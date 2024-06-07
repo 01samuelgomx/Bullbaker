@@ -1,0 +1,56 @@
+.text-gradient.text-info {
+  background-image: linear-gradient(310deg, #ff6e6e, #89517a) !important;
+}
+.bg-gradient-info {
+  background-image: linear-gradient(310deg, #ff6e6e, #89517a) !important;
+}
+.page-header {
+  padding-top: 4em !important;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: 50%;
+}
+.home_banner .banner_left {
+  background: none !important;
+  height: 100vh;
+  padding: 0 16%;
+}
+.banner_area .banner_inner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 270px !important;
+  background: #f9f9ff;
+  z-index: 1;
+}
+.blog_categorie_area {
+  padding-top: none !important;
+  padding-bottom: 80px;
+}
+.home_banner .full_height {
+  background: url(../img/curved-images/slider-6.png) no-repeat !important;
+  min-height: 70vh !important;
+  background-color: aquamarine;
+}
+.home_banner .banner_left h1 {
+  font-size: 60px;
+  color: white !important;
+  margin-bottom: 25px;
+  text-transform: capitalize;
+  font-weight: 300;
+}
+.home_banner .banner_left p {
+  max-width: 510px;
+  color: white !important;
+  font-weight: 400;
+}
+.ms-1 {
+  margin-left: 0.25rem !important;
+  color: #344767 !important;
+}
+.nav-link {
+  color: #3a416f !important;
+}
