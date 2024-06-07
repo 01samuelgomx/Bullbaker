@@ -1,7 +1,5 @@
 <?php
 
-// Web Routes
-
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\AulaController;
 use App\Http\Controllers\homeController;
@@ -10,12 +8,12 @@ use App\Http\Controllers\CursosController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\LoginController;
-// Dashboard Routes
 use Illuminate\Support\Facades\Route;
 
 //--------------------------------------------------------------------------
 //  Web Routes
 //--------------------------------------------------------------------------
+
 Route::get('/', [homeController::class, 'index'])->name('home');
 Route::get('/sobre',[sobreController::class, 'sobre'])->name('sobre');
 Route::get('/cursos', [ CursosController::class, 'cursos'])->name('cursos');

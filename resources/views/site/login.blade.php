@@ -40,8 +40,8 @@
                                 <div class="card-body">
 
                                     <form role="form" action="{{ route('login') }}" method="POST">
-
                                         @csrf
+
                                         <label>Email</label>
                                         <div class="mb-3">
                                             <input type="email" class="form-control" placeholder="Email"
