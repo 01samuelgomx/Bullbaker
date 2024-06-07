@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrador;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 
@@ -12,66 +13,65 @@ class LoginController extends Controller
         return view('site.login');
     }
 
-         // -------------------------------------
+     // -------------------------------------
      // -------------------------------------
      public function autenticar(Request $request)
      {
  
          $regras = [
-             'emailUsuario' => 'required|email',
-             'senhaUsuario' => 'required'
+             'email' => 'required|email',
+             'senha' => 'required'
          ];
  
          $msg = [
-             'emailUsuario.required' => 'O campo de email é obrigatório !',
-             'emailUsuario.email' => 'O e-mail informado não é válido.',
-             'senhaUsuario.required' => 'O campo de senha é obrigatório'
+             'email.required' => 'O campo de email é obrigatório !',
+             'email.email' => 'O e-mail informado não é válido.',
+             'senha.required' => 'O campo de senha é obrigatório'
          ];
- 
+
          $request->validate($regras, $msg);
+
+         $email = $request->get('email');
+         $senha = $request->get('senha');
  
-         $email = $request->get('emailUsuario');
-         $senha = $request->get('senhaUsuario');
-        
-         $usuario = Usuario::where("emailUsuario", $email)->first();
- 
- 
-         if(!$usuario){
-             return back()->withErrors(['emailUsuario' => 'O email informado não está cadastrado.']);
-         }
+         $usuario = Usuario::where("email", $email)->first();
          
-         if($usuario->senhaUsuario != $senha){
-             return back()->withErrors(['senhaUsuario' => 'Senha incorreta.']);
-         }
- 
-         // -------------------------------------
- 
-         $tipoUsuario = $usuario->tipo_usuario;
- 
-         $tipo = null;
- 
-         session([
-             'email' => $usuario->emailUsuario,
-         ]);
          
-         if($tipoUsuario instanceof Administrador){
-             // dd($tipo);
-             // $tipo = 'cliente';
-             
-             session([
-                 'id'            => $tipoUsuario->idCliente,
-                 'nome'          => $tipoUsuario->nomeCliente,
-                 'tipo_usuario'  => 'Administrativo',
-             ]);
- 
-             return redirect('dashboard/administrativo/aluno/index');
- 
+         if (!$usuario) {
+             return back()->withErrors(['email' => 'Email incorreto.']);
+            }
             
-         }
-              //-------------------------
-           
-         
-         return back()->withErrors(['emailUsuario'=> 'Erro desconhecido de autenticação']);
+            if ($usuario->senha != $senha) {
+                return back()->withErrors(['senha' => 'Senha incorreta.']);
+            }
+            
+            // -------------------------------------
+            
+            $tipoUsuario = $usuario->tipo_usuario;
+            
+            $tipo = null;
+            
+            session([
+                'email' => $usuario->email,
+            ]);
+
+
+
+            
+            if ($tipoUsuario instanceof Administrador ) {
+            // dd($tipoUsuario);
+
+            $tipo = 'Administrativo';
+
+            session([
+                'id'            => $usuario->idAdmin,
+                'nome'          => $usuario->nomeAdmin,
+                'tipo_usuario'  => 'Administrativo',
+            ]);
+            return redirect('dashboard/alunos/');
+        }
+        
+         return back()->withErrors(['email'=> 'Erro desconhecido de autenticação']);
  
  
      }

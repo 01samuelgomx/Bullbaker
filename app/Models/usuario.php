@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Usuario extends Model
 {
     use HasFactory;
+
     protected $table = 'usuarios';
-    protected $primaryKey = 'idUsuario';
+    protected $primaryKey = 'id_Usuario';
 
-
-
-    public function tipoUsuario(){
+    public function tipo_usuario(){
 
         return $this->morphTo('tipo_usuario','tipo_usuario_type','tipo_usuario_id');
     }

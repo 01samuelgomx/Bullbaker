@@ -3,7 +3,7 @@
 // Web Routes
 
 use App\Http\Controllers\AlunoController;
-use App\Http\Controllers\AulasController;
+use App\Http\Controllers\AulaController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\sobreController;
 use App\Http\Controllers\CursosController;
@@ -22,6 +22,7 @@ Route::get('/cursos', [ CursosController::class, 'cursos'])->name('cursos');
 Route::get('/contato', [ContatoController::class, 'contato'])->name('contato');
 Route::get('/menu', [MenuController::class, 'menu'])->name('menu');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'autenticar'])->name('login');
 
 //--------------------------------------------------------------------------
 //  Dashboard
@@ -52,12 +53,12 @@ Route::prefix('/dashboard/administrativo/cursos')->group(function () {
 //--------------------------------------------------------------------------
 //  Crud Aulas
 Route::prefix('/dashboard/administrativo/aulas')->group(function () {
-    Route::get('/index', [AulasController::class, 'index'])->name('index'); 
-    Route::get('/create', [AulasController::class, 'create'])->name('create'); // rota de Acesso ao formulario
-    Route::post('/cad', [AulasController::class, 'cad'])->name('cad'); //Cadastro do Aulas
-    Route::get('/{id}/edit', [AulasController::class, 'edit'])->name('edit');// rota de Acesso ao formulario
-    Route::post('/{id}/update', [AulasController::class, 'update'])->name('update'); //Atualização dos dados
-    Route::put('/desativar', [AulasController::class, 'destroy'])->name('destroy'); // Deletar os dados
+    Route::get('/index', [AulaController::class, 'index'])->name('index'); 
+    Route::get('/create', [AulaController::class, 'create'])->name('create'); // rota de Acesso ao formulario
+    Route::post('/cad', [AulaController::class, 'cad'])->name('cad'); //Cadastro do Aulas
+    Route::get('/{id}/edit', [AulaController::class, 'edit'])->name('edit');// rota de Acesso ao formulario
+    Route::post('/{id}/update', [AulaController::class, 'update'])->name('update'); //Atualização dos dados
+    Route::put('/desativar', [AulaController::class, 'destroy'])->name('destroy'); // Deletar os dados
 });
 
     // -----------------------
@@ -68,15 +69,6 @@ Route::prefix('/dashboard/administrativo/aulas')->group(function () {
     // O processo sera o mesmo dentro do codigo
     // Deêm prioridade ao funcionamento do aluno, pois as outras serão iguais
     // -----------------------
-
-    // Route::get('/dashboard/administrativo/create', [AdminController::class, 'createAdmin'])->name('dashboard.administrativo.create');
-    // Route::post('/dashboard/administrativo/cadAdmin', [AdminController::class,'cadAdmin'])->name('cadAdmin');
-    // Route::post('/dashboard/administrativo', [AdminController::class, 'cadAdmin'])->name('dashboard.administrativo.cad');
-    // Route::get('/dashboard/administrativo/{id}/edit', [AdminController::class, 'editAdmin'])->name('dashboard.administrativo.edit');
-    // Route::post('/dashboard/administrativo/{id}/updateAdmin', [AdminController::class, 'updateAdmin'])->name('update');
-    // Route::put('/dashboard/administrativo/{id}/desativar', [AdminController::class, 'desativarAdmin'])->name('desativar');
-    // });
-
 
 Route::get('/sair', function(){
     session()->flush();

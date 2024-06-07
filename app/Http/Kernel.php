@@ -37,6 +37,9 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
+            // MIDDLEWARE EDITADO
+           \App\Http\Middleware\LogAcessoBullbaker::class,
         ],
 
         'api' => [
@@ -63,5 +66,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+         // ---------------------
+         // ROUTE BullBaker
+        'autenticacao' => \App\Http\Middleware\Autbullbaker::class,
     ];
 }

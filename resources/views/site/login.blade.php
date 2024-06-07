@@ -4,10 +4,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="apple-touch-icon" sizes="76x76" href="Dashboard/img/apple-icon.png">
     <link rel="icon" type="image/png" href="img/logo.jpg">
     <title>
-       Login Administrador
+        Login Administrador
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -36,20 +38,28 @@
                                     <p class="mb-0">Para acessar informe seu email e senha.</p>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form">
+
+                                    <form role="form" action="{{ route('login') }}" method="POST">
+
+                                        @csrf
                                         <label>Email</label>
                                         <div class="mb-3">
                                             <input type="email" class="form-control" placeholder="Email"
-                                                aria-label="Email" aria-describedby="email-addon">
+                                                aria-label="Email" aria-describedby="email-addon"
+                                                value="{{ old('email') }}">
+                                                     {{ $errors->has('email') ? $errors->first('email') : '' }}
                                         </div>
                                         <label>senha</label>
                                         <div class="mb-3">
-                                            <input type="email" class="form-control" placeholder="Senha"
-                                                aria-label="Password" aria-describedby="password-addon">
+                                            <input type="password" class="form-control" placeholder="Senha"
+                                                aria-label="Password" aria-describedby="password-addon"
+                                                value="{{ old('senha') }}">
+                                                   {{ $errors->has('senha') ? $errors->first('senha') : '' }}
                                         </div>
 
                                         <div class="text-center">
-                                            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Entrar</button>
+                                            <button type="submit"
+                                                class="btn bg-gradient-info w-100 mt-4 mb-0">Entrar</button>
                                         </div>
                                     </form>
                                 </div>

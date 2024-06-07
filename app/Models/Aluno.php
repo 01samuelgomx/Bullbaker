@@ -11,13 +11,11 @@ class Aluno extends Model
     protected $table = 'tblaluno';
     protected $primaryKey = 'idAluno';
 
-
     public function usuario(){
         return $this->morphOne(Usuario::class, 'tipo_usuario');
     }
     use HasFactory;
     protected $fillable = ['nome'];
-
 
     public function Regras(){
     return [
