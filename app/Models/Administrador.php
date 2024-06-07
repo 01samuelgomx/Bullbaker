@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Usuario;
 class Administrador extends Model
 {
     use HasFactory;
@@ -21,8 +21,6 @@ class Administrador extends Model
         'dataCadAdmin',      
         'statusAdmin',
         'fotoAdmin',
-        'tipoAdministrador',
-        
     ];
 
     public function usuario(){

@@ -13,23 +13,25 @@ use Illuminate\Support\Facades\Route;
 //--------------------------------------------------------------------------
 //  Web Routes
 //--------------------------------------------------------------------------
-
 Route::get('/', [homeController::class, 'index'])->name('home');
 Route::get('/sobre',[sobreController::class, 'sobre'])->name('sobre');
 Route::get('/cursos', [ CursosController::class, 'cursos'])->name('cursos');
 Route::get('/contato', [ContatoController::class, 'contato'])->name('contato');
 Route::get('/menu', [MenuController::class, 'menu'])->name('menu');
+
+//--------------------------------------------------------------------------
+//  Login
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'autenticar'])->name('login');
 
 //--------------------------------------------------------------------------
 //  Dashboard
-//--------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------
 //  Crud Aluno
 Route::prefix('/dashboard/administrativo/aluno')->group(function () {
-    Route::get('/index', [AlunoController::class, 'index'])->name('index'); 
+    Route::get('/index', [AlunoController::class, 'index'])->name('administrador'); 
+
     Route::get('/create', [AlunoController::class, 'create'])->name('create'); // rota de Acesso ao formulario
     Route::post('/cadAluno', [AlunoController::class, 'cadAluno'])->name('cadAluno'); //Cadastro do aluno
     Route::get('/{id}/edit', [AlunoController::class, 'edit'])->name('editAluno');// rota de Acesso ao formulario

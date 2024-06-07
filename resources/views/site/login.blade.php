@@ -44,14 +44,18 @@
 
                                         <label>Email</label>
                                         <div class="mb-3">
-                                            <input type="email" class="form-control" placeholder="Email"
+                                            <input type="email" 
+                                            class="form-control" 
+                                            name="email" placeholder="Email"
                                                 aria-label="Email" aria-describedby="email-addon"
                                                 value="{{ old('email') }}">
                                                      {{ $errors->has('email') ? $errors->first('email') : '' }}
                                         </div>
                                         <label>senha</label>
                                         <div class="mb-3">
-                                            <input type="password" class="form-control" placeholder="Senha"
+                                            <input type="password" class="form-control" 
+                                            name="senha"
+                                            placeholder="Senha"
                                                 aria-label="Password" aria-describedby="password-addon"
                                                 value="{{ old('senha') }}">
                                                    {{ $errors->has('senha') ? $errors->first('senha') : '' }}

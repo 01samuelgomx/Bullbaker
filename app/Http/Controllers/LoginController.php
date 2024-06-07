@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use App\Models\Administrador;
+use App\Models\Aluno;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,10 @@ class LoginController extends Controller
         return view('site.login');
     }
 
-     // -------------------------------------
-     // -------------------------------------
+     
      public function autenticar(Request $request)
      {
+         // -------------------------------------
          // Definindo regras de validação
          $regras = [
              'email' => 'required|email',
@@ -30,6 +31,7 @@ class LoginController extends Controller
              'senha.required' => 'O campo de senha é obrigatório'
          ];
      
+         // -------------------------------------
          // Validando a solicitação
          $request->validate($regras, $msg);
      
@@ -38,38 +40,33 @@ class LoginController extends Controller
          $senha = $request->get('senha');
          // Buscando o usuário pelo email
          $usuario = Usuario::where("email", $email)->first();
-         dd($usuario);
-     
-
-
-
-
-
-
-
          
+         // -------------------------------------
          // Verificando se o usuário existe
          if (!$usuario) {
              return back()->withErrors(['email' => 'Email incorreto.']);
-         }
+             }
+             
+             // Verificando se a senha está correta 
+             if ($usuario->senha != $senha) {
+                 return back()->withErrors(['senha' => 'Senha incorreta.']);
+                 }
 
-         // Verificando se a senha está correta 
-         if ($usuario->senha != $senha) {
-             return back()->withErrors(['senha' => 'Senha incorreta.']);
-         }
-     
+         // -------------------------------------
          // Obtendo o tipo de usuário
          $tipoUsuario = $usuario->tipo_usuario;
-     
+         
          $tipo = null;
          // Iniciando a sessão
          session([
              'email' => $usuario->email,
-         ]);
-     
+             ]);
+             
+         // -------------------------------------
          // Verificando o tipo de usuário e redirecionando
          if ($tipoUsuario instanceof Administrador) {
-            
+         // dd($tipoUsuario);
+
             $tipo = 'Administrativo';
 
              session([
@@ -77,10 +74,26 @@ class LoginController extends Controller
                  'nome'          => $usuario->nomeAdmin,
                  'tipo_usuario'  => 'Administrativo',
              ]);
-             return redirect('dashboard/administrativo/aluno/index');
+             return view('site.dashboard.administrativo.cursos.index');
          }
-     
-         return back()->withErrors(['email' => 'Erro desconhecido de autenticação']);
-     }
-     
+
+
+          //-------------------------
+          elseif ($tipoUsuario instanceof Aluno) {
+            // dd($tipoUsuario);
+   
+               $tipo = 'aluno';
+   
+                session([
+                    'id'            => $usuario->idAluno,
+                    'nome'          => $usuario->nomeAluno,
+                    'tipo_usuario'  => 'aluno',
+                ]);
+                return view('site.dashboard.administrativo.cursos.index');
+            }
+
+            
+        return back()->withErrors(['emailUsuario'=> 'Erro desconhecido de autenticação']);
+
+    }
 }

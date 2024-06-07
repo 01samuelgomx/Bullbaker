@@ -384,7 +384,6 @@
             // Que foram criados pelo croud
             // ----------------------- --}}
 
-                            {{-- @foreach ($lista as $aluno) --}}
                             <tr>
                                 <th>ID</th>
                                 <th>Nome</th>
@@ -397,32 +396,26 @@
                         </thead>
                         <tbody>
 
-     {{-- // -----------------------
-            // ATENÇÃO !!!!!!!
-            // continue a preencher !
-            // Para Fazer uso Da funçao Listar
-            // Utilize {{ $aluno->nomeAluno }} 
-            // dentro do campo que recebera o valor
-            // ----------------------- --}}
 
+                            @foreach ($aluno as $lista)
                             <tr>
                                 <td>
-                                    <span class="blue-bg indx" name="">01</span>
+                                    <span class="blue-bg indx" name="">{{$lista->idAluno }}</span>
                                 </td>
                                 <td>
-                                    <span class="date">10 June 2017</span>
+                                    <span class="date">{{$lista->nomeAluno }}</span>
                                 </td>
                                 <td>
-                                    <h4 class="name">Michael Baker</h4>
+                                    <h4 class="name">{{$lista->emailAluno }}</h4>
                                 </td>
                                 <td>
-                                    <span class="ph#">076 9477 4896</span>
+                                    <span class="ph#">{{$lista->telefoneAluno }}</span>
                                 </td>
                                 <td>
-                                    <span class="ph#">076 9477 4896</span>
+                                    <span class="ph#">{{$lista->dataCadAluno }}</span>
                                 </td>
                                 <td>
-                                    <span class="addr">Some St. 77, LA</span>
+                                    <span class="addr">{{$lista->idCurso }}</span>
                                 </td>
                                 <td>
                                     <div class="table-btns">
@@ -432,86 +425,7 @@
                                     </div>
                                 </td>
                             </tr>
-
-                            <tr>
-                                <td>
-                                    <span class="blue-bg indx">02</span>
-                                </td>
-
-                                <td>
-                                    <span class="date">15 June 2017</span>
-                                </td>
-
-                                <td>
-                                    <h4 class="name">Larisa Maskalyova</h4>
-                                </td>
-
-                                <td>
-                                    <span class="ph#">0500 034548</span>
-                                </td>
-
-                                <td>
-                                    <span class="addr">Another St. 456</span>
-                                </td>
-
-                                <td>
-                                    <span class="addr">Another St. 456</span>
-                                </td>
-
-                                <td>
-                                    <div class="table-btns">
-                                        <a href="{{ url('dashboard/administrativo/aluno/edit') }}" title=""
-                                            class="green-bg-hover">Editar</a>
-                                        <a href="#" title="" class="blue-bg-hover">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <span class="blue-bg indx">03</span>
-                                </td>
-
-                                <td>
-                                    <span class="date">19 June 2017</span>
-                                </td>
-
-                                <td>
-                                    <h4 class="name">Natasha Kim</h4>
-                                </td>
-
-                                <td>
-                                    <span class="ph#">(01315) 27698</span>
-                                </td>
-
-                                <td>
-                                    <span class="addr">294-318 Duis Ave</span>
-                                </td>
-
-                                <td>
-                                    <span class="addr">294-318 Duis Ave</span>
-                                </td>
-
-                                <td>
-
-                                    <div class="table-btns">
-                                        <a href="{{ url('/dashboard/administrativo/aluno/edit') }}" title=""
-                                            class="green-bg-hover">Editar</a>
-                                        <a href="#" title="" class="blue-bg-hover">Delete</a>
-                                    </div>
-
-                                    {{-- <div class="table-btns">
-                                                <a href="{{url('/dashboard/administrativo/aluno/edit')}}" title="" class="green-bg-hover">Editar</a>
-                                                <form action="{{ route('desativar', $aluno->idAluno) }}" method="POST" style="display: inline" class="blue-bg-hover">
-                                                    @csrf
-                                                    @method('PUT')
-                                                      <button type="submit" class="blue-bg-hover"> Delete </button>
-                                                  </form>
-                                            </div> --}}
-
-                                    {{-- @endforeach --}}
-                                </td>
-                            </tr>
+                            @endforeach
 
                         </tbody>
                     </table>

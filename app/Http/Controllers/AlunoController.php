@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aluno;
+use App\Models\Aula;
+use App\Models\Usuario;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,10 +19,6 @@ class AlunoController extends Controller
     /**
      * @return Response
      */
-    public function index()
-    {
-        return view('site.dashboard.administrativo.aluno.index');
-    }
 
     
     /**
@@ -142,13 +140,24 @@ class AlunoController extends Controller
         // -----------------------
             public function show($id)
             {
-                $alunos = $this->aluno->find($id);
-                
-                if($alunos === null) {
-                    return response()->json(['error' => 'Não existe dados para esse aluno'], 404);
-                }
+            
+            }
 
-                return response()->json($alunos, 200) ;
+            public function index()
+            {
+                $idAluno = session('id');
+                $aluno = Aluno::find($idAluno);
+                $lista = Aluno::all();
+        
+                $idUsuario = session('id');
+                $usuario = Usuario::find($idUsuario);
+        
+                if (!$aluno) {
+                    abort(404, 'Administrador não encontrado');
+                }
+        
+                return view('site.dashboard.administrativo.aluno.index', compact('aluno', 'usuario', 'lista'));
+
             }
 
 
