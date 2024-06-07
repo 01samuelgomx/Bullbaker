@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Administrador;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 
@@ -53,37 +54,22 @@ class LoginController extends Controller
              'email' => $usuario->emailUsuario,
          ]);
          
-         if($tipoUsuario instanceof Cliente){
+         if($tipoUsuario instanceof Administrador){
              // dd($tipo);
              // $tipo = 'cliente';
              
              session([
                  'id'            => $tipoUsuario->idCliente,
                  'nome'          => $tipoUsuario->nomeCliente,
-                 'tipo_usuario'  => 'cliente',
+                 'tipo_usuario'  => 'Administrativo',
              ]);
  
+             return redirect('dashboard/administrativo/aluno/index');
  
-             return redirect('dashboard/usuario');
-             
+            
          }
               //-------------------------
-              elseif($tipoUsuario instanceof Administradores){
- 
-             if($tipoUsuario->tipoAdministrador == 'admin'){
- 
-                 $tipo = 'administrador';
-                 
-                 session([
-                     'id'            => $tipoUsuario->idAdmin,
-                     'nome'          => $tipoUsuario->nomeAdmin,
-                     'tipo_usuario'  => $tipoUsuario->tipoAdministrador,
-                 ]);
- 
-                 return redirect('dashboard/administrativo');
- 
-      }
-         } 
+           
          
          return back()->withErrors(['emailUsuario'=> 'Erro desconhecido de autenticação']);
  
