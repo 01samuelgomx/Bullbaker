@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Administrador;
+use App\Models\Aluno;
 use App\Models\Usuario;
 use Closure;
 use Illuminate\Http\Request;
@@ -31,16 +32,19 @@ class Autbullbaker
 
             $tipoUsuario = $usuario->tipo_usuario;
 
-
             if ($tipoUsuario) {
-
-
                 $tipo = null;
 
 
-                if ($tipoUsuario instanceof Administrador) {
+                if ($tipoUsuario instanceof Aluno) {
+
+                    $tipo = 'aluno';
                     
+                }elseif ($tipoUsuario instanceof Administrador){
+
+                    //  dd($tipoUsuario);
                     $tipo = $tipoUsuario->tipoAdministrador;
+
                 }
             }
 

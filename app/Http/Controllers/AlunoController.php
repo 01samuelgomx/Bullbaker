@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aluno;
-use App\Models\Aula;
 use App\Models\Usuario;
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
 class AlunoController extends Controller
 {
     public $aluno;
@@ -19,49 +16,27 @@ class AlunoController extends Controller
     /**
      * @return Response
      */
-
     
-    /**
-     * @return Response
-     */
-
     // -------------------------------
-    // Rotas Dos Formulario START
+    // Rotas Dos Formulario 
     // ------------------------------
-     public function create()
-     {
-         return view('site.dashboard.administrativo.aluno.create', //compact('aluno')
+    
+    public function create()
+    {
+        return view('site.dashboard.administrativo.aluno.create', //compact('aluno')
         );
-     }
+    }
 
-            // -----------------------
-            // ATENÇÃO !!!!!!!
-            // continue a preencher !
-            // Utilize a verificação abaixo quando a conexão com o banco for realizada
-            // Ela ira verificar se o aluno realmente existe de acordo com o id
-            // -----------------------
+        /**
+         * @return Response
+         */
+    
+    public function edit($id)
+    {
+         return view('dashboard.administrativo.aluno.edit', //compact('aluno', 'editAluno')
+        );
+    }
 
-            // $idAluno = session('id');
-            // $aluno = Aluno::find($idAluno);
-
-            // if (!$aluno) {
-            //     abort(404, 'Aluno não encontrado');
-            // }
-
-            public function edit($id)
-            {
-                // $idAluno = session('id');
-                // $aluno = Aluno::find($idAluno);
-        
-                // $editAluno = Aluno::findOrFail($id);
-        
-                return view('dashboard.administrativo.aluno.edit', //compact('aluno', 'editAluno')
-                );
-            }
-
-    // ------------------------------
-    // Rotas Dos Formulario END
-    // ------------------------------
 
     // -------------------------------
     // Croud START
@@ -77,21 +52,37 @@ class AlunoController extends Controller
 
             'nome' => $request-> nome,
             'foto' => $imagem_url,
-
-            // -----------------------
-            // ATENÇÃO !!!!!!!
-            // continue a preencher !
-            // Adicione os campos necessarios de acordo com a tabela
-            // -----------------------
-
         ]);
 
         return response()->json($alunos, 200);
     }
 
     // -------------------------------
-    // CADASTRO DO ALUNO 
-    // ------------------------------
+    // Listar Aluno
+    
+    public function index()
+    {
+        $idAluno = session('id');
+        $aluno = Aluno::find($idAluno);
+        $lista = Aluno::all(); 
+
+        dd($lista);
+        
+        $idUsuario = session('id');
+        $usuario = Usuario::find($idUsuario);
+        
+        if (!$aluno) {
+            abort(404, 'Aluno não encontrado');
+            }
+            
+            return view('site.dashboard.administrativo.aluno.index', compact('aluno', 'usuario', 'lista'));
+            }
+        // -------------------------------
+
+
+    // -------------------------------
+    // Cadastro Aluno
+
     public function cadAluno (Request $request)
     {
         $request->merge(['dataContratacao' => now()]);
@@ -135,87 +126,58 @@ class AlunoController extends Controller
      * @return Response
      */
 
-        // -----------------------
-        // Listar Aluno
-        // -----------------------
-            public function show($id)
-            {
-            
+            public function show($id){
             }
-
-            public function index()
-            {
-                $idAluno = session('id');
-                $aluno = Aluno::find($idAluno);
-                $lista = Aluno::all();
         
-                $idUsuario = session('id');
-                $usuario = Usuario::find($idUsuario);
-        
-                if (!$aluno) {
-                    abort(404, 'Administrador não encontrado');
-                }
-        
-                return view('site.dashboard.administrativo.aluno.index', compact('aluno', 'usuario', 'lista'));
-
-            }
-
-
-
     /**
      * @param  Request 
      * @param  Aluno 
      * @return Response
      */
 
-    // -----------------------
+    // -------------------------------
     // Update Aluno
-    // -----------------------
+    
     public function update(Request $request, $id)
     {
-       $alunos = $this->aluno->find($id);
-
-        if($alunos === null){
+        $alunos = $this->aluno->find($id);
+        
+        if ($alunos === null) {
             return response()->json(['erro' => 'Impossível realizar a atualização. O aluno não existe!'], 404);
         }
-
-        if($request->method() === 'put') {
-
+        
+        if ($request->method() === 'put') {
             $dadosDinamico = [];
-
+            
             foreach ($alunos->Regras() as $input => $regra) {
-                if(array_key_exists($input, $request->all())) {
+                if (array_key_exists($input, $request->all())) {
                     $dadosDinamico[$input] = $regra;
                 }
             }
-
-
+            
             $request->validate($dadosDinamico, $this->aluno->Feedback());
-        }
-        else{
+        } else {
             $request->validate($this->aluno->Regras(), $this->aluno->Feedback());
         }
-
-        if($request->file('foto') == true) {
+    
+        if ($request->file('foto') == true) {
             Storage::disk('public')->delete($alunos->foto);
         }
-
-        $imagem = $request -> file('foto');
-
-        $imagem_url = $imagem -> store('imagem', 'public');
-
-       $alunos -> update([
+        
+        $imagem = $request->file('foto');
+        $imagem_url = $imagem->store('imagem', 'public');
+        
+        $alunos->update([
             'nome' => $request->nome,
             'foto' => $imagem_url
-            //continue a colocar os dados de acordo com a tabela
-       ]); // update dos novos dados
-
-       return response()->json($alunos, 200);
+        ]);
+        
+        return response()->json($alunos, 200);
     }
-
+    
 
     /**
-     * @param  Aluno  
+     * @param  Aluno
      * @return Response
      */
 

@@ -25,18 +25,15 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'autenticar'])->name('login');
 
 //--------------------------------------------------------------------------
-//  Dashboard
-
-//--------------------------------------------------------------------------
 //  Crud Aluno
-Route::prefix('/dashboard/administrativo/aluno')->group(function () {
-    Route::get('/index', [AlunoController::class, 'index'])->name('administrador'); 
+Route::middleware('autenticacao:aluno')->group(function () {
+    Route::get('/dashboard/adminstrativo/aluno/index', [AlunoController::class, 'index'])->name('lista'); 
 
-    Route::get('/create', [AlunoController::class, 'create'])->name('create'); // rota de Acesso ao formulario
-    Route::post('/cadAluno', [AlunoController::class, 'cadAluno'])->name('cadAluno'); //Cadastro do aluno
-    Route::get('/{id}/edit', [AlunoController::class, 'edit'])->name('editAluno');// rota de Acesso ao formulario
-    Route::post('/{id}/update', [AlunoController::class, 'update'])->name('update'); //Atualização dos dados
-    Route::put('/desativar', [AlunoController::class, 'destroy'])->name('destroy'); // Deletar os dados
+    Route::get('/dashboard/adminstrativo/aluno/create', [AlunoController::class, 'create'])->name('create'); // rota de Acesso ao formulario
+    Route::post('/dashboard/adminstrativo/aluno/cadAluno', [AlunoController::class, 'cadAluno'])->name('cadAluno'); //Cadastro do aluno
+    Route::get('/dashboard/adminstrativo/aluno/{id}/edit', [AlunoController::class, 'edit'])->name('editAluno');// rota de Acesso ao formulario
+    Route::post('/dashboard/adminstrativo/aluno/{id}/update', [AlunoController::class, 'update'])->name('update'); //Atualização dos dados
+    Route::put('/dashboard/adminstrativo/aluno/desativar', [AlunoController::class, 'destroy'])->name('destroy'); // Deletar os dados
 });
 
 //--------------------------------------------------------------------------
@@ -61,15 +58,8 @@ Route::prefix('/dashboard/administrativo/aulas')->group(function () {
     Route::put('/desativar', [AulaController::class, 'destroy'])->name('destroy'); // Deletar os dados
 });
 
-    // -----------------------
-    // ATENÇÃO !!!!!!!
-    // As rotas a seguir podem servir como exemplo ou refencia
-    // caso algo possa vir a acontecer
-    // Durante o desenvolvimento do croud das outras tabelas
-    // O processo sera o mesmo dentro do codigo
-    // Deêm prioridade ao funcionamento do aluno, pois as outras serão iguais
-    // -----------------------
-
+//--------------------------------------------------------------------------
+//  SAIR ROUTES
 Route::get('/sair', function(){
     session()->flush();
     return redirect('/');

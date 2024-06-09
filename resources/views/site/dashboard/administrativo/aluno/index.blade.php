@@ -7,6 +7,8 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <!-- Vendor: Bootstrap 4 Stylesheets  -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
@@ -397,25 +399,31 @@
                         <tbody>
 
 
-                            @foreach ($aluno as $lista)
+                            @foreach ($lista as $aluno)
                             <tr>
                                 <td>
-                                    <span class="blue-bg indx" name="">{{$lista->idAluno }}</span>
+                                    <span class="blue-bg indx" name="">{{ $aluno->idAluno }}</span>
                                 </td>
                                 <td>
-                                    <span class="date">{{$lista->nomeAluno }}</span>
+                                    <span class="date">{{$aluno->nomeAluno }}</span>
                                 </td>
                                 <td>
-                                    <h4 class="name">{{$lista->emailAluno }}</h4>
+                                    <h4 class="name">{{$aluno->emailAluno }}</h4>
                                 </td>
                                 <td>
-                                    <span class="ph#">{{$lista->telefoneAluno }}</span>
+                                    <span class="ph#">{{$aluno->telefoneAluno }}</span>
                                 </td>
                                 <td>
-                                    <span class="ph#">{{$lista->dataCadAluno }}</span>
+                                    <span class="ph#">{{$aluno->dataCadAluno }}</span>
                                 </td>
                                 <td>
-                                    <span class="addr">{{$lista->idCurso }}</span>
+                                    <span class="ph#">{{$aluno->statusAluno }}</span>
+                                </td>
+                                <td>
+                                    <span class="ph#">{{$aluno->fotoAluno }}</span>
+                                </td>
+                                <td>
+                                    <span class="addr">{{$aluno->idCurso }}</span>
                                 </td>
                                 <td>
                                     <div class="table-btns">

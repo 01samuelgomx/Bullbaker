@@ -53,6 +53,7 @@ class LoginController extends Controller
                  }
 
          // -------------------------------------
+         
          // Obtendo o tipo de usuário
          $tipoUsuario = $usuario->tipo_usuario;
          
@@ -62,37 +63,39 @@ class LoginController extends Controller
              'email' => $usuario->email,
              ]);
              
-         // -------------------------------------
-         // Verificando o tipo de usuário e redirecionando
-         if ($tipoUsuario instanceof Administrador) {
-         // dd($tipoUsuario);
+             // -------------------------------------
+             
+             if ($tipoUsuario instanceof Aluno) {
+            //  dd($usuario);
 
-            $tipo = 'Administrativo';
+            $tipo = 'aluno';
 
              session([
-                 'id'            => $usuario->idAdmin,
-                 'nome'          => $usuario->nomeAdmin,
-                 'tipo_usuario'  => 'Administrativo',
+                 'id'            => $usuario->idAluno,
+                 'nome'          => $usuario->nomeAluno,
+                 'tipo_usuario'  => 'aluno',
              ]);
-             return view('site.dashboard.administrativo.cursos.index');
-         }
+             return view('site.dashboard.administrativo.aluno.index');
+        }
 
-
-          //-------------------------
-          elseif ($tipoUsuario instanceof Aluno) {
+             //-------------------------
+          elseif ($tipoUsuario instanceof Administrador) {
             // dd($tipoUsuario);
-   
-               $tipo = 'aluno';
-   
+
+            if($tipoUsuario->tipoAdministrador == 'Administrativo'){
+
+                $tipo = 'Administrativo';
+                
                 session([
-                    'id'            => $usuario->idAluno,
-                    'nome'          => $usuario->nomeAluno,
-                    'tipo_usuario'  => 'aluno',
+                    'id'            => $tipoUsuario->idAdmin,
+                    'nome'          => $tipoUsuario->nomeAdmin,
+                    'tipo_usuario'  => $tipoUsuario->tipoAdministrador,
                 ]);
-                return view('site.dashboard.administrativo.cursos.index');
+
+                return redirect('dashboard/administrativo/aulas/index');
+        }
             }
 
-            
         return back()->withErrors(['emailUsuario'=> 'Erro desconhecido de autenticação']);
 
     }

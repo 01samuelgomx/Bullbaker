@@ -14,8 +14,20 @@ class Aluno extends Model
     public function usuario(){
         return $this->morphOne(Usuario::class, 'tipo_usuario');
     }
-    use HasFactory;
-    protected $fillable = ['nome'];
+
+    protected $fillable = [
+        'idAluno',
+        'nomeAluno',
+        'emailAluno',
+        'telefoneAluno',
+        'dataCadAluno',
+        'statusAluno',
+        'fotoAluno',
+        'idCurso',
+        'created_at',
+        'updated_at',
+    
+    ];
 
     public function Regras(){
     return [

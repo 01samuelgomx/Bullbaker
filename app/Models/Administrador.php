@@ -21,6 +21,9 @@ class Administrador extends Model
         'dataCadAdmin',      
         'statusAdmin',
         'fotoAdmin',
+        'tipoAdministrador',
+        'created_at',
+        'updated_at',
     ];
 
     public function usuario(){
