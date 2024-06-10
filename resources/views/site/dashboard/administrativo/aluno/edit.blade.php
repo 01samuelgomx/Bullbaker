@@ -7,6 +7,8 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <!-- Vendor: Bootstrap 4 Stylesheets  -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
@@ -23,17 +25,18 @@
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color4.css') }}" title="color4">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color5.css') }}" title="color5">
 </head>
+
 <body class="expand-data panel-data">
     <div class="topbar">
-      <div class="logo">
-        <h1>
-          <a href="#" title="">
-            <img src="images/logo1.png" alt="" />
-          </a>
-        </h1>
-      </div>
- 
-     <div class="topbar-bottom-colors">
+        <div class="logo">
+            <h1>
+                <a href="#" title="">
+                    <img src="images/logo1.png" alt="" />
+                </a>
+            </h1>
+        </div>
+
+        <div class="topbar-bottom-colors">
             <i style="background-color: #361F08;"></i>
             <i style="background-color: #C1959D;"></i>
             <i style="background-color: #90A293;"></i>
@@ -44,154 +47,160 @@
         </div>
     </div>
     <!-- Topbar -->
-  
+
     <header class="side-header expand-header">
-      <div class="nav-head">Main Navigation
-        <span class="menu-trigger">
-          <i class="ion-android-menu"></i>
-        </span>
-      </div>
-       <nav class="custom-scrollbar">
+        <div class="nav-head">Main Navigation
+            <span class="menu-trigger">
+                <i class="ion-android-menu"></i>
+            </span>
+        </div>
+        <nav class="custom-scrollbar">
             <ul class="drp-sec">
                 <li class="has-drp">
                     <a href="#" title="">
                         <i class="ion-home"></i>
                         <span>Dashboard</span>
                     </a>
-        
+
                 </li>
             </ul>
             <h4>Tabelas</h4>
             <ul class="drp-sec">
 
                 <li class="has-drp">
-                    <a href="{{url('dashboard/administrativo/aluno/index')}}" title="">
+                    <a href="{{ url('dashboard/administrativo/aluno/index') }}" title="">
                         <i class="ion-briefcase"></i>
                         <span>Alunos</span>
                     </a>
-                    </li>
+                </li>
 
                 <li class="has-drp">
-                    <a href="{{url('dashboard/administrativo/cursos/index')}}" title="">
+                    <a href="{{ url('dashboard/administrativo/cursos/index') }}" title="">
                         <i class="ion-briefcase"></i>
                         <span>Cursos</span>
                     </a>
-                    </li>
+                </li>
 
                 <li class="has-drp">
-                    <a href="{{url('dashboard/administrativo/aulas/index')}}" title="">
+                    <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="">
                         <i class="ion-briefcase"></i>
                         <span>Aulas</span>
                     </a>
-                    </li>
+                </li>
 
-                 </ul>
+            </ul>
         </nav>
     </header>
     <!-- Side Header -->
-  
+
     <div class="option-panel">
-      <span class="panel-btn">
-        <i class="fa ion-android-settings fa-spin"></i>
-      </span>
-      <div class="color-panel">
-        <h4>Text Color</h4>
-        <span class="color1" onclick="setActiveStyleSheet('color1'); return false;">
-          <i></i>
+        <span class="panel-btn">
+            <i class="fa ion-android-settings fa-spin"></i>
         </span>
-        <span class="color2" onclick="setActiveStyleSheet('color2'); return false;">
-          <i></i>
-        </span>
-        <span class="color3" onclick="setActiveStyleSheet('color'); return false;">
-          <i></i>
-        </span>
-        <span class="color4" onclick="setActiveStyleSheet('color4'); return false;">
-          <i></i>
-        </span>
-        <span class="color5" onclick="setActiveStyleSheet('color5'); return false;">
-          <i></i>
-        </span>
-      </div>
+        <div class="color-panel">
+            <h4>Text Color</h4>
+            <span class="color1" onclick="setActiveStyleSheet('color1'); return false;">
+                <i></i>
+            </span>
+            <span class="color2" onclick="setActiveStyleSheet('color2'); return false;">
+                <i></i>
+            </span>
+            <span class="color3" onclick="setActiveStyleSheet('color'); return false;">
+                <i></i>
+            </span>
+            <span class="color4" onclick="setActiveStyleSheet('color4'); return false;">
+                <i></i>
+            </span>
+            <span class="color5" onclick="setActiveStyleSheet('color5'); return false;">
+                <i></i>
+            </span>
+        </div>
     </div>
     <!-- Options Panel -->
     <div class="pg-tp">
         <i class="ion-cube"></i>
         <div class="pr-tp-inr">
             <h4>Bem - Vindo a Area dos Alunos!
-                <span></span> Panel</h4>
+                <span></span> Panel
+            </h4>
             <span>Nossa interface de atualizações, Realize seu cadastro em poucos passos!</span>
         </div>
     </div>
     <!-- Page Top -->
-  
+
     <div class="panel-content">
-      <div class="widget pad50-65">
-        <div class="widget-title2">
-          <h4>Preencha com os dados do Aluno</h4>
-          <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
+        <div class="widget pad50-65">
+            <div class="widget-title2">
+                <h4>Preencha com os dados do Aluno</h4>
+                <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
+            </div>
+
+        {{-------------------
+            //FORMULARIO
+            //-------------------}}
+
+            <form action="{{ route('update', $editAluno->$idAluno) }}" method="POST" role="form text-left"
+                class="contact-form">
+
+                @csrf
+                @method('POST')
+
+                <div class="column mrg20">
+
+                    <div class="row mrg20">
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeAluno"
+                                id="nomeAluno" value="{{ $editAluno->nomeAluno }}" />
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="email" placeholder="Email:" name="emailAluno"
+                                id="emailAluno" value="{{ $editAluno->emailAluno }}" />
+                        </div>
+
+                    </div>
+
+                    <div class="row mrg20">
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="tel" placeholder="Telefone:" name="telefoneAluno"
+                                value="{{ $editAluno->telefoneAluno }}" id="telefoneAluno" />
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="date" placeholder="Data de castro:" name="dataCadAluno"
+                                id="dataCadAluno" value="{{ $editAluno->dataCadAluno }}" />
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="text" placeholder="Status:" name="statusAluno"
+                                id="statusAluno" value="{{ $editAluno->statusAluno }}" />
+                        </div>
+                        {{--       
+            <div class="col-md-6 col-sm-12 col-lg-6">
+              <input class="brd-rd5" type="text" placeholder="foto:" name="fotoAluno" id="fotoAluno" value="{{$editAluno-> old('fotoAluno') }}" />
+            </div> --}}
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="text" placeholder="ID Curso:" name="idCurso"
+                                id="idCurso" value="{{ $editAluno->idCurso }}" />
+                        </div>
+
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <button class="green-bg brd-rd5" type="submit">Enviar</button>
+                    </div>
+                </div>
+            </form>
+
         </div>
-
-    {{--// -----------------------
-        // ATENÇÃO !!!!!!!
-        // A ação do formulario para que ele possa ser atualizado
-        // certifique-se de que tudo esta sendo passado
-        // Todos os campos de acordo com tabela precisam ser passados
-        // ----------------------- --}}
-
-  {{-- <form action="{{route('update', $editAluno->idAluno )}}" method="POST"  role="form text-left" class="contact-form">
-        @csrf
-        @method('POST') --}}
-
-            <div class="column mrg20">
-
-       <div class="row mrg20">
-       
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeAluno" id="nomeAluno" value="{{ old('nomeAluno') }}" />
-            </div>
-
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="email" placeholder="Email:" name="emailAluno" id="emailAluno" value="{{ old('emailAluno') }}" />
-            </div>
-
-        </div>
-
-       <div class="row mrg20">
-
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="tel" placeholder="Telefone:" name="telefoneAluno" value="{{ old('telefoneAluno') }}" id="telefoneAluno" />
-            </div>
-
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="date" placeholder="Data de castro:" name="dataCadAluno" id="dataCadAluno" value="{{ old('dataCadAluno') }}" />
-            </div>
-
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="text" placeholder="Status:" name="statusAluno" id="statusAluno" value="{{ old('statusAluno') }}" />
-            </div>
-
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="text" placeholder="foto:" name="fotoAluno" id="fotoAluno" value="{{ old('fotoAluno') }}" />
-            </div>
-
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="text" placeholder="ID Curso:" name="idCurso" id="idCurso" value="{{ old('idCurso') }}" />
-            </div>
-
-        </div>
-           <div class="col-md-12 col-sm-12 col-lg-12">
-              <button class="green-bg brd-rd5" type="submit">Enviar</button>
-            </div>
-            </div>
-        </form>
-        
-      </div>
     </div>
     <!-- Panel Content -->
     <footer>
-     
+
     </footer>
-    
+
     <!-- Vendor: Javascripts -->
     <script src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
     <!-- Vendor: Followed by our custom Javascripts -->
@@ -222,12 +231,12 @@
     <script src="{{ asset('assets/js/styleswitcher.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             'use strict';
 
             $.getJSON(
                 'https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json',
-                function (data) {
+                function(data) {
                     Highcharts.chart('chrt1', {
                         chart: {
                             zoomType: 'x'
@@ -339,7 +348,7 @@
                 }]
             });
 
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
                 $('#chrt3').highcharts({
                     chart: {
                         type: 'area',
@@ -412,7 +421,7 @@
                 });
             });
 
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
                 $('#chrt4').highcharts({
                     chart: {
                         type: 'area',

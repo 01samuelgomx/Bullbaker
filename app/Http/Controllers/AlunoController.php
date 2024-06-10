@@ -32,11 +32,15 @@ class AlunoController extends Controller
          * @return Response
          */
     
-    public function edit($id)
-    {
-         return view('dashboard.administrativo.aluno.edit', //compact('aluno', 'editAluno')
-        );
-    }
+         public function edit($id)
+         {
+             $idAluno = session('id');
+             $aluno = Aluno::find($idAluno);
+     
+             $editAluno = Aluno::findOrFail($id);
+     
+             return view('site.dashboard.administrativo.aluno.edit', compact('aluno', 'editAluno'));
+         }
 
 
     // -------------------------------
@@ -94,29 +98,27 @@ class AlunoController extends Controller
 
         $request->validate([
 
-            'nomeAdmin'              => 'required|string|max:100',
-
-        // -----------------------
-        // ATENÇÃO !!!!!!!
-        // continue a preencher !
-        // Adicione os campos necessarios de acordo com a tabela
-        // -----------------------
+            'nomeAluno'     => 'required|string|max:100',
+            'emailAluno'    => 'required|string|max:100',
+            'telefoneAluno' => 'required|string|max:20',
+            'dataCadAluno'  => 'required|date',
+            // 'fotoAluno'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'statusAluno'   => 'required|in:ativo,desativo',
+            'idCurso'       => 'required|exists:cursos,id',
 
         ]);
 
         $aluno = new Aluno();
 
-        $aluno->nomealuno           = $request->input('nomealuno');
-        
-        // -----------------------
-        // ATENÇÃO !!!!!!!
-        // Preencha com o restante de informações necessarias de acordo com a tabela
-        // Todo os campos da tabela precisam ser listados aqui
-        // -----------------------
-
-        $aluno->statusAluno         = $request->input('statusAdmin');
-        $aluno->created_at          = $request->input('create_at');
-        $aluno->updated_at          = $request->input('updated_at');
+        $aluno->nomeAluno       = $request->input('nomeAluno');
+        $aluno->emailAluno      = $request->input('emailAluno');
+        $aluno->telefoneAluno   = $request->input('telefoneAluno');
+        $aluno->dataCadAluno    = $request->input('dataCadAluno');
+        // $aluno->fotoAluno       = $request->input('fotoAluno');
+        $aluno->statusAluno     = $request->input('statusAluno');
+        $aluno->idCurso         = $request->input('idCurso');
+        $aluno->created_at      = $request->input('create_at');
+        $aluno->updated_at      = $request->input('updated_at');
 
 
         $aluno->save();
@@ -141,42 +143,82 @@ class AlunoController extends Controller
     // -------------------------------
     // Update Aluno
     
-    public function update(Request $request, $id)
+
+
+    // ----------------------
+    // -------UPDATE---------
+    // ----------------------
+    public function update(Request $request, $idAluno)
     {
-        $alunos = $this->aluno->find($id);
-        
-        if ($alunos === null) {
-            return response()->json(['erro' => 'Impossível realizar a atualização. O aluno não existe!'], 404);
-        }
-        
-        if ($request->method() === 'put') {
-            $dadosDinamico = [];
-            
-            foreach ($alunos->Regras() as $input => $regra) {
-                if (array_key_exists($input, $request->all())) {
-                    $dadosDinamico[$input] = $regra;
-                }
-            }
-            
-            $request->validate($dadosDinamico, $this->aluno->Feedback());
-        } else {
-            $request->validate($this->aluno->Regras(), $this->aluno->Feedback());
-        }
-    
-        if ($request->file('foto') == true) {
-            Storage::disk('public')->delete($alunos->foto);
-        }
-        
-        $imagem = $request->file('foto');
-        $imagem_url = $imagem->store('imagem', 'public');
-        
-        $alunos->update([
-            'nome' => $request->nome,
-            'foto' => $imagem_url
+        $request->validate([
+
+            'nomeAluno'     => 'required|string|max:100',
+            'emailAluno'    => 'required|string|max:100',
+            'telefoneAluno' => 'required|string|max:20',
+            'dataCadAluno'  => 'required|date',
+            // 'fotoAluno'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'statusAluno'   => 'required|in:ativo,desativo',
+            'idCurso'       => 'required|exists:cursos,id',
         ]);
+
+        $aluno = Aluno::findOrFail($idAluno);
         
-        return response()->json($alunos, 200);
+        $aluno->update($request->only([
+            'idAluno',
+            'nomeAluno',
+            'emailAluno',
+            'telefoneAluno',
+            'dataCadAluno',
+            'statusAluno',
+            // 'fotoAluno',
+            'idCurso',
+        ]));
+
+        return redirect()->route('site/dashboard/administrativo/aluno/index')->with('success', 'Admin atualizado com sucesso.');
     }
+
+
+    // public function update(Request $request, $id)
+    // {
+    //     $alunos = $this->aluno->find($id);
+        
+    //     if ($alunos === null) {
+    //         return response()->json(['erro' => 'Impossível realizar a atualização. O aluno não existe!'], 404);
+    //     }
+        
+    //     if ($request->method() === 'put') {
+    //         $dadosDinamico = [];
+            
+    //         foreach ($alunos->Regras() as $input => $regra) {
+    //             if (array_key_exists($input, $request->all())) {
+    //                 $dadosDinamico[$input] = $regra;
+    //             }
+    //         }
+            
+    //         $request->validate($dadosDinamico, $this->aluno->Feedback());
+    //     } else {
+    //         $request->validate($this->aluno->Regras(), $this->aluno->Feedback());
+    //     }
+    
+    //     // if ($request->file('foto') == true) {
+    //     //     Storage::disk('public')->delete($alunos->foto);
+    //     // }
+        
+    //     // $imagem = $request->file('foto');
+    //     // $imagem_url = $imagem->store('imagem', 'public');
+        
+    //     $alunos->update([
+    //         'nomeAluno' => $request->nomeAluno,
+    //         'emailAluno' => $request->emailAluno,
+    //         'telefoneAluno' => $request->telefoneAluno,
+    //         'dataCadAluno' => $request->dataCadAluno,
+    //         'statusAluno' => $request->statusAluno,
+    //         'idCurso' => $request->idCurso,
+    //         // 'foto' => $imagem_url
+    //     ]);
+        
+    //     return response()->json($alunos, 200);
+    // }
     
 
     /**

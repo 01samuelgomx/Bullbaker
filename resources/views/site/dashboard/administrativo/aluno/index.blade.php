@@ -428,13 +428,23 @@
                                     <td>
                                         <span class="addr">{{ $aluno->idCurso }}</span>
                                     </td>
+
+
                                     <td>
                                         <div class="table-btns">
-                                            <a href="{{ url('/dashboard/administrativo/aluno/edit') }}"
+                                            <a href="{{ route('editAluno', $aluno->idAluno) }}"
                                                 title="" class="green-bg-hover">Editar</a>
-                                            <a href="#" title="" class="blue-bg-hover">Delete</a>
+
+
+                                            <form action="{{ route('destroy', $aluno->idAluno) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                             <button type="submit" class="blue-bg-hover"> Desativar </button>
+                                            </form>
                                         </div>
                                     </td>
+
+
                                 </tr>
                             @endforeach
 

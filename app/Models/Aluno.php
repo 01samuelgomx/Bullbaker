@@ -23,7 +23,7 @@ class Aluno extends Model
         'telefoneAluno',
         'dataCadAluno',
         'statusAluno',
-        'fotoAluno',
+        // 'fotoAluno',
         'idCurso',
     
     ];
@@ -36,7 +36,7 @@ class Aluno extends Model
         'telefoneAluno' => 'required|unique:alunos,telefoneAluno,'.$this->id.'|min:11',
         'dataCadAluno' => 'required|date',
         'statusAluno' => 'required|in:active,inactive',
-        'fotoAluno' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // 'fotoAluno' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'idCurso' => 'required|exists:cursos,id',
 
     ];
@@ -65,9 +65,9 @@ class Aluno extends Model
         'statusAluno.required' => 'O campo status é obrigatório.',
         'statusAluno.in' => 'O status deve ser "active" ou "inactive".',
 
-        'fotoAluno.image' => 'A foto deve ser uma imagem.',
-        'fotoAluno.mimes' => 'A foto deve ser um arquivo do tipo: jpeg, png, jpg, gif, svg.',
-        'fotoAluno.max' => 'A foto não deve ter mais que 2048 KB.',
+        // 'fotoAluno.image' => 'A foto deve ser uma imagem.',
+        // 'fotoAluno.mimes' => 'A foto deve ser um arquivo do tipo: jpeg, png, jpg, gif, svg.',
+        // 'fotoAluno.max' => 'A foto não deve ter mais que 2048 KB.',
 
         'idCurso.required' => 'O campo curso é obrigatório.',
         'idCurso.exists' => 'O curso selecionado é inválido.',

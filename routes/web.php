@@ -29,10 +29,10 @@ Route::post('/login', [LoginController::class, 'autenticar'])->name('login');
 Route::middleware('autenticacao:aluno')->group(function () {
     Route::get('/dashboard/adminstrativo/aluno/index', [AlunoController::class, 'index'])->name('aluno'); 
 
-    Route::get('/dashboard/adminstrativo/aluno/create', [AlunoController::class, 'create'])->name('create'); // rota de Acesso ao formulario
+    Route::get('/dashboard/administrativo/aluno/create', [AlunoController::class, 'create'])->name('create'); // rota de Acesso ao formulario
     Route::post('/dashboard/adminstrativo/aluno/cadAluno', [AlunoController::class, 'cadAluno'])->name('cadAluno'); //Cadastro do aluno
     Route::get('/dashboard/adminstrativo/aluno/{id}/edit', [AlunoController::class, 'edit'])->name('editAluno');// rota de Acesso ao formulario
-    Route::post('/dashboard/adminstrativo/aluno/{id}/update', [AlunoController::class, 'update'])->name('update'); //Atualização dos dados
+    Route::put('/dashboard/adminstrativo/aluno/{id}/update', [AlunoController::class, 'update'])->name('update'); //Atualização dos dados
     Route::put('/dashboard/adminstrativo/aluno/desativar', [AlunoController::class, 'destroy'])->name('destroy'); // Deletar os dados
 });
 

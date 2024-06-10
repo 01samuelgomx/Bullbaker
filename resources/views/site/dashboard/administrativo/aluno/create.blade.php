@@ -7,6 +7,8 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
 
     <!-- Vendor: Bootstrap 4 Stylesheets  -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
@@ -132,12 +134,9 @@
         </div>
 
 
-    {{--// -----------------------
-        // ATENÇÃO !!!!!!!
-        // A action do formulario para atualizar de acordo com o nome do nosso controller
-        // ----------------------- --}}
+             <form action="{{ route('cadAluno') }}" method="PUT" role="form text-left" class="contact-form">
 
-             {{-- <form action="{{ route('cadAluno') }}" method="POST" role="form text-left" class="contact-form"> --}}
+             @csrf
                
             <div class="column mrg20">
 
@@ -166,10 +165,10 @@
             <div class="col-md-6 col-sm-12 col-lg-6">
               <input class="brd-rd5" type="text" placeholder="Status:" name="statusAluno" id="statusAluno" value="{{ old('statusAluno') }}" />
             </div>
-
+{{-- 
             <div class="col-md-6 col-sm-12 col-lg-6">
               <input class="brd-rd5" type="text" placeholder="foto:" name="fotoAluno" id="fotoAluno" value="{{ old('fotoAluno') }}" />
-            </div>
+            </div> --}}
 
             <div class="col-md-6 col-sm-12 col-lg-6">
               <input class="brd-rd5" type="text" placeholder="ID Curso:" name="idCurso" id="idCurso" value="{{ old('idCurso') }}" />
