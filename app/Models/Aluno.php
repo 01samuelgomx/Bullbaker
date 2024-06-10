@@ -16,6 +16,7 @@ class Aluno extends Model
     }
 
     protected $fillable = [
+
         'idAluno',
         'nomeAluno',
         'emailAluno',
@@ -24,8 +25,6 @@ class Aluno extends Model
         'statusAluno',
         'fotoAluno',
         'idCurso',
-        'created_at',
-        'updated_at',
     
     ];
 

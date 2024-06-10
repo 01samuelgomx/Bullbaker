@@ -27,6 +27,7 @@
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color5.css') }}" title="color5">
 </head>
 
+
 <body class="expand-data panel-data">
     <div class="topbar">
         <div class="logo">
@@ -380,7 +381,7 @@
                     <table class="table table-bordered style2">
                         <thead>
 
-     {{-- // -----------------------
+                            {{-- // -----------------------
             // ATENÇÃO !!!!!!!
             // A verificação abaixo será para listar todos os alunos
             // Que foram criados pelo croud
@@ -400,39 +401,41 @@
 
 
                             @foreach ($lista as $aluno)
-                            <tr>
-                                <td>
-                                    <span class="blue-bg indx" name="">{{ $aluno->idAluno }}</span>
-                                </td>
-                                <td>
-                                    <span class="date">{{$aluno->nomeAluno }}</span>
-                                </td>
-                                <td>
-                                    <h4 class="name">{{$aluno->emailAluno }}</h4>
-                                </td>
-                                <td>
-                                    <span class="ph#">{{$aluno->telefoneAluno }}</span>
-                                </td>
-                                <td>
-                                    <span class="ph#">{{$aluno->dataCadAluno }}</span>
-                                </td>
-                                <td>
-                                    <span class="ph#">{{$aluno->statusAluno }}</span>
-                                </td>
-                                <td>
-                                    <span class="ph#">{{$aluno->fotoAluno }}</span>
-                                </td>
-                                <td>
-                                    <span class="addr">{{$aluno->idCurso }}</span>
-                                </td>
-                                <td>
-                                    <div class="table-btns">
-                                        <a href="{{ url('/dashboard/administrativo/aluno/edit') }}" title=""
-                                            class="green-bg-hover">Editar</a>
-                                        <a href="#" title="" class="blue-bg-hover">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        <span class="blue-bg indx" name="">{{ $aluno->idAluno }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="date">{{ $aluno->nomeAluno }}</span>
+                                    </td>
+
+                                    <td>
+                                        <h4 class="name">{{ $aluno->emailAluno }}</h4>
+                                    </td>
+
+                                    <td>
+                                        <span class="ph#">{{ $aluno->telefoneAluno }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="ph#">{{ $aluno->dataCadAluno }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="ph#">{{ $aluno->statusAluno }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="ph#">{{ $aluno->fotoAluno }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="addr">{{ $aluno->idCurso }}</span>
+                                    </td>
+                                    <td>
+                                        <div class="table-btns">
+                                            <a href="{{ url('/dashboard/administrativo/aluno/edit') }}"
+                                                title="" class="green-bg-hover">Editar</a>
+                                            <a href="#" title="" class="blue-bg-hover">Delete</a>
+                                        </div>
+                                    </td>
+                                </tr>
                             @endforeach
 
                         </tbody>

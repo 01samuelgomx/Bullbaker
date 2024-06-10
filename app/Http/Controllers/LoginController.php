@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Administrador;
 use App\Models\Aluno;
-use App\Models\Usuario;
+use App\Models\usuario;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -37,9 +37,12 @@ class LoginController extends Controller
      
          // Obtendo email e senha da solicitação
          $email = $request->get('email');
+        //  dd($email);
          $senha = $request->get('senha');
+        //  dd($senha);
          // Buscando o usuário pelo email
-         $usuario = Usuario::where("email", $email)->first();
+         $usuario = usuario::where('email', $email)->first();
+        //  dd($usuario);
          
          // -------------------------------------
          // Verificando se o usuário existe
@@ -54,28 +57,28 @@ class LoginController extends Controller
 
          // -------------------------------------
          
-         // Obtendo o tipo de usuário
-         $tipoUsuario = $usuario->tipo_usuario;
-         
-         $tipo = null;
-         // Iniciando a sessão
-         session([
+            // Obtendo o tipo de usuário
+            $tipoUsuario = $usuario->tipo_usuario;
+            // dd($tipoUsuario);
+            $tipo = null;
+
+            session([
              'email' => $usuario->email,
              ]);
              
              // -------------------------------------
              
              if ($tipoUsuario instanceof Aluno) {
-            //  dd($usuario);
+            //  dd($usuario->id_usuario);
 
             $tipo = 'aluno';
 
              session([
-                 'id'            => $usuario->idAluno,
+                 'id'            => $usuario->id_usuario,
                  'nome'          => $usuario->nomeAluno,
                  'tipo_usuario'  => 'aluno',
              ]);
-             return view('site.dashboard.administrativo.aluno.index');
+             return redirect()->route('aluno');
         }
 
              //-------------------------
@@ -92,7 +95,7 @@ class LoginController extends Controller
                     'tipo_usuario'  => $tipoUsuario->tipoAdministrador,
                 ]);
 
-                return redirect('dashboard/administrativo/aulas/index');
+                return view('site.dashboard.administrativo.cursos.index');
         }
             }
 

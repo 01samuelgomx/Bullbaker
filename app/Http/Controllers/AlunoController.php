@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class AlunoController extends Controller
 {
     public $aluno;
+    public $idAluno;
 
     public function __construct(Aluno $aluno) {
         $this -> aluno = $aluno;
@@ -63,21 +64,23 @@ class AlunoController extends Controller
     public function index()
     {
         $idAluno = session('id');
+        // dd($idAluno);
         $aluno = Aluno::find($idAluno);
-        $lista = Aluno::all(); 
-
-        dd($lista);
+        $lista = Aluno::all();
         
+        // dd($lista); 
         $idUsuario = session('id');
         $usuario = Usuario::find($idUsuario);
         
         if (!$aluno) {
             abort(404, 'Aluno não encontrado');
-            }
-            
-            return view('site.dashboard.administrativo.aluno.index', compact('aluno', 'usuario', 'lista'));
-            }
-        // -------------------------------
+        }
+        // dd($lista);
+        return view('site.dashboard.administrativo.aluno.index', compact('aluno', 'usuario', 'lista'));
+    }
+    
+    // -------------------------------
+
 
 
     // -------------------------------

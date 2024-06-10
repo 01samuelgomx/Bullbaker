@@ -27,7 +27,7 @@ Route::post('/login', [LoginController::class, 'autenticar'])->name('login');
 //--------------------------------------------------------------------------
 //  Crud Aluno
 Route::middleware('autenticacao:aluno')->group(function () {
-    Route::get('/dashboard/adminstrativo/aluno/index', [AlunoController::class, 'index'])->name('lista'); 
+    Route::get('/dashboard/adminstrativo/aluno/index', [AlunoController::class, 'index'])->name('aluno'); 
 
     Route::get('/dashboard/adminstrativo/aluno/create', [AlunoController::class, 'create'])->name('create'); // rota de Acesso ao formulario
     Route::post('/dashboard/adminstrativo/aluno/cadAluno', [AlunoController::class, 'cadAluno'])->name('cadAluno'); //Cadastro do aluno
