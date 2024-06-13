@@ -81,7 +81,9 @@ class AlunoController extends Controller
         $idAluno = session('id');
         // dd($idAluno);
         $aluno = Aluno::find($idAluno);
-        $lista = Aluno::all();
+        
+        // Filtra somente os alunos ativos
+        $lista = Aluno::where('statusAluno', 'ativo')->get();
         
         // dd($lista); 
         $idUsuario = session('id');
@@ -115,7 +117,7 @@ class AlunoController extends Controller
             'dataCadAluno'  => 'required|date',
             // 'fotoAluno'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'statusAluno'   => 'required|in:ativo,desativo',
-            'idCurso'       => 'required|exists:cursos,id',
+            'idCurso'       => 'required|exists:tblcurso,idCurso',
 
         ]);
 
@@ -131,10 +133,9 @@ class AlunoController extends Controller
         $aluno->created_at      = $request->input('create_at');
         $aluno->updated_at      = $request->input('updated_at');
 
-
         $aluno->save();
 
-        return redirect()->route('site.dashboard.administrativo.aluno.index')->with('success', 'Aluno adicionado com sucesso!');
+        return redirect()->route('index.aluno')->with('success', 'Aluno adicionado com sucesso!');
     }
 
     /**
@@ -168,7 +169,7 @@ class AlunoController extends Controller
             'telefoneAluno' => 'required|string|max:20',
             'dataCadAluno'  => 'required|date',
             'statusAluno'   => 'required|in:ativo,desativo',
-            'idCurso'       => 'required|exists:cursos,id',
+            'idCurso'       => 'required|exists:tblcurso,idCurso',
         ]);
     
         // Busca do aluno pelo ID
@@ -185,55 +186,9 @@ class AlunoController extends Controller
         ]));
     
         // Redirecionamento com mensagem de sucesso
-        return redirect()->route('aluno.index')
+        return redirect()->route('index.aluno')
                          ->with('success', 'Aluno atualizado com sucesso.');
     }
-    
-    
-
-
-    // public function update(Request $request, $id)
-    // {
-    //     $alunos = $this->aluno->find($id);
-        
-    //     if ($alunos === null) {
-    //         return response()->json(['erro' => 'Impossível realizar a atualização. O aluno não existe!'], 404);
-    //     }
-        
-    //     if ($request->method() === 'put') {
-    //         $dadosDinamico = [];
-            
-    //         foreach ($alunos->Regras() as $input => $regra) {
-    //             if (array_key_exists($input, $request->all())) {
-    //                 $dadosDinamico[$input] = $regra;
-    //             }
-    //         }
-            
-    //         $request->validate($dadosDinamico, $this->aluno->Feedback());
-    //     } else {
-    //         $request->validate($this->aluno->Regras(), $this->aluno->Feedback());
-    //     }
-    
-    //     // if ($request->file('foto') == true) {
-    //     //     Storage::disk('public')->delete($alunos->foto);
-    //     // }
-        
-    //     // $imagem = $request->file('foto');
-    //     // $imagem_url = $imagem->store('imagem', 'public');
-        
-    //     $alunos->update([
-    //         'nomeAluno' => $request->nomeAluno,
-    //         'emailAluno' => $request->emailAluno,
-    //         'telefoneAluno' => $request->telefoneAluno,
-    //         'dataCadAluno' => $request->dataCadAluno,
-    //         'statusAluno' => $request->statusAluno,
-    //         'idCurso' => $request->idCurso,
-    //         // 'foto' => $imagem_url
-    //     ]);
-        
-    //     return response()->json($alunos, 200);
-    // }
-    
 
     /**
      * @param  Aluno
@@ -243,18 +198,35 @@ class AlunoController extends Controller
     // -----------------------
     // Delete Aluno
     // -----------------------
+
+    
     public function destroy($id)
     {
-        $alunos = $this -> aluno -> find($id);
+        // Busca do aluno pelo ID
+        $aluno = Aluno::find($id);
 
-        if($alunos === null){
-            return response()->json(['erro' => 'Impossível deleter este registro. O aluno não existe!'], 404);
+    if ($aluno === null) {
+        return response()->json(['erro' => 'Impossível desativar este registro. O aluno não existe!'], 404);
         }
-
-        Storage::disk('public')->delete($alunos->foto);
-        $alunos->delete();
-        return response()->json(['msg' => 'O registro foi removido com sucesso'], 200);
-    }
-
+        
+        // Atualiza o status do aluno para 'desativo'
+        $aluno->statusAluno = 'desativo';
+        $aluno->save();
+        
+        return response()->json(['msg' => 'O status do aluno foi atualizado para desativo com sucesso'], 200);
+        }
+        
+        // public function destroy($id)
+        // {
+        //     $alunos = $this -> aluno -> find($id);
+    
+        //     if($alunos === null){
+        //         return response()->json(['erro' => 'Impossível deleter este registro. O aluno não existe!'], 404);
+        //     }
+    
+        //     Storage::disk('public')->delete($alunos->foto);
+        //     $alunos->delete();
+        //     return response()->json(['msg' => 'O registro foi removido com sucesso'], 200);
+        // }
     
 }

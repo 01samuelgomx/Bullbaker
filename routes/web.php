@@ -24,13 +24,14 @@ Route::get('/menu', [MenuController::class, 'menu'])->name('menu');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'autenticar'])->name('login');
 
+
 //--------------------------------------------------------------------------
 // Crud Aluno
 Route::middleware('autenticacao:aluno')->group(function () {
     Route::get('/dashboard/administrativo/aluno/index', [AlunoController::class, 'index'])->name('index.aluno'); 
 
     Route::get('/dashboard/administrativo/aluno/create', [AlunoController::class, 'create'])->name('create.aluno'); // rota de Acesso ao formulario
-    Route::post('/dashboard/administrativo/aluno', [AlunoController::class, 'store'])->name('store'); // Cadastro do aluno
+    Route::post('/dashboard/administrativo/aluno', [AlunoController::class, 'cadAluno'])->name('cad.aluno'); // Cadastro do aluno
     Route::get('/dashboard/administrativo/aluno/{id}/edit', [AlunoController::class, 'edit'])->name('edit.aluno');// rota de Acesso ao formulario
     Route::put('/dashboard/administrativo/aluno/{id}', [AlunoController::class, 'update'])->name('update.aluno'); // Atualização do aluno
     Route::delete('/dashboard/administrativo/aluno/{id}', [AlunoController::class, 'destroy'])->name('delete.aluno'); // Deletar os dados
@@ -47,6 +48,7 @@ Route::prefix('/dashboard/administrativo/cursos')->group(function () {
     Route::post('/{id}/update', [CursosController::class, 'update'])->name('update'); //Atualização dos dados
     Route::put('/desativar', [CursosController::class, 'destroy'])->name('destroy'); // Deletar os dados
 });
+
 
 //--------------------------------------------------------------------------
 //  Crud Aulas

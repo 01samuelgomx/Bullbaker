@@ -33,11 +33,11 @@ class Aluno extends Model
 
         'nomeAluno' => 'required|unique:alunos,nomeAluno,'.$this->id.'|min:3',
         'emailAluno' => 'required|unique:alunos,emailAluno,'.$this->id.'|email',
-        'telefoneAluno' => 'required|unique:alunos,telefoneAluno,'.$this->id.'|min:11',
+        'telefoneAluno' => 'required|unique:alunos,telefoneAluno,'.$this->id.'|min:20',
         'dataCadAluno' => 'required|date',
         'statusAluno' => 'required|in:active,inactive',
-        // 'fotoAluno' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'idCurso' => 'required|exists:cursos,id',
+        'fotoAluno' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'idCurso' => 'required|exists:tblcurso,idCurso',
 
     ];
 

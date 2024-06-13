@@ -134,9 +134,10 @@
         </div>
 
 
-             <form action="{{ route('cadAluno') }}" method="PUT" role="form text-left" class="contact-form">
+             <form action="{{ route('cad.aluno') }}" method="POST" role="form text-left" class="contact-form">
 
              @csrf
+             @method('POST')
                
             <div class="column mrg20">
 

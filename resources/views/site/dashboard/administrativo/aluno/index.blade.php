@@ -393,6 +393,8 @@
                                 <th>Email</th>
                                 <th>Telefone</th>
                                 <th>Data</th>
+                                <th>Status</th>
+                                <th>Foto</th>
                                 <th>Curso</th>
                                 <th>Edição</th>
                             </tr>
@@ -440,7 +442,7 @@
                                                 title="" class="green-bg-hover">Editar</a>
 
 
-                                            <form action="{{ route('destroy', $aluno->idAluno) }}" method="POST">
+                                            <form action="{{ route('delete.aluno', $aluno->idAluno) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
                                              <button type="submit" class="blue-bg-hover"> Delete </button>

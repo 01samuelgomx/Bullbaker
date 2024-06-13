@@ -23,7 +23,6 @@ class LogAcessoBullbaker
     
         LogAcesso::create(['log' => "IP: $ip Requisitou na rota: $url da aplicação"]);
         
-
         return $next($request);
     }
 }
