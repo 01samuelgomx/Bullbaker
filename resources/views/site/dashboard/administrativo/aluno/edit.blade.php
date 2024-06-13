@@ -139,60 +139,43 @@
             //FORMULARIO
             //-------------------}}
 
-            <form action="{{ route('update', $editAluno->$idAluno) }}" method="POST" role="form text-left"
-                class="contact-form">
+<form action="{{ route('update', $editAluno->idAluno) }}" method="POST" role="form text-left" class="contact-form">
+    @csrf
+    @method('PUT')
 
-                @csrf
-                @method('POST')
-
-                <div class="column mrg20">
-
-                    <div class="row mrg20">
-
-                        <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeAluno"
-                                id="nomeAluno" value="{{ $editAluno->nomeAluno }}" />
-                        </div>
-
-                        <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="email" placeholder="Email:" name="emailAluno"
-                                id="emailAluno" value="{{ $editAluno->emailAluno }}" />
-                        </div>
-
-                    </div>
-
-                    <div class="row mrg20">
-
-                        <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="tel" placeholder="Telefone:" name="telefoneAluno"
-                                value="{{ $editAluno->telefoneAluno }}" id="telefoneAluno" />
-                        </div>
-
-                        <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="date" placeholder="Data de castro:" name="dataCadAluno"
-                                id="dataCadAluno" value="{{ $editAluno->dataCadAluno }}" />
-                        </div>
-
-                        <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="text" placeholder="Status:" name="statusAluno"
-                                id="statusAluno" value="{{ $editAluno->statusAluno }}" />
-                        </div>
-                        {{--       
+    <div class="column mrg20">
+        <div class="row mrg20">
             <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="text" placeholder="foto:" name="fotoAluno" id="fotoAluno" value="{{$editAluno-> old('fotoAluno') }}" />
-            </div> --}}
+                <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeAluno" id="nomeAluno" value="{{ old('nomeAluno', $editAluno->nomeAluno) }}" required />
+            </div>
+            <div class="col-md-6 col-sm-12 col-lg-6">
+                <input class="brd-rd5" type="email" placeholder="Email:" name="emailAluno" id="emailAluno" value="{{ old('emailAluno', $editAluno->emailAluno) }}" required />
+            </div>
+        </div>
+        <div class="row mrg20">
+            <div class="col-md-6 col-sm-12 col-lg-6">
+                <input class="brd-rd5" type="tel" placeholder="Telefone:" name="telefoneAluno" value="{{ old('telefoneAluno', $editAluno->telefoneAluno) }}" id="telefoneAluno" required />
+            </div>
+            <div class="col-md-6 col-sm-12 col-lg-6">
+                <input class="brd-rd5" type="date" placeholder="Data de cadastro:" name="dataCadAluno" id="dataCadAluno" value="{{ old('dataCadAluno', $editAluno->dataCadAluno) }}" required />
+            </div>
+            <div class="col-md-6 col-sm-12 col-lg-6">
+                <select class="brd-rd5" name="statusAluno" id="statusAluno" required>
+                    <option value="ativo" {{ old('statusAluno', $editAluno->statusAluno) == 'ativo' ? 'selected' : '' }}>Ativo</option>
+                    <option value="desativo" {{ old('statusAluno', $editAluno->statusAluno) == 'desativo' ? 'selected' : '' }}>Desativo</option>
+                </select>
+            </div>
+            <div class="col-md-6 col-sm-12 col-lg-6">
+                <input class="brd-rd5" type="text" placeholder="ID Curso:" name="idCurso" id="idCurso" value="{{ old('idCurso', $editAluno->idCurso) }}" required />
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <button class="green-bg brd-rd5" type="submit">Enviar</button>
+        </div>
+    </div>
+</form>
 
-                        <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="text" placeholder="ID Curso:" name="idCurso"
-                                id="idCurso" value="{{ $editAluno->idCurso }}" />
-                        </div>
 
-                    </div>
-                    <div class="col-md-12 col-sm-12 col-lg-12">
-                        <button class="green-bg brd-rd5" type="submit">Enviar</button>
-                    </div>
-                </div>
-            </form>
 
         </div>
     </div>

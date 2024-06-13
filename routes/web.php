@@ -25,16 +25,17 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'autenticar'])->name('login');
 
 //--------------------------------------------------------------------------
-//  Crud Aluno
+// Crud Aluno
 Route::middleware('autenticacao:aluno')->group(function () {
-    Route::get('/dashboard/adminstrativo/aluno/index', [AlunoController::class, 'index'])->name('aluno'); 
+    Route::get('/dashboard/administrativo/aluno/index', [AlunoController::class, 'index'])->name('index'); 
 
     Route::get('/dashboard/administrativo/aluno/create', [AlunoController::class, 'create'])->name('create'); // rota de Acesso ao formulario
-    Route::post('/dashboard/adminstrativo/aluno/cadAluno', [AlunoController::class, 'cadAluno'])->name('cadAluno'); //Cadastro do aluno
-    Route::get('/dashboard/adminstrativo/aluno/{id}/edit', [AlunoController::class, 'edit'])->name('editAluno');// rota de Acesso ao formulario
-    Route::put('/dashboard/adminstrativo/aluno/{id}/update', [AlunoController::class, 'update'])->name('update'); //Atualização dos dados
-    Route::put('/dashboard/adminstrativo/aluno/desativar', [AlunoController::class, 'destroy'])->name('destroy'); // Deletar os dados
+    Route::post('/dashboard/administrativo/aluno', [AlunoController::class, 'store'])->name('store'); // Cadastro do aluno
+    Route::get('/dashboard/administrativo/aluno/{id}/edit', [AlunoController::class, 'edit'])->name('edit');// rota de Acesso ao formulario
+    Route::put('/dashboard/administrativo/aluno/{id}', [AlunoController::class, 'update'])->name('update'); // Atualização do aluno
+    Route::delete('/dashboard/administrativo/aluno/{id}', [AlunoController::class, 'destroy'])->name('delete'); // Deletar os dados
 });
+
 
 //--------------------------------------------------------------------------
 //  Crud Cursos

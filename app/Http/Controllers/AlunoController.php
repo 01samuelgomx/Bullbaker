@@ -34,14 +34,24 @@ class AlunoController extends Controller
     
          public function edit($id)
          {
+             // Pega o ID do aluno da sessão
              $idAluno = session('id');
+             
+             // Se o ID do aluno da sessão não estiver definido, redireciona para outra página ou retorna um erro
+             if (!$idAluno) {
+                 return redirect()->route('login')->withErrors(['msg' => 'Sessão expirada, faça login novamente.']);
+             }
+            //  dd($idAluno);
+             // Encontra o aluno logado
              $aluno = Aluno::find($idAluno);
-     
+         
+             // Encontra o aluno que será editado
              $editAluno = Aluno::findOrFail($id);
-     
+         
+             // Retorna a view com as variáveis necessárias
              return view('site.dashboard.administrativo.aluno.edit', compact('aluno', 'editAluno'));
          }
-
+         
 
     // -------------------------------
     // Croud START
@@ -150,21 +160,22 @@ class AlunoController extends Controller
     // ----------------------
     public function update(Request $request, $idAluno)
     {
+        // Validação dos dados recebidos
         $request->validate([
-
             'nomeAluno'     => 'required|string|max:100',
-            'emailAluno'    => 'required|string|max:100',
+            'emailAluno'    => 'required|string|email|max:100',
             'telefoneAluno' => 'required|string|max:20',
             'dataCadAluno'  => 'required|date',
             // 'fotoAluno'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'statusAluno'   => 'required|in:ativo,desativo',
             'idCurso'       => 'required|exists:cursos,id',
         ]);
-
+    
+        // Busca do aluno pelo ID
         $aluno = Aluno::findOrFail($idAluno);
-        
+    
+        // Atualização dos dados do aluno
         $aluno->update($request->only([
-            'idAluno',
             'nomeAluno',
             'emailAluno',
             'telefoneAluno',
@@ -173,9 +184,12 @@ class AlunoController extends Controller
             // 'fotoAluno',
             'idCurso',
         ]));
-
-        return redirect()->route('site/dashboard/administrativo/aluno/index')->with('success', 'Admin atualizado com sucesso.');
+    
+        // Redirecionamento com mensagem de sucesso
+        return redirect()->route('site.dashboard.administrativo.aluno.index')
+                         ->with('success', 'Admin atualizado com sucesso.');
     }
+    
 
 
     // public function update(Request $request, $id)
