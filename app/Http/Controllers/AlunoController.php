@@ -38,10 +38,11 @@ class AlunoController extends Controller
              $idAluno = session('id');
              
              // Se o ID do aluno da sessão não estiver definido, redireciona para outra página ou retorna um erro
+             
              if (!$idAluno) {
                  return redirect()->route('login')->withErrors(['msg' => 'Sessão expirada, faça login novamente.']);
              }
-            //  dd($idAluno);
+
              // Encontra o aluno logado
              $aluno = Aluno::find($idAluno);
          
@@ -166,7 +167,6 @@ class AlunoController extends Controller
             'emailAluno'    => 'required|string|email|max:100',
             'telefoneAluno' => 'required|string|max:20',
             'dataCadAluno'  => 'required|date',
-            // 'fotoAluno'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'statusAluno'   => 'required|in:ativo,desativo',
             'idCurso'       => 'required|exists:cursos,id',
         ]);
@@ -181,14 +181,14 @@ class AlunoController extends Controller
             'telefoneAluno',
             'dataCadAluno',
             'statusAluno',
-            // 'fotoAluno',
             'idCurso',
         ]));
     
         // Redirecionamento com mensagem de sucesso
-        return redirect()->route('site.dashboard.administrativo.aluno.index')
-                         ->with('success', 'Admin atualizado com sucesso.');
+        return redirect()->route('aluno.index')
+                         ->with('success', 'Aluno atualizado com sucesso.');
     }
+    
     
 
 

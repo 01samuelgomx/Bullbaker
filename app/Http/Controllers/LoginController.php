@@ -65,20 +65,23 @@ class LoginController extends Controller
             session([
              'email' => $usuario->email,
              ]);
+
              
              // -------------------------------------
              
              if ($tipoUsuario instanceof Aluno) {
-            //  dd($usuario->id_usuario);
+           
+                $tipo = 'aluno';
 
-            $tipo = 'aluno';
+            //  dd($usuario->tipo_usuario_type);
 
              session([
                  'id'            => $usuario->id_usuario,
                  'nome'          => $usuario->nomeAluno,
                  'tipo_usuario'  => 'aluno',
              ]);
-             return redirect()->route('aluno');
+             
+             return redirect()->route('index.aluno');
         }
 
              //-------------------------

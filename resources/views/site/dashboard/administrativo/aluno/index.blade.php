@@ -405,6 +405,7 @@
                                     <td>
                                         <span class="blue-bg indx" name="">{{ $aluno->idAluno }}</span>
                                     </td>
+
                                     <td>
                                         <span class="date">{{ $aluno->nomeAluno }}</span>
                                     </td>
@@ -416,30 +417,33 @@
                                     <td>
                                         <span class="ph#">{{ $aluno->telefoneAluno }}</span>
                                     </td>
+
                                     <td>
                                         <span class="ph#">{{ $aluno->dataCadAluno }}</span>
                                     </td>
+
                                     <td>
                                         <span class="ph#">{{ $aluno->statusAluno }}</span>
                                     </td>
+
                                     <td>
                                         <span class="ph#">{{ $aluno->fotoAluno }}</span>
                                     </td>
+
                                     <td>
                                         <span class="addr">{{ $aluno->idCurso }}</span>
                                     </td>
 
-
                                     <td>
                                         <div class="table-btns">
-                                            <a href="{{ route('editAluno', $aluno->idAluno) }}"
+                                            <a href="{{ route('edit.aluno', $aluno->idAluno) }}"
                                                 title="" class="green-bg-hover">Editar</a>
 
 
                                             <form action="{{ route('destroy', $aluno->idAluno) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                             <button type="submit" class="blue-bg-hover"> Desativar </button>
+                                             <button type="submit" class="blue-bg-hover"> Delete </button>
                                             </form>
                                         </div>
                                     </td>
