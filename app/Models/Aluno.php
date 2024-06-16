@@ -35,7 +35,7 @@ class Aluno extends Model
         'emailAluno' => 'required|unique:alunos,emailAluno,'.$this->id.'|email',
         'telefoneAluno' => 'required|unique:alunos,telefoneAluno,'.$this->id.'|min:20',
         'dataCadAluno' => 'required|date',
-        'statusAluno' => 'required|in:active,inactive',
+        'statusAluno' => 'required|in:ativo,desativado',
         'fotoAluno' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'idCurso' => 'required|exists:tblcurso,idCurso',
 

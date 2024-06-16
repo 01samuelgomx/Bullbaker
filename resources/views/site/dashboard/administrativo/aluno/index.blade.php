@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
     <!-- Vendor: Bootstrap 4 Stylesheets  -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
     <link rel="icon" href="{{ asset('img/logo.jpg') }}" type="image/png" />
@@ -20,11 +19,12 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}" type="text/css">
 
     <!-- Color Scheme -->
-    <link rel="stylesheet" href="css/color-schemes/color.css" type="text/css" title="color3">
+    <link rel="stylesheet" href="{{ asset('assets/css/color-schemes/color.css') }}" type="text/css" title="color3">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color1.css') }}" title="color1">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color2.css') }}" title="color2">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color4.css') }}" title="color4">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color5.css') }}" title="color5">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 
@@ -39,46 +39,15 @@
                 </a>
             </h1>
         </div>
-        <div class="topbar-data">
-            <div class="usr-act">
-                <i>Olá, Usu!</i>
-                <span>
-                    <img src="images/resource/topbar-usr1.jpg" alt="" />
-                    <i class="sts away"></i>
-                </span>
-                <div class="usr-inf">
-                    <div class="usr-thmb brd-rd50">
-                        <img class="brd-rd50" src="images/resource/usr.jpg" alt="" />
-                        <i class="sts away"></i>
-                        <a class="green-bg brd-rd5" href="#" title="">
-                            <i class="fa fa-envelope"></i>
-                        </a>
-                    </div>
-                    <h5>
-                        <a href="#" title="">John Smith</a>
-                    </h5>
-                    <span>Co Worker</span>
-                    <i>076 9477 4896</i>
-                    <div class="act-pst-lk-stm">
-                        <a class="brd-rd5 green-bg-hover" href="#" title="">
-                            <i class="ion-heart"></i> Love</a>
-                        <a class="brd-rd5 blue-bg-hover" href="#" title="">
-                            <i class="ion-forward"></i> Reply</a>
-                    </div>
-                    <div class="usr-ft">
-                        <a class="btn-danger" href="#" title="">
-                            <i class="fa fa-sign-out"></i> Logout</a>
-                    </div>
-                </div>
-            </div>
-            <form class="topbar-search">
-                <button type="submit">
-                    <i class="ion-ios-search-strong"></i>
-                </button>
-                <input type="text" placeholder="Type and Hit Enter" />
-            </form>
+          <div class="topbar-data">
 
+            <div class="usr-act">
+               <span>Olá, seja bem vindo! {{ $aluno->nomeAluno }}</span>
+            </div>
+         
         </div>
+       
+
         <div class="topbar-bottom-colors">
             <i style="background-color: #361F08;"></i>
             <i style="background-color: #C1959D;"></i>
@@ -91,7 +60,7 @@
     </div>
     <!-- Topbar -->
     <header class="side-header expand-header">
-        <div class="nav-head">Main Navigation
+        <div class="nav-head">Navegação Principal !
             <span class="menu-trigger">
                 <i class="ion-android-menu"></i>
             </span>
@@ -162,11 +131,11 @@
     <!-- Options Panel -->
     <div class="pg-tp">
         <i class="ion-cube"></i>
-        <div class="pr-tp-inr">
-            <h4>Bem - Vindo(a)
+           <div class="pr-tp-inr">
+            <h4>Bem - Vindo a Area dos Alunos!
                 <span></span> Panel
             </h4>
-            <span>Admin Template for medium and large web applications with ery clean and aesthetic style.</span>
+            <span>Nossa interface de atualizações, Realize seu cadastro em poucos passos!</span>
         </div>
     </div>
     <!-- Page Top -->
@@ -196,12 +165,12 @@
                         <i class="ion-arrow-graph-up-right"></i>
                         <div class="stat-box-innr">
                             <span>$
-                                <i class="counter">1,206,90</i>
+                                <i class="counter">Numero de cursos</i>
                             </span>
-                            <h5>FATURAMENTO</h5>
+                            <h5>Cursos Cadastrados !</h5>
                         </div>
                         <span>
-                            <i class="ion-ios-stopwatch"></i> Updated: 05:14pm</span>
+                            <i class="ion-ios-stopwatch"></i>Crie novo curso através da tabela</span>
                     </div>
                 </div>
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
@@ -226,11 +195,11 @@
                         <i class="ion-android-desktop"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter">975</i>k+</span>
-                            <h5>CUSTOS</h5>
+                                <i class="counter">Numero de Aulas</i></span>
+                            <h5>Aulas Inseridas !</h5>
                         </div>
                         <span>
-                            <i class="ion-ios-stopwatch"></i> Updated: 05:14pm</span>
+                            <i class="ion-ios-stopwatch"></i>Saiba mais e acesse a tabela aulas !</span>
                     </div>
                 </div>
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
@@ -255,12 +224,12 @@
                         <i class="ion-cube"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter">690</i>
+                                <i class="counter">Numero de alunos</i>
                             </span>
-                            <h5>PEDIDOS</h5>
+                            <h5>Total de Alunos</h5>
                         </div>
                         <span>
-                            <i class="ion-ios-stopwatch"></i> Updated: 05:14pm</span>
+                            <i class="ion-ios-stopwatch"></i>Confira mais em sua tabela alunos !</span>
                     </div>
                 </div>
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
@@ -284,75 +253,9 @@
                     <i class="ion-ios-stopwatch"></i> Updated: 05:14pm</span>
             </div>
         </div>
-        <div class="col-md-12 grid-item col-sm-12 col-lg-12">
 
-        </div>
-        <div class="col-md-6 grid-item col-sm-12 col-lg-6">
-            <div class="widget sales-summ pad50-40">
-                <div class="wdgt-opt">
-                    <span class="wdgt-opt-btn">
-                        <i class="ion-android-more-vertical"></i>
-                    </span>
-                    <div class="wdgt-opt-lst brd-rd5">
-                        <a class="delt-wdgt" href="#" title="">Delete</a>
-                        <a class="expnd-wdgt" href="#" title="">Expand</a>
-                        <a class="refrsh-wdgt" href="#" title="">Refresh</a>
-                    </div>
-                </div>
-                <div class="wdgt-ldr">
-                    <div class="ball-scale-multiple">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-                <h4 class="widget-title">Sales Summery</h4>
-                <div class="sales-charts">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#today">Today</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#week">Week</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#month">Month</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="today">
-                            <div id="chrt2" style="height: 270px;"></div>
-                        </div>
-                        <div class="tab-pane fade" id="week">
-                            <div id="chrt3" style="height: 270px;"></div>
-                        </div>
-                        <div class="tab-pane fade" id="month">
-                            <div id="chrt4" style="height: 270px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sales-stat">
-                    <div class="sales-stat-itm">
-                        <span style="color: #13aaf9;">
-                            <i class="counter">760</i>
-                        </span>
-                        <i>Total Sales</i>
-                    </div>
-                    <div class="sales-stat-itm">
-                        <span style="color: #968cec;">$
-                            <i class="counter">4,219</i>
-                        </span>
-                        <i>Revenus</i>
-                    </div>
-                    <div class="sales-stat-itm">
-                        <span style="color: #968cec;">$
-                            <i class="counter">1,247</i>
-                        </span>
-                        <i>Expenses</i>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+    
 
         <div class="col-md-12 grid-item col-sm-12 col-lg-12">
             <div class="widget proj-order pad50-40">
@@ -379,14 +282,8 @@
 
                 <div class="table-wrap">
                     <table class="table table-bordered style2">
-                        <thead>
 
-                            {{-- // -----------------------
-            // ATENÇÃO !!!!!!!
-            // A verificação abaixo será para listar todos os alunos
-            // Que foram criados pelo croud
-            // ----------------------- --}}
-
+                        <thead class="thead-inverse" style="background-color: #90a293; color: #fff">
                             <tr>
                                 <th>ID</th>
                                 <th>Nome</th>
@@ -399,13 +296,14 @@
                                 <th>Edição</th>
                             </tr>
                         </thead>
+
                         <tbody>
 
 
                             @foreach ($lista as $aluno)
                                 <tr>
                                     <td>
-                                        <span class="blue-bg indx" name="">{{ $aluno->idAluno }}</span>
+                                        <span class="blue-bg indx" style="background-color:#445547;" name="">{{ $aluno->idAluno }}</span>
                                     </td>
 
                                     <td>
@@ -438,14 +336,15 @@
 
                                     <td>
                                         <div class="table-btns">
-                                            <a href="{{ route('edit.aluno', $aluno->idAluno) }}"
-                                                title="" class="green-bg-hover">Editar</a>
+                                            <a href="{{ route('edit.aluno', $aluno->idAluno) }}" title=""
+                                                class="green-bg-hover">Editar</a>
 
 
-                                            <form action="{{ route('delete.aluno', $aluno->idAluno) }}" method="POST">
+                                            <form action="{{ route('delete.aluno', $aluno->idAluno) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                             <button type="submit" class="blue-bg-hover"> Delete </button>
+                                                <button type="submit" class="blue-bg-hover">Delete</button>
                                             </form>
                                         </div>
                                     </td>
@@ -460,7 +359,7 @@
             </div>
         </div>
 
-        <div class="col-md-12 grid-item col-sm-12 col-lg-12">
+        {{-- <div class="col-md-12 grid-item col-sm-12 col-lg-12">
             <div class="totl-revnu widget pad50-40">
                 <div class="wdgt-opt">
                     <span class="wdgt-opt-btn">
@@ -482,7 +381,7 @@
                 <h4 class="widget-title">Total Revenue</h4>
                 <div id="chart5"></div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <!-- Filter Items -->
     </div>

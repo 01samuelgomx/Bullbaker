@@ -55,7 +55,7 @@ class AlunoController extends Controller
          
 
     // -------------------------------
-    // Croud START
+    // Croud STORE
     // ------------------------------
 
     public function store(Request $request)
@@ -105,7 +105,6 @@ class AlunoController extends Controller
 
     public function cadAluno (Request $request)
     {
-        $request->merge(['dataContratacao' => now()]);
         $request->merge(['create_at' => now()]);
         $request->merge(['updated_at' => now()]);
 
@@ -152,14 +151,9 @@ class AlunoController extends Controller
      * @return Response
      */
 
-    // -------------------------------
-    // Update Aluno
-    
+     // -------------------------------
+     // Cadastro Aluno
 
-
-    // ----------------------
-    // -------UPDATE---------
-    // ----------------------
     public function update(Request $request, $idAluno)
     {
         // Validação dos dados recebidos
@@ -197,9 +191,7 @@ class AlunoController extends Controller
 
     // -----------------------
     // Delete Aluno
-    // -----------------------
 
-    
     public function destroy($id)
     {
         // Busca do aluno pelo ID

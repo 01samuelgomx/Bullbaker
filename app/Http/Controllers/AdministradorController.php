@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrador;
+use App\Models\Aula;
+use App\Models\Cursos;
+
 use App\Http\Requests\StoreAdministradorRequest;
 use App\Http\Requests\UpdateAdministradorRequest;
 
@@ -15,7 +18,7 @@ class AdministradorController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**

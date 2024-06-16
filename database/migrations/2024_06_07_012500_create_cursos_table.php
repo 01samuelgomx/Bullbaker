@@ -15,10 +15,13 @@ return new class extends Migration
     {
         Schema::create('tblCurso', function (Blueprint $table) {
             $table->id('idCurso');
-            $table->string('nomeCurso');
-            $table->text('descricaoCurso');
+            $table->string('nomeCurso', 255);
+            $table->text('descricaoCurso'); 
+            $table->decimal('precoCurso', 8, 2);
+            $table->integer('vagasDisponiveisCurso');
+            $table->string('fotoCurso', 255);
             $table->boolean('statusCurso')->default(true);
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 

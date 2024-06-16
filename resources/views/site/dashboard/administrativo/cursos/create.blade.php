@@ -7,6 +7,8 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <!-- Vendor: Bootstrap 4 Stylesheets  -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
@@ -23,17 +25,18 @@
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color4.css') }}" title="color4">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color5.css') }}" title="color5">
 </head>
+
 <body class="expand-data panel-data">
     <div class="topbar">
-      <div class="logo">
-        <h1>
-          <a href="#" title="">
-            <img src="images/logo1.png" alt="" />
-          </a>
-        </h1>
-      </div>
- 
-     <div class="topbar-bottom-colors">
+        <div class="logo">
+            <h1>
+                <a href="#" title="">
+                    <img src="images/logo1.png" alt="" />
+                </a>
+            </h1>
+        </div>
+
+        <div class="topbar-bottom-colors">
             <i style="background-color: #361F08;"></i>
             <i style="background-color: #C1959D;"></i>
             <i style="background-color: #90A293;"></i>
@@ -44,151 +47,188 @@
         </div>
     </div>
     <!-- Topbar -->
-  
+
     <header class="side-header expand-header">
-      <div class="nav-head">Main Navigation
-        <span class="menu-trigger">
-          <i class="ion-android-menu"></i>
-        </span>
-      </div>
-       <nav class="custom-scrollbar">
+        <div class="nav-head">Main Navigation
+            <span class="menu-trigger">
+                <i class="ion-android-menu"></i>
+            </span>
+        </div>
+        <nav class="custom-scrollbar">
             <ul class="drp-sec">
                 <li class="has-drp">
                     <a href="#" title="">
                         <i class="ion-home"></i>
                         <span>Dashboard</span>
                     </a>
-        
+
                 </li>
             </ul>
             <h4>Tabelas</h4>
             <ul class="drp-sec">
 
                 <li class="has-drp">
-                    <a href="{{url('dashboard/administrativo/aluno/index')}}" title="">
+                    <a href="{{ url('dashboard/administrativo/aluno/index') }}" title="">
                         <i class="ion-briefcase"></i>
                         <span>Alunos</span>
                     </a>
-                    </li>
+                </li>
 
                 <li class="has-drp">
-                    <a href="{{url('dashboard/administrativo/cursos/index')}}" title="">
+                    <a href="{{ url('dashboard/administrativo/cursos/index') }}" title="">
                         <i class="ion-briefcase"></i>
                         <span>Cursos</span>
                     </a>
-                    </li>
+                </li>
 
                 <li class="has-drp">
-                    <a href="{{url('dashboard/administrativo/aulas/index')}}" title="">
+                    <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="">
                         <i class="ion-briefcase"></i>
                         <span>Aulas</span>
                     </a>
-                    </li>
+                </li>
 
-                 </ul>
+            </ul>
         </nav>
     </header>
     <!-- Side Header -->
-  
+
     <div class="option-panel">
-      <span class="panel-btn">
-        <i class="fa ion-android-settings fa-spin"></i>
-      </span>
-      <div class="color-panel">
-        <h4>Text Color</h4>
-        <span class="color1" onclick="setActiveStyleSheet('color1'); return false;">
-          <i></i>
+        <span class="panel-btn">
+            <i class="fa ion-android-settings fa-spin"></i>
         </span>
-        <span class="color2" onclick="setActiveStyleSheet('color2'); return false;">
-          <i></i>
-        </span>
-        <span class="color3" onclick="setActiveStyleSheet('color'); return false;">
-          <i></i>
-        </span>
-        <span class="color4" onclick="setActiveStyleSheet('color4'); return false;">
-          <i></i>
-        </span>
-        <span class="color5" onclick="setActiveStyleSheet('color5'); return false;">
-          <i></i>
-        </span>
-      </div>
+        <div class="color-panel">
+            <h4>Text Color</h4>
+            <span class="color1" onclick="setActiveStyleSheet('color1'); return false;">
+                <i></i>
+            </span>
+            <span class="color2" onclick="setActiveStyleSheet('color2'); return false;">
+                <i></i>
+            </span>
+            <span class="color3" onclick="setActiveStyleSheet('color'); return false;">
+                <i></i>
+            </span>
+            <span class="color4" onclick="setActiveStyleSheet('color4'); return false;">
+                <i></i>
+            </span>
+            <span class="color5" onclick="setActiveStyleSheet('color5'); return false;">
+                <i></i>
+            </span>
+        </div>
     </div>
     <!-- Options Panel -->
     <div class="pg-tp">
         <i class="ion-cube"></i>
         <div class="pr-tp-inr">
             <h4>Bem - Vindo a Area dos Cursos!
-                <span></span> Panel</h4>
+                <span></span> Panel
+            </h4>
             <span>Nossa interface de atualizações, Realize seu cadastro em poucos passos!</span>
         </div>
     </div>
     <!-- Page Top -->
-  
+
     <div class="panel-content">
-      <div class="widget pad50-65">
-        <div class="widget-title2">
-          <h4>Preencha com os dados dos Cursos</h4>
-          <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
+        <div class="widget pad50-65">
+            <div class="widget-title2">
+                <h4>Preencha com os dados dos Cursos</h4>
+                <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
+            </div>
+
+            <form action="{{ route('cad.curso') }}" method="POST" role="form text-left"
+                class="contact-form">
+
+                @csrf
+                @method('POST')
+
+                <div class="column mrg20">
+
+                    <div class="row mrg20">
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeCurso" id="nomeCurso"
+                                value="{{ old('nomeCurso') }}" />
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="text" placeholder="Descrisção:" name="descricaoCurso"
+                                id="descricaoCurso"
+                                value="{{ old('descricaoCurso') }}" />
+                        </div>
+
+                        {{-- <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="text" placeholder="Descrisção:" name="fotoCurso"
+                                id="fotoCurso" value="{{ old('fotoCurso') }}" />
+                            </div> --}}
+
+                        <div class="row mrg20">
+
+                            <div class="col-md-6 col-sm-12 col-lg-6">
+                                <input class="brd-rd5" type="number" placeholder="Vagas:"
+                                    name="vagasDisponiveisCurso" id="vagasDisponiveisCurso"
+                                    value="{{ old('vagasDisponiveisCurso') }}" />
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 col-lg-6">
+                                <input class="brd-rd5" type="number" placeholder="Preço:" name="precoCurso"
+                                    id="precoCurso" value="{{ old('precoCurso') }}" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="column mrg20">
+                    <div class="row mrg20">
+
+
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="text" placeholder="Status:" name="statusCurso"
+                                id="statusCurso" value="{{ old('statusCurso') }}" />
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoCurso"
+                                id="duracaoCurso" value="{{ old('duracaoCurso') }}" />
+                        </div>
+
+
+                        <div class="row mrg20">
+
+
+                            <div class="col-md-6 col-sm-12 col-lg-6">
+                                <input class="brd-rd5" type="date" placeholder="Data Inicio:" name="data_inicio"
+                                    id="data_inicio" value="{{ old('data_inicio') }}" />
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 col-lg-6">
+                                <input class="brd-rd5" type="date" placeholder="Data Fim:" name="data_fim"
+                                    id="data_fim" value="{{ old('data_fim') }}" />
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <button class="green-bg brd-rd5" type="submit">Enviar</button>
+                </div>
         </div>
 
-        <form class="contact-form">
-            <div class="column mrg20">
-
-       <div class="row mrg20">
-       
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeCursos"  id="nomeCursos" value="{{ old('nomeCursos') }}" value="{{ old('') }}" />
-            </div>
-
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="text" placeholder="Descrisção:" name="descricaoCursos"  id="descricaoCursos" value="{{ old('descricaoCursos') }}" />
-            </div>
-
-        </div>
-
-       <div class="row mrg20">
-
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoCursos"  id="duracaoCursos" value="{{ old('duracaoCursos') }}" />
-            </div>
-
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="number" placeholder="Preço:" name="precoCursos"  id="precoCursos" value="{{ old('precoCursos') }}" />
-            </div>
-
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="number" placeholder="Vagas:" name="vagasDisponiveisCursos" id="vagasDisponiveisCursos" value="{{ old('vagasDisponiveisCursos') }}" />
-            </div>
-
-        </div>
-        
-        
-      </div>
-
-       <div class="row mrg20">
-
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="date" placeholder="Data Inicio:" name="data_inicio"  id="data_inicio" value="{{ old('data_inicio') }}"/>
-            </div>
-
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="date" placeholder="Data Fim:" name="data_fim" id="data_fim" value="{{ old('data_fim') }}"/>
-            </div>
-
-        </div>
-           <div class="col-md-12 col-sm-12 col-lg-12">
-              <button class="green-bg brd-rd5" type="submit">Enviar</button>
-            </div>
-            </div>
         </form>
-        
-      </div>
+
+    </div>
     </div>
     <!-- Panel Content -->
     <footer>
-     
+
     </footer>
-    
+
     <!-- Vendor: Javascripts -->
     <script src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
     <!-- Vendor: Followed by our custom Javascripts -->
@@ -219,12 +259,12 @@
     <script src="{{ asset('assets/js/styleswitcher.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             'use strict';
 
             $.getJSON(
                 'https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json',
-                function (data) {
+                function(data) {
                     Highcharts.chart('chrt1', {
                         chart: {
                             zoomType: 'x'
@@ -336,7 +376,7 @@
                 }]
             });
 
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
                 $('#chrt3').highcharts({
                     chart: {
                         type: 'area',
@@ -409,7 +449,7 @@
                 });
             });
 
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
                 $('#chrt4').highcharts({
                     chart: {
                         type: 'area',

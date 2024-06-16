@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Curso extends Model
+class Cursos extends Model
 {
     use HasFactory;
     protected $table = 'tblcurso';
@@ -17,6 +17,7 @@ class Curso extends Model
         'duracaoCurso',
         'precoCurso',
         'vagasDisponiveisCurso',
+        'fotoCurso',
         'data_inicio',
         'data_fim',
         'statusCurso',
@@ -31,9 +32,10 @@ class Curso extends Model
             'duracaoCurso' => 'required|integer|min:1',
             'precoCurso' => 'required|numeric|min:0',
             'vagasDisponiveisCurso' => 'required|integer|min:1',
+            // 'fotoCurso' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'data_inicio' => 'required|date',
             'data_fim' => 'required|date|after_or_equal:data_inicio',
-            'statusCurso' => 'required|in:ativo,inativo',
+            'statusCurso' => 'required|in:ativo,desativado',
         ];
     }
 
