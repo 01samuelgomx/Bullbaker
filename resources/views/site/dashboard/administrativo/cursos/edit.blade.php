@@ -31,7 +31,9 @@
         <div class="logo">
             <h1>
                 <a href="#" title="">
-                    <img src="images/logo1.png" alt="" />
+                     <img src="{{ asset('assets/img/logoBull.png') }}"
+                        style=" width: 110px;
+                     margin-top: -28px; height: 100px; " alt="" />
                 </a>
             </h1>
         </div>
@@ -183,14 +185,14 @@
                     <div class="row mrg20">
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <select class="brd-rd5" name="statusAluno" id="statusAluno" required>
+                            <select class="brd-rd5" name="statusCurso" id="statusCurso" required>
                                 <option value="ativo"
                                 class="brd-rd5"
-                                    {{ old('statusAluno', $editAluno->statusAluno) == 'ativo' ? 'selected' : '' }}>
+                                    {{ old('statusCurso', $editCurso->statusCurso) == 'ativo' ? 'selected' : '' }}>
                                     Ativo</option>
                                 <option value="desativo"
                                 class="brd-rd5"
-                                    {{ old('statusAluno', $editAluno->statusAluno) == 'desativo' ? 'selected' : '' }}>
+                                    {{ old('statusCurso', $editCurso->statusCurso) == 'desativo' ? 'selected' : '' }}>
                                     Desativo</option>
                             </select>
                         </div>
@@ -205,12 +207,12 @@
 
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
-                                <input class="brd-rd5" type="date" placeholder="Data Inicio:" name="data_inicio"
+                                <input class="brd-rd5" type="datetime-local" placeholder="Data Inicio:" name="data_inicio"
                                     id="data_inicio" value="{{ old('data_inicio', $editCurso->data_inicio) }}" />
                             </div>
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
-                                <input class="brd-rd5" type="date" placeholder="Data Fim:" name="data_fim"
+                                <input class="brd-rd5" type="datetime-local" placeholder="Data Fim:" name="data_fim"
                                     id="data_fim" value="{{ old('data_fim', $editCurso->data_fim) }}" />
                             </div>
 

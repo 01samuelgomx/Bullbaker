@@ -164,8 +164,8 @@
                         </div>
                         <i class="ion-arrow-graph-up-right"></i>
                         <div class="stat-box-innr">
-                            <span>$
-                                <i class="counter">Numero de cursos</i>
+                            <span>
+                                <i class="counter"> ->  {{ $num_cursos_ativos }}</i>
                             </span>
                             <h5>Cursos Cadastrados !</h5>
                         </div>
@@ -195,7 +195,7 @@
                         <i class="ion-android-desktop"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter">Numero de Aulas</i></span>
+                                <i class="counter"> ->  {{ $num_aulas_ativas }}</i></span>
                             <h5>Aulas Inseridas !</h5>
                         </div>
                         <span>
@@ -221,10 +221,11 @@
                                 <div></div>
                             </div>
                         </div>
+
                         <i class="ion-cube"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter">Numero de alunos</i>
+                                <i class="counter">  ->  {{ $num_alunos_ativos }}</i>
                             </span>
                             <h5>Total de Alunos</h5>
                         </div>
@@ -278,7 +279,7 @@
                 </div>
                 <h4 class="widget-title">Confira as informações dos Alunos!</h4>
                 <a class="add-proj brd-rd5" href="{{ url('/dashboard/administrativo/aluno/create') }}"
-                    data-toggle="tooltip" title="Add Project">+</a>
+                    data-toggle="tooltip" title="Adicionar Aluno">+</a>
 
                 <div class="table-wrap">
                     <table class="table table-bordered style2">

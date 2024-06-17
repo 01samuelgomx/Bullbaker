@@ -35,7 +35,7 @@ Route::middleware('autenticacao:aluno')->group(function () {
     Route::post('/dashboard/administrativo/aluno', [AlunoController::class, 'cadAluno'])->name('cad.aluno'); // Cadastro do aluno
     Route::get('/dashboard/administrativo/aluno/{id}/edit', [AlunoController::class, 'edit'])->name('edit.aluno');// rota de Acesso ao formulario
     Route::put('/dashboard/administrativo/aluno/{id}', [AlunoController::class, 'update'])->name('update.aluno'); // Atualização do aluno
-    Route::delete('/dashboard/administrativo/aluno/{id}', [AlunoController::class, 'destroy'])->name('delete.aluno'); // Deletar os dados
+    Route::put('/dashboard/administrativo/aluno/{id}', [AlunoController::class, 'destroy'])->name('delete.aluno'); // Deletar os dados
 });
 
 //--------------------------------------------------------------------------

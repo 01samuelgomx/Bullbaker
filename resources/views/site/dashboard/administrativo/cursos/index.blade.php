@@ -164,8 +164,8 @@
                         </div>
                         <i class="ion-arrow-graph-up-right"></i>
                         <div class="stat-box-innr">
-                            <span>$
-                                <i class="counter">Numero de cursos</i>
+                            <span>
+                                <i class="counter"> ->  {{ $num_cursos_ativos }}</i>
                             </span>
                             <h5>Cursos Cadastrados !</h5>
                         </div>
@@ -195,7 +195,7 @@
                         <i class="ion-android-desktop"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter">Numero de Aulas</i></span>
+                                <i class="counter"> ->  {{ $num_aulas_ativas }}</i></span>
                             <h5>Aulas Inseridas !</h5>
                         </div>
                         <span>
@@ -224,9 +224,9 @@
                         <i class="ion-cube"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter">Numero de cursos</i>
+                                <i class="counter"> ->  {{ $num_alunos_ativos }}</i>
                             </span>
-                            <h5>Total de cursos</h5>
+                            <h5>Total de Aluno</h5>
                         </div>
                         <span>
                             <i class="ion-ios-stopwatch"></i>Confira mais em sua tabela cursos !</span>
@@ -325,7 +325,7 @@
                                     </td>
 
                                     <td>
-                                        <span class="ph#">{{ $curso->vagasDisponiveisCurso }}</span>
+                                        <span class="ph#">{{ $curso->vagasDisponiveisCurso }} vagas!</span>
                                     </td>
 
                                     {{-- <td>

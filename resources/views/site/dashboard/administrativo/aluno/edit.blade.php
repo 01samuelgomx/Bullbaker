@@ -162,7 +162,7 @@
                                 required />
                         </div>
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="date" placeholder="Data de cadastro:"
+                            <input class="brd-rd5" type="datetime-local" placeholder="Data de cadastro:"
                                 name="dataCadAluno" id="dataCadAluno"
                                 value="{{ old('dataCadAluno', $editAluno->dataCadAluno) }}" required />
                         </div>

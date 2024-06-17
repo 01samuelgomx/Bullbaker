@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
     <!-- Vendor: Bootstrap 4 Stylesheets  -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
 
@@ -31,7 +30,9 @@
         <div class="logo">
             <h1>
                 <a href="#" title="">
-                    <img src="images/logo1.png" alt="" />
+                    <img src="{{ asset('assets/img/logoBull.png') }}"
+                        style=" width: 110px;
+                     margin-top: -28px; height: 100px; " alt="" />
                 </a>
             </h1>
         </div>
@@ -183,9 +184,11 @@
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <select class="brd-rd5" name="statusAluno" id="statusAluno" required>
-                                <option class="brd-rd5" value="ativo"  {{ old('statusAluno') == 'ativo' ? 'selected' : '' }}>
+                                <option class="brd-rd5" value="ativo"
+                                    {{ old('statusAluno') == 'ativo' ? 'selected' : '' }}>
                                     Ativo</option>
-                                <option class="brd-rd5" value="desativo" {{ old('statusAluno') == 'desativo' ? 'selected' : '' }}>
+                                <option class="brd-rd5" value="desativo"
+                                    {{ old('statusAluno') == 'desativo' ? 'selected' : '' }}>
                                     Desativo</option>
                             </select>
                         </div>
@@ -200,8 +203,8 @@
 
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
-                                <input class="brd-rd5" type="datetime-local" placeholder="Data Inicio:" name="data_inicio"
-                                    id="data_inicio" value="{{ old('data_inicio') }}" />
+                                <input class="brd-rd5" type="datetime-local" placeholder="Data Inicio:"
+                                    name="data_inicio" id="data_inicio" value="{{ old('data_inicio') }}" />
                             </div>
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
@@ -215,10 +218,10 @@
                     </div>
                 </div>
 
-
                 <div class="col-md-12 col-sm-12 col-lg-12">
                     <button class="green-bg brd-rd5" type="submit">Enviar</button>
                 </div>
+
         </div>
 
         </form>
