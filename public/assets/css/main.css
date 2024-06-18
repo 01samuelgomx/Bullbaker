@@ -3137,8 +3137,10 @@ table.style3 .table-inverse {background-color: #1e1e1e;}
 .slctd .pckg-bdy > a {background-color: #242424;}
 /*===== Contact Us =====*/
 .widget-title2 {
-  float: left;
+  display: flex;
   width: 100%;
+  align-items: center !important;
+  justify-content: space-between !important;
   margin-bottom: 40px;
 }
 .widget-title2 > h4 {

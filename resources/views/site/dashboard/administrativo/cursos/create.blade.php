@@ -9,17 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
     <!-- Vendor: Bootstrap 4 Stylesheets  -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
 
     <!-- Our Website CSS Styles -->
-    <link rel="stylesheet" href="css/icons.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/icons.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}" type="text/css">
 
     <!-- Color Scheme -->
-    <link rel="stylesheet" href="css/color-schemes/color.css" type="text/css" title="color3">
+    <link rel="stylesheet" href="{{ asset('css/color-schemes/color.css') }}" type="text/css" title="color3">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color1.css') }}" title="color1">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color2.css') }}" title="color2">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color4.css') }}" title="color4">
@@ -31,7 +30,9 @@
         <div class="logo">
             <h1>
                 <a href="#" title="">
-                    <img src="images/logo1.png" alt="" />
+                    <img src="{{ asset('assets/img/logoBull.png') }}"
+                        style=" width: 110px;
+                     margin-top: -28px; height: 100px; " alt="" />
                 </a>
             </h1>
         </div>
@@ -130,13 +131,17 @@
 
     <div class="panel-content">
         <div class="widget pad50-65">
+        
             <div class="widget-title2">
-                <h4>Preencha com os dados dos Cursos</h4>
-                <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
+                <div style=" flex-direction: column;">
+                    <h4>Preencha com os dados dos Cursos</h4>
+                    <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
+                </div>
+                <img src="{{ asset('img/camera.png') }}" alt="Cadastre uma Imagem ao curso" width="100">
             </div>
 
-            <form action="{{ route('cad.curso') }}" method="POST" role="form text-left"
-                class="contact-form">
+            <form action="{{ route('cad.curso') }}" method="POST" role="form text-left" class="contact-form"
+                enctype="multipart/form-data">
 
                 @csrf
                 @method('POST')
@@ -146,20 +151,19 @@
                     <div class="row mrg20">
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeCurso" id="nomeCurso"
-                                value="{{ old('nomeCurso') }}" />
+                            <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeCurso"
+                                id="nomeCurso" value="{{ old('nomeCurso') }}" />
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="text" placeholder="Descrisção:" name="descricaoCurso"
-                                id="descricaoCurso"
-                                value="{{ old('descricaoCurso') }}" />
+                                id="descricaoCurso" value="{{ old('descricaoCurso') }}" />
                         </div>
 
-                        {{-- <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="text" placeholder="Descrisção:" name="fotoCurso"
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="file" placeholder="Descrisção:" name="fotoCurso"
                                 id="fotoCurso" value="{{ old('fotoCurso') }}" />
-                            </div> --}}
+                        </div>
 
                         <div class="row mrg20">
 
@@ -183,12 +187,17 @@
                 <div class="column mrg20">
                     <div class="row mrg20">
 
-
-
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="text" placeholder="Status:" name="statusCurso"
-                                id="statusCurso" value="{{ old('statusCurso') }}" />
+                            <select class="brd-rd5" name="statusAluno" id="statusAluno" required>
+                                <option class="brd-rd5" value="ativo"
+                                    {{ old('statusAluno') == 'ativo' ? 'selected' : '' }}>
+                                    Ativo</option>
+                                <option class="brd-rd5" value="desativo"
+                                    {{ old('statusAluno') == 'desativo' ? 'selected' : '' }}>
+                                    Desativo</option>
+                            </select>
                         </div>
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoCurso"
                                 id="duracaoCurso" value="{{ old('duracaoCurso') }}" />
@@ -199,12 +208,12 @@
 
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
-                                <input class="brd-rd5" type="date" placeholder="Data Inicio:" name="data_inicio"
-                                    id="data_inicio" value="{{ old('data_inicio') }}" />
+                                <input class="brd-rd5" type="datetime-local" placeholder="Data Inicio:"
+                                    name="data_inicio" id="data_inicio" value="{{ old('data_inicio') }}" />
                             </div>
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
-                                <input class="brd-rd5" type="date" placeholder="Data Fim:" name="data_fim"
+                                <input class="brd-rd5" type="datetime-local" placeholder="Data Fim:" name="data_fim"
                                     id="data_fim" value="{{ old('data_fim') }}" />
                             </div>
 
@@ -214,10 +223,10 @@
                     </div>
                 </div>
 
-
                 <div class="col-md-12 col-sm-12 col-lg-12">
                     <button class="green-bg brd-rd5" type="submit">Enviar</button>
                 </div>
+
         </div>
 
         </form>

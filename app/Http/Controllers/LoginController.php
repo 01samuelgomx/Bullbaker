@@ -76,9 +76,9 @@ class LoginController extends Controller
             //  dd($usuario->tipo_usuario_type);
 
              session([
-                 'id'            => $usuario->id_usuario,
-                 'nome'          => $usuario->nomeAluno,
-                 'tipo_usuario'  => 'aluno',
+                 'id'            => $usuario->tipo_usuario_id,
+                 'nome'          => $usuario->nome,
+                 'tipo_usuario_type'  => 'aluno',
              ]);
              
              return redirect()->route('index.aluno');

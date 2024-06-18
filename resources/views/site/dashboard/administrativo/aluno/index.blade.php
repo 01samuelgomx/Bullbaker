@@ -142,7 +142,7 @@
 
     <div class="panel-content">
         <div class="filter-items">
-            <div class="row grid-wrap mrg20">
+               <div class="row grid-wrap mrg20">
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
                     <div class="stat-box widget bg-clr1">
                         <div class="wdgt-opt">
@@ -164,8 +164,8 @@
                         </div>
                         <i class="ion-arrow-graph-up-right"></i>
                         <div class="stat-box-innr">
-                            <span>$
-                                <i class="counter">Numero de cursos</i>
+                            <span>
+                                <i class="counter"> ->  {{ $num_cursos_ativos }}</i>
                             </span>
                             <h5>Cursos Cadastrados !</h5>
                         </div>
@@ -195,7 +195,7 @@
                         <i class="ion-android-desktop"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter">Numero de Aulas</i></span>
+                                <i class="counter"> ->  {{ $num_aulas_ativas }}</i></span>
                             <h5>Aulas Inseridas !</h5>
                         </div>
                         <span>
@@ -221,10 +221,11 @@
                                 <div></div>
                             </div>
                         </div>
+
                         <i class="ion-cube"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter">Numero de alunos</i>
+                                <i class="counter">  ->  {{ $num_alunos_ativos }}</i>
                             </span>
                             <h5>Total de Alunos</h5>
                         </div>
@@ -251,7 +252,7 @@
                 </div>
                 <span>
                     <i class="ion-ios-stopwatch"></i> Updated: 05:14pm</span>
-            </div>
+               </div>
         </div>
 
 

@@ -24,14 +24,57 @@
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color2.css') }}" title="color2">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color4.css') }}" title="color4">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color5.css') }}" title="color5">
+
 </head>
+
+<style>
+.file-input-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+#file-input {
+    display: none;
+}
+
+.file-label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #ddd;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.file-label img {
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.file-label img.selected {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>
 
 <body class="expand-data panel-data">
     <div class="topbar">
         <div class="logo">
             <h1>
                 <a href="#" title="">
-                    <img src="images/logo1.png" alt="" />
+                    <img src="{{ asset('assets/img/logoBull.png') }}"
+                        style=" width: 110px;
+                     margin-top: -28px; height: 100px; " alt="" />
                 </a>
             </h1>
         </div>
@@ -130,23 +173,35 @@
 
     <div class="panel-content">
         <div class="widget pad50-65">
-            <div class="widget-title2">
-                <h4>Preencha com os dados dos Cursos</h4>
-                <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
-            </div>
 
             <form action="{{ route('update.curso', $editCurso->idCurso) }}" method="POST" role="form text-left"
                 class="contact-form">
                 @csrf
                 @method('PUT')
 
+
+                <div class="d-flex justify-content-between">
+                    <div class="widget-title2">
+                        <div style=" flex-direction: column;">
+                            <h4>Preencha com os dados dos Cursos</h4>
+                            <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
+                        </div>
+                    </div>
+
+                    <div class="file-input-container" style="margin-bottom:30px;">
+                        <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)">
+                        <label for="file-input" class="file-label">
+                            <img id="icon" src="{{ asset('img/camera.png') }}" alt="Upload Image">
+                        </label>
+                    </div>
+                </div>
                 <div class="column mrg20">
 
                     <div class="row mrg20">
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeCurso" id="nomeCurso"
-                                value="{{ old('nomeCurso', $editCurso->nomeCurso) }}" />
+                            <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeCurso"
+                                id="nomeCurso" value="{{ old('nomeCurso', $editCurso->nomeCurso) }}" />
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
@@ -155,10 +210,12 @@
                                 value="{{ old('descricaoCurso', $editCurso->descricaoCurso) }}" />
                         </div>
 
-                        {{-- <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="text" placeholder="Descrisção:" name="fotoCurso"
-                                id="fotoCurso" value="{{ old('fotoCurso') }}" />
-                            </div> --}}
+                        {{-- @if ($editCurso->fotocurso)
+                            <div>
+                                <img src="{{ asset('storage/img/aluno/' . $editCurso->fotocurso) }}"
+                                    alt="Imagem do Curso" width="100">
+                            </div>
+                        @endif --}}
 
                         <div class="row mrg20">
 
@@ -182,12 +239,17 @@
                 <div class="column mrg20">
                     <div class="row mrg20">
 
-
-
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="text" placeholder="Status:" name="statusCurso"
-                                id="statusCurso" value="{{ old('statusCurso', $editCurso->statusCurso) }}" />
+                            <select class="brd-rd5" name="statusCurso" id="statusCurso" required>
+                                <option value="ativo" class="brd-rd5"
+                                    {{ old('statusCurso', $editCurso->statusCurso) == 'ativo' ? 'selected' : '' }}>
+                                    Ativo</option>
+                                <option value="desativo" class="brd-rd5"
+                                    {{ old('statusCurso', $editCurso->statusCurso) == 'desativo' ? 'selected' : '' }}>
+                                    Desativo</option>
+                            </select>
                         </div>
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoCurso"
                                 id="duracaoCurso" value="{{ old('duracaoCurso', $editCurso->duracaoCurso) }}" />
@@ -198,12 +260,13 @@
 
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
-                                <input class="brd-rd5" type="date" placeholder="Data Inicio:" name="data_inicio"
-                                    id="data_inicio" value="{{ old('data_inicio', $editCurso->data_inicio) }}" />
+                                <input class="brd-rd5" type="datetime-local" placeholder="Data Inicio:"
+                                    name="data_inicio" id="data_inicio"
+                                    value="{{ old('data_inicio', $editCurso->data_inicio) }}" />
                             </div>
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
-                                <input class="brd-rd5" type="date" placeholder="Data Fim:" name="data_fim"
+                                <input class="brd-rd5" type="datetime-local" placeholder="Data Fim:" name="data_fim"
                                     id="data_fim" value="{{ old('data_fim', $editCurso->data_fim) }}" />
                             </div>
 
@@ -257,6 +320,28 @@
     <script src="{{ asset('assets/js/jquery.poptrox.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/styleswitcher.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
+
+    <script>
+       function displayImage(event) {
+    const fileInput = event.target;
+    const file = fileInput.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const imgElement = document.getElementById('icon');
+            imgElement.classList.remove('selected');
+            
+            // Timeout to allow the removal of the class to take effect before adding it again
+            setTimeout(() => {
+                imgElement.src = e.target.result;
+                imgElement.classList.add('selected');
+            }, 100);
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             'use strict';

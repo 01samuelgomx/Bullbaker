@@ -42,7 +42,7 @@
           <div class="topbar-data">
 
             <div class="usr-act">
-               <span>Olá, seja bem vindo! {{ $curso->nomeCurso }}</span>
+               <span> Olá seja bem vindo! </span>
             </div>
          
         </div>
@@ -79,9 +79,9 @@
             <ul class="drp-sec">
 
                 <li class="has-drp">
-                    <a href="{{ url('dashboard/administrativo/curso/index') }}" title="">
+                    <a href="{{ url('dashboard/administrativo/aluno/index') }}" title="">
                         <i class="ion-briefcase"></i>
-                        <span>cursos</span>
+                        <span>Alunos</span>
                     </a>
                 </li>
 
@@ -164,8 +164,8 @@
                         </div>
                         <i class="ion-arrow-graph-up-right"></i>
                         <div class="stat-box-innr">
-                            <span>$
-                                <i class="counter">Numero de cursos</i>
+                            <span>
+                                <i class="counter"> ->  {{ $num_cursos_ativos }}</i>
                             </span>
                             <h5>Cursos Cadastrados !</h5>
                         </div>
@@ -195,7 +195,7 @@
                         <i class="ion-android-desktop"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter">Numero de Aulas</i></span>
+                                <i class="counter"> ->  {{ $num_aulas_ativas }}</i></span>
                             <h5>Aulas Inseridas !</h5>
                         </div>
                         <span>
@@ -224,9 +224,9 @@
                         <i class="ion-cube"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter">Numero de cursos</i>
+                                <i class="counter"> ->  {{ $num_alunos_ativos }}</i>
                             </span>
-                            <h5>Total de cursos</h5>
+                            <h5>Total de Aluno</h5>
                         </div>
                         <span>
                             <i class="ion-ios-stopwatch"></i>Confira mais em sua tabela cursos !</span>
@@ -278,7 +278,7 @@
                 </div>
                 <h4 class="widget-title">Confira as informações dos cursos!</h4>
                 <a class="add-proj brd-rd5" href="{{ url('/dashboard/administrativo/cursos/create') }}"
-                    data-toggle="tooltip" title="Add Project">+</a>
+                    data-toggle="tooltip" title="Adicionar novo curso">+</a>
 
                 <div class="table-wrap">
                     <table class="table table-bordered style2">
@@ -286,12 +286,12 @@
                         <thead class="thead-inverse" style="background-color: #c1959d; color: #fff">
                             <tr>
                                 <th>ID</th>
+                                <th>Foto</th>
                                 <th>Nome</th>
                                 <th>Descricao</th>
                                 <th>Duracao</th>
                                 <th>Preco</th>
                                 <th>vagasDisponiveisCurso</th>
-                                {{-- <th>Foto</th> --}}
                                 <th>data_inicio</th>
                                 <th>data_fim</th>
                                 <th>statusCurso</th>
@@ -309,6 +309,10 @@
                                     </td>
 
                                     <td>
+                                        <span style="width: 100px; height: 100px" class="ph#">{{ $curso->fotoCurso }}</span>
+                                    </td>
+
+                                    <td>
                                         <span class="date">{{ $curso->nomeCurso }}</span>
                                     </td>
 
@@ -317,20 +321,17 @@
                                     </td>
 
                                     <td>
-                                        <span class="ph#">{{ $curso->duracaoCurso }}</span>
+                                        <span class="ph#">{{ $curso->duracaoCurso }} Dias</span>
                                     </td>
 
                                     <td>
-                                        <span class="ph#">{{ $curso->precoCurso }}</span>
+                                        <span class="ph#">R$ {{ $curso->precoCurso }}</span>
                                     </td>
 
                                     <td>
-                                        <span class="ph#">{{ $curso->vagasDisponiveisCurso }}</span>
+                                        <span class="ph#">{{ $curso->vagasDisponiveisCurso }} vagas!</span>
                                     </td>
 
-                                    {{-- <td>
-                                        <span class="ph#">{{ $curso->fotoCurso }}</span>
-                                    </td> --}}
 
                                     <td>
                                         <span class="addr">{{ $curso->data_inicio }}</span>
@@ -347,7 +348,7 @@
                                     <td>
                                         <div class="table-btns">
                                             <a href="{{ route('edit.curso', $curso->idCurso) }}" title=""
-                                                class="green-bg-hover">Editar</a>
+                                                class="green-bg-hover" style = "Text-transform">Editar</a>
 
 
                                             <form action="{{ route('delete.curso', $curso->idCurso) }}"
