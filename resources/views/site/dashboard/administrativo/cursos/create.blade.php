@@ -131,20 +131,33 @@
 
     <div class="panel-content">
         <div class="widget pad50-65">
-        
-            <div class="widget-title2">
-                <div style=" flex-direction: column;">
-                    <h4>Preencha com os dados dos Cursos</h4>
-                    <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
-                </div>
-                <img src="{{ asset('img/camera.png') }}" alt="Cadastre uma Imagem ao curso" width="100">
-            </div>
 
             <form action="{{ route('cad.curso') }}" method="POST" role="form text-left" class="contact-form"
                 enctype="multipart/form-data">
 
                 @csrf
                 @method('POST')
+
+                <div class="d-flex justify-content-between">
+
+                    <div class="widget-title2">
+                        <div style=" flex-direction: column;">
+                            <h4>Preencha com os dados dos Cursos</h4>
+                            <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
+                        </div>
+                    </div>
+
+                              <div class="file-input-container" style="margin-bottom:30px;">
+                        <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
+                            name="fotoCurso" id="fotoCurso" value="{{ old ('fotoCurso') }}">
+                        <label for="file-input" class="file-label">
+                            <img id="icon"
+                                src="{{ asset('storage/img/cursos/') : asset('img/camera.png') }}"
+                                alt="Upload Image">
+                        </label>
+                    </div>
+
+                </div>
 
                 <div class="column mrg20">
 
@@ -157,12 +170,8 @@
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="text" placeholder="Descrisção:" name="descricaoCurso"
-                                id="descricaoCurso" value="{{ old('descricaoCurso') }}" />
-                        </div>
-
-                        <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="file" placeholder="Descrisção:" name="fotoCurso"
-                                id="fotoCurso" value="{{ old('fotoCurso') }}" />
+                                id="descricaoCurso"
+                                value="{{ old('descricaoCurso') }}" />
                         </div>
 
                         <div class="row mrg20">
@@ -188,12 +197,12 @@
                     <div class="row mrg20">
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <select class="brd-rd5" name="statusAluno" id="statusAluno" required>
-                                <option class="brd-rd5" value="ativo"
-                                    {{ old('statusAluno') == 'ativo' ? 'selected' : '' }}>
+                            <select class="brd-rd5" name="statusCurso" id="statusCurso" required>
+                                <option value="ativo" class="brd-rd5"
+                                    {{ old('statusCurso') == 'ativo' ? 'selected' : '' }}>
                                     Ativo</option>
-                                <option class="brd-rd5" value="desativo"
-                                    {{ old('statusAluno') == 'desativo' ? 'selected' : '' }}>
+                                <option value="desativo" class="brd-rd5"
+                                    {{ old('statusCurso') == 'desativo' ? 'selected' : '' }}>
                                     Desativo</option>
                             </select>
                         </div>
@@ -209,7 +218,8 @@
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
                                 <input class="brd-rd5" type="datetime-local" placeholder="Data Inicio:"
-                                    name="data_inicio" id="data_inicio" value="{{ old('data_inicio') }}" />
+                                    name="data_inicio" id="data_inicio"
+                                    value="{{ old('data_inicio') }}" />
                             </div>
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
@@ -223,10 +233,10 @@
                     </div>
                 </div>
 
+
                 <div class="col-md-12 col-sm-12 col-lg-12">
                     <button class="green-bg brd-rd5" type="submit">Enviar</button>
                 </div>
-
         </div>
 
         </form>

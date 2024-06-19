@@ -28,43 +28,43 @@
 </head>
 
 <style>
-.file-input-container {
-    position: relative;
-    width: 150px;
-    height: 150px;
-}
+    .file-input-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+    }
 
-#file-input {
-    display: none;
-}
+    #file-input {
+        display: none;
+    }
 
-.file-label {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: #ddd;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    transition: background-color 0.3s ease;
-}
+    .file-label {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: transparent;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        transition: background-color 0.3s ease;
+    }
 
-.file-label img {
-    width: 100px;
-    height: 100px;
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
+    .file-label img {
+        width: 100px;
+        height: 100px;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
 
-.file-label img.selected {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    .file-label img.selected {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 </style>
 
 <body class="expand-data panel-data">
@@ -179,8 +179,8 @@
                 @csrf
                 @method('PUT')
 
-
                 <div class="d-flex justify-content-between">
+
                     <div class="widget-title2">
                         <div style=" flex-direction: column;">
                             <h4>Preencha com os dados dos Cursos</h4>
@@ -189,12 +189,17 @@
                     </div>
 
                     <div class="file-input-container" style="margin-bottom:30px;">
-                        <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)">
+                        <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
+                            name="fotoCurso">
                         <label for="file-input" class="file-label">
-                            <img id="icon" src="{{ asset('img/camera.png') }}" alt="Upload Image">
+                            <img id="icon"
+                                src="{{ isset($editCurso->fotoCurso) && $editCurso->fotoCurso ? asset('storage/img/cursos/' . $editCurso->fotoCurso) : asset('img/camera.png') }}"
+                                alt="Upload Image">
                         </label>
                     </div>
+
                 </div>
+
                 <div class="column mrg20">
 
                     <div class="row mrg20">
@@ -285,6 +290,7 @@
         </form>
 
     </div>
+
     </div>
     <!-- Panel Content -->
     <footer>
@@ -322,25 +328,24 @@
     <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
 
     <script>
-       function displayImage(event) {
-    const fileInput = event.target;
-    const file = fileInput.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const imgElement = document.getElementById('icon');
-            imgElement.classList.remove('selected');
-            
-            // Timeout to allow the removal of the class to take effect before adding it again
-            setTimeout(() => {
-                imgElement.src = e.target.result;
-                imgElement.classList.add('selected');
-            }, 100);
-        }
-        reader.readAsDataURL(file);
-    }
-}
+        function displayImage(event) {
+            const fileInput = event.target;
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgElement = document.getElementById('icon');
+                    imgElement.classList.remove('selected');
 
+                    // Timeout to allow the removal of the class to take effect before adding it again
+                    setTimeout(() => {
+                        imgElement.src = e.target.result;
+                        imgElement.classList.add('selected');
+                    }, 100);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
     </script>
     <script type="text/javascript">
         $(document).ready(function() {

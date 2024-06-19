@@ -193,43 +193,55 @@ class CursosController extends Controller
      // -------------------------------
      // Cadastro curso
 
-    public function update(Request $request, $idCurso)
-    {
-        // Validação dos dados recebidos
-        $request->validate([
-
-            'nomeCurso'             => 'required|string|max:100',
-            'descricaoCurso'        => 'required|string|max:100',
-            'duracaoCurso'          => 'required|numeric|min:1',
-            'precoCurso'            => 'required|numeric|min:1',
-            'vagasDisponiveisCurso' => 'required|numeric|min:1',
-            // 'fotoCurso'             => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'data_inicio'           => 'required|date',
-            'data_fim'              => 'required|date|after_or_equal:data_inicio',
-            'statusCurso'           => 'required|in:ativo,desativo',
-
-        ]);
-    
-        // Busca do curso pelo ID
-        $curso = Cursos::findOrFail($idCurso);
-    
-        // Atualização dos dados do curso
-        $curso->update($request->only([
-            'idCurso',
-            'nomeCurso',
-            'descricaoCurso',
-            'duracaoCurso',
-            'precoCurso',
-            'vagasDisponiveisCurso',
-            'fotoCurso',
-            'data_inicio',
-            'data_fim',
-            'statusCurso',
-        ]));
-    
-        // Redirecionamento com mensagem de sucesso
-        return redirect()->route('index.curso')->with('success', 'curso atualizado com sucesso.');
-    }
+     public function update(Request $request, $idCurso)
+     {
+         // Validação dos dados recebidos
+         $request->validate([
+             'nomeCurso'             => 'required|string|max:100',
+             'descricaoCurso'        => 'required|string|max:100',
+             'duracaoCurso'          => 'required|numeric|min:1',
+             'precoCurso'            => 'required|numeric|min:1',
+             'vagasDisponiveisCurso' => 'required|numeric|min:1',
+             'fotoCurso'             => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+             'data_inicio'           => 'required|date',
+             'data_fim'              => 'required|date|after_or_equal:data_inicio',
+             'statusCurso'           => 'required|in:ativo,desativo',
+         ]);
+     
+         // Busca do curso pelo ID
+         $curso = Cursos::findOrFail($idCurso);
+     
+         // Atualização dos dados do curso
+         $curso->update($request->only([
+             'nomeCurso',
+             'descricaoCurso',
+             'duracaoCurso',
+             'precoCurso',
+             'vagasDisponiveisCurso',
+             'data_inicio',
+             'data_fim',
+             'statusCurso',
+         ]));
+     
+         // Atualização da imagem do curso, se uma nova imagem foi enviada
+         if ($request->hasFile('fotoCurso')) {
+             // Apaga a imagem anterior, se existir
+             if ($curso->fotoCurso) {
+                 Storage::delete('public/img/cursos/' . $curso->fotoCurso);
+             }
+     
+             // Armazena a nova imagem
+             $path = $request->file('fotoCurso')->store('public/img/cursos');
+             $curso->fotoCurso = basename($path);
+     
+             // Salva a alteração da imagem no banco de dados
+             $curso->save();
+         }
+     
+         // Redirecionamento com mensagem de sucesso
+         return redirect()->route('index.curso')->with('success', 'Curso atualizado com sucesso.');
+     }
+     
 
     /**
      * @param  Cursos
