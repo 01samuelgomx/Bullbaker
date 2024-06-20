@@ -162,7 +162,7 @@
     <!-- Options Panel -->
     <div class="pg-tp">
         <i class="ion-cube"></i>
-        <div class="pr-tp-inr">
+        <div class="pr-tp-inr" >
             <h4>Bem - Vindo a Area dos Cursos!
                 <span></span> Panel
             </h4>
@@ -175,26 +175,38 @@
         <div class="widget pad50-65">
 
             <form action="{{ route('update.curso', $editCurso->idCurso) }}" method="POST" role="form text-left"
-                class="contact-form">
+                enctype="multipart/form-data" class="contact-form">
                 @csrf
                 @method('PUT')
 
                 <div class="d-flex justify-content-between">
 
                     <div class="widget-title2">
-                        <div style=" flex-direction: column;">
-                            <h4>Preencha com os dados dos Cursos</h4>
+
+                        <div class="pr-tp-inr">
+                            <h4>Preencha com os dados dos Cursos </h4>
                             <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
                         </div>
+
                     </div>
+
+                    {{-- <div class="file-input-container" style="margin-bottom:30px;">
+                        <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
+                            name="fotoCurso">
+                        <label for="file-input" class="file-label">
+                            <img id="icon"
+                                src="{{ isset($editCurso->fotoCurso) && $editCurso->fotoCurso ? asset('storage/app/public/img/cursos' . $editCurso->fotoCurso) : asset('img/camera.png') }}"
+                                alt="Upload Image">
+                        </label>
+                    </div> --}}
 
                     <div class="file-input-container" style="margin-bottom:30px;">
                         <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
                             name="fotoCurso">
                         <label for="file-input" class="file-label">
                             <img id="icon"
-                                src="{{ isset($editCurso->fotoCurso) && $editCurso->fotoCurso ? asset('storage/img/cursos/' . $editCurso->fotoCurso) : asset('img/camera.png') }}"
-                                alt="Upload Image">
+                                src="{{ isset($editCurso->fotoCurso) && $editCurso->fotoCurso ? asset('storage/app/public/img/cursos/' . $editCurso->fotoCurso) : asset('public/img/camera.png') }}"
+                                alt="Escolher Imagem">
                         </label>
                     </div>
 

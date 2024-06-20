@@ -27,12 +27,12 @@ class Cursos extends Model
 
     public function Regras(){
         return [
-            'nomeCurso' => 'required|unique:cursos,nomeCurso,'.$this->id.'|min:3',
+            'nomeCurso' => 'required|unique:tblcurso,nomeCurso,'.$this->id.'|min:3',
             'descricaoCurso' => 'required|min:10',
             'duracaoCurso' => 'required|integer|min:1',
             'precoCurso' => 'required|numeric|min:0',
             'vagasDisponiveisCurso' => 'required|integer|min:1',
-            // 'fotoCurso' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'fotoCurso' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'data_inicio' => 'required|date',
             'data_fim' => 'required|date|after_or_equal:data_inicio',
             'statusCurso' => 'required|in:ativo,desativado',

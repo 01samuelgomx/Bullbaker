@@ -25,6 +25,46 @@
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color5.css') }}" title="color5">
 </head>
 
+<style>
+    .file-input-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+    }
+
+    #file-input {
+        display: none;
+    }
+
+    .file-label {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: transparent;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        transition: background-color 0.3s ease;
+    }
+
+    .file-label img {
+        width: 100px;
+        height: 100px;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    .file-label img.selected {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+
 <body class="expand-data panel-data">
     <div class="topbar">
         <div class="logo">
@@ -147,15 +187,29 @@
                         </div>
                     </div>
 
-                              <div class="file-input-container" style="margin-bottom:30px;">
+                    {{-- ------------------------------------ --}}
+
+                    <div class="file-input-container" style="margin-bottom:30px;">
                         <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
-                            name="fotoCurso" id="fotoCurso" value="{{ old ('fotoCurso') }}">
+                            name="fotoCurso" id="fotoCurso" value="{{ old('fotoCurso') }}">
                         <label for="file-input" class="file-label">
-                            <img id="icon"
-                                src="{{ asset('storage/img/cursos/') : asset('img/camera.png') }}"
-                                alt="Upload Image">
+                            <img id="icon" src="{{ asset('img/camera.png') }}" alt="Escolher Imagem">
                         </label>
                     </div>
+
+
+                    <div class="file-input-container" style="margin-bottom:30px;">
+                        <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
+                            name="fotoCurso">
+                        <label for="file-input" class="file-label">
+                            <img id="icon"
+                                src="{{ isset($editCurso->fotoCurso) && $editCurso->fotoCurso ? asset('storage/app/public/img/cursos/' . $editCurso->fotoCurso) : asset('public/img/camera.png') }}"
+                                alt="Escolher Imagem">
+                        </label>
+                    </div>
+
+
+                    {{-- ------------------------------------ --}}
 
                 </div>
 
@@ -170,8 +224,7 @@
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="text" placeholder="Descrisção:" name="descricaoCurso"
-                                id="descricaoCurso"
-                                value="{{ old('descricaoCurso') }}" />
+                                id="descricaoCurso" value="{{ old('descricaoCurso') }}" />
                         </div>
 
                         <div class="row mrg20">
@@ -218,8 +271,7 @@
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
                                 <input class="brd-rd5" type="datetime-local" placeholder="Data Inicio:"
-                                    name="data_inicio" id="data_inicio"
-                                    value="{{ old('data_inicio') }}" />
+                                    name="data_inicio" id="data_inicio" value="{{ old('data_inicio') }}" />
                             </div>
 
                             <div class="col-md-6 col-sm-12 col-lg-6">

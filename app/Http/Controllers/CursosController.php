@@ -86,7 +86,6 @@ class CursosController extends Controller
     }
 
 
-    
         /**
          * @return Response
          */
@@ -112,78 +111,62 @@ class CursosController extends Controller
              return view('site.dashboard.administrativo.cursos.edit', compact('curso', 'editCurso'));
          }
          
-
     // -------------------------------
     // Croud STORE
     // ------------------------------
 
-    public function store(Request $request)
-    {
-        $request -> validate($this->curso->Regras(), $this->curso->Feedback());
-        $imagem = $request -> file('foto');
-        $imagem_url = $imagem -> store('imagem', 'public');
-
-        $cursos = $this->curso->create([
-
-            'nome' => $request-> nome,
-            'foto' => $imagem_url,
-        ]);
-
-        return response()->json($cursos, 200);
-    }
     
     // -------------------------------
     // Cadastro curso
 
-    public function cadcurso (Request $request)
+    public function cadcurso(Request $request)
     {
-        $request->merge(['create_at' => now()]);
+        $request->merge(['created_at' => now()]);
         $request->merge(['updated_at' => now()]);
-
+    
         $request->validate([
-
             'nomeCurso'             => 'required|string|max:100',
-            'descricaoCurso'        => 'required|string|max:140',
-            'duracaoCurso'          => 'nullable|numeric|min:1',
-            'precoCurso'            => 'required|numeric|min:0',
+            'descricaoCurso'        => 'required|string|max:100',
+            'duracaoCurso'          => 'required|numeric|min:1',
+            'precoCurso'            => 'required|numeric|min:1',
             'vagasDisponiveisCurso' => 'required|numeric|min:1',
-            // 'fotoCurso'             => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'fotoCurso'             => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'data_inicio'           => 'required|date',
             'data_fim'              => 'required|date|after_or_equal:data_inicio',
             'statusCurso'           => 'required|in:ativo,desativo',
-
         ]);
-        // dd('teste');
-
+    
         $curso = new Cursos();
-
-        $curso->nomeCurso                 = $request->input('nomeCurso');
-        $curso->descricaoCurso            = $request->input('descricaoCurso');
-        $curso->duracaoCurso              = $request->input('duracaoCurso');
-        $curso->precoCurso                = $request->input('precoCurso');
-        $curso->vagasDisponiveisCurso     = $request->input('vagasDisponiveisCurso');
-        // $curso->fotocurso                 = $request->input('fotocurso');
-        $curso->data_inicio               = $request->input('data_inicio');
-        $curso->data_fim                  = $request->input('data_fim');
-        $curso->statusCurso               = $request->input('statusCurso');
-        $curso->create_at                 = $request->input('create_at');
-        $curso->updated_at                = $request->input('updated_at');
+    
+        $curso->nomeCurso = $request->input('nomeCurso');
+        $curso->descricaoCurso = $request->input('descricaoCurso');
+        $curso->duracaoCurso = $request->input('duracaoCurso');
+        $curso->precoCurso = $request->input('precoCurso');
+        $curso->vagasDisponiveisCurso = $request->input('vagasDisponiveisCurso');
+    
+        // Upload da imagem
+        if ($request->hasFile('fotoCurso') && $request->file('fotoCurso')->isValid()) {
+            $file = $request->file('fotoCurso');
+            $path = $file->store('public/img/cursos');
+            $curso->fotoCurso = basename($path);
+        }
+    
+        $curso->data_inicio = $request->input('data_inicio');
+        $curso->data_fim = $request->input('data_fim');
+        $curso->statusCurso = $request->input('statusCurso');
         
-        // dd($curso->nomeCurso);
         $curso->save();
-
-
+    
         return redirect()->route('index.curso')->with('success', 'Curso adicionado com sucesso!');
     }
+    
 
     /**
      * @param  Integer
      * @return Response
      */
 
-            public function show($id){
-            }
-        
+    
     /**
      * @param  Request 
      * @param  Cursos 
@@ -202,7 +185,7 @@ class CursosController extends Controller
              'duracaoCurso'          => 'required|numeric|min:1',
              'precoCurso'            => 'required|numeric|min:1',
              'vagasDisponiveisCurso' => 'required|numeric|min:1',
-             'fotoCurso'             => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+             'fotoCurso'             => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
              'data_inicio'           => 'required|date',
              'data_fim'              => 'required|date|after_or_equal:data_inicio',
              'statusCurso'           => 'required|in:ativo,desativo',
@@ -241,6 +224,7 @@ class CursosController extends Controller
          // Redirecionamento com mensagem de sucesso
          return redirect()->route('index.curso')->with('success', 'Curso atualizado com sucesso.');
      }
+     
      
 
     /**

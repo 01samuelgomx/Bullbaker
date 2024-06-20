@@ -39,14 +39,14 @@
                 </a>
             </h1>
         </div>
-          <div class="topbar-data">
+        <div class="topbar-data">
 
             <div class="usr-act">
-               <span> Olá seja bem vindo! </span>
+                <span> Olá seja bem vindo! </span>
             </div>
-         
+
         </div>
-       
+
 
         <div class="topbar-bottom-colors">
             <i style="background-color: #361F08;"></i>
@@ -131,7 +131,7 @@
     <!-- Options Panel -->
     <div class="pg-tp">
         <i class="ion-cube"></i>
-           <div class="pr-tp-inr">
+        <div class="pr-tp-inr">
             <h4>Bem - Vindo a Area dos cursos!
                 <span></span> Panel
             </h4>
@@ -165,7 +165,7 @@
                         <i class="ion-arrow-graph-up-right"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter"> ->  {{ $num_cursos_ativos }}</i>
+                                <i class="counter"> -> {{ $num_cursos_ativos }}</i>
                             </span>
                             <h5>Cursos Cadastrados !</h5>
                         </div>
@@ -195,7 +195,7 @@
                         <i class="ion-android-desktop"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter"> ->  {{ $num_aulas_ativas }}</i></span>
+                                <i class="counter"> -> {{ $num_aulas_ativas }}</i></span>
                             <h5>Aulas Inseridas !</h5>
                         </div>
                         <span>
@@ -224,7 +224,7 @@
                         <i class="ion-cube"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter"> ->  {{ $num_alunos_ativos }}</i>
+                                <i class="counter"> -> {{ $num_alunos_ativos }}</i>
                             </span>
                             <h5>Total de Aluno</h5>
                         </div>
@@ -255,7 +255,7 @@
         </div>
 
 
-    
+
 
         <div class="col-md-12 grid-item col-sm-12 col-lg-12">
             <div class="widget proj-order pad50-40">
@@ -305,12 +305,19 @@
                             @foreach ($lista as $curso)
                                 <tr>
                                     <td>
-                                        <span class="blue-bg indx" style="background-color:#785e63;" name="">{{ $curso->idCurso }}</span>
+                                        <span class="blue-bg indx" style="background-color:#785e63;"
+                                            name="">{{ $curso->idCurso }}</span>
                                     </td>
 
                                     <td>
-                                        <span style="width: 100px; height: 100px" class="ph#">{{ $curso->fotoCurso }}</span>
+                                        @if ($curso->fotoCurso && Storage::exists('public/img/cursos/' . $curso->fotoCurso))
+                                            <img src="{{ asset('storage/img/cursos/' . $curso->fotoCurso) }}"
+                                                alt="{{ $curso->fotoCurso }}" style="width: 100px; height: 100px;">
+                                        @else
+                                            <span>Imagem não disponível</span>
+                                        @endif
                                     </td>
+
 
                                     <td>
                                         <span class="date">{{ $curso->nomeCurso }}</span>
