@@ -121,9 +121,11 @@ class CursosController extends Controller
 
     public function cadcurso(Request $request)
     {
+        // Adiciona timestamps automaticamente
         $request->merge(['created_at' => now()]);
         $request->merge(['updated_at' => now()]);
-    
+
+        // Validação dos dados
         $request->validate([
             'nomeCurso'             => 'required|string|max:100',
             'descricaoCurso'        => 'required|string|max:100',
@@ -133,30 +135,30 @@ class CursosController extends Controller
             'fotoCurso'             => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'data_inicio'           => 'required|date',
             'data_fim'              => 'required|date|after_or_equal:data_inicio',
-            'statusCurso'           => 'required|in:ativo,desativo',
+            'statusCurso'           => 'required|in:ativo,desativado',
         ]);
-    
+
         $curso = new Cursos();
-    
-        $curso->nomeCurso = $request->input('nomeCurso');
-        $curso->descricaoCurso = $request->input('descricaoCurso');
-        $curso->duracaoCurso = $request->input('duracaoCurso');
-        $curso->precoCurso = $request->input('precoCurso');
+
+        $curso->nomeCurso             = $request->input('nomeCurso');
+        $curso->descricaoCurso        = $request->input('descricaoCurso');
+        $curso->duracaoCurso          = $request->input('duracaoCurso');
+        $curso->precoCurso            = $request->input('precoCurso');
         $curso->vagasDisponiveisCurso = $request->input('vagasDisponiveisCurso');
-    
+
         // Upload da imagem
         if ($request->hasFile('fotoCurso') && $request->file('fotoCurso')->isValid()) {
             $file = $request->file('fotoCurso');
             $path = $file->store('public/img/cursos');
             $curso->fotoCurso = basename($path);
         }
-    
+
         $curso->data_inicio = $request->input('data_inicio');
-        $curso->data_fim = $request->input('data_fim');
+        $curso->data_fim    = $request->input('data_fim');
         $curso->statusCurso = $request->input('statusCurso');
-        
+
         $curso->save();
-    
+
         return redirect()->route('index.curso')->with('success', 'Curso adicionado com sucesso!');
     }
     
@@ -237,10 +239,11 @@ class CursosController extends Controller
 
     public function destroy($id)
     {
-       $editCurso = Cursos::findOrFail($id);
-       $editCurso ->update(['statusCurso' => 'desativo']);
-        
-       return redirect()->route('index.curso')->with('success', 'Curso desativado com sucesso.');
+        $curso = Cursos::findOrFail($id);
+        $curso->update(['statusCurso' => 'desativado']);
+
+        return redirect()->route('index.curso')->with('success', 'Curso desativado com sucesso.');
+
     }
 
 }

@@ -54,37 +54,29 @@
                 <i class="ion-android-menu"></i>
             </span>
         </div>
-        <nav class="custom-scrollbar">
-            <ul class="drp-sec">
-                <li class="has-drp">
-                    <a href="#" title="">
-                        <i class="ion-home"></i>
-                        <span>Dashboard</span>
-                    </a>
+          <nav class="custom-scrollbar">
 
-                </li>
-            </ul>
             <h4>Tabelas</h4>
             <ul class="drp-sec">
 
                 <li class="has-drp">
-                    <a href="{{ url('dashboard/administrativo/aluno/index') }}" title="">
-                        <i class="ion-briefcase"></i>
+                    <a href="{{ url('dashboard/administrativo/aluno/index') }}" title=" acessar tabela alunos">
                         <span>Alunos</span>
+                        <i class="fa fa-user-circle" aria-hidden="true"></i>
                     </a>
                 </li>
 
                 <li class="has-drp">
-                    <a href="{{ url('dashboard/administrativo/cursos/index') }}" title="">
-                        <i class="ion-briefcase"></i>
+                    <a href="{{ url('dashboard/administrativo/cursos/index') }}" title="acessar tabela cursos">
                         <span>Cursos</span>
+                        <i class="fa fa-university" aria-hidden="true"></i>
                     </a>
                 </li>
 
                 <li class="has-drp">
-                    <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="">
-                        <i class="ion-briefcase"></i>
+                    <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="acessar tabela aulas">
                         <span>Aulas</span>
+                      <i class="fa fa-play-circle" aria-hidden="true"></i>
                     </a>
                 </li>
 

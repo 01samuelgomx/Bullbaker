@@ -11,7 +11,6 @@ class Cursos extends Model
     protected $primaryKey = 'idCurso';
 
     protected $fillable = [
-        'idCurso',
         'nomeCurso',
         'descricaoCurso',
         'duracaoCurso',
@@ -27,7 +26,7 @@ class Cursos extends Model
 
     public function Regras(){
         return [
-            'nomeCurso' => 'required|unique:tblcurso,nomeCurso,'.$this->id.'|min:3',
+            'nomeCurso' => 'required|unique:tblcurso,nomeCurso|min:3',
             'descricaoCurso' => 'required|min:10',
             'duracaoCurso' => 'required|integer|min:1',
             'precoCurso' => 'required|numeric|min:0',

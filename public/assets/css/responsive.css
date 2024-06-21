@@ -35,10 +35,9 @@ nav h4 {opacity: 1;}
 .mnt-mckp {display: none;}
 }
 
-@media(max-width:980px){
+
 .table-wrap,
 .invoice-table {width: 100% !important;overflow-x: auto !important;display: block;white-space: nowrap;}
-}
 
 @media(max-width:770px){
 .topbar-search {padding: 0 15px;width: 35%;margin: 10px 20px;}

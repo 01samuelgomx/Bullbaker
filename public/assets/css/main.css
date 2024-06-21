@@ -850,7 +850,9 @@ nav h4 {
 .side-header > div > nav ul > li > a span,
 nav h4 {opacity: 0;}
 .side-header.expand-header > nav ul > li > a,
-.side-header.expand-header > div > nav ul > li > a {padding: 12px 40px;}
+.side-header.expand-header > div > nav ul > li > a {    display: flex;
+  justify-content: space-between;
+  padding: 15px 40px;}
 .side-header.expand-header > nav ul > li > a span,
 .side-header.expand-header > div > nav ul > li > a span,
 .side-header.expand-header nav h4 {opacity: 1;}
@@ -865,7 +867,6 @@ nav h4 {opacity: 0;}
 .side-header > nav ul.drp-sec > li.has-drp > a:before,
 .side-header > div > nav ul.drp-sec > li.has-drp > a:before {
     color: inherit;
-    content: "\f363";
     font-family: Ionicons;
     font-size: 16px;
     position: absolute;
