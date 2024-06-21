@@ -279,12 +279,12 @@
                         <thead class="thead-inverse" style="background-color: #90a293; color: #fff">
                             <tr>
                                 <th>ID</th>
+                                <th>Foto</th>
                                 <th>Nome</th>
                                 <th>Email</th>
                                 <th>Telefone</th>
                                 <th>Data</th>
                                 <th>Status</th>
-                                <th>Foto</th>
                                 <th>Curso</th>
                                 <th style="backgroud-color:#4c7f4c">Edição</th>
                                 <th style="backgroud-color:##b2354c">Deletar</th>
@@ -300,6 +300,17 @@
                                         <span class="blue-bg indx" style="background-color:#445547;"
                                             name="">{{ $aluno->idAluno }}</span>
                                     </td>
+
+                                         {{-- ------FOTO------ --}}
+                                         <td>
+                                            @if (Storage::exists('public/img/alunos/' . $aluno->fotoAluno))
+                                                <img src="{{ asset('storage/img/alunos/' . $aluno->fotoAluno) }}"
+                                                    alt="lll" style="width: 100px; height: 100px;border-radius: 50%">
+                                            @else
+                                                <span>Imagem não disponível</span>
+                                            @endif
+                                        </td>
+                                        {{-- ---------------- --}}
 
                                     <td>
                                         <span class="date">{{ $aluno->nomeAluno }}</span>
@@ -321,9 +332,6 @@
                                         <span class="ph#">{{ $aluno->statusAluno }}</span>
                                     </td>
 
-                                    <td>
-                                        <span class="ph#">{{ $aluno->fotoAluno }}</span>
-                                    </td>
 
                                     <td>
                                         <span class="addr">{{ $aluno->idCurso }}</span>

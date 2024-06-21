@@ -23,7 +23,7 @@ class Aluno extends Model
         'telefoneAluno',
         'dataCadAluno',
         'statusAluno',
-        // 'fotoAluno',
+        'fotoAluno',
         'idCurso',
     
     ];

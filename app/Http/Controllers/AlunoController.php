@@ -163,7 +163,14 @@ class AlunoController extends Controller
         $aluno->emailAluno      = $request->input('emailAluno');
         $aluno->telefoneAluno   = $request->input('telefoneAluno');
         $aluno->dataCadAluno    = $request->input('dataCadAluno');
-        // $aluno->fotoAluno       = $request->input('fotoAluno');
+        
+                // Upload da imagem
+        if ($request->hasFile('fotoAluno') && $request->file('fotoAluno')->isValid()) {
+        $file = $request->file('fotoAluno');
+        $path = $file->store('public/img/alunos');
+        $aluno->fotoCurso = basename($path);
+    }
+
         $aluno->statusAluno     = $request->input('statusAluno');
         $aluno->idCurso         = $request->input('idCurso');
         $aluno->created_at      = $request->input('create_at');
@@ -218,6 +225,21 @@ class AlunoController extends Controller
             // 'fotoAluno',
             'idCurso',
         ]));
+
+         // Atualização da imagem do curso, se uma nova imagem foi enviada
+         if ($request->hasFile('fotoAluno')) {
+            // Apaga a imagem anterior, se existir
+            if ($aluno->fotoAluno) {
+                Storage::delete('public/img/alunos/' . $aluno->fotoaluno);
+            }
+    
+            // Armazena a nova imagem
+            $path = $request->file('fotoAluno')->store('public/img/alunos');
+            $aluno->fotoAluno = basename($path);
+    
+            // Salva a alteração da imagem no banco de dados
+            $aluno->save();
+        }
     
         // Redirecionamento com mensagem de sucesso
         return redirect()->route('index.aluno')->with('success', 'Aluno atualizado com sucesso.');
