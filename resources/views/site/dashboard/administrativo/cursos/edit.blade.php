@@ -182,23 +182,14 @@
 
                     </div>
 
-                    {{-- <div class="file-input-container" style="margin-bottom:30px;">
-                        <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
-                            name="fotoCurso">
-                        <label for="file-input" class="file-label">
-                            <img id="icon"
-                                src="{{ isset($editCurso->fotoCurso) && $editCurso->fotoCurso ? asset('storage/app/public/img/cursos' . $editCurso->fotoCurso) : asset('img/camera.png') }}"
-                                alt="Upload Image">
-                        </label>
-                    </div> --}}
 
                     <div class="file-input-container" style="margin-bottom:30px;">
                         <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
                             name="fotoCurso">
                         <label for="file-input" class="file-label">
                             <img id="icon"
-                                src="{{ isset($editCurso->fotoCurso) && $editCurso->fotoCurso ? asset('storage/app/public/img/cursos/' . $editCurso->fotoCurso) : asset('public/img/camera.png') }}"
-                                alt="Escolher Imagem">
+                                src="{{ isset($editCurso->fotoCurso) && $editCurso->fotoCurso ? asset('storage/img/cursos/' . $editCurso->fotoCurso) : asset('public/img/camera.png') }}"
+                                alt="Escolher Imagem" style="width: 100px; height: 100px; border-radius: 50%">
                         </label>
                     </div>
 

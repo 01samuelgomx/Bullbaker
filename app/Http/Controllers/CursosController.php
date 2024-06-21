@@ -41,7 +41,7 @@ class CursosController extends Controller
         // Filtra somente os cursos ativos
         $lista = Cursos::where('statusCurso', 'ativo')->get();
         
-        // dd($lista); 
+        // dd($curso->fotoCurso); 
         
         if (!$curso) {
             abort(404, 'curso não encontrado');
@@ -239,11 +239,10 @@ class CursosController extends Controller
 
     public function destroy($id)
     {
-        $curso = Cursos::findOrFail($id);
-        $curso->update(['statusCurso' => 'desativado']);
-
-        return redirect()->route('index.curso')->with('success', 'Curso desativado com sucesso.');
-
-    }
+        $editCurso = Cursos::findOrFail($id);
+        $editCurso ->update(['statusCurso' => 'desativo']);
+         
+        return redirect()->route('index.curso')->with('success', 'curso desativado com sucesso.');
+     }
 
 }

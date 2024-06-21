@@ -120,7 +120,7 @@
             </span>
         </div>
     </div>
-    
+
     <!-- Options Panel -->
     <div class="pg-tp">
         <i class="ion-cube"></i>
@@ -240,10 +240,10 @@
                     <span>$
                         <i class="counter"></i>
                     </span>
-                 
+
                 </div>
                 <span>
-                
+
                 </span>
             </div>
         </div>
@@ -306,9 +306,9 @@
 
                                     {{-- ------FOTO------ --}}
                                     <td>
-                                        @if ($curso->fotoCurso && Storage::exists('public/img/cursos/' . $curso->fotoCurso))
+                                        @if (Storage::exists('public/img/cursos/' . $curso->fotoCurso))
                                             <img src="{{ asset('storage/img/cursos/' . $curso->fotoCurso) }}"
-                                                alt="{{ $curso->fotoCurso }}" style="width: 100px; height: 100px;">
+                                                alt="lll" style="width: 100px; height: 100px;border-radius: 50%">
                                         @else
                                             <span>Imagem não disponível</span>
                                         @endif
@@ -357,7 +357,7 @@
                                     </td>
 
                                     <td>
-                                        <form action="{{ route('delete.curso', $curso->idCurso) }}" method="POST">
+                                        <form action="{{ route('delete.curso', $curso->idCurso) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit"
