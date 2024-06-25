@@ -97,7 +97,7 @@
                 <i class="ion-android-menu"></i>
             </span>
         </div>
-         <nav class="custom-scrollbar">
+        <nav class="custom-scrollbar">
 
             <h4>Tabelas</h4>
             <ul class="drp-sec">
@@ -119,7 +119,7 @@
                 <li class="has-drp">
                     <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="acessar tabela aulas">
                         <span>Aulas</span>
-                      <i class="fa fa-play-circle" aria-hidden="true"></i>
+                        <i class="fa fa-play-circle" aria-hidden="true"></i>
                     </a>
                 </li>
 
@@ -154,7 +154,7 @@
     <!-- Options Panel -->
     <div class="pg-tp">
         <i class="ion-cube"></i>
-        <div class="pr-tp-inr" >
+        <div class="pr-tp-inr">
             <h4>Bem - Vindo a Area dos Cursos!
                 <span></span> Panel
             </h4>
@@ -182,7 +182,7 @@
 
                     </div>
 
-
+                    {{-- ------FOTO------ --}}
                     <div class="file-input-container" style="margin-bottom:30px;">
                         <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
                             name="fotoCurso">
@@ -192,6 +192,8 @@
                                 alt="Escolher Imagem" style="width: 100px; height: 100px; border-radius: 50%">
                         </label>
                     </div>
+                    {{-- ---------------- --}}
+
 
                 </div>
 
@@ -210,7 +212,7 @@
                                 value="{{ old('descricaoCurso', $editCurso->descricaoCurso) }}" />
                         </div>
 
-       
+
 
                         <div class="row mrg20">
 
@@ -283,9 +285,27 @@
 
     </div>
     <!-- Panel Content -->
-    <footer>
+ 
+    <script>
+        function displayImage(event) {
+            const fileInput = event.target;
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgElement = document.getElementById('icon');
+                    imgElement.classList.remove('selected');
 
-    </footer>
+                    // Timeout to allow the removal of the class to take effect before adding it again
+                    setTimeout(() => {
+                        imgElement.src = e.target.result;
+                        imgElement.classList.add('selected');
+                    }, 100);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 
     <!-- Vendor: Javascripts -->
     <script src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
@@ -317,26 +337,6 @@
     <script src="{{ asset('assets/js/styleswitcher.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
 
-    <script>
-        function displayImage(event) {
-            const fileInput = event.target;
-            const file = fileInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const imgElement = document.getElementById('icon');
-                    imgElement.classList.remove('selected');
-
-                    // Timeout to allow the removal of the class to take effect before adding it again
-                    setTimeout(() => {
-                        imgElement.src = e.target.result;
-                        imgElement.classList.add('selected');
-                    }, 100);
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-    </script>
 
 </body>
 

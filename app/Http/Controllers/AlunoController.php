@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Administrador;
 use App\Models\Aluno;
 use App\Models\Usuario;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -35,60 +37,54 @@ class AlunoController extends Controller
     
     public function index()
     {
-        $idAluno = session('id');
-        // dd($idAluno);
-        $aluno = Aluno::find($idAluno);
-        
-        // Filtra somente os alunos ativos
+
+        // Busca o administrador com base no ID da sessão ou outro critério adequado
+        $idAdministrador = session('id');
+        // dd($idAdministrador);
+        $administrador = Administrador::find($idAdministrador);
+        // dd($administrador);
+        if (!$administrador) {
+            abort(404, 'Administrador não encontrado');
+        }
+    
+
         $lista = Aluno::where('statusAluno', 'ativo')->get();
-        
-        // dd($lista); 
+    
         $idUsuario = session('id');
         $usuario = Usuario::find($idUsuario);
-        
-        if (!$aluno) {
-            abort(404, 'Aluno não encontrado');
-        }
-
-        // -------------------------------
+    
+        //-----------------------
         // Listar Views
         
-               // Contar ALunos
-              $result = DB::table('vw_alunos_ativos')->first();
-            
-              // // Verifica se a consulta retornou um resultado
-              if ($result) {
-              $num_alunos_ativos = $result->num_alunos_ativos;
-             } else {
-              $num_alunos_ativos = 0;
-             }
+        // Contar Alunos
+        $result = DB::table('vw_alunos_ativos')->first();
+        if ($result) {
+            $num_alunos_ativos = $result->num_alunos_ativos;
+        } else {
+            $num_alunos_ativos = 0;
+        }
+    
+        // Contar Cursos
+        $result = DB::table('vw_cursos_ativos')->first();
+        if ($result) {
+            $num_cursos_ativos = $result->num_cursos_ativos;
+        } else {
+            $num_cursos_ativos = 0;
+        }
+    
+        // Contar Aulas
+        $result = DB::table('vw_aulas_ativas')->first();
+        if ($result) {
+            $num_aulas_ativas = $result->num_aulas_ativas;
+        } else {
+            $num_aulas_ativas = 0;
+        }
+    
 
-               // Contar Cursos
-                $result = DB::table('vw_cursos_ativos')->first();
-                
-                // // Verifica se a consulta retornou um resultado
-                if ($result) {
-                    $num_cursos_ativos = $result->num_cursos_ativos;
-                } else {
-                    $num_cursos_ativos = 0;
-                }
-
-               // Contar Aulas
-                $result = DB::table('vw_aulas_ativas')->first();
-                
-                // // Verifica se a consulta retornou um resultado
-                if ($result) {
-                    $num_aulas_ativas = $result->num_aulas_ativas;
-                } else {
-                    $num_aulas_ativas = 0;
-                }
-                
-                // -------------------------------
-
-        // dd($lista);
-        return view('site.dashboard.administrativo.aluno.index', compact('aluno', 'usuario', 'lista','num_alunos_ativos','num_cursos_ativos','num_aulas_ativas'));
+        // Retornar a view com os dados necessários
+        return view('site.dashboard.administrativo.aluno.index', compact( 'usuario', 'administrador', 'lista', 'num_alunos_ativos', 'num_cursos_ativos', 'num_aulas_ativas'));
     }
-
+    
         /**
          * @return Response
          */
@@ -151,7 +147,7 @@ class AlunoController extends Controller
             'emailAluno'    => 'required|string|max:100',
             'telefoneAluno' => 'required|string|max:20',
             'dataCadAluno'  => 'required|date',
-            // 'fotoAluno'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'fotoAluno'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'statusAluno'   => 'required|in:ativo,desativo',
             'idCurso'       => 'required|exists:tblcurso,idCurso',
 
@@ -168,7 +164,7 @@ class AlunoController extends Controller
         if ($request->hasFile('fotoAluno') && $request->file('fotoAluno')->isValid()) {
         $file = $request->file('fotoAluno');
         $path = $file->store('public/img/alunos');
-        $aluno->fotoCurso = basename($path);
+        $aluno->fotoAluno = basename($path);
     }
 
         $aluno->statusAluno     = $request->input('statusAluno');
@@ -206,7 +202,7 @@ class AlunoController extends Controller
             'emailAluno'    => 'required|string|email|max:100',
             'telefoneAluno' => 'required|string|max:20',
             'dataCadAluno'  => 'required|date',
-            // 'fotoAluno'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'fotoAluno'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'statusAluno'   => 'required|in:ativo,desativo',
             'idCurso'       => 'required|exists:tblcurso,idCurso',
         ]);
@@ -222,7 +218,7 @@ class AlunoController extends Controller
             'telefoneAluno',
             'dataCadAluno',
             'statusAluno',
-            // 'fotoAluno',
+            'fotoAluno',
             'idCurso',
         ]));
 
@@ -230,7 +226,7 @@ class AlunoController extends Controller
          if ($request->hasFile('fotoAluno')) {
             // Apaga a imagem anterior, se existir
             if ($aluno->fotoAluno) {
-                Storage::delete('public/img/alunos/' . $aluno->fotoaluno);
+                Storage::delete('public/img/alunos/' . $aluno->fotoAluno);
             }
     
             // Armazena a nova imagem

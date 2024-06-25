@@ -54,7 +54,7 @@
                 <i class="ion-android-menu"></i>
             </span>
         </div>
-          <nav class="custom-scrollbar">
+        <nav class="custom-scrollbar">
 
             <h4>Tabelas</h4>
             <ul class="drp-sec">
@@ -76,7 +76,7 @@
                 <li class="has-drp">
                     <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="acessar tabela aulas">
                         <span>Aulas</span>
-                      <i class="fa fa-play-circle" aria-hidden="true"></i>
+                        <i class="fa fa-play-circle" aria-hidden="true"></i>
                     </a>
                 </li>
 
@@ -91,11 +91,11 @@
             width: 150px;
             height: 150px;
         }
-    
+
         #file-input {
             display: none;
         }
-    
+
         .file-label {
             display: block;
             width: 100%;
@@ -110,14 +110,14 @@
             position: relative;
             transition: background-color 0.3s ease;
         }
-    
+
         .file-label img {
             width: 100px;
             height: 100px;
             pointer-events: none;
             transition: all 0.3s ease;
         }
-    
+
         .file-label img.selected {
             width: 100%;
             height: 100%;
@@ -164,7 +164,7 @@
         <div class="widget pad50-65">
 
             <form action="{{ route('update.aluno', $editAluno->idAluno) }}" method="POST" role="form text-left"
-                class="contact-form">
+                class="contact-form" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -180,16 +180,17 @@
 
                     </div>
 
-
+                    {{-- ------FOTO------ --}}
                     <div class="file-input-container" style="margin-bottom:30px;">
                         <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
-                            name="fotoCurso">
+                            name="fotoAluno">
                         <label for="file-input" class="file-label">
                             <img id="icon"
                                 src="{{ isset($editAluno->fotoAluno) && $editAluno->fotoAluno ? asset('storage/img/alunos/' . $editAluno->fotoAluno) : asset('public/img/camera.png') }}"
                                 alt="Escolher Imagem" style="width: 100px; height: 100px; border-radius: 50%">
                         </label>
                     </div>
+                    {{-- ---------------- --}}
 
                 </div>
 
@@ -212,10 +213,11 @@
                                 required />
                         </div>
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="date" placeholder="Data de cadastro:"
+                            <input class="brd-rd5" type="datetime-local" placeholder="Data de cadastro:"
                                 name="dataCadAluno" id="dataCadAluno"
                                 value="{{ old('dataCadAluno', $editAluno->dataCadAluno) }}" required />
                         </div>
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <select class="brd-rd5" name="statusAluno" id="statusAluno" required>
                                 <option value="ativo"
@@ -226,8 +228,9 @@
                                     Desativo</option>
                             </select>
                         </div>
+                        
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="text" placeholder="ID Curso:" name="idCurso"
+                            <input class="brd-rd5" type="text" placeholder="Curso matriculado:" name="idCurso"
                                 id="idCurso" value="{{ old('idCurso', $editAluno->idCurso) }}" required />
                         </div>
                     </div>

@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Administrador;
 use App\Models\Cursos;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -47,6 +50,17 @@ class CursosController extends Controller
             abort(404, 'curso não encontrado');
         }
 
+
+        // Busca o administrador com base no ID da sessão ou outro critério adequado
+        $idAdministrador = session('id');
+        // dd($idAdministrador);
+        $administrador = Administrador::find($idAdministrador);
+        // dd($administrador);
+        if (!$administrador) {
+            abort(404, 'Administrador não encontrado');
+        }
+    
+
         // -------------------------------
         // Listar Views
         
@@ -82,14 +96,10 @@ class CursosController extends Controller
                  
                  // -------------------------------
         // dd($lista);
-        return view('site.dashboard.administrativo.cursos.index', compact('curso','lista','num_alunos_ativos','num_cursos_ativos','num_aulas_ativas'));
+        return view('site.dashboard.administrativo.cursos.index', compact('administrador','curso','lista','num_alunos_ativos','num_cursos_ativos','num_aulas_ativas'));
     }
 
 
-        /**
-         * @return Response
-         */
-    
          public function edit($id)
          {
              // Pega o ID do curso da sessão

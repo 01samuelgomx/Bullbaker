@@ -69,24 +69,24 @@ class LoginController extends Controller
              
              // -------------------------------------
              
-             if ($tipoUsuario instanceof Aluno) {
+        //      if ($tipoUsuario instanceof Aluno) {
            
-                $tipo = 'aluno';
+        //         $tipo = 'aluno';
 
-            //  dd($usuario->tipo_usuario_type);
+        //     //  dd($usuario->tipo_usuario_type);
 
-             session([
-                 'id'            => $usuario->tipo_usuario_id,
-                 'nome'          => $usuario->nome,
-                 'tipo_usuario_type'  => 'aluno',
-             ]);
+        //      session([
+        //          'id'            => $usuario->tipo_usuario_id,
+        //          'nome'          => $usuario->nome,
+        //          'tipo_usuario_type'  => 'aluno',
+        //      ]);
              
-             return redirect()->route('index.aluno');
-        }
+        //      return redirect()->route('index.aluno');
+        // }
 
              //-------------------------
-          elseif ($tipoUsuario instanceof Administrador) {
-            // dd($tipoUsuario);
+          if ($tipoUsuario instanceof Administrador) {
+            // dd($tipoUsuario->idAdmin);
 
             if($tipoUsuario->tipoAdministrador == 'Administrativo'){
 
@@ -98,7 +98,7 @@ class LoginController extends Controller
                     'tipo_usuario'  => $tipoUsuario->tipoAdministrador,
                 ]);
 
-                return view('site.dashboard.administrativo.cursos.index');
+                return redirect()->route('index.aluno');
         }
             }
 

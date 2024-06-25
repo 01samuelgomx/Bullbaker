@@ -42,7 +42,7 @@
         <div class="topbar-data">
 
             <div class="usr-act">
-                <span>Olá, seja bem vindo! {{ $aluno->nomeAluno }}</span>
+                <span>Olá, seja bem vindo! {{ $administrador->nomeAdmin }}</span>
             </div>
 
         </div>
@@ -87,7 +87,7 @@
                 <li class="has-drp">
                     <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="acessar tabela aulas">
                         <span>Aulas</span>
-                      <i class="fa fa-play-circle" aria-hidden="true"></i>
+                        <i class="fa fa-play-circle" aria-hidden="true"></i>
                     </a>
                 </li>
 
@@ -301,16 +301,16 @@
                                             name="">{{ $aluno->idAluno }}</span>
                                     </td>
 
-                                         {{-- ------FOTO------ --}}
-                                         <td>
-                                            @if (Storage::exists('public/img/alunos/' . $aluno->fotoAluno))
-                                                <img src="{{ asset('storage/img/alunos/' . $aluno->fotoAluno) }}"
-                                                    alt="lll" style="width: 100px; height: 100px;border-radius: 50%">
-                                            @else
-                                                <span>Imagem não disponível</span>
-                                            @endif
-                                        </td>
-                                        {{-- ---------------- --}}
+                                    {{-- ------FOTO------ --}}
+                                    <td>
+                                        @if (Storage::exists('public/img/alunos/' . $aluno->fotoAluno))
+                                            <img src="{{ asset('storage/img/alunos/' . $aluno->fotoAluno) }}"
+                                                alt="lll" style="width: 100px; height: 100px;border-radius: 50%">
+                                        @else
+                                            <span>Imagem não disponível</span>
+                                        @endif
+                                    </td>
+                                    {{-- ---------------- --}}
 
                                     <td>
                                         <span class="date">{{ $aluno->nomeAluno }}</span>

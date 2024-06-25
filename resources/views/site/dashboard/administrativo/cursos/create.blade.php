@@ -95,7 +95,7 @@
                 <i class="ion-android-menu"></i>
             </span>
         </div>
-            <nav class="custom-scrollbar">
+        <nav class="custom-scrollbar">
 
             <h4>Tabelas</h4>
             <ul class="drp-sec">
@@ -117,7 +117,7 @@
                 <li class="has-drp">
                     <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="acessar tabela aulas">
                         <span>Aulas</span>
-                      <i class="fa fa-play-circle" aria-hidden="true"></i>
+                        <i class="fa fa-play-circle" aria-hidden="true"></i>
                     </a>
                 </li>
 
@@ -154,7 +154,6 @@
         <i class="ion-cube"></i>
         <div class="pr-tp-inr">
             <h4>Bem - Vindo a Area dos Cursos!
-                <span></span> Panel
             </h4>
             <span>Nossa interface de atualizações, Realize seu cadastro em poucos passos!</span>
         </div>
@@ -176,6 +175,7 @@
                             <span>Por favor certifique-se das informações antes de realizar o cadastro!</span>
                         </div>
                     </div>
+                    {{-- ------FOTO------ --}}
 
                     <div class="file-input-container" style="margin-bottom:30px;">
                         <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
@@ -185,6 +185,8 @@
                         </label>
                     </div>
                 </div>
+                {{-- ---------------- --}}
+
 
                 <div class="column mrg20">
                     <div class="row mrg20">
@@ -212,6 +214,7 @@
 
                 <div class="column mrg20">
                     <div class="row mrg20">
+                        
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <select class="brd-rd5" name="statusCurso" id="statusCurso" required>
                                 <option value="ativo" class="brd-rd5"
@@ -220,6 +223,7 @@
                                     {{ old('statusCurso') == 'desativado' ? 'selected' : '' }}>Desativado</option>
                             </select>
                         </div>
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoCurso"
                                 id="duracaoCurso" value="{{ old('duracaoCurso') }}" />

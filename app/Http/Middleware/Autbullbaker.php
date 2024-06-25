@@ -36,11 +36,13 @@ class Autbullbaker
                 $tipo = null;
 
 
-                if ($tipoUsuario instanceof Aluno) {
+                // if ($tipoUsuario instanceof Aluno) {
 
-                    $tipo = 'aluno';
+                //     $tipo = 'aluno';
                     
-                }elseif ($tipoUsuario instanceof Administrador){
+                // } 
+                
+                if ($tipoUsuario instanceof Administrador){
 
                     //  dd($tipoUsuario);
                     $tipo = $tipoUsuario->tipoAdministrador;

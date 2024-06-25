@@ -162,7 +162,7 @@
     <div class="panel-content">
         <div class="widget pad50-65">
 
-    <form action="{{ route('cad.aluno') }}" method="POST" role="form text-left" class="contact-form">
+    <form action="{{ route('cad.aluno') }}" method="POST" role="form text-left" class="contact-form" enctype="multipart/form-data">
 
         @csrf
         @method('POST')
@@ -214,16 +214,17 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-lg-6">
-                    <input class="brd-rd5" type="text" placeholder="Status:" name="statusAluno" id="statusAluno"
-                        value="{{ old('statusAluno') }}" />
+                    <select class="brd-rd5" name="statusAluno" id="statusAluno" required>
+                        <option value="ativo" class="brd-rd5"
+                            {{ old('statusAluno') == 'ativo' ? 'selected' : '' }}>Ativo</option>
+                        <option value="desativado" class="brd-rd5"
+                            {{ old('statusAluno') == 'desativado' ? 'selected' : '' }}>Desativado</option>
+                    </select>
                 </div>
-                {{-- 
-            <div class="col-md-6 col-sm-12 col-lg-6">
-              <input class="brd-rd5" type="text" placeholder="foto:" name="fotoAluno" id="fotoAluno" value="{{ old('fotoAluno') }}" />
-            </div> --}}
+   
 
                 <div class="col-md-6 col-sm-12 col-lg-6">
-                    <input class="brd-rd5" type="text" placeholder="ID Curso:" name="idCurso" id="idCurso"
+                    <input class="brd-rd5" type="text" placeholder="Curso Matriculado:" name="idCurso" id="idCurso"
                         value="{{ old('idCurso') }}" />
                 </div>
 

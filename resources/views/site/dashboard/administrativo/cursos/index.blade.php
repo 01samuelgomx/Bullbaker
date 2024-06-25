@@ -42,8 +42,9 @@
         <div class="topbar-data">
 
             <div class="usr-act">
-                <span> Olá seja bem vindo! </span>
+                <span>Olá, seja bem vindo! {{ $administrador->nomeAdmin }}</span>
             </div>
+
 
         </div>
 
@@ -357,7 +358,8 @@
                                     </td>
 
                                     <td>
-                                        <form action="{{ route('delete.curso', $curso->idCurso) }}" method="POST" enctype="multipart/form-data">
+                                        <form action="{{ route('delete.curso', $curso->idCurso) }}" method="POST"
+                                            enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit"

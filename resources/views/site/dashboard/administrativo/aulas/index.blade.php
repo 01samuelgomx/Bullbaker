@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Vendor: Bootstrap 4 Stylesheets  -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
@@ -18,12 +19,14 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}" type="text/css">
 
     <!-- Color Scheme -->
-    <link rel="stylesheet" href="css/color-schemes/color.css" type="text/css" title="color3">
+    <link rel="stylesheet" href="{{ asset('assets/css/color-schemes/color.css') }}" type="text/css" title="color3">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color1.css') }}" title="color1">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color2.css') }}" title="color2">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color4.css') }}" title="color4">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color5.css') }}" title="color5">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
 
 <body class="expand-data panel-data">
     <div class="topbar">
@@ -37,45 +40,15 @@
             </h1>
         </div>
         <div class="topbar-data">
+
             <div class="usr-act">
-                <i>Olá, Usu!</i>
-                <span>
-                    <img src="images/resource/topbar-usr1.jpg" alt="" />
-                    <i class="sts away"></i>
-                </span>
-                <div class="usr-inf">
-                    <div class="usr-thmb brd-rd50">
-                        <img class="brd-rd50" src="images/resource/usr.jpg" alt="" />
-                        <i class="sts away"></i>
-                        <a class="green-bg brd-rd5" href="#" title="">
-                            <i class="fa fa-envelope"></i>
-                        </a>
-                    </div>
-                    <h5>
-                        <a href="#" title="">John Smith</a>
-                    </h5>
-                    <span>Co Worker</span>
-                    <i>076 9477 4896</i>
-                    <div class="act-pst-lk-stm">
-                        <a class="brd-rd5 green-bg-hover" href="#" title="">
-                            <i class="ion-heart"></i> Love</a>
-                        <a class="brd-rd5 blue-bg-hover" href="#" title="">
-                            <i class="ion-forward"></i> Reply</a>
-                    </div>
-                    <div class="usr-ft">
-                        <a class="btn-danger" href="#" title="">
-                            <i class="fa fa-sign-out"></i> Logout</a>
-                    </div>
-                </div>
+                <span>Olá, seja bem vindo! {{ $administrador->nomeAdmin }}</span>
             </div>
-            <form class="topbar-search">
-                <button type="submit">
-                    <i class="ion-ios-search-strong"></i>
-                </button>
-                <input type="text" placeholder="Type and Hit Enter" />
-            </form>
+
 
         </div>
+
+
         <div class="topbar-bottom-colors">
             <i style="background-color: #361F08;"></i>
             <i style="background-color: #C1959D;"></i>
@@ -88,12 +61,12 @@
     </div>
     <!-- Topbar -->
     <header class="side-header expand-header">
-        <div class="nav-head">Main Navigation
+        <div class="nav-head">Navegação Principal !
             <span class="menu-trigger">
-                <i class="ion-android-menu"></i>
+                <i class="fa fa-reorder" aria-hidden="true"></i>
             </span>
         </div>
-         <nav class="custom-scrollbar">
+        <nav class="custom-scrollbar">
 
             <h4>Tabelas</h4>
             <ul class="drp-sec">
@@ -106,7 +79,7 @@
                 </li>
 
                 <li class="has-drp">
-                    <a href="{{ url('dashboard/administrativo/cursos/index') }}" title="acessar tabela cursos">
+                    <a href="{{ url('dashboard/administrativo/cursos/index') }}" title="acessar tabela aulas">
                         <span>Cursos</span>
                         <i class="fa fa-university" aria-hidden="true"></i>
                     </a>
@@ -115,7 +88,7 @@
                 <li class="has-drp">
                     <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="acessar tabela aulas">
                         <span>Aulas</span>
-                      <i class="fa fa-play-circle" aria-hidden="true"></i>
+                        <i class="fa fa-play-circle" aria-hidden="true"></i>
                     </a>
                 </li>
 
@@ -148,14 +121,14 @@
             </span>
         </div>
     </div>
+
     <!-- Options Panel -->
     <div class="pg-tp">
         <i class="ion-cube"></i>
         <div class="pr-tp-inr">
-            <h4>Bem - Vindo(a)
-                <span></span> Panel
+            <h4>Bem - Vindo a Area dos aulas!
             </h4>
-            <span>Admin Template for medium and large web applications with ery clean and aesthetic style.</span>
+            <span>Nossa interface de atualizações, Realize seu cadastro em poucos passos!</span>
         </div>
     </div>
     <!-- Page Top -->
@@ -184,13 +157,13 @@
                         </div>
                         <i class="ion-arrow-graph-up-right"></i>
                         <div class="stat-box-innr">
-                            <span>$
-                                <i class="counter">1,206,90</i>
+                            <span>
+                                <i class="counter"> -> {{ $num_aulas_ativas }}</i>
                             </span>
-                            <h5>FATURAMENTO</h5>
+                            <h5>aulas Cadastrados !</h5>
                         </div>
                         <span>
-                            <i class="ion-ios-stopwatch"></i> Updated: 05:14pm</span>
+                            <i class="ion-ios-stopwatch"></i>Crie novo aula através da tabela</span>
                     </div>
                 </div>
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
@@ -215,11 +188,11 @@
                         <i class="ion-android-desktop"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter">975</i>k+</span>
-                            <h5>CUSTOS</h5>
+                                <i class="counter"> -> {{ $num_aulas_ativas }}</i></span>
+                            <h5>Aulas Inseridas !</h5>
                         </div>
                         <span>
-                            <i class="ion-ios-stopwatch"></i> Updated: 05:14pm</span>
+                            <i class="ion-ios-stopwatch"></i>Saiba mais e acesse a tabela aulas !</span>
                     </div>
                 </div>
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
@@ -244,12 +217,12 @@
                         <i class="ion-cube"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter">690</i>
+                                <i class="counter"> -> {{ $num_alunos_ativos }}</i>
                             </span>
-                            <h5>PEDIDOS</h5>
+                            <h5>Total de Aluno</h5>
                         </div>
                         <span>
-                            <i class="ion-ios-stopwatch"></i> Updated: 05:14pm</span>
+                            <i class="ion-ios-stopwatch"></i>Confira mais em sua tabela Alunos !</span>
                     </div>
                 </div>
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
@@ -265,83 +238,18 @@
                 <i class="ion-android-upload"></i>
                 <div class="stat-box-innr">
                     <span>$
-                        <i class="counter">2,206</i>
+                        <i class="counter"></i>
                     </span>
-                    <h5>Today Income</h5>
+
                 </div>
                 <span>
-                    <i class="ion-ios-stopwatch"></i> Updated: 05:14pm</span>
-            </div>
-        </div>
-        <div class="col-md-12 grid-item col-sm-12 col-lg-12">
 
-        </div>
-        <div class="col-md-6 grid-item col-sm-12 col-lg-6">
-            <div class="widget sales-summ pad50-40">
-                <div class="wdgt-opt">
-                    <span class="wdgt-opt-btn">
-                        <i class="ion-android-more-vertical"></i>
-                    </span>
-                    <div class="wdgt-opt-lst brd-rd5">
-                        <a class="delt-wdgt" href="#" title="">Delete</a>
-                        <a class="expnd-wdgt" href="#" title="">Expand</a>
-                        <a class="refrsh-wdgt" href="#" title="">Refresh</a>
-                    </div>
-                </div>
-                <div class="wdgt-ldr">
-                    <div class="ball-scale-multiple">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-                <h4 class="widget-title">Sales Summery</h4>
-                <div class="sales-charts">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#today">Today</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#week">Week</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#month">Month</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="today">
-                            <div id="chrt2" style="height: 270px;"></div>
-                        </div>
-                        <div class="tab-pane fade" id="week">
-                            <div id="chrt3" style="height: 270px;"></div>
-                        </div>
-                        <div class="tab-pane fade" id="month">
-                            <div id="chrt4" style="height: 270px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sales-stat">
-                    <div class="sales-stat-itm">
-                        <span style="color: #13aaf9;">
-                            <i class="counter">760</i>
-                        </span>
-                        <i>Total Sales</i>
-                    </div>
-                    <div class="sales-stat-itm">
-                        <span style="color: #968cec;">$
-                            <i class="counter">4,219</i>
-                        </span>
-                        <i>Revenus</i>
-                    </div>
-                    <div class="sales-stat-itm">
-                        <span style="color: #968cec;">$
-                            <i class="counter">1,247</i>
-                        </span>
-                        <i>Expenses</i>
-                    </div>
-                </div>
+                </span>
             </div>
         </div>
+
+
+
 
         <div class="col-md-12 grid-item col-sm-12 col-lg-12">
             <div class="widget proj-order pad50-40">
@@ -362,119 +270,81 @@
                         <div></div>
                     </div>
                 </div>
-                <h4 class="widget-title">Confira as informações das Aulas!</h4>
-                <a class="add-proj brd-rd5" href="{{ url('/dashboard/administrativo/aluno/create') }}"
-                    data-toggle="tooltip" title="Add Project">+</a>
+                <h4 class="widget-title">Confira as informações dos aulas!</h4>
+                <a class="add-proj brd-rd5" href="{{ url('/dashboard/administrativo/aulas/create') }}"
+                    data-toggle="tooltip" title="Adicionar novo aula">+</a>
 
-                       <div class="table-wrap">
+                <div class="table-wrap">
                     <table class="table table-bordered style2">
-                        <thead>
-                            {{-- @foreach ($lista as $cursos) --}}
+
+                        <thead class="thead-inverse" style="background-color: #361F08; color: #fff">
                             <tr>
-                                <th>ID</th>
-                                <th>ID Curso</th>
-                                <th>Nome</th>
-
-                                <th>Descrisção</th>
-                                <th>Duração</th>
+                                <th>ID Aula</th>
                                 <th>Video</th>
-
+                                <th>Nome</th>
+                                <th>Descricao</th>
+                                <th>Duracao</th>
+                                <th>ID cursos</th>
+                                <th>status</th>
                                 <th>Edição</th>
+                                <th>Deletar</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            <tr>
-                                <td>
-                                    <span class="blue-bg indx">01</span>
-                                </td>
-                                <td>
-                                    <span class="blue-bg indx">02</span>
-                                </td>
-                                <td>
-                                    <h4 class="name">Michael Baker</h4>
-                                </td>
 
-                                <td>
-                                    <span class="ph#">076 9477 4896</span>
-                                </td>
-                                <td>
-                                    <span class="ph#">076 9477 4896</span>
-                                </td>
-                                <td>
-                                    <span class="ph#">076 9477 4896</span>
-                                </td>
-                              
-                          
-                                <td>
-                                    <div class="table-btns">
-                                        <a href="{{ url('dashboard/administrativo/cursos/edit') }}" title=""
-                                            class="green-bg-hover">Editar</a>
-                                        <a href="#" title="" class="blue-bg-hover">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="blue-bg indx">01</span>
-                                </td>
-                                <td>
-                                    <span class="blue-bg indx">02</span>
-                                </td>
-                                <td>
-                                    <h4 class="name">Michael Baker</h4>
-                                </td>
 
-                                <td>
-                                    <span class="ph#">076 9477 4896</span>
-                                </td>
-                                <td>
-                                    <span class="ph#">076 9477 4896</span>
-                                </td>
-                                <td>
-                                    <span class="ph#">076 9477 4896</span>
-                                </td>
-                              
-                          
-                                <td>
-                                    <div class="table-btns">
-                                        <a href="{{ url('dashboard/administrativo/cursos/edit') }}" title=""
-                                            class="green-bg-hover">Editar</a>
-                                        <a href="#" title="" class="blue-bg-hover">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="blue-bg indx">01</span>
-                                </td>
-                                <td>
-                                    <span class="blue-bg indx">02</span>
-                                </td>
-                                <td>
-                                    <h4 class="name">Michael Baker</h4>
-                                </td>
+                            @foreach ($lista as $aula)
+                                <tr>
+                                    <td>
+                                        <span class="blue-bg indx" style="background-color:#271402;"
+                                            name="">{{ $aula->idAula }}</span>
+                                    </td>
 
-                                <td>
-                                    <span class="ph#">076 9477 4896</span>
-                                </td>
-                                <td>
-                                    <span class="ph#">076 9477 4896</span>
-                                </td>
-                                <td>
-                                    <span class="ph#">076 9477 4896</span>
-                                </td>
-                              
-                          
-                                <td>
-                                    <div class="table-btns">
-                                        <a href="{{ url('dashboard/administrativo/cursos/edit') }}" title=""
-                                            class="green-bg-hover">Editar</a>
-                                        <a href="#" title="" class="blue-bg-hover">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
+                                    <td>
+                                        <span class="date">{{ $aula->video_aulaAula }}</span>
+                                    </td>
 
-                  
+                                    <td>
+                                        <span class="date">{{ $aula->nomeAula }}</span>
+                                    </td>
+
+                                    <td>
+                                        <h4 class="name">{{ $aula->descricaoAula }}</h4>
+                                    </td>
+
+                                    <td>
+                                        <span class="ph#">{{ $aula->duracaoAula }} Horas</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="blue-bg indx" style="background-color:#785e63;"
+                                            name="">{{ $aula->idCurso }}</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="addr">{{ $aula->statusAula }}</span>
+                                    </td>
+
+                                    <td>
+                                        <div>
+                                            <a href="{{ route('edit.aula', $aula->idAula) }}" title=""
+                                                class="brd-rd30 btn btn-outline-success">Editar</a>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <form action="{{ route('delete.aula', $aula->idAula) }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit"
+                                                class="brd-rd30 btn btn-outline-danger">Delete</button>
+                                        </form>
+                                    </td>
+
+                                </tr>
+                            @endforeach
 
                         </tbody>
                     </table>
@@ -482,40 +352,13 @@
             </div>
         </div>
 
-        <div class="col-md-12 grid-item col-sm-12 col-lg-12">
-            <div class="totl-revnu widget pad50-40">
-                <div class="wdgt-opt">
-                    <span class="wdgt-opt-btn">
-                        <i class="ion-android-more-vertical"></i>
-                    </span>
-                    <div class="wdgt-opt-lst brd-rd5">
-                        <a class="delt-wdgt" href="#" title="">Delete</a>
-                        <a class="expnd-wdgt" href="#" title="">Expand</a>
-                        <a class="refrsh-wdgt" href="#" title="">Refresh</a>
-                    </div>
-                </div>
-                <div class="wdgt-ldr">
-                    <div class="ball-scale-multiple">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-                <h4 class="widget-title">Total Revenue</h4>
-                <div id="chart5"></div>
-            </div>
-        </div>
+
     </div>
     <!-- Filter Items -->
     </div>
     </div>
     <!-- Panel Content -->
-    <footer>
-        <p>Copyright
-            <a href="#" title="">Example Company</a> &amp; 2017 - 2018
-        </p>
-        <span>10GB of 250GB Free.</span>
-    </footer>
+
 
     <!-- Vendor: Javascripts -->
     <script src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
@@ -546,343 +389,7 @@
     <script src="{{ asset('assets/js/jquery.poptrox.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/styleswitcher.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            'use strict';
 
-            $.getJSON(
-                'https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json',
-                function(data) {
-                    Highcharts.chart('chrt1', {
-                        chart: {
-                            zoomType: 'x'
-                        },
-
-                        legend: {
-                            enabled: false
-                        },
-                        title: {
-                            style: {
-                                display: 'none'
-                            }
-                        },
-                        plotOptions: {
-                            area: {
-                                fillColor: {
-                                    linearGradient: {
-                                        x1: 0,
-                                        y1: 0,
-                                        x2: 0,
-                                        y2: 1
-                                    },
-                                    stops: [
-                                        [0, Highcharts.getOptions().colors[0]],
-                                        [1, Highcharts.Color(Highcharts.getOptions().colors[
-                                            0]).setOpacity(0).get('rgba')]
-                                    ]
-                                },
-                                marker: {
-                                    radius: 2
-                                },
-                                lineWidth: 1,
-                                states: {
-                                    hover: {
-                                        lineWidth: 1
-                                    }
-                                },
-                                threshold: null
-                            }
-                        },
-                        series: [{
-                            type: 'area',
-                            name: 'USD to EUR',
-                            data: data
-                        }]
-                    });
-                });
-
-            Highcharts.chart('chrt2', {
-                chart: {
-                    type: 'area',
-                    backgroundColor: "#FFFFFF",
-                    borderColor: "#335cad"
-                },
-                legend: {
-                    enabled: false
-                },
-                title: {
-                    style: {
-                        display: 'none'
-                    }
-                },
-                xAxis: {
-                    categories: ['1', '2', '3', '4', '5', '6', '7']
-                },
-                credits: {
-                    enabled: false
-                },
-                tooltip: {
-                    pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
-                },
-                plotOptions: {
-                    area: {
-                        categories: ['1', '2', '3', '4', '5', '6', '7'],
-                        marker: {
-                            enabled: false,
-                            symbol: 'circle',
-                            radius: 2,
-                            states: {
-                                hover: {
-                                    enabled: true
-                                }
-                            }
-                        }
-                    }
-                },
-                series: [{
-                    data: [null, null, null, null, null, 6, 11, 32, 110, 235, 369, 640, 1005,
-                        1436, 2063, 3057, 4618, 6444, 9822, 15468, 20434,
-                        24126, 27387, 29459, 31056, 31982, 32040, 31233, 29224, 27342,
-                        26662, 26956, 27912, 28999, 28965, 27826, 25579, 25722, 24826,
-                        24605, 24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344,
-                        23586, 22380, 21004, 17287, 14747, 13076, 12555, 12144, 11009,
-                        10950, 10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295,
-                        10104, 9914, 9620, 9326, 5113, 5113, 4954, 4804, 4761, 4717,
-                        4368, 4018
-                    ]
-                }, {
-                    data: [null, null, null, null, null, null, null, null, null, null, 5, 25,
-                        50, 120, 150, 200, 426, 660, 869, 1060, 1605,
-                        2471, 3322, 4238, 5221, 6129, 7089, 8339, 9399, 10538, 11643, 13092,
-                        14478, 15915, 17385, 19055, 21205, 23044, 25393, 27935,
-                        30062, 32049, 33952, 35804, 37431, 39197, 45000, 43000, 41000,
-                        39000, 37000, 35000, 33000, 31000, 29000, 27000, 25000, 24000,
-                        23000, 22000, 21000, 20000, 19000, 18000, 18000, 17000, 16000,
-                        15537, 14162, 12787, 12600, 11400, 5500, 4512, 4502, 4502,
-                        4500, 4500
-                    ]
-                }]
-            });
-
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-                $('#chrt3').highcharts({
-                    chart: {
-                        type: 'area',
-                        backgroundColor: "#FFFFFF",
-                        borderColor: "#335cad"
-                    },
-                    legend: {
-                        enabled: false
-                    },
-                    title: {
-                        style: {
-                            display: 'none'
-                        }
-                    },
-                    xAxis: {
-                        categories: ['1', '2', '3', '4', '5', '6', '7']
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
-                    },
-                    plotOptions: {
-                        area: {
-                            categories: ['1', '2', '3', '4', '5', '6', '7'],
-                            marker: {
-                                enabled: false,
-                                symbol: 'circle',
-                                radius: 2,
-                                states: {
-                                    hover: {
-                                        enabled: true
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    series: [{
-                        data: [null, null, null, null, null, null, null, null, null,
-                            null, 5, 25, 50, 120, 150, 200, 426, 660, 869, 1060,
-                            1605,
-                            2471, 3322, 4238, 5221, 6129, 7089, 8339, 9399, 10538,
-                            11643, 13092, 14478, 15915, 17385, 19055, 21205, 23044,
-                            25393, 27935,
-                            30062, 32049, 33952, 35804, 37431, 39197, 45000, 43000,
-                            41000, 39000, 37000, 35000, 33000, 31000, 29000, 27000,
-                            25000, 24000,
-                            23000, 22000, 21000, 20000, 19000, 18000, 18000, 17000,
-                            16000, 15537, 14162, 12787, 12600, 11400, 5500, 4512,
-                            4502, 4502,
-                            4500, 4500
-                        ]
-                    }, {
-                        data: [null, null, null, null, null, 6, 11, 32, 110, 235, 369,
-                            640, 1005, 1436, 2063, 3057, 4618, 6444, 9822, 15468,
-                            20434,
-                            24126, 27387, 29459, 31056, 31982, 32040, 31233, 29224,
-                            27342, 26662, 26956, 27912, 28999, 28965, 27826, 25579,
-                            25722, 24826,
-                            24605, 24304, 23464, 23708, 24099, 24357, 24237, 24401,
-                            24344, 23586, 22380, 21004, 17287, 14747, 13076, 12555,
-                            12144, 11009,
-                            10950, 10871, 10824, 10577, 10527, 10475, 10421, 10358,
-                            10295, 10104, 9914, 9620, 9326, 5113, 5113, 4954, 4804,
-                            4761, 4717,
-                            4368, 4018
-                        ]
-                    }]
-                });
-            });
-
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-                $('#chrt4').highcharts({
-                    chart: {
-                        type: 'area',
-                        backgroundColor: "#FFFFFF",
-                        borderColor: "#335cad"
-                    },
-                    legend: {
-                        enabled: false
-                    },
-                    title: {
-                        style: {
-                            display: 'none'
-                        }
-                    },
-                    xAxis: {
-                        categories: ['1', '2', '3', '4', '5', '6', '7']
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
-                    },
-                    plotOptions: {
-                        area: {
-                            categories: ['1', '2', '3', '4', '5', '6', '7'],
-                            marker: {
-                                enabled: false,
-                                symbol: 'circle',
-                                radius: 2,
-                                states: {
-                                    hover: {
-                                        enabled: true
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    series: [{
-                        data: [null, null, null, null, null, 6, 11, 32, 110, 235, 369,
-                            640, 1005, 1436, 2063, 3057, 4618, 6444, 9822, 15468,
-                            20434,
-                            24126, 27387, 29459, 31056, 31982, 32040, 31233, 29224,
-                            27342, 26662, 26956, 27912, 28999, 28965, 27826, 25579,
-                            25722, 24826,
-                            24605, 24304, 23464, 23708, 24099, 24357, 24237, 24401,
-                            24344, 23586, 22380, 21004, 17287, 14747, 13076, 12555,
-                            12144, 11009,
-                            10950, 10871, 10824, 10577, 10527, 10475, 10421, 10358,
-                            10295, 10104, 9914, 9620, 9326, 5113, 5113, 4954, 4804,
-                            4761, 4717,
-                            4368, 4018
-                        ]
-                    }, {
-                        data: [null, null, null, null, null, null, null, null, null,
-                            null, 5, 25, 50, 120, 150, 200, 426, 660, 869, 1060,
-                            1605,
-                            2471, 3322, 4238, 5221, 6129, 7089, 8339, 9399, 10538,
-                            11643, 13092, 14478, 15915, 17385, 19055, 21205, 23044,
-                            25393, 27935,
-                            30062, 32049, 33952, 35804, 37431, 39197, 45000, 43000,
-                            41000, 39000, 37000, 35000, 33000, 31000, 29000, 27000,
-                            25000, 24000,
-                            23000, 22000, 21000, 20000, 19000, 18000, 18000, 17000,
-                            16000, 15537, 14162, 12787, 12600, 11400, 5500, 4512,
-                            4502, 4502,
-                            4500, 4500
-                        ]
-                    }]
-                });
-            });
-
-            Highcharts.chart('chart5', {
-                title: {
-                    style: {
-                        display: 'none'
-                    }
-                },
-                xAxis: {
-                    categories: ['Apples', 'Oranges', 'Pears',
-                        'Bananas', 'Plums'
-                    ]
-                },
-                labels: {
-                    items: [{
-                        style: {
-                            left: '50px',
-                            top: '18px',
-                            color: (Highcharts.theme &&
-                                Highcharts.theme.textColor) || 'black'
-                        }
-                    }]
-                },
-                series: [{
-                    type: 'column',
-                    name: 'Jane',
-                    data: [3, 2, 1, 3, 4]
-                }, {
-                    type: 'column',
-                    name: 'John',
-                    data: [2, 3, 5, 7, 6]
-                }, {
-                    type: 'column',
-                    name: 'Joe',
-                    data: [4, 3, 3, 9, 0]
-                }, {
-                    type: 'spline',
-                    name: 'Average',
-                    data: [3, 2.67, 3, 6.33, 3.33],
-                    marker: {
-                        lineWidth: 2,
-                        lineColor: Highcharts.getOptions().colors[3],
-                        fillColor: 'white'
-                    }
-                }, {
-                    type: 'pie',
-                    name: 'Total consumption',
-                    data: [{
-                        name: 'Jane',
-                        y: 13,
-                        color: Highcharts.getOptions().colors[0]
-                    }, {
-                        name: 'John',
-                        y: 23,
-                        color: Highcharts.getOptions().colors[1]
-                    }, {
-                        name: 'Joe',
-                        y: 19,
-                        color: Highcharts.getOptions().colors[2]
-                    }],
-                    center: [100, 80],
-                    size: 100,
-                    showInLegend: false,
-                    dataLabels: {
-                        enabled: false
-                    }
-                }]
-            });
-
-            //===== ToolTip =====//
-            if ($.isFunction($.fn.tooltip)) {
-                $('[data-toggle="tooltip"]').tooltip();
-            }
-        });
-    </script>
 </body>
 
 </html>
