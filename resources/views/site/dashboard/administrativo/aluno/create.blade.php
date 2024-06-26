@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
 
     <!-- Our Website CSS Styles -->
+    <link rel="icon" href="{{ asset('../../img/logo.jpg') }}" type="image/png" />
     <link rel="stylesheet" href="css/icons.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}" type="text/css">
@@ -162,80 +163,102 @@
     <div class="panel-content">
         <div class="widget pad50-65">
 
-    <form action="{{ route('cad.aluno') }}" method="POST" role="form text-left" class="contact-form" enctype="multipart/form-data">
+            <form action="{{ route('cad.aluno') }}" method="POST" role="form text-left" class="contact-form"
+                enctype="multipart/form-data">
 
-        @csrf
-        @method('POST')
+                @csrf
+                @method('POST')
 
-        <div class="d-flex justify-content-between">
-            <div class="widget-title2">
-                <div class="pr-tp-inr">
-                    <h4>Preencha com os dados do Aluno </h4>
-                    <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
+                <div class="d-flex justify-content-between">
+                    <div class="widget-title2">
+                        <div class="pr-tp-inr">
+                            <h4>Preencha com os dados do Aluno </h4>
+                            <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
+                        </div>
+                    </div>
+
+                    <div class="file-input-container" style="margin-bottom:30px;">
+                        <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
+                            name="fotoAluno" value="{{ old('fotoAluno') }}">
+                        <label for="file-input" class="file-label">
+                            <img id="icon" src="{{ asset('img/camera.png') }}" alt="Escolher Imagem">
+                        </label>
+                        @error('fotoAluno')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
-            </div>
 
-            <div class="file-input-container" style="margin-bottom:30px;">
-                <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)" name="fotoAluno"
-                    value="{{ old('fotoAluno') }}">
-                <label for="file-input" class="file-label">
-                    <img id="icon" src="{{ asset('img/camera.png') }}" alt="Escolher Imagem">
-                </label>
-            </div>
+
+                <div class="column mrg20">
+
+                    <div class="row mrg20">
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeAluno"
+                                id="nomeAluno" value="{{ old('nomeAluno') }}" />
+                            @error('nomeAluno')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="email" placeholder="Email:" name="emailAluno"
+                                id="emailAluno" value="{{ old('emailAluno') }}" />
+                            @error('emailAluno')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                    </div>
+
+                    <div class="row mrg20">
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="tel" placeholder="Telefone:" name="telefoneAluno"
+                                value="{{ old('telefoneAluno') }}" id="telefoneAluno" />
+                            @error('telefoneAluno')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="date" placeholder="Data de castro:" name="dataCadAluno"
+                                id="dataCadAluno" value="{{ old('dataCadAluno') }}" />
+                            @error('dataCadAluno')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <select class="brd-rd5" name="statusAluno" id="statusAluno" required>
+                                <option value="ativo" class="brd-rd5"
+                                    {{ old('statusAluno') == 'ativo' ? 'selected' : '' }}>Ativo</option>
+                                <option value="desativado" class="brd-rd5"
+                                    {{ old('statusAluno') == 'desativado' ? 'selected' : '' }}>Desativado</option>
+                            </select>
+                            @error('statusAluno')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="text" placeholder="Curso Matriculado:" name="idCurso"
+                                id="idCurso" value="{{ old('idCurso') }}" />
+                            @error('idCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <button class="green-bg brd-rd5" type="submit">Enviar</button>
+                    </div>
+                </div>
+            </form>
+
         </div>
-
-
-        <div class="column mrg20">
-
-            <div class="row mrg20">
-
-                <div class="col-md-6 col-sm-12 col-lg-6">
-                    <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeAluno" id="nomeAluno"
-                        value="{{ old('nomeAluno') }}" />
-                </div>
-
-                <div class="col-md-6 col-sm-12 col-lg-6">
-                    <input class="brd-rd5" type="email" placeholder="Email:" name="emailAluno" id="emailAluno"
-                        value="{{ old('emailAluno') }}" />
-                </div>
-
-            </div>
-
-            <div class="row mrg20">
-
-                <div class="col-md-6 col-sm-12 col-lg-6">
-                    <input class="brd-rd5" type="tel" placeholder="Telefone:" name="telefoneAluno"
-                        value="{{ old('telefoneAluno') }}" id="telefoneAluno" />
-                </div>
-
-                <div class="col-md-6 col-sm-12 col-lg-6">
-                    <input class="brd-rd5" type="date" placeholder="Data de castro:" name="dataCadAluno"
-                        id="dataCadAluno" value="{{ old('dataCadAluno') }}" />
-                </div>
-
-                <div class="col-md-6 col-sm-12 col-lg-6">
-                    <select class="brd-rd5" name="statusAluno" id="statusAluno" required>
-                        <option value="ativo" class="brd-rd5"
-                            {{ old('statusAluno') == 'ativo' ? 'selected' : '' }}>Ativo</option>
-                        <option value="desativado" class="brd-rd5"
-                            {{ old('statusAluno') == 'desativado' ? 'selected' : '' }}>Desativado</option>
-                    </select>
-                </div>
-   
-
-                <div class="col-md-6 col-sm-12 col-lg-6">
-                    <input class="brd-rd5" type="text" placeholder="Curso Matriculado:" name="idCurso" id="idCurso"
-                        value="{{ old('idCurso') }}" />
-                </div>
-
-            </div>
-            <div class="col-md-12 col-sm-12 col-lg-12">
-                <button class="green-bg brd-rd5" type="submit">Enviar</button>
-            </div>
-        </div>
-    </form>
-
-    </div>
     </div>
     <!-- Panel Content -->
     <script>
@@ -279,7 +302,7 @@
     <script src="{{ asset('assets/js/styleswitcher.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
 
-       
+
 </body>
 
 </html>

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
 
     <!-- Our Website CSS Styles -->
+    <link rel="icon" href="{{ asset('../../img/logo.jpg') }}" type="image/png" />
     <link rel="stylesheet" href="css/icons.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}" type="text/css">
@@ -189,6 +190,9 @@
                                 src="{{ isset($editAluno->fotoAluno) && $editAluno->fotoAluno ? asset('storage/img/alunos/' . $editAluno->fotoAluno) : asset('public/img/camera.png') }}"
                                 alt="Escolher Imagem" style="width: 100px; height: 100px; border-radius: 50%">
                         </label>
+                        @error('fotoAluno')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     {{-- ---------------- --}}
 
@@ -200,10 +204,16 @@
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeAluno"
                                 id="nomeAluno" value="{{ old('nomeAluno', $editAluno->nomeAluno) }}" required />
+                            @error('nomeAluno')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="email" placeholder="Email:" name="emailAluno"
                                 id="emailAluno" value="{{ old('emailAluno', $editAluno->emailAluno) }}" required />
+                            @error('emailAluno')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mrg20">
@@ -211,11 +221,17 @@
                             <input class="brd-rd5" type="tel" placeholder="Telefone:" name="telefoneAluno"
                                 value="{{ old('telefoneAluno', $editAluno->telefoneAluno) }}" id="telefoneAluno"
                                 required />
+                            @error('telefoneAluno')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="datetime-local" placeholder="Data de cadastro:"
                                 name="dataCadAluno" id="dataCadAluno"
                                 value="{{ old('dataCadAluno', $editAluno->dataCadAluno) }}" required />
+                            @error('dataCadAluno')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
@@ -227,11 +243,17 @@
                                     {{ old('statusAluno', $editAluno->statusAluno) == 'desativo' ? 'selected' : '' }}>
                                     Desativo</option>
                             </select>
+                            @error('statusAluno')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="text" placeholder="Curso matriculado:" name="idCurso"
                                 id="idCurso" value="{{ old('idCurso', $editAluno->idCurso) }}" required />
+                            @error('idCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-12 col-sm-12 col-lg-12">

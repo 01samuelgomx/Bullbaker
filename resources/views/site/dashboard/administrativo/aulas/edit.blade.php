@@ -3,7 +3,7 @@
 
 <head>
     <!-- Meta-Information -->
-    <title>Tabela Cursos</title>
+    <title>Editar Tabela Aulas</title>
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +11,7 @@
 
 
     <!-- Vendor: Bootstrap 4 Stylesheets  -->
+    <link rel="icon" href="{{ asset('../../img/logo.jpg') }}" type="image/png" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
 
     <!-- Our Website CSS Styles -->
@@ -19,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}" type="text/css">
 
     <!-- Color Scheme -->
-    <link rel="stylesheet" href="css/color-schemes/color.css" type="text/css" title="color3">
+    <link rel="stylesheet" href="{{ asset ('css/color-schemes/color.css') }}" type="text/css" title="color3">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color1.css') }}" title="color1">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color2.css') }}" title="color2">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color4.css') }}" title="color4">
@@ -155,7 +156,7 @@
     <div class="pg-tp">
         <i class="ion-cube"></i>
         <div class="pr-tp-inr">
-            <h4>Bem - Vindo a Area dos Cursos!
+            <h4>Bem - Vindo a Area das Aulas!
                 <span></span> Panel
             </h4>
             <span>Nossa interface de atualizações, Realize seu cadastro em poucos passos!</span>
@@ -166,78 +167,84 @@
     <div class="panel-content">
         <div class="widget pad50-65">
 
-            <form action="{{ route('update.aula', $editAula->idAula) }}" method="POST" role="form text-left"
-                enctype="multipart/form-data" class="contact-form">
+            <form action="{{ route('update.aula', $editAula->idAula) }}" method="POST" role="form text-left" class="contact-form">
                 @csrf
                 @method('PUT')
-
+            
                 <div class="d-flex justify-content-between">
-
                     <div class="widget-title2">
-
                         <div class="pr-tp-inr">
-                            <h4>Preencha com os dados da Aula </h4>
-                            <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
+                            <h4>Preencha com os dados da Aula</h4>
+                            <span>Por favor certifique-se das informações antes de realizar o cadastro!</span>
                         </div>
-
                     </div>
-
                 </div>
-
+            
                 <div class="column mrg20">
-
                     <div class="row mrg20">
-
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="text" placeholder="Editar Video:" name="video_aulaAula"
                                 id="video_aulaAula" value="{{ old('video_aulaAula', $editAula->video_aulaAula) }}" />
+                            @error('video_aulaAula')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-
+            
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeAula"
                                 id="nomeAula" value="{{ old('nomeAula', $editAula->nomeAula) }}" />
+                            @error('nomeAula')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-
+            
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="text" placeholder="Descrisção:" name="descricaoAula"
+                            <input class="brd-rd5" type="text" placeholder="Descrição:" name="descricaoAula"
                                 id="descricaoAula" value="{{ old('descricaoAula', $editAula->descricaoAula) }}" />
-
+                            @error('descricaoAula')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-
+            
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="number" placeholder="Vagas:" name="duracaoAula"
+                            <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoAula"
                                 id="duracaoAula" value="{{ old('duracaoAula', $editAula->duracaoAula) }}" />
+                            @error('duracaoAula')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-
                     </div>
-
                 </div>
-
-
+            
                 <div class="column mrg20">
                     <div class="row mrg20">
-
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <select class="brd-rd5" name="statusAula" id="statusAula" required>
                                 <option value="ativo" class="brd-rd5"
-                                    {{ old('statusAula', $editAula->statusAula) == 'ativo' ? 'selected' : '' }}>
-                                    Ativo</option>
+                                    {{ old('statusAula', $editAula->statusAula) == 'ativo' ? 'selected' : '' }}>Ativo</option>
                                 <option value="desativo" class="brd-rd5"
-                                    {{ old('statusAula', $editAula->statusAula) == 'desativo' ? 'selected' : '' }}>
-                                    Desativo</option>
+                                    {{ old('statusAula', $editAula->statusAula) == 'desativo' ? 'selected' : '' }}>Desativo</option>
                             </select>
+                            @error('statusAula')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-
+            
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <input class="brd-rd5" type="number" placeholder="Curso Relacionado:" name="idCurso"
+                                id="idCurso" value="{{ old('idCurso', $editAula->idCurso) }}" />
+                            @error('idCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
-
-
+            
                 <div class="col-md-12 col-sm-12 col-lg-12">
                     <button class="green-bg brd-rd5" type="submit">Enviar</button>
                 </div>
-        </div>
-
-        </form>
+            </form>
+            
 
     </div>
 

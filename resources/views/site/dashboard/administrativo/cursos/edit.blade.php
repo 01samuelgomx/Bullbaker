@@ -11,6 +11,7 @@
 
 
     <!-- Vendor: Bootstrap 4 Stylesheets  -->
+    <link rel="icon" href="{{ asset('../../img/logo.jpg') }}" type="image/png" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
 
     <!-- Our Website CSS Styles -->
@@ -191,6 +192,9 @@
                                 src="{{ isset($editCurso->fotoCurso) && $editCurso->fotoCurso ? asset('storage/img/cursos/' . $editCurso->fotoCurso) : asset('public/img/camera.png') }}"
                                 alt="Escolher Imagem" style="width: 100px; height: 100px; border-radius: 50%">
                         </label>
+                        @error('fotoCurso')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     {{-- ---------------- --}}
 
@@ -204,12 +208,18 @@
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeCurso"
                                 id="nomeCurso" value="{{ old('nomeCurso', $editCurso->nomeCurso) }}" />
+                            @error('nomeCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="text" placeholder="Descrisção:" name="descricaoCurso"
                                 id="descricaoCurso"
                                 value="{{ old('descricaoCurso', $editCurso->descricaoCurso) }}" />
+                            @error('descricaoCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
 
@@ -220,11 +230,17 @@
                                 <input class="brd-rd5" type="number" placeholder="Vagas:"
                                     name="vagasDisponiveisCurso" id="vagasDisponiveisCurso"
                                     value="{{ old('vagasDisponiveisCurso', $editCurso->vagasDisponiveisCurso) }}" />
+                                @error('vagasDisponiveisCurso')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
                                 <input class="brd-rd5" type="number" placeholder="Preço:" name="precoCurso"
                                     id="precoCurso" value="{{ old('precoCurso', $editCurso->precoCurso) }}" />
+                                @error('precoCurso')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                         </div>
@@ -245,11 +261,17 @@
                                     {{ old('statusCurso', $editCurso->statusCurso) == 'desativo' ? 'selected' : '' }}>
                                     Desativo</option>
                             </select>
+                            @error('statusCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoCurso"
                                 id="duracaoCurso" value="{{ old('duracaoCurso', $editCurso->duracaoCurso) }}" />
+                            @error('duracaoCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
 
@@ -260,11 +282,17 @@
                                 <input class="brd-rd5" type="datetime-local" placeholder="Data Inicio:"
                                     name="data_inicio" id="data_inicio"
                                     value="{{ old('data_inicio', $editCurso->data_inicio) }}" />
+                                @error('data_inicio')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
                                 <input class="brd-rd5" type="datetime-local" placeholder="Data Fim:" name="data_fim"
                                     id="data_fim" value="{{ old('data_fim', $editCurso->data_fim) }}" />
+                                @error('data_fim')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                         </div>
@@ -285,7 +313,7 @@
 
     </div>
     <!-- Panel Content -->
- 
+
     <script>
         function displayImage(event) {
             const fileInput = event.target;

@@ -57,7 +57,7 @@ Route::middleware('autenticacao:Administrativo')->group(function () {
     Route::get('/dashboard/administrativo/aulas/index', [AulaController::class, 'index'])->name('index.aula'); 
 
     Route::get('/dashboard/administrativo/aulas/create', [AulaController::class, 'create'])->name('create.aula'); // rota de Acesso ao formulario
-    Route::post('/dashboard/administrativo/aulas', [AulaController::class, 'cadaula'])->name('cad.aula'); // Cadastro do aula
+    Route::post('/dashboard/administrativo/aulas', [AulaController::class, 'cadAula'])->name('cad.aula'); // Cadastro do aula
     Route::get('/dashboard/administrativo/aulas/{id}/edit', [AulaController::class, 'edit'])->name('edit.aula');// rota de Acesso ao formulario
     Route::put('/dashboard/administrativo/aulas/{id}', [AulaController::class, 'update'])->name('update.aula'); // Atualização do aula
     Route::delete('/dashboard/administrativo/aulas/{id}', [AulaController::class, 'destroy'])->name('delete.aula'); // Deletar os dados

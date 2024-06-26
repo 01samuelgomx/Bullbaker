@@ -20,18 +20,19 @@ class Aula extends Model
         'created_at',
         'updated_at',
     ];
-
-    public function Regras(){
+    
+    public function Regras()
+    {
         return [
             'nomeAula'       => 'required|unique:tblaulas,nomeAula|min:3',
             'descricaoAula'  => 'required|min:10',
             'duracaoAula'    => 'required|integer|min:1',
-            'video_aulaAula' => 'nullable|url|regex:/^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/',
+            'video_aulaAula' => ['nullable', 'string', 'regex:/<iframe.*src="https:\/\/www\.youtube\.com\/embed\/([a-zA-Z0-9_-]+)".*<\/iframe>/'],
             'statusAula'     => 'required|in:ativo,desativo',
-            'idCurso'       => 'required|exists:tblcurso,idCurso',
+            'idCurso'        => 'required|exists:tblcurso,idCurso',
         ];
     }
-
+    
     public function Feedback(){
         return [
             'idCurso.required'       => 'O campo ID do curso é obrigatório.',

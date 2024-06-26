@@ -11,7 +11,8 @@
 
     <!-- Vendor: Bootstrap 4 Stylesheets  -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
-    <link rel="icon" href="{{ asset('img/logo.jpg') }}" type="image/png" />
+    <link rel="icon" href="{{ asset('../../img/logo.jpg') }}" type="image/png" />
+
 
     <!-- Our Web CSS Styles -->
     <link rel="stylesheet" href="{{ asset('css/icons.min.css') }}" type="text/css">

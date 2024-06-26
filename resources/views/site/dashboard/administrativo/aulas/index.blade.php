@@ -8,10 +8,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('../../img/logo.jpg') }}" type="image/png" />
 
     <!-- Vendor: Bootstrap 4 Stylesheets  -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
-    <link rel="icon" href="{{ asset('img/logo.jpg') }}" type="image/png" />
 
     <!-- Our Web CSS Styles -->
     <link rel="stylesheet" href="{{ asset('css/icons.min.css') }}" type="text/css">

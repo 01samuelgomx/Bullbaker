@@ -10,6 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Vendor: Bootstrap 4 Stylesheets  -->
+    <link rel="icon" href="{{ asset('../../img/logo.jpg') }}" type="image/png" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
 
     <!-- Our Website CSS Styles -->
@@ -183,6 +184,9 @@
                         <label for="file-input" class="file-label">
                             <img id="icon" src="{{ asset('img/camera.png') }}" alt="Escolher Imagem">
                         </label>
+                        @error('fotoCurso')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 {{-- ---------------- --}}
@@ -193,20 +197,33 @@
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeCurso"
                                 id="nomeCurso" value="{{ old('nomeCurso') }}" />
+                            @error('nomeCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="text" placeholder="Descrição:" name="descricaoCurso"
                                 id="descricaoCurso" value="{{ old('descricaoCurso') }}" />
+                            @error('descricaoCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="row mrg20">
                             <div class="col-md-6 col-sm-12 col-lg-6">
                                 <input class="brd-rd5" type="number" placeholder="Vagas:"
                                     name="vagasDisponiveisCurso" id="vagasDisponiveisCurso"
                                     value="{{ old('vagasDisponiveisCurso') }}" />
+                                @error('vagasDisponiveisCurso')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-6 col-sm-12 col-lg-6">
                                 <input class="brd-rd5" type="number" placeholder="Preço:" name="precoCurso"
                                     id="precoCurso" value="{{ old('precoCurso') }}" />
+                                @error('precoCurso')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -214,7 +231,7 @@
 
                 <div class="column mrg20">
                     <div class="row mrg20">
-                        
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <select class="brd-rd5" name="statusCurso" id="statusCurso" required>
                                 <option value="ativo" class="brd-rd5"
@@ -222,20 +239,32 @@
                                 <option value="desativado" class="brd-rd5"
                                     {{ old('statusCurso') == 'desativado' ? 'selected' : '' }}>Desativado</option>
                             </select>
+                            @error('statusCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoCurso"
                                 id="duracaoCurso" value="{{ old('duracaoCurso') }}" />
+                            @error('duracaoCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="row mrg20">
                             <div class="col-md-6 col-sm-12 col-lg-6">
                                 <input class="brd-rd5" type="datetime-local" placeholder="Data Início:"
                                     name="data_inicio" id="data_inicio" value="{{ old('data_inicio') }}" />
+                                @error('data_inicio')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-6 col-sm-12 col-lg-6">
                                 <input class="brd-rd5" type="datetime-local" placeholder="Data Fim:" name="data_fim"
                                     id="data_fim" value="{{ old('data_fim') }}" />
+                                @error('data_fim')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
