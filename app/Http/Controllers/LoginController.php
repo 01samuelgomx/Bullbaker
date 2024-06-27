@@ -66,24 +66,6 @@ class LoginController extends Controller
              'email' => $usuario->email,
              ]);
 
-             
-             // -------------------------------------
-             
-        //      if ($tipoUsuario instanceof Aluno) {
-           
-        //         $tipo = 'aluno';
-
-        //     //  dd($usuario->tipo_usuario_type);
-
-        //      session([
-        //          'id'            => $usuario->tipo_usuario_id,
-        //          'nome'          => $usuario->nome,
-        //          'tipo_usuario_type'  => 'aluno',
-        //      ]);
-             
-        //      return redirect()->route('index.aluno');
-        // }
-
              //-------------------------
           if ($tipoUsuario instanceof Administrador) {
             // dd($tipoUsuario->idAdmin);

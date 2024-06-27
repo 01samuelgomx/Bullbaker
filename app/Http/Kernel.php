@@ -43,7 +43,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
@@ -70,5 +70,7 @@ class Kernel extends HttpKernel
          // ---------------------
          // ROUTE BullBaker
         'autenticacao' => \App\Http\Middleware\Autbullbaker::class,
+        'Administrativo' => \App\Http\Middleware\UserIsAdmin::class,
+        'aluno' => \App\Http\Middleware\UserIsAluno::class,
     ];
 }
