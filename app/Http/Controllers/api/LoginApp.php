@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Administrador;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 
@@ -34,11 +33,13 @@ class LoginApp extends Controller
                             'tipo_usuario' => $usuario->tipo_usuario_type,
                             'dados_aluno' => [
                                 'idAluno' => $aluno->idAluno,
-                                'nome' => $aluno->nome,
+                                'nome' => $aluno->nomeAluno,
                             ],
                         ],
+
                         'access_token' => $token,
                         'token_type' => 'Bearer',
+                        
                     ]);
                 }
             } elseif ($usuario->tipo_usuario_type === 'Administrativo') {
