@@ -306,19 +306,50 @@ class AlunoController extends Controller
         
        return redirect()->route('index.aluno')->with('success', 'Aluno desativado com sucesso.');
     }
-    // -------------------------------
-        
-        // public function destroy($id)
-        // {
-        //     $alunos = $this -> aluno -> find($id);
-    
-        //     if($alunos === null){
-        //         return response()->json(['erro' => 'Impossível deleter este registro. O aluno não existe!'], 404);
-        //     }
-    
-        //     Storage::disk('public')->delete($alunos->foto);
-        //     $alunos->delete();
-        //     return response()->json(['msg' => 'O registro foi removido com sucesso'], 200);
-        // }
-    
+
+     // -------------------------------
+     // LOGIN ALUNO APP
+
+     public function login(Request $request)
+     {
+         $credentials = $request->validate([
+             'email' => 'required|email',
+             'senha' => 'required',
+         ]);
+     
+         $usuario = Usuario::where('email', $credentials['email'])->where('senha', $credentials['senha'])->first();
+     
+         if ($usuario) {
+            
+             $token = $usuario->createToken('Token de Acesso')->plainTextToken;
+     
+             if ($usuario->tipo_usuario_type === 'aluno') {
+                 $aluno = $usuario->tipo_usuario()->first();
+     
+                 if ($aluno) {
+                     return response()->json([
+                         'message' => 'Login bem sucedido',
+                         'usuario' => [
+                             'id' => $usuario->idUsuario,
+                             'nome' => $usuario->nome,
+                             'email' => $usuario->email,
+                             'tipo_usuario' => $usuario->tipo_usuario_type,
+                             'dados_aluno' => [
+                                 'idAluno' => $aluno->idAluno,
+                                 'nome' => $aluno->nomeAluno,
+                                 'email' => $aluno->emailAluno,
+                             ],
+                         ],
+                         'access_token' => $token,
+                         'token_type' => 'Bearer',
+                     ]);
+                 }
+             }
+         }
+     
+         return response()->json(['message' => 'Credenciais inválidas ou usuário não é um aluno ou administrador'], 401);
+     }
+     
+
+
 }

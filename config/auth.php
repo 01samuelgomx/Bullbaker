@@ -63,6 +63,7 @@ return [
     |
     */
 
+
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
@@ -73,6 +74,7 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        
     ],
 
     /*
