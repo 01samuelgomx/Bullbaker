@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text('descricaoAula')->nullable(); // Cria um campo TEXT para a descrição da aula, podendo ser nulo
             $table->integer('duracaoAula')->nullable(); // Cria um campo INTEGER para a duração da aula, podendo ser nulo
             $table->string('video_aulaAula', 255)->nullable(); // Cria um campo VARCHAR para o vídeo da aula, podendo ser nulo
+            $table->string('StatusAula', 255);
+            $table->string('fotoAula', 255);
             $table->timestamps(); // Cria os campos created_at e updated_at
         });
     }

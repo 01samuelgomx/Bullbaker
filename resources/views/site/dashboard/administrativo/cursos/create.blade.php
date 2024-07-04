@@ -164,10 +164,10 @@
     <div class="panel-content">
         <div class="widget pad50-65">
 
-            <form action="{{ route('cad.curso') }}" method="POST" role="form text-left" class="contact-form"
-                enctype="multipart/form-data">
+            <form action="{{ route('cad.curso') }}" method="POST" class="contact-form" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
+
 
                 <div class="d-flex justify-content-between">
                     <div class="widget-title2">
@@ -176,8 +176,8 @@
                             <span>Por favor certifique-se das informações antes de realizar o cadastro!</span>
                         </div>
                     </div>
-                    {{-- ------FOTO------ --}}
 
+                    <!-- Foto do curso -->
                     <div class="file-input-container" style="margin-bottom:30px;">
                         <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
                             name="fotoCurso" value="{{ old('fotoCurso') }}">
@@ -189,12 +189,11 @@
                         @enderror
                     </div>
                 </div>
-                {{-- ---------------- --}}
-
 
                 <div class="column mrg20">
                     <div class="row mrg20">
                         <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Nome do Curso</p>
                             <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeCurso"
                                 id="nomeCurso" value="{{ old('nomeCurso') }}" />
                             @error('nomeCurso')
@@ -203,36 +202,127 @@
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Descrição do curso</p>
                             <input class="brd-rd5" type="text" placeholder="Descrição:" name="descricaoCurso"
                                 id="descricaoCurso" value="{{ old('descricaoCurso') }}" />
                             @error('descricaoCurso')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="row mrg20">
-                            <div class="col-md-6 col-sm-12 col-lg-6">
-                                <input class="brd-rd5" type="number" placeholder="Vagas:"
-                                    name="vagasDisponiveisCurso" id="vagasDisponiveisCurso"
-                                    value="{{ old('vagasDisponiveisCurso') }}" />
-                                @error('vagasDisponiveisCurso')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 col-sm-12 col-lg-6">
-                                <input class="brd-rd5" type="number" placeholder="Preço:" name="precoCurso"
-                                    id="precoCurso" value="{{ old('precoCurso') }}" />
-                                @error('precoCurso')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
                     </div>
-                </div>
 
-                <div class="column mrg20">
                     <div class="row mrg20">
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Vagas Disponíveis</p>
+                            <input class="brd-rd5" type="number" placeholder="Vagas:" name="vagasDisponiveisCurso"
+                                id="vagasDisponiveisCurso" value="{{ old('vagasDisponiveisCurso') }}" />
+                            @error('vagasDisponiveisCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Preço do curso</p>
+                            <input class="brd-rd5" type="number" placeholder="Preço:" name="precoCurso"
+                                id="precoCurso" value="{{ old('precoCurso') }}" />
+                            @error('precoCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mrg20">
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Primeiro título</p>
+                            <input class="brd-rd5" type="text" placeholder="Título Um:" name="tituloUmCurso"
+                                id="tituloUmCurso" value="{{ old('tituloUmCurso') }}" />
+                            @error('tituloUmCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Primeira Descrição</p>
+                            <input class="brd-rd5" type="text" placeholder="Primeira Descrição"
+                                name="descriumCurso" id="descriumCurso" value="{{ old('descriumCurso') }}" />
+                            @error('descriumCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mrg20">
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Segundo título</p>
+                            <input class="brd-rd5" type="text" placeholder="Segundo título:"
+                                name="tituloDoisCurso" id="tituloDoisCurso" value="{{ old('tituloDoisCurso') }}" />
+                            @error('tituloDoisCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Segunda descrição</p>
+                            <input class="brd-rd5" type="text" placeholder="Segunda descrição"
+                                name="descriDoisCurso" id="descriDoisCurso" value="{{ old('descriDoisCurso') }}" />
+                            @error('descriDoisCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mrg20">
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Terceiro título</p>
+                            <input class="brd-rd5" type="text" placeholder="Terceiro título:"
+                                name="tituloTresCurso" id="tituloTresCurso" value="{{ old('tituloTresCurso') }}" />
+                            @error('tituloTresCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Terceira descrição</p>
+                            <input class="brd-rd5" type="text" placeholder="Terceira Descrição"
+                                name="descriTresCurso" id="descriTresCurso" value="{{ old('descriTresCurso') }}" />
+                            @error('descriTresCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mrg20">
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Duração do Curso (em horas)</p>
+                            <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoCurso"
+                                id="duracaoCurso" value="{{ old('duracaoCurso') }}" />
+                            @error('duracaoCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Data de Início</p>
+                            <input class="brd-rd5" type="date" placeholder="Data Início:" name="data_inicio"
+                                id="data_inicio" value="{{ old('data_inicio') }}" />
+                            @error('data_inicio')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Data de Fim</p>
+                            <input class="brd-rd5" type="date" placeholder="Data Fim:" name="data_fim"
+                                id="data_fim" value="{{ old('data_fim') }}" />
+                            @error('data_fim')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mrg20">
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Status do curso</p>
                             <select class="brd-rd5" name="statusCurso" id="statusCurso" required>
                                 <option value="ativo" class="brd-rd5"
                                     {{ old('statusCurso') == 'ativo' ? 'selected' : '' }}>Ativo</option>
@@ -243,37 +333,15 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-
-                        <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoCurso"
-                                id="duracaoCurso" value="{{ old('duracaoCurso') }}" />
-                            @error('duracaoCurso')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="row mrg20">
-                            <div class="col-md-6 col-sm-12 col-lg-6">
-                                <input class="brd-rd5" type="datetime-local" placeholder="Data Início:"
-                                    name="data_inicio" id="data_inicio" value="{{ old('data_inicio') }}" />
-                                @error('data_inicio')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 col-sm-12 col-lg-6">
-                                <input class="brd-rd5" type="datetime-local" placeholder="Data Fim:" name="data_fim"
-                                    id="data_fim" value="{{ old('data_fim') }}" />
-                                @error('data_fim')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
                     </div>
+
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-lg-12">
                     <button class="green-bg brd-rd5" type="submit">Enviar</button>
                 </div>
             </form>
+
 
             <script>
                 function displayImage(event) {

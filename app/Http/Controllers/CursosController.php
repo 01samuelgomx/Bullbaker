@@ -134,66 +134,101 @@ class CursosController extends Controller
         // Adiciona timestamps automaticamente
         $request->merge(['created_at' => now()]);
         $request->merge(['updated_at' => now()]);
-
+    
         // Validação dos dados
         $request->validate([
-            'nomeCurso'             => 'required|string|max:100',
-            'descricaoCurso'        => 'required|string|max:100',
-            'duracaoCurso'          => 'required|numeric|min:1',
-            'precoCurso'            => 'required|numeric|min:1',
-            'vagasDisponiveisCurso' => 'required|numeric|min:1',
+            'nomeCurso'             => 'required|unique:tblcurso,nomeCurso|min:3',
+            'descricaoCurso'        => 'required|min:10',
+            'duracaoCurso'          => 'required|integer|min:1',
+            'precoCurso'            => 'required|numeric|min:0',
+            'vagasDisponiveisCurso' => 'required|integer|min:1',
             'fotoCurso'             => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'data_inicio'           => 'required|date',
             'data_fim'              => 'required|date|after_or_equal:data_inicio',
             'statusCurso'           => 'required|in:ativo,desativado',
-        ],[
-            'nomeCurso.required'             => 'O campo nome do curso é obrigatório.',
-            'nomeCurso.unique'               => 'Este nome de curso já está em uso.',
-            'nomeCurso.min'                  => 'O nome do curso deve ter no mínimo 3 caracteres.',
-            'descricaoCurso.required'        => 'O campo descrição é obrigatório.',
-            'descricaoCurso.min'             => 'A descrição deve ter no mínimo 10 caracteres.',
-            'duracaoCurso.required'          => 'O campo duração é obrigatório.',
-            'duracaoCurso.integer'           => 'A duração deve ser um número inteiro.',
-            'duracaoCurso.min'               => 'A duração deve ser de pelo menos 1 hora.',
-            'precoCurso.required'            => 'O campo preço é obrigatório.',
-            'precoCurso.numeric'             => 'O preço deve ser um número.',
-            'precoCurso.min'                 => 'O preço deve ser um valor positivo.',
-            'vagasDisponiveisCurso.required' => 'O campo vagas disponíveis é obrigatório.',
-            'vagasDisponiveisCurso.integer'  => 'O número de vagas deve ser um número inteiro.',
-            'vagasDisponiveisCurso.min'      => 'Deve haver pelo menos 1 vaga disponível.',
-            'data_inicio.required'           => 'O campo data de início é obrigatório.',
-            'data_inicio.date'               => 'A data de início deve ser uma data válida.',
-            'data_fim.required'              => 'O campo data de fim é obrigatório.',
-            'data_fim.date'                  => 'A data de fim deve ser uma data válida.',
-            'data_fim.after_or_equal'        => 'A data de fim deve ser igual ou posterior à data de início.',
-            'statusCurso.required'           => 'O campo status é obrigatório.',
-            'statusCurso.in'                 => 'O status deve ser "ativo" ou "inativo".',
-         ]
-        );
-
+            'aprendeDescriCursos'   => 'required|max:150',
+            'tituloUmCurso'         => 'required|min:10',
+            'descriumCurso'         => 'required|min:10',
+            'tituloDoisCurso'       => 'required|min:10',
+            'descriDoisCurso'       => 'required|min:10',
+            'tituloTresCurso'       => 'required|min:10',
+            'descriTresCurso'       => 'required|min:10',
+            [
+                'nomeCurso.required' => 'O campo nome do curso é obrigatório.',
+                  'nomeCurso.unique' => 'Este nome de curso já está em uso.',
+                  'nomeCurso.min' => 'O nome do curso deve ter pelo menos 3 caracteres.',
+                  'descricaoCurso.required' => 'O campo descrição do curso é obrigatório.',
+                  'descricaoCurso.min' => 'A descrição do curso deve ter pelo menos 10 caracteres.',
+                  'duracaoCurso.required' => 'O campo duração do curso é obrigatório.',
+                  'duracaoCurso.integer' => 'A duração do curso deve ser um número inteiro.',
+                  'duracaoCurso.min' => 'A duração do curso deve ser de pelo menos 1.',
+                  'precoCurso.required' => 'O campo preço do curso é obrigatório.',
+                  'precoCurso.numeric' => 'O preço do curso deve ser um número.',
+                  'precoCurso.min' => 'O preço do curso deve ser pelo menos 0.',
+                  'vagasDisponiveisCurso.required' => 'O campo vagas disponíveis é obrigatório.',
+                  'vagasDisponiveisCurso.integer' => 'As vagas disponíveis devem ser um número inteiro.',
+                  'vagasDisponiveisCurso.min' => 'As vagas disponíveis devem ser pelo menos 1.',
+                  'fotoCurso.required' => 'O campo foto do curso é obrigatório.',
+                  'fotoCurso.image' => 'O arquivo deve ser uma imagem.',
+                  'fotoCurso.mimes' => 'A imagem deve estar no formato jpeg, png, jpg, gif ou svg.',
+                  'fotoCurso.max' => 'A imagem não pode ser maior que 2048 kilobytes.',
+                  'data_inicio.required' => 'O campo data de início é obrigatório.',
+                  'data_inicio.date' => 'A data de início deve ser uma data válida.',
+                  'data_fim.required' => 'O campo data de fim é obrigatório.',
+                  'data_fim.date' => 'A data de fim deve ser uma data válida.',
+                  'data_fim.after_or_equal' => 'A data de fim deve ser uma data após ou igual à data de início.',
+                  'statusCurso.required' => 'O campo status do curso é obrigatório.',
+                  'statusCurso.in' => 'O status do curso deve ser ativo ou desativado.',
+                  'aprendeDescriCursos.required' => 'O campo descrição do que será aprendido é obrigatório.',
+                  'aprendeDescriCursos.max' => 'A descrição do que será aprendido não pode ter mais de 150 caracteres.',
+                  'tituloUmCurso.required' => 'O campo título um é obrigatório.',
+                  'tituloUmCurso.max' => 'O título um não pode ter mais de 10 caracteres.',
+                  'descriumCurso.required' => 'O campo descrição um é obrigatório.',
+                  'descriumCurso.min' => 'A descrição um não pode ter menos que 10 caractere.',
+                  'tituloDoisCurso.required' => 'O campo título dois é obrigatório.',
+                  'tituloDoisCurso.min' => 'O título dois deve ter pelo menos 10 caracteres.',
+                  'descriDoisCurso.required' => 'O campo descrição dois é obrigatório.',
+                  'descriDoisCurso.max' => 'A descrição dois não pode ter menos que 10 caracteres.',
+                  'tituloTresCurso.required' => 'O campo título três é obrigatório.',
+                  'tituloTresCurso.min' => 'O título três deve ter pelo menos que 10 caracteres.',
+                  'descriTresCurso.required' => 'O campo descrição três é obrigatório.',
+                  'descriTresCurso.min' => 'A descrição três não pode ter menos que 10 caractere.',
+               ]
+        ]);
+    
+        // Criação de uma nova instância de Cursos
         $curso = new Cursos();
-
+    
         $curso->nomeCurso             = $request->input('nomeCurso');
         $curso->descricaoCurso        = $request->input('descricaoCurso');
-        $curso->duracaoCurso          = $request->input('duracaoCurso');
         $curso->precoCurso            = $request->input('precoCurso');
         $curso->vagasDisponiveisCurso = $request->input('vagasDisponiveisCurso');
-
+        $curso->duracaoCurso          = $request->input('duracaoCurso');
+        $curso->aprendeDescriCursos   = $request->input('aprendeDescriCursos');
+        $curso->data_inicio           = $request->input('data_inicio');
+        $curso->data_fim              = $request->input('data_fim');
+        $curso->tituloUmCurso         = $request->input('tituloUmCurso');
+        $curso->descriumCurso         = $request->input('descriumCurso');
+        $curso->tituloDoisCurso       = $request->input('tituloDoisCurso');
+        $curso->descriDoisCurso       = $request->input('descriDoisCurso');
+        $curso->tituloTresCurso       = $request->input('tituloTresCurso');
+        $curso->descriTresCurso       = $request->input('descriTresCurso');
+        $curso->statusCurso           = $request->input('statusCurso');
+    
         // Upload da imagem
         if ($request->hasFile('fotoCurso') && $request->file('fotoCurso')->isValid()) {
             $file = $request->file('fotoCurso');
             $path = $file->store('public/img/cursos');
             $curso->fotoCurso = basename($path);
         }
-
-        $curso->data_inicio = $request->input('data_inicio');
-        $curso->data_fim    = $request->input('data_fim');
-        $curso->statusCurso = $request->input('statusCurso');
-
+    
+        // Salva o novo curso
         $curso->save();
-
+    
+        // Redirecionamento com mensagem de sucesso
         return redirect()->route('index.curso')->with('success', 'Curso adicionado com sucesso!');
     }
+    
     
 
     /**
@@ -215,37 +250,62 @@ class CursosController extends Controller
      {
          // Validação dos dados recebidos
          $request->validate([
-             'nomeCurso'             => 'required|string|max:100',
-             'descricaoCurso'        => 'required|string|max:100',
-             'duracaoCurso'          => 'required|numeric|min:1',
-             'precoCurso'            => 'required|numeric|min:1',
-             'vagasDisponiveisCurso' => 'required|numeric|min:1',
-             'fotoCurso'             => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-             'data_inicio'           => 'required|date',
-             'data_fim'              => 'required|date|after_or_equal:data_inicio',
-             'statusCurso'           => 'required|in:ativo,desativo',
+            'nomeCurso' => 'unique:tblcurso,nomeCurso|min:3',
+            'descricaoCurso' => 'min:10',
+            'duracaoCurso' => 'integer|min:1',
+            'precoCurso' => 'numeric|min:0',
+            'vagasDisponiveisCurso' => 'integer|min:1',
+            'fotoCurso' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'data_inicio' => 'date',
+            'data_fim' => 'date|after_or_equal:data_inicio',
+            'statusCurso' => 'in:ativo,desativado',
+            'aprendeDescriCursos' => 'max:150',
+            'tituloUmCurso' => 'min:10',
+            'descriumCurso' => 'min:10',
+            'tituloDoisCurso' => 'min:10',
+            'descriDoisCurso' => 'min:10',
+            'tituloTresCurso' => 'min:10',
+            'descriTresCurso' => 'min:10',
          ],[
-            'nomeCurso.required'             => 'O campo nome do curso é obrigatório.',
-            'nomeCurso.unique'               => 'Este nome de curso já está em uso.',
-            'nomeCurso.min'                  => 'O nome do curso deve ter no mínimo 3 caracteres.',
-            'descricaoCurso.required'        => 'O campo descrição é obrigatório.',
-            'descricaoCurso.min'             => 'A descrição deve ter no mínimo 10 caracteres.',
-            'duracaoCurso.required'          => 'O campo duração é obrigatório.',
-            'duracaoCurso.integer'           => 'A duração deve ser um número inteiro.',
-            'duracaoCurso.min'               => 'A duração deve ser de pelo menos 1 hora.',
-            'precoCurso.required'            => 'O campo preço é obrigatório.',
-            'precoCurso.numeric'             => 'O preço deve ser um número.',
-            'precoCurso.min'                 => 'O preço deve ser um valor positivo.',
+          'nomeCurso.required' => 'O campo nome do curso é obrigatório.',
+            'nomeCurso.unique' => 'Este nome de curso já está em uso.',
+            'nomeCurso.min' => 'O nome do curso deve ter pelo menos 3 caracteres.',
+            'descricaoCurso.required' => 'O campo descrição do curso é obrigatório.',
+            'descricaoCurso.min' => 'A descrição do curso deve ter pelo menos 10 caracteres.',
+            'duracaoCurso.required' => 'O campo duração do curso é obrigatório.',
+            'duracaoCurso.integer' => 'A duração do curso deve ser um número inteiro.',
+            'duracaoCurso.min' => 'A duração do curso deve ser de pelo menos 1.',
+            'precoCurso.required' => 'O campo preço do curso é obrigatório.',
+            'precoCurso.numeric' => 'O preço do curso deve ser um número.',
+            'precoCurso.min' => 'O preço do curso deve ser pelo menos 0.',
             'vagasDisponiveisCurso.required' => 'O campo vagas disponíveis é obrigatório.',
-            'vagasDisponiveisCurso.integer'  => 'O número de vagas deve ser um número inteiro.',
-            'vagasDisponiveisCurso.min'      => 'Deve haver pelo menos 1 vaga disponível.',
-            'data_inicio.required'           => 'O campo data de início é obrigatório.',
-            'data_inicio.date'               => 'A data de início deve ser uma data válida.',
-            'data_fim.required'              => 'O campo data de fim é obrigatório.',
-            'data_fim.date'                  => 'A data de fim deve ser uma data válida.',
-            'data_fim.after_or_equal'        => 'A data de fim deve ser igual ou posterior à data de início.',
-            'statusCurso.required'           => 'O campo status é obrigatório.',
-            'statusCurso.in'                 => 'O status deve ser "ativo" ou "inativo".',
+            'vagasDisponiveisCurso.integer' => 'As vagas disponíveis devem ser um número inteiro.',
+            'vagasDisponiveisCurso.min' => 'As vagas disponíveis devem ser pelo menos 1.',
+            'fotoCurso.required' => 'O campo foto do curso é obrigatório.',
+            'fotoCurso.image' => 'O arquivo deve ser uma imagem.',
+            'fotoCurso.mimes' => 'A imagem deve estar no formato jpeg, png, jpg, gif ou svg.',
+            'fotoCurso.max' => 'A imagem não pode ser maior que 2048 kilobytes.',
+            'data_inicio.required' => 'O campo data de início é obrigatório.',
+            'data_inicio.date' => 'A data de início deve ser uma data válida.',
+            'data_fim.required' => 'O campo data de fim é obrigatório.',
+            'data_fim.date' => 'A data de fim deve ser uma data válida.',
+            'data_fim.after_or_equal' => 'A data de fim deve ser uma data após ou igual à data de início.',
+            'statusCurso.required' => 'O campo status do curso é obrigatório.',
+            'statusCurso.in' => 'O status do curso deve ser ativo ou desativado.',
+            'aprendeDescriCursos.required' => 'O campo descrição do que será aprendido é obrigatório.',
+            'aprendeDescriCursos.max' => 'A descrição do que será aprendido não pode ter mais de 150 caracteres.',
+            'tituloUmCurso.required' => 'O campo título um é obrigatório.',
+            'tituloUmCurso.max' => 'O título um não pode ter mais de 10 caracteres.',
+            'descriumCurso.required' => 'O campo descrição um é obrigatório.',
+            'descriumCurso.min' => 'A descrição um não pode ter menos que 10 caractere.',
+            'tituloDoisCurso.required' => 'O campo título dois é obrigatório.',
+            'tituloDoisCurso.min' => 'O título dois deve ter pelo menos 10 caracteres.',
+            'descriDoisCurso.required' => 'O campo descrição dois é obrigatório.',
+            'descriDoisCurso.max' => 'A descrição dois não pode ter menos que 10 caracteres.',
+            'tituloTresCurso.required' => 'O campo título três é obrigatório.',
+            'tituloTresCurso.min' => 'O título três deve ter pelo menos que 10 caracteres.',
+            'descriTresCurso.required' => 'O campo descrição três é obrigatório.',
+            'descriTresCurso.min' => 'A descrição três não pode ter menos que 10 caractere.',
          ]
         );
      
@@ -254,14 +314,19 @@ class CursosController extends Controller
      
          // Atualização dos dados do curso
          $curso->update($request->only([
-             'nomeCurso',
-             'descricaoCurso',
-             'duracaoCurso',
-             'precoCurso',
-             'vagasDisponiveisCurso',
-             'data_inicio',
-             'data_fim',
-             'statusCurso',
+            'nomeCurso',
+            'descricaoCurso',
+            'precoCurso',
+            'vagasDisponiveisCurso',
+            'aprendeDescriCursos',
+            'tituloUmCurso',
+            'descriumCurso',
+            'tituloDoisCurso',
+            'descriDoisCurso',
+            'tituloTresCurso',
+            'descriTresCurso',
+            'fotoCurso',
+            'statusCurso',
          ]));
      
          // Atualização da imagem do curso, se uma nova imagem foi enviada

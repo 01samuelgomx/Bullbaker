@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}" type="text/css">
 
     <!-- Color Scheme -->
-    <link rel="stylesheet" href="{{ asset ('css/color-schemes/color.css') }}" type="text/css" title="color3">
+    <link rel="stylesheet" href="{{ asset('css/color-schemes/color.css') }}" type="text/css" title="color3">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color1.css') }}" title="color1">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color2.css') }}" title="color2">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color4.css') }}" title="color4">
@@ -167,19 +167,38 @@
     <div class="panel-content">
         <div class="widget pad50-65">
 
-            <form action="{{ route('update.aula', $editAula->idAula) }}" method="POST" role="form text-left" class="contact-form">
+            <form action="{{ route('update.aula', $editAula->idAula) }}" method="POST" role="form text-left" 
+            enctype="multipart/form-data" class="contact-form">
                 @csrf
                 @method('PUT')
-            
+
                 <div class="d-flex justify-content-between">
+
                     <div class="widget-title2">
                         <div class="pr-tp-inr">
                             <h4>Preencha com os dados da Aula</h4>
                             <span>Por favor certifique-se das informações antes de realizar o cadastro!</span>
                         </div>
                     </div>
+
+                {{-- ------FOTO------ --}}
+                <div class="file-input-container" style="margin-bottom:30px;">
+                    <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
+                        name="fotoAula">
+                    <label for="file-input" class="file-label">
+                        <img id="icon"
+                            src="{{ isset($editAula->fotoAula) && $editAula->fotoAula ? asset('storage/img/aula/' . $editAula->fotoAula) : asset('public/img/camera.png') }}"
+                            alt="Escolher Imagem" style="width: 100px; height: 100px; border-radius: 50%">
+                    </label>
+                    @error('fotoAula')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
-            
+                {{-- ---------------- --}}
+
+                </div>
+
+
                 <div class="column mrg20">
                     <div class="row mrg20">
                         <div class="col-md-6 col-sm-12 col-lg-6">
@@ -189,7 +208,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-            
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeAula"
                                 id="nomeAula" value="{{ old('nomeAula', $editAula->nomeAula) }}" />
@@ -197,7 +216,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-            
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="text" placeholder="Descrição:" name="descricaoAula"
                                 id="descricaoAula" value="{{ old('descricaoAula', $editAula->descricaoAula) }}" />
@@ -205,7 +224,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-            
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoAula"
                                 id="duracaoAula" value="{{ old('duracaoAula', $editAula->duracaoAula) }}" />
@@ -215,21 +234,23 @@
                         </div>
                     </div>
                 </div>
-            
+
                 <div class="column mrg20">
                     <div class="row mrg20">
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <select class="brd-rd5" name="statusAula" id="statusAula" required>
                                 <option value="ativo" class="brd-rd5"
-                                    {{ old('statusAula', $editAula->statusAula) == 'ativo' ? 'selected' : '' }}>Ativo</option>
+                                    {{ old('statusAula', $editAula->statusAula) == 'ativo' ? 'selected' : '' }}>Ativo
+                                </option>
                                 <option value="desativo" class="brd-rd5"
-                                    {{ old('statusAula', $editAula->statusAula) == 'desativo' ? 'selected' : '' }}>Desativo</option>
+                                    {{ old('statusAula', $editAula->statusAula) == 'desativo' ? 'selected' : '' }}>
+                                    Desativo</option>
                             </select>
                             @error('statusAula')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-            
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <input class="brd-rd5" type="number" placeholder="Curso Relacionado:" name="idCurso"
                                 id="idCurso" value="{{ old('idCurso', $editAula->idCurso) }}" />
@@ -239,14 +260,14 @@
                         </div>
                     </div>
                 </div>
-            
+
                 <div class="col-md-12 col-sm-12 col-lg-12">
                     <button class="green-bg brd-rd5" type="submit">Enviar</button>
                 </div>
             </form>
-            
 
-    </div>
+
+        </div>
 
     </div>
     <!-- Panel Content -->

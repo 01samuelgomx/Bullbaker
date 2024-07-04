@@ -169,6 +169,7 @@
 
             <form action="{{ route('update.curso', $editCurso->idCurso) }}" method="POST" role="form text-left"
                 enctype="multipart/form-data" class="contact-form">
+                
                 @csrf
                 @method('PUT')
 
@@ -206,6 +207,7 @@
                     <div class="row mrg20">
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Nome do Curso</p>
                             <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeCurso"
                                 id="nomeCurso" value="{{ old('nomeCurso', $editCurso->nomeCurso) }}" />
                             @error('nomeCurso')
@@ -214,6 +216,7 @@
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Descrisção do curso</p>
                             <input class="brd-rd5" type="text" placeholder="Descrisção:" name="descricaoCurso"
                                 id="descricaoCurso"
                                 value="{{ old('descricaoCurso', $editCurso->descricaoCurso) }}" />
@@ -227,6 +230,7 @@
                         <div class="row mrg20">
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
+                                <p>Vagas Disponíveis</p>
                                 <input class="brd-rd5" type="number" placeholder="Vagas:"
                                     name="vagasDisponiveisCurso" id="vagasDisponiveisCurso"
                                     value="{{ old('vagasDisponiveisCurso', $editCurso->vagasDisponiveisCurso) }}" />
@@ -236,6 +240,7 @@
                             </div>
 
                             <div class="col-md-6 col-sm-12 col-lg-6">
+                                <p>Preço do curso</p>
                                 <input class="brd-rd5" type="number" placeholder="Preço:" name="precoCurso"
                                     id="precoCurso" value="{{ old('precoCurso', $editCurso->precoCurso) }}" />
                                 @error('precoCurso')
@@ -243,30 +248,68 @@
                                 @enderror
                             </div>
 
-                        </div>
-                    </div>
+                            <div class="col-md-6 col-sm-12 col-lg-6">
+                                <p>Primeiro titulo</p>
+                                <input class="brd-rd5" type="text" placeholder="Titulo Um:" name="tituloUmCurso"
+                                    id="tituloUmCurso"
+                                    value="{{ old('tituloUmCurso', $editCurso->tituloUmCurso) }}" />
+                                @error('tituloUmCurso')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                </div>
+                            <div class="col-md-6 col-sm-12 col-lg-6">
+                                <p>Primeira Descrisção</p>
+                                <input class="brd-rd5" type="text" placeholder="Primeira Descrisção" name="descriumCurso"
+                                    id="descriumCurso"
+                                    value="{{ old('descriumCurso', $editCurso->descriumCurso) }}" />
+                                @error('descriumCurso')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
+                            <div class="col-md-6 col-sm-12 col-lg-6">
+                                <p>Segundo titulo</p>
+                                <input class="brd-rd5" type="text" placeholder="Segundo titulo:" name="tituloDoisCurso"
+                                    id="tituloDoisCurso"
+                                    value="{{ old('tituloDoisCurso', $editCurso->tituloDoisCurso) }}" />
+                                @error('tituloDoisCurso')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                <div class="column mrg20">
-                    <div class="row mrg20">
+                            <div class="col-md-6 col-sm-12 col-lg-6">
+                                <p>Terceiro Titulo</p>
+                                <input class="brd-rd5" type="text" placeholder="Terceiro Titulo:"
+                                    name="tituloTresCurso" id="tituloTresCurso"
+                                    value="{{ old('tituloTresCurso', $editCurso->tituloTresCurso) }}" />
+                                @error('tituloTresCurso')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 col-lg-6">
+                                <p>Segunda descrisção</p>
+                                <input class="brd-rd5" type="text" placeholder="Segunda descrisção" name="descriDoisCurso"
+                                    id="descriDoisCurso"
+                                    value="{{ old('descriDoisCurso', $editCurso->descriDoisCurso) }}" />
+                                @error('descriDoisCurso')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 col-lg-6">
+                                <p>Terceira descrisção</p>
+                                <input class="brd-rd5" type="text" placeholder="Terceira Descrisção"
+                                    name="descriTresCurso" id="descriTresCurso"
+                                    value="{{ old('descriTresCurso', $editCurso->descriTresCurso) }}" />
+                                @error('descriTresCurso')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <select class="brd-rd5" name="statusCurso" id="statusCurso" required>
-                                <option value="ativo" class="brd-rd5"
-                                    {{ old('statusCurso', $editCurso->statusCurso) == 'ativo' ? 'selected' : '' }}>
-                                    Ativo</option>
-                                <option value="desativo" class="brd-rd5"
-                                    {{ old('statusCurso', $editCurso->statusCurso) == 'desativo' ? 'selected' : '' }}>
-                                    Desativo</option>
-                            </select>
-                            @error('statusCurso')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Duração do Curso</p>
                             <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoCurso"
                                 id="duracaoCurso" value="{{ old('duracaoCurso', $editCurso->duracaoCurso) }}" />
                             @error('duracaoCurso')
@@ -275,11 +318,9 @@
                         </div>
 
 
-                        <div class="row mrg20">
-
-
-                            <div class="col-md-6 col-sm-12 col-lg-6">
-                                <input class="brd-rd5" type="datetime-local" placeholder="Data Inicio:"
+                                         <div class="col-md-6 col-sm-12 col-lg-6">
+                                <p>Data de Inicio</p>
+                                <input class="brd-rd5" type="date" placeholder="Data Inicio:"
                                     name="data_inicio" id="data_inicio"
                                     value="{{ old('data_inicio', $editCurso->data_inicio) }}" />
                                 @error('data_inicio')
@@ -287,18 +328,36 @@
                                 @enderror
                             </div>
 
+
+                            
                             <div class="col-md-6 col-sm-12 col-lg-6">
-                                <input class="brd-rd5" type="datetime-local" placeholder="Data Fim:" name="data_fim"
+                                <p>Data Fim</p>
+                                <input class="brd-rd5" type="date" placeholder="Data Fim:" name="data_fim"
                                     id="data_fim" value="{{ old('data_fim', $editCurso->data_fim) }}" />
                                 @error('data_fim')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
+                            
+                            <div class="col-md-6 col-sm-12 col-lg-6">
+                                <p>Status do curso</p>
+                                <select class="brd-rd5" name="statusCurso" id="statusCurso" required>
+                                    <option value="ativo" class="brd-rd5"
+                                        {{ old('statusCurso', $editCurso->statusCurso) == 'ativo' ? 'selected' : '' }}>
+                                        Ativo</option>
+                                    <option value="desativo" class="brd-rd5"
+                                        {{ old('statusCurso', $editCurso->statusCurso) == 'desativo' ? 'selected' : '' }}>
+                                        Desativo</option>
+                                </select>
+                                @error('statusCurso')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                         </div>
-
-
                     </div>
+
                 </div>
 
 

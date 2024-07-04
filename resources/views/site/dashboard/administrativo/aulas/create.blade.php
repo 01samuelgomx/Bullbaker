@@ -166,7 +166,8 @@
     <div class="panel-content">
         <div class="widget pad50-65">
 
-            <form action="{{ route('cad.aula') }}" method="POST" role="form text-left" class="contact-form">
+            <form action="{{ route('cad.aula') }}" method="POST" role="form text-left" 
+            class="contact-form" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
 
@@ -177,13 +178,25 @@
                             <span>Por favor certifique-se das informações antes de realizar o cadastro!</span>
                         </div>
                     </div>
+
+                    <div class="file-input-container" style="margin-bottom:30px;">
+                        <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
+                            name="fotoAula" value="{{ old('fotoAula') }}">
+                        <label for="file-input" class="file-label">
+                            <img id="icon" src="{{ asset('img/camera.png') }}" alt="Escolher Imagem">
+                        </label>
+                        @error('fotoAula')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
+
 
                 <div class="column mrg20">
                     <div class="row mrg20">
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="u" placeholder="Cadastrar Vídeo:"
-                                name="video_aulaAula" id="video_aulaAula" value="{{ old('video_aulaAula') }}" />
+                            <input class="brd-rd5" type="text" placeholder="Editar Video:" name="video_aulaAula"
+                                id="video_aulaAula" value="{{ old('video_aulaAula') }}" />
                             @error('video_aulaAula')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -206,7 +219,7 @@
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="number" placeholder="Duração da Aula:" name="duracaoAula"
+                            <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoAula"
                                 id="duracaoAula" value="{{ old('duracaoAula') }}" />
                             @error('duracaoAula')
                                 <span class="text-danger">{{ $message }}</span>
@@ -220,9 +233,11 @@
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <select class="brd-rd5" name="statusAula" id="statusAula" required>
                                 <option value="ativo" class="brd-rd5"
-                                    {{ old('statusAula') == 'ativo' ? 'selected' : '' }}>Ativo</option>
+                                    {{ old('statusAula') == 'ativo' ? 'selected' : '' }}>Ativo
+                                </option>
                                 <option value="desativo" class="brd-rd5"
-                                    {{ old('statusAula') == 'desativo' ? 'selected' : '' }}>Desativo</option>
+                                    {{ old('statusAula') == 'desativo' ? 'selected' : '' }}>
+                                    Desativo</option>
                             </select>
                             @error('statusAula')
                                 <span class="text-danger">{{ $message }}</span>

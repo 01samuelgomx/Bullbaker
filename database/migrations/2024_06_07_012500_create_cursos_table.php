@@ -17,8 +17,23 @@ return new class extends Migration
             $table->id('idCurso');
             $table->string('nomeCurso', 255);
             $table->text('descricaoCurso'); 
+
             $table->decimal('precoCurso', 8, 2);
             $table->integer('vagasDisponiveisCurso');
+            $table->date('data_inicio');
+
+            $table->date('data_fim');
+            $table->string('duracaoCurso',30);
+            $table->text('aprendeDescriCursos')->nullable();
+
+            $table->string('tituloUmCurso', 255)->nullable();
+            $table->text('descriumCurso')->nullable();
+            $table->string('tituloDoisCurso', 255)->nullable();
+
+            $table->text('descriDoisCurso')->nullable();
+            $table->string('tituloTresCurso', 255)->nullable();
+            $table->text('descriTresCurso')->nullable();
+
             $table->string('fotoCurso', 255);
             $table->boolean('statusCurso')->default(true);
             $table->timestamps(); 

@@ -280,6 +280,7 @@
                         <thead class="thead-inverse" style="background-color: #361F08; color: #fff">
                             <tr>
                                 <th>ID Aula</th>
+                                <th>Foto Aula</th>
                                 <th>Video</th>
                                 <th>Nome</th>
                                 <th>Descricao</th>
@@ -299,6 +300,10 @@
                                     <td>
                                         <span class="blue-bg indx" style="background-color:#271402;"
                                             name="">{{ $aula->idAula }}</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="date">{{ $aula->fotoAula }}</span>
                                     </td>
 
                                     <td>

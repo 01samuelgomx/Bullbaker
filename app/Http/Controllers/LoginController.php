@@ -14,7 +14,7 @@ class LoginController extends Controller
         return view('site.login');
     }
 
-     
+
      public function autenticar(Request $request)
      {
          // -------------------------------------
@@ -23,18 +23,18 @@ class LoginController extends Controller
              'email' => 'required|email',
              'senha' => 'required'
          ];
-     
+
          // Definindo mensagens de erro personalizadas
          $msg = [
              'email.required' => 'O campo de email é obrigatório!',
              'email.email' => 'O e-mail informado não é válido.',
              'senha.required' => 'O campo de senha é obrigatório'
          ];
-     
+
          // -------------------------------------
          // Validando a solicitação
          $request->validate($regras, $msg);
-     
+
          // Obtendo email e senha da solicitação
          $email = $request->get('email');
         //  dd($email);
@@ -43,20 +43,20 @@ class LoginController extends Controller
          // Buscando o usuário pelo email
          $usuario = usuario::where('email', $email)->first();
         //  dd($usuario);
-         
+
          // -------------------------------------
          // Verificando se o usuário existe
          if (!$usuario) {
              return back()->withErrors(['email' => 'Email incorreto.']);
              }
-             
-             // Verificando se a senha está correta 
+
+             // Verificando se a senha está correta
              if ($usuario->senha != $senha) {
                  return back()->withErrors(['senha' => 'Senha incorreta.']);
                  }
 
          // -------------------------------------
-         
+
             // Obtendo o tipo de usuário
             $tipoUsuario = $usuario->tipo_usuario;
             // dd($tipoUsuario);
@@ -73,7 +73,7 @@ class LoginController extends Controller
             if($tipoUsuario->tipoAdministrador == 'Administrativo'){
 
                 $tipo = 'Administrativo';
-                
+
                 session([
                     'id'            => $tipoUsuario->idAdmin,
                     'nome'          => $tipoUsuario->nomeAdmin,

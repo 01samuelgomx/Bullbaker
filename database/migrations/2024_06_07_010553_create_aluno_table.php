@@ -19,6 +19,11 @@ return new class extends Migration
             $table->string('emailAluno')->unique();
             $table->string('telefoneAluno');
             $table->timestamp('dataCadAluno')->useCurrent();
+            $table->enum('nivelHabilidade', ['Iniciante', 'Intermediário', 'Avançado']);
+            $table->string('estadoAluno');
+            $table->string('nomeCurso');
+            $table->date('dataDeNascimento');
+            $table->string('objetivo');
             $table->boolean('statusAluno')->default(true);
             $table->string('fotoAluno')->nullable();
             $table->unsignedBigInteger('idCurso');

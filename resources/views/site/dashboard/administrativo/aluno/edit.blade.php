@@ -200,24 +200,51 @@
 
 
                 <div class="column mrg20">
+
                     <div class="row mrg20">
                         <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Nome do Aluno</p>
                             <input class="brd-rd5" type="text" placeholder="Nome:" name="nomeAluno"
                                 id="nomeAluno" value="{{ old('nomeAluno', $editAluno->nomeAluno) }}" required />
                             @error('nomeAluno')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Data nascimento</p>
+                            <input class="brd-rd5" type="date" placeholder="Nome:" name="dataDeNascimento"
+                                id="dataDeNascimento"
+                                value="{{ old('dataDeNascimento', $editAluno->dataDeNascimento) }}" required />
+                            @error('dataDeNascimento')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Email</p>
                             <input class="brd-rd5" type="email" placeholder="Email:" name="emailAluno"
                                 id="emailAluno" value="{{ old('emailAluno', $editAluno->emailAluno) }}" required />
                             @error('emailAluno')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="row mrg20">
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Objetivo do Aluno</p>
+                            <input class="brd-rd5" type="text" placeholder="Objetivo:" name="objetivo"
+                                id="objetivo" value="{{ old('objetivo', $editAluno->objetivo) }}" required />
+                            @error('objetivo')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
+
+                    <div class="row mrg20">
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Telefone</p>
                             <input class="brd-rd5" type="tel" placeholder="Telefone:" name="telefoneAluno"
                                 value="{{ old('telefoneAluno', $editAluno->telefoneAluno) }}" id="telefoneAluno"
                                 required />
@@ -225,7 +252,10 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Data de Cadastro</p>
                             <input class="brd-rd5" type="datetime-local" placeholder="Data de cadastro:"
                                 name="dataCadAluno" id="dataCadAluno"
                                 value="{{ old('dataCadAluno', $editAluno->dataCadAluno) }}" required />
@@ -234,7 +264,38 @@
                             @enderror
                         </div>
 
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Estado do Aluno</p>
+                            <input class="brd-rd5" type="text" placeholder="Estado do Aluno:" name="estadoAluno"
+                                id="estadoAluno" value="{{ old('estadoAluno', $editAluno->estadoAluno) }}"
+                                required />
+                            @error('estadoAluno')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Nome do Curso</p>
+                            <input class="brd-rd5" type="text" placeholder="Nome Curso:" name="nomeCurso"
+                                id="nomeCurso" value="{{ old('nomeCurso', $editAluno->nomeCurso) }}" required />
+                            @error('nomeCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Identificador Curso</p>
+                            <input class="brd-rd5" type="text" placeholder="Curso matriculado:" name="idCurso"
+                                id="idCurso" value="{{ old('idCurso', $editAluno->idCurso) }}" required />
+                            @error('idCurso')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Status do Aluno</p>
                             <select class="brd-rd5" name="statusAluno" id="statusAluno" required>
                                 <option value="ativo"
                                     {{ old('statusAluno', $editAluno->statusAluno) == 'ativo' ? 'selected' : '' }}>
@@ -248,24 +309,40 @@
                             @enderror
                         </div>
 
+                    </div>
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <input class="brd-rd5" type="text" placeholder="Curso matriculado:" name="idCurso"
-                                id="idCurso" value="{{ old('idCurso', $editAluno->idCurso) }}" required />
-                            @error('idCurso')
+                            <p>Nivel De Habilidade</p>
+                            <select class="brd-rd5" name="nivelHabilidade" id="nivelHabilidade" required>
+                                <option value="Iniciante"
+                                    {{ old('nivelHabilidade', $editAluno->nivelHabilidade) == 'Iniciante' ? 'selected' : '' }}>
+                                    Iniciante</option>
+                                <option value="Intermediário"
+                                    {{ old('nivelHabilidade', $editAluno->nivelHabilidade) == 'Intermediário' ? 'selected' : '' }}>
+                                    Intermediário</option>
+                                <option value="Avançado"
+                                    {{ old('nivelHabilidade', $editAluno->nivelHabilidade) == 'Avançado' ? 'selected' : '' }}>
+                                    Avançado</option>
+                            </select>
+                            @error('nivelHabilidade')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12 col-lg-12">
-                        <button class="green-bg brd-rd5" type="submit">Enviar</button>
+
+
                     </div>
                 </div>
-            </form>
 
 
-
-
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <button class="green-bg brd-rd5" type="submit">Enviar</button>
+                </div>
         </div>
+        </form>
+
+
+
+
+    </div>
     </div>
     <!-- Panel Content -->
     <script>

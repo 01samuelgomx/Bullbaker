@@ -22,10 +22,8 @@ return new class extends Migration
             $table->string('tipo_usuario_type');
             $table->timestamp('email_verificado_em')->nullable();
             $table->string('token_lembrete')->nullable();
-            $table->timestamps();
-
-            // Define a chave estrangeira para tipo de usuário
             $table->foreign('tipo_usuario_id')->references('id')->on('tipo_usuarios');
+            $table->timestamps();
         });
     }
 

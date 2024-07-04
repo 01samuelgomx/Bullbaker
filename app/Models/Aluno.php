@@ -16,31 +16,37 @@ class Aluno extends Model
     }
 
     protected $fillable = [
-
         'idAluno',
         'nomeAluno',
         'emailAluno',
         'telefoneAluno',
         'dataCadAluno',
+        'nivelHabilidade',
+        'estadoAluno',
+        'nomeCurso',
+        'dataDeNascimento',
+        'objetivo',
         'statusAluno',
         'fotoAluno',
         'idCurso',
-    
     ];
 
-    public function Regras(){
-    return [
-
-        'nomeAluno'     => 'required|unique:alunos,nomeAluno,'.$this->id.'|min:3',
-        'emailAluno'    => 'required|unique:alunos,emailAluno,'.$this->id.'|email',
-        'telefoneAluno' => 'required|unique:alunos,telefoneAluno,'.$this->id.'|min:20',
-        'dataCadAluno'  => 'required|date',
-        'statusAluno'   => 'required|in:ativo,desativado',
-        'fotoAluno'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'idCurso'       => 'required|exists:tblcurso,idCurso',
-
-    ];
-
+    public function regras()
+    {
+        return [
+            'nomeAluno'         => 'required|unique:tblaluno,nomeAluno,' . $this->id . '|min:3',
+            'emailAluno'        => 'required|unique:tblaluno,emailAluno,' . $this->id . '|email',
+            'telefoneAluno'     => 'required|unique:tblaluno,telefoneAluno,' . $this->id . '|min:10',
+            'dataCadAluno'      => 'required|date',
+            'nivelHabilidade'   => 'required|string|max:255',
+            'estadoAluno'       => 'required|string|max:255',
+            'nomeCurso'         => 'required|string|max:255',
+            'dataDeNascimento'  => 'required|date',
+            'objetivo'          => 'nullable|string',
+            'statusAluno'       => 'required|in:ativo,desativo',
+            'fotoAluno'         => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'idCurso'           => 'required|exists:tblcurso,idCurso',
+        ];
     }
 
 
@@ -62,8 +68,25 @@ class Aluno extends Model
         'dataCadAluno.required'  => 'O campo data de cadastro é obrigatório.',
         'dataCadAluno.date'      => 'A data de cadastro deve ser uma data válida.',
 
+        'nivelHabilidade.required' => 'O campo nível de habilidade é obrigatório.',
+        'nivelHabilidade.string'   => 'O nível de habilidade deve ser um texto.',
+        'nivelHabilidade.max'      => 'O nível de habilidade não deve exceder 255 caracteres.',
+
+        'estadoAluno.required'   => 'O campo estado é obrigatório.',
+        'estadoAluno.string'     => 'O estado deve ser um texto.',
+        'estadoAluno.max'        => 'O estado não deve exceder 255 caracteres.',
+
+        'nomeCurso.required'     => 'O campo nome do curso é obrigatório.',
+        'nomeCurso.string'       => 'O nome do curso deve ser um texto.',
+        'nomeCurso.max'          => 'O nome do curso não deve exceder 255 caracteres.',
+
+        'dataDeNascimento.required' => 'O campo data de nascimento é obrigatório.',
+        'dataDeNascimento.date'     => 'A data de nascimento deve ser uma data válida.',
+
+        'objetivo.string'        => 'O objetivo deve ser um texto.',
+
         'statusAluno.required'   => 'O campo status é obrigatório.',
-        'statusAluno.in'         => 'O status deve ser "active" ou "inactive".',
+        'statusAluno.in'         => 'O status deve ser "ativo" ou "desativado".',
 
         'fotoAluno.image'        => 'A foto deve ser uma imagem.',
         'fotoAluno.mimes'        => 'A foto deve ser um arquivo do tipo: jpeg, png, jpg, gif, svg.',

@@ -288,6 +288,12 @@
                                 <th>Duracao</th>
                                 <th>Preco</th>
                                 <th>vagasDisponiveisCurso</th>
+                                <th>tituloUmCurso</th>
+                                <th>descriumCurso</th>
+                                <th>tituloDoisCurso</th>
+                                <th>descriDoisCurso</th>
+                                <th>tituloTresCurso</th>
+                                <th>descriTresCurso</th>
                                 <th>data_inicio</th>
                                 <th>data_fim</th>
                                 <th>statusCurso</th>
@@ -336,6 +342,28 @@
 
                                     <td>
                                         <span class="ph#">{{ $curso->vagasDisponiveisCurso }} vagas!</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="ph#">{{ $curso->tituloUmCurso }}</span>
+                                    </td>
+                                    
+                                    <td>
+                                        <span class="ph#">{{ $curso->descriumCurso }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="ph#">{{ $curso->tituloDoisCurso }}</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="ph#">{{ $curso->descriDoisCurso }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="ph#">{{ $curso->tituloTresCurso }}</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="ph#">{{ $curso->descriTresCurso }}</span>
                                     </td>
 
 

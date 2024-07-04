@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\AlunoController;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\AlunoController;
+// use App\Http\Controllers\Api\CursosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -9,10 +11,16 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::post('/login', [AlunoController::class, 'login']);
+Route::post('/login', [LoginController::class, 'login']);
 
 Route::middleware(['auth:sanctum', 'aluno'])->group(function () {
-
-    Route::apiResource('aluno', AlunoController::class);
+    // Página Home
+    Route::get('/home/{idAluno}', [AlunoController::class, 'home']);
+    // Página Perfil
+    Route::get('/perfil/{idAluno}', [AlunoController::class, 'perfil']);
+    
+    // ------------------------
+    // Cursos
+    // Route::get('/index', [CursosController::class, 'index']);
 
 });

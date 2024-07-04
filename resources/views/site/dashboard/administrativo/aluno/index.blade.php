@@ -284,9 +284,14 @@
                                 <th>Nome</th>
                                 <th>Email</th>
                                 <th>Telefone</th>
-                                <th>Data</th>
+                                <th>Data Cadastro</th>
+                                <th>Habilidade</th>
+                                <th>Estado</th>
+                                <th>ID Curso</th>
+                                <th>Nome Curso</th>
+                                <th>Data Nascimento</th>
+                                <th>Objetivo</th>
                                 <th>Status</th>
-                                <th>Curso</th>
                                 <th style="backgroud-color:#4c7f4c">Edição</th>
                                 <th style="backgroud-color:##b2354c">Deletar</th>
                             </tr>
@@ -330,13 +335,34 @@
                                     </td>
 
                                     <td>
-                                        <span class="ph#">{{ $aluno->statusAluno }}</span>
+                                        <span class="ph#">{{ $aluno->nivelHabilidade }}</span>
                                     </td>
-
+                                    
+                                    <td>
+                                        <span class="ph#">{{ $aluno->estadoAluno }}</span>
+                                    </td>
 
                                     <td>
                                         <span class="addr">{{ $aluno->idCurso }}</span>
                                     </td>
+
+                                    <td>
+                                        <span class="ph#">{{ $aluno->nomeCurso }}</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="ph#">{{ $aluno->dataDeNascimento }}</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="ph#">{{ $aluno->objetivo }}</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="ph#">{{ $aluno->statusAluno }}</span>
+                                    </td>
+
+
 
                                     <td>
                                         <div>
