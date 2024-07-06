@@ -142,8 +142,10 @@ class AlunoController extends Controller
         $request->merge(['updated_at' => now()]);
 
         $request->validate([
+            
             'nomeAluno'         => 'required|unique:tblaluno,nomeAluno|min:3',
             'emailAluno'        => 'required|unique:tblaluno,emailAluno|email',
+            'senhaAluno'        => 'required|unique:tblaluno,senhaAluno|max:10',
             'telefoneAluno'     => 'required|unique:tblaluno,telefoneAluno|min:10',
 
             'dataCadAluno'      => 'required|date',
@@ -166,6 +168,10 @@ class AlunoController extends Controller
             'emailAluno.required'    => 'O campo e-mail é obrigatório.',
             'emailAluno.unique'      => 'Este e-mail já está em uso.',
             'emailAluno.email'       => 'O e-mail deve ser um endereço de e-mail válido.',
+
+            'senhaAluno.required'    => 'O campo senha é obrigatório.',
+            'senhaAluno.unique'      => 'Está não é segura  já está em uso.',
+            'senhaAluno.max'       => 'a senha deve ter ate 10 caracteres',
 
             'telefoneAluno.required' => 'O campo telefone é obrigatório.',
             'telefoneAluno.unique'   => 'Este telefone já está em uso.',
@@ -206,6 +212,7 @@ class AlunoController extends Controller
 
         $aluno->nomeAluno        = $request->input('nomeAluno');
         $aluno->emailAluno       = $request->input('emailAluno');
+        $aluno->senhaAluno       = $request->input('senhaAluno');
         $aluno->telefoneAluno    = $request->input('telefoneAluno');
 
         $aluno->dataCadAluno     = $request->input('dataCadAluno');
@@ -250,104 +257,108 @@ class AlunoController extends Controller
      // -------------------------------
      // Cadastro Aluno
 
-    public function update(Request $request, $idAluno)
-    {
-        // Validação dos dados recebidos
-        $request->validate([
-            'nomeAluno'         => 'required|unique:tblaluno,nomeAluno|min:3',
-            'emailAluno'        => 'required|unique:tblaluno,emailAluno|email',
-            'telefoneAluno'     => 'required|unique:tblaluno,telefoneAluno|min:10',
-            'dataCadAluno'      => 'required|date',
-            'nivelHabilidade'   => 'required|string|max:255',
-            'estadoAluno'       => 'required|string|max:255',
-            'nomeCurso'         => 'required|string|max:255',
-            'dataDeNascimento'  => 'required|date',
-            'objetivo'          => 'nullable|string',
-            'statusAluno'       => 'required|in:ativo,desativo',
-            'fotoAluno'         => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'idCurso'           => 'required|exists:tblcurso,idCurso',
-        ],[
+     public function update(Request $request, $idAluno)
+     {
+         // Validação dos dados recebidos
+         $request->validate([
+             'nomeAluno'         => 'required|min:3',
+             'emailAluno'        => 'required|email',
+             'senhaAluno'        => 'required|max:10',
+             'telefoneAluno'     => 'required|min:10',
+             'dataCadAluno'      => 'required|date',
+             'nivelHabilidade'   => 'required|string|max:255',
+             'estadoAluno'       => 'required|string|max:255',
+             'nomeCurso'         => 'required|string|max:255',
+             'dataDeNascimento'  => 'required|date',
+             'objetivo'          => 'nullable|string',
+             'statusAluno'       => 'required|in:ativo,desativo',
+             'fotoAluno'         => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+             'idCurso'           => 'required|exists:tblcurso,idCurso',
+         ], [
             'nomeAluno.required'     => 'O campo nome é obrigatório.',
             'nomeAluno.unique'       => 'Este nome já está em uso.',
             'nomeAluno.min'          => 'O nome deve ter no mínimo 3 caracteres.',
-
+    
             'emailAluno.required'    => 'O campo e-mail é obrigatório.',
             'emailAluno.unique'      => 'Este e-mail já está em uso.',
             'emailAluno.email'       => 'O e-mail deve ser um endereço de e-mail válido.',
-
+    
+            'senhaAluno.required'    => 'O campo senha é obrigatório.',
+            'senhaAluno.unique'      => 'Está não é segura  já está em uso.',
+            'senhaAluno.max'       => 'a senha deve ter ate 10 caracteres',
+    
             'telefoneAluno.required' => 'O campo telefone é obrigatório.',
             'telefoneAluno.unique'   => 'Este telefone já está em uso.',
             'telefoneAluno.min'      => 'O telefone deve ter no mínimo 11 caracteres.',
-
+    
             'dataCadAluno.required'  => 'O campo data de cadastro é obrigatório.',
             'dataCadAluno.date'      => 'A data de cadastro deve ser uma data válida.',
-
+    
             'nivelHabilidade.required' => 'O campo nível de habilidade é obrigatório.',
             'nivelHabilidade.string'   => 'O nível de habilidade deve ser um texto.',
             'nivelHabilidade.max'      => 'O nível de habilidade não deve exceder 255 caracteres.',
-
+    
             'estadoAluno.required'   => 'O campo estado é obrigatório.',
             'estadoAluno.string'     => 'O estado deve ser um texto.',
             'estadoAluno.max'        => 'O estado não deve exceder 255 caracteres.',
-
+    
             'nomeCurso.required'     => 'O campo nome do curso é obrigatório.',
             'nomeCurso.string'       => 'O nome do curso deve ser um texto.',
             'nomeCurso.max'          => 'O nome do curso não deve exceder 255 caracteres.',
-
+    
             'dataDeNascimento.required' => 'O campo data de nascimento é obrigatório.',
             'dataDeNascimento.date'     => 'A data de nascimento deve ser uma data válida.',
-
+    
             'objetivo.string'        => 'O objetivo deve ser um texto.',
-
+    
             'statusAluno.required'   => 'O campo status é obrigatório.',
             'statusAluno.in'         => 'O status deve ser "ativo" ou "desativado".',
-
+    
             'fotoAluno.image'        => 'A foto deve ser uma imagem.',
             'fotoAluno.mimes'        => 'A foto deve ser um arquivo do tipo: jpeg, png, jpg, gif, svg.',
             'fotoAluno.max'          => 'A foto não deve ter mais que 2048 KB.',
-
+    
             'idCurso.required'       => 'O campo curso é obrigatório.',
             'idCurso.exists'         => 'O curso selecionado é inválido.',
-        ]);
-
-        // Busca do aluno pelo ID
-        $aluno = Aluno::findOrFail($idAluno);
-
-        // Atualização dos dados do aluno
-        $aluno->update($request->only([
-            'idAluno',
-            'nomeAluno',
-            'emailAluno',
-            'telefoneAluno',
-            'dataCadAluno',
-            'nivelHabilidade',
-            'estadoAluno',
-            'nomeCurso',
-            'idCurso',
-            'dataDeNascimento',
-            'objetivo',
-            'statusAluno',
-            'fotoAluno',
-        ]));
-
-         // Atualização da imagem do curso, se uma nova imagem foi enviada
+         ]);
+     
+         // Busca do aluno pelo ID
+         $aluno = Aluno::findOrFail($idAluno);
+     
+         // Atualização dos dados do aluno
+         $aluno->update($request->only([
+             'nomeAluno',
+             'emailAluno',
+             'senhaAluno',
+             'telefoneAluno',
+             'dataCadAluno',
+             'nivelHabilidade',
+             'estadoAluno',
+             'nomeCurso',
+             'dataDeNascimento',
+             'objetivo',
+             'statusAluno',
+             'idCurso',
+         ]));
+     
+         // Atualização da imagem do aluno, se uma nova imagem foi enviada
          if ($request->hasFile('fotoAluno')) {
-            // Apaga a imagem anterior, se existir
-            if ($aluno->fotoAluno) {
-                Storage::delete('public/img/alunos/' . $aluno->fotoAluno);
-            }
-
-            // Armazena a nova imagem
-            $path = $request->file('fotoAluno')->store('public/img/alunos');
-            $aluno->fotoAluno = basename($path);
-
-            // Salva a alteração da imagem no banco de dados
-            $aluno->save();
-        }
-
-        // Redirecionamento com mensagem de sucesso
-        return redirect()->route('index.aluno')->with('success', 'Aluno atualizado com sucesso.');
-    }
+             // Apaga a imagem anterior, se existir
+             if ($aluno->fotoAluno) {
+                 Storage::delete('public/img/alunos/' . $aluno->fotoAluno);
+             }
+     
+             // Armazena a nova imagem
+             $path = $request->file('fotoAluno')->store('public/img/alunos');
+             $aluno->fotoAluno = basename($path);
+     
+             // Salva a alteração da imagem no banco de dados
+             $aluno->save();
+         }
+     
+         return redirect()->route('index.aluno')->with('success', 'Aluno atualizado com sucesso.');
+     }
+     
 
     /**
      * @param  Aluno

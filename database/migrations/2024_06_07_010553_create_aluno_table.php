@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('idAluno');
             $table->string('nomeAluno');
             $table->string('emailAluno')->unique();
+            $table->string('senhaAluno');
             $table->string('telefoneAluno');
             $table->timestamp('dataCadAluno')->useCurrent();
             $table->enum('nivelHabilidade', ['Iniciante', 'Intermediário', 'Avançado']);

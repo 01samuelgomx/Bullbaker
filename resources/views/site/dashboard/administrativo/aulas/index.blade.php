@@ -302,8 +302,13 @@
                                             name="">{{ $aula->idAula }}</span>
                                     </td>
 
-                                    <td>
-                                        <span class="date">{{ $aula->fotoAula }}</span>
+                                            <td>
+                                        @if (Storage::exists('public/img/aulas/' . $aula->fotoAula))
+                                            <img src="{{ asset('storage/img/aulas/' . $aula->fotoAula) }}"
+                                                alt="lll" style="width: 100px; height: 100px;border-radius: 50%">
+                                        @else
+                                            <span>Imagem não disponível</span>
+                                        @endif
                                     </td>
 
                                     <td>

@@ -147,7 +147,7 @@ class AulaController extends Controller
                 'video_aulaAula'         => ['nullable', 'string', 'regex:/<iframe.*src="https:\/\/www\.youtube\.com\/embed\/[a-zA-Z0-9_-]+".*<\/iframe>/'],
                 'fotoAula'               => 'nullable|image|mimes:jpeg,png,PNG,jpeg,jpg,gif,svg|max:2048',
                 'statusAula'             => 'required|in:ativo,desativo',
-                [
+                ],[
                     'idCurso.required'       => 'O campo ID do curso é obrigatório.',
                     'idCurso.exists'         => 'O curso associado não existe.',
         
@@ -168,7 +168,7 @@ class AulaController extends Controller
         
                     'fotoAula.mimes'        => 'A foto deve ser um arquivo do tipo: jpeg, png, jpg, gif, svg.',
                     'fotoAula.max'          => 'A foto não deve ter mais que 2048 KB.',
-                ]
+                
             ]);
         
             // Criação de uma nova instância da aula

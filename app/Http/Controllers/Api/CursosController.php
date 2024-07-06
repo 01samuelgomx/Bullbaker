@@ -19,48 +19,53 @@ class CursosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($curso)
+
+   
+    public function listarCursos()
     {
+        // Obtém o ID do curso da sessão
         $idCurso = session('id');
-        // dd($idCurso);
-        $curso = Cursos::find($idCurso);
-        
+    
         // Filtra somente os cursos ativos
-        $lista = Cursos::where('statusCurso', 'ativo')->get();
-        
-        // dd($curso->fotoCurso); 
-        
+        $cursosAtivos = Cursos::where('statusCurso', 'ativo')->get();
+    
+        // Busca o curso específico pelo ID da sessão
+        $curso = Cursos::find($idCurso);
+    
+        // Verifica se o curso foi encontrado
         if (!$curso) {
-            abort(404, 'Curso não encontrado');
+            return response()->json(['error' => 'Curso não encontrado'], 404);
         }
-       
+    
+        // Retorna o curso específico e a lista de cursos ativos em formato JSON
         return response()->json([
             'dadosCurso' => [
-                'nome'                 => $curso->nomeCurso,
-                'descriscao'           => $curso->descricaoCurso,
-                'preco'                => $curso->precoCurso,
-                'vagas'                => $curso->vagasDisponiveisCurso,
-                'aprende'              => $curso->aprendeDescriCursos,
-                'tituloUm'             => $curso->tituloUmCurso,
-                'descrium'             => $curso->descriumCurso,
-                'tituloDois'           => $curso->tituloDoisCurso,
-                'descriDois'           => $curso->descriDois,
-                'tituloTres'           => $curso->tituloTresCurso,
-                'descriTresCurso'      => $curso->descriTresCurso,
-                'foto'                 => $curso->fotoCurso,
-                'status'               => $curso->statusCurso,
+                'nome'             => $curso->nomeCurso,
+                'descriscao'       => $curso->descricaoCurso,
+                'preco'            => $curso->precoCurso,
+                'vagas'            => $curso->vagasDisponiveisCurso,
+                'aprende'          => $curso->aprendeDescriCursos,
+                'tituloUm'         => $curso->tituloUmCurso,
+                'descrium'         => $curso->descriumCurso,
+                'tituloDois'       => $curso->tituloDoisCurso,
+                'descriDois'       => $curso->descriDoisCurso,
+                'tituloTres'       => $curso->tituloTresCurso,
+                'descriTresCurso'  => $curso->descriTresCurso,
+                'foto'             => $curso->fotoCurso,
+                'status'           => $curso->statusCurso,
             ],
-            'cursosAtivos' => $lista  // Adicionando a lista de cursos ativos ao JSON de resposta
+            'cursosAtivos' => $cursosAtivos
         ]);
     }
     
+
 
     /**
      * Show the form for cursoseating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function cursoseate()
+    public function create()
     {
         //
     }

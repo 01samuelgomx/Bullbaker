@@ -283,6 +283,7 @@
                                 <th>Foto</th>
                                 <th>Nome</th>
                                 <th>Email</th>
+                                <th>Senha</th>
                                 <th>Telefone</th>
                                 <th>Data Cadastro</th>
                                 <th>Habilidade</th>
@@ -324,6 +325,10 @@
 
                                     <td>
                                         <h4 class="name">{{ $aluno->emailAluno }}</h4>
+                                    </td>
+
+                                    <td>
+                                        <h4 class="name">{{ $aluno->senhaAluno }}</h4>
                                     </td>
 
                                     <td>

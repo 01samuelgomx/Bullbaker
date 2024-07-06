@@ -44,9 +44,9 @@ Route::middleware('autenticacao:Administrativo')->group(function () {
 Route::middleware('autenticacao:Administrativo')->group(function () {
     Route::get('/dashboard/administrativo/cursos/index', [CursosController::class, 'index'])->name('index.curso'); 
 
-    Route::get('/dashboard/administrativo/cursos/create', [CursosController::class, 'create'])->name('create.curso'); // rota de Acesso ao formulario
+    Route::get('/dashboard/administrativo/cursos/create', [CursosController::class, 'create'])->name('create.curso'); // rota de Acesso get ao formulario
     Route::post('/dashboard/administrativo/cursos', [CursosController::class, 'cadcurso'])->name('cad.curso'); // Cadastro do curso
-    Route::get('/dashboard/administrativo/cursos/{id}/edit', [CursosController::class, 'edit'])->name('edit.curso');// rota de Acesso ao formulario
+    Route::get('/dashboard/administrativo/cursos/{id}/edit', [CursosController::class, 'edit'])->name('edit.curso');// rota de Acesso ao formulario de acordo com o id
     Route::put('/dashboard/administrativo/cursos/{id}', [CursosController::class, 'update'])->name('update.curso'); // Atualização do curso
     Route::delete('/dashboard/administrativo/cursos/{id}', [CursosController::class, 'destroy'])->name('delete.curso'); // Deletar os dados
 });

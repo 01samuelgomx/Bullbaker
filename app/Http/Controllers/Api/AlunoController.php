@@ -83,6 +83,19 @@ class AlunoController extends Controller
 
     }
 
+    public function fotoAluno(Request $request, $idAluno)
+    {
+        $aluno = Aluno::find($idAluno);
+
+        if (!$aluno) {
+            return response()->json(['error' => 'Aluno não encontrado'], 404);
+        }
+
+        // Retornar apenas a foto do aluno
+        return response()->json(['fotoAluno' => $aluno->fotoAluno]);
+    }
+
+
     public function index()
     {
 
@@ -154,6 +167,39 @@ class AlunoController extends Controller
 
     public function update(Request $request, $idAluno)
     {
+        $request-> validate([
+            'nomeAluno'         => 'required|unique:tblaluno,nomeAluno|min:3',
+            'emailAluno'        => 'required|unique:tblaluno,emailAluno|email',
+            'telefoneAluno'     => 'required|unique:tblaluno,telefoneAluno|min:10',
+            'dataCadAluno'      => 'required|date',
+            'nivelHabilidade'   => 'required|string|max:255',
+            'estadoAluno'       => 'required|string|max:255',
+            'nomeCurso'         => 'required|string|max:255',
+            'dataDeNascimento'  => 'required|date',
+            'objetivo'          => 'nullable|string',
+            'statusAluno'       => 'required|in:ativo,desativo',
+            'fotoAluno'         => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'idCurso'           => 'required|exists:tblcurso,idCurso',
+
+        ]);
+
+        $aluno = Aluno::findOrFail($idAluno);
+
+        $aluno->update($request->only([
+            'idAluno',
+            'nomeAluno',
+            'emailAluno',
+            'telefoneAluno',
+            'dataCadAluno',
+            'nivelHabilidade',
+            'estadoAluno',
+            'nomeCurso',
+            'idCurso',
+            'dataDeNascimento',
+            'objetivo',
+            'statusAluno',
+            'fotoAluno',
+        ]));
 
     }
 

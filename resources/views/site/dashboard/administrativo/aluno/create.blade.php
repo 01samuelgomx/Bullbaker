@@ -220,6 +220,15 @@
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Email</p>
+                            <input class="brd-rd5" type="number" placeholder="Senha:" name="senhaAluno"
+                                id="senhaAluno" value="{{ old('senhaAluno') }}" required />
+                            @error('senhaAluno')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
                             <p>Objetivo do Aluno</p>
                             <input class="brd-rd5" type="text" placeholder="Objetivo:" name="objetivo"
                                 id="objetivo" value="{{ old('objetivo') }}" required />

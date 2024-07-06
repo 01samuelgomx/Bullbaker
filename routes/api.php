@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\AlunoController;
-// use App\Http\Controllers\Api\CursosController;
+use App\Http\Controllers\Api\CursosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +18,12 @@ Route::middleware(['auth:sanctum', 'aluno'])->group(function () {
     Route::get('/home/{idAluno}', [AlunoController::class, 'home']);
     // Página Perfil
     Route::get('/perfil/{idAluno}', [AlunoController::class, 'perfil']);
+    Route::get('/foto{idAluno}', [AlunoController::class, 'fotoAluno']);
+    Route::post('/perfil/edit/{idAluno}', [AlunoController::class, 'update']);
     
     // ------------------------
     // Cursos
-    // Route::get('/index', [CursosController::class, 'index']);
+    Route::get('/listarCursos', [CursosController::class, 'listarCursos']);
+
 
 });

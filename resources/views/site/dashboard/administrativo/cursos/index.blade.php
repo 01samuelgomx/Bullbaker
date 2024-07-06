@@ -284,19 +284,20 @@
                                 <th>ID</th>
                                 <th>Foto</th>
                                 <th>Nome</th>
-                                <th>Descricao</th>
-                                <th>Duracao</th>
-                                <th>Preco</th>
-                                <th>vagasDisponiveisCurso</th>
-                                <th>tituloUmCurso</th>
-                                <th>descriumCurso</th>
-                                <th>tituloDoisCurso</th>
-                                <th>descriDoisCurso</th>
-                                <th>tituloTresCurso</th>
-                                <th>descriTresCurso</th>
-                                <th>data_inicio</th>
-                                <th>data_fim</th>
-                                <th>statusCurso</th>
+                                <th>Descrição</th>
+                                <th>Duração</th>
+                                <th>Preço</th>
+                                <th>Vagas Disponíveis </th>
+                                <th>Oque se Aprende no Curso?</th>
+                                <th>Titulo Um Curso</th>
+                                <th>Descrisção um Curso</th>
+                                <th>Titulo Dois Curso</th>
+                                <th>Descrisção Dois Curso</th>
+                                <th>Titulo Tres</th>
+                                <th>Descrisção Três</th>
+                                <th>Data de inicio</th>
+                                <th>Data final</th>
+                                <th>Status do Curso</th>
                                 <th style="backgroud-color:#4c7f4c">Edição</th>
                                 <th style="backgroud-color:##b2354c">Deletar</th>
                             </tr>
@@ -342,6 +343,10 @@
 
                                     <td>
                                         <span class="ph#">{{ $curso->vagasDisponiveisCurso }} vagas!</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="ph#">{{ $curso->aprendeDescriCursos }}</span>
                                     </td>
 
                                     <td>

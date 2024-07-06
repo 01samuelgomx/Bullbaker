@@ -164,10 +164,11 @@
     <div class="panel-content">
         <div class="widget pad50-65">
 
-            <form action="{{ route('cad.curso') }}" method="POST" class="contact-form" enctype="multipart/form-data">
+            <form action="{{ route('cad.curso') }}" method="POST" role="form text-left" class="contact-form" 
+                enctype="multipart/form-data">
+
                 @csrf
                 @method('POST')
-
 
                 <div class="d-flex justify-content-between">
                     <div class="widget-title2">
@@ -191,6 +192,7 @@
                 </div>
 
                 <div class="column mrg20">
+
                     <div class="row mrg20">
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <p>Nome do Curso</p>
@@ -292,8 +294,18 @@
                     </div>
 
                     <div class="row mrg20">
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <p>Duração do Curso (em horas)</p>
+                            <p>Oque se Aprende neste curso?</p>
+                            <input class="brd-rd5" type="text" placeholder="Duração:" name="aprendeDescriCursos"
+                                id="aprendeDescriCursos" value="{{ old('aprendeDescriCursos') }}" />
+                            @error('aprendeDescriCursos')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Duração do Curso (em minutos)</p>
                             <input class="brd-rd5" type="number" placeholder="Duração:" name="duracaoCurso"
                                 id="duracaoCurso" value="{{ old('duracaoCurso') }}" />
                             @error('duracaoCurso')
@@ -301,6 +313,9 @@
                             @enderror
                         </div>
 
+                        </div>
+
+                    <div class="row mrg20">
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <p>Data de Início</p>
                             <input class="brd-rd5" type="date" placeholder="Data Início:" name="data_inicio"

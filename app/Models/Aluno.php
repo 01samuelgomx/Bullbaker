@@ -9,6 +9,7 @@ class Aluno extends Model
 {
     use HasFactory;
     protected $table = 'tblaluno';
+    protected $hidden     = ['senhaAluno'];
     protected $primaryKey = 'idAluno';
 
     public function usuario(){
@@ -19,6 +20,7 @@ class Aluno extends Model
         'idAluno',
         'nomeAluno',
         'emailAluno',
+        'senhaAluno',
         'telefoneAluno',
         'dataCadAluno',
         'nivelHabilidade',
@@ -36,7 +38,8 @@ class Aluno extends Model
         return [
             'nomeAluno'         => 'required|unique:tblaluno,nomeAluno,' . $this->id . '|min:3',
             'emailAluno'        => 'required|unique:tblaluno,emailAluno,' . $this->id . '|email',
-            'telefoneAluno'     => 'required|unique:tblaluno,telefoneAluno,' . $this->id . '|min:10',
+            'senhaAluno'        => 'required|unique:tblaluno,senhaAluno,' . $this->id . '|max: 10',
+            'telefoneAluno'     => 'required|unique:tblaluno,telefoneAluno,' . $this->id . '|min:11',
             'dataCadAluno'      => 'required|date',
             'nivelHabilidade'   => 'required|string|max:255',
             'estadoAluno'       => 'required|string|max:255',
@@ -60,6 +63,10 @@ class Aluno extends Model
         'emailAluno.required'    => 'O campo e-mail é obrigatório.',
         'emailAluno.unique'      => 'Este e-mail já está em uso.',
         'emailAluno.email'       => 'O e-mail deve ser um endereço de e-mail válido.',
+
+        'senhaAluno.required'    => 'O campo senha é obrigatório.',
+        'senhaAluno.unique'      => 'Está não é segura  já está em uso.',
+        'senhaAluno.max'       => 'a senha deve ter ate 10 caracteres',
 
         'telefoneAluno.required' => 'O campo telefone é obrigatório.',
         'telefoneAluno.unique'   => 'Este telefone já está em uso.',
