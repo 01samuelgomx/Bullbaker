@@ -47,7 +47,6 @@ class AlunoController extends Controller
                 
             ]
         ]);
-
     }
 
     public function perfil($idAluno)
@@ -83,17 +82,7 @@ class AlunoController extends Controller
 
     }
 
-    public function fotoAluno(Request $request, $idAluno)
-    {
-        $aluno = Aluno::find($idAluno);
 
-        if (!$aluno) {
-            return response()->json(['error' => 'Aluno não encontrado'], 404);
-        }
-
-        // Retornar apenas a foto do aluno
-        return response()->json(['fotoAluno' => $aluno->fotoAluno]);
-    }
 
 
     public function index()
@@ -165,43 +154,57 @@ class AlunoController extends Controller
      // -------------------------------
      // Cadastro Aluno
 
-    public function update(Request $request, $idAluno)
-    {
-        $request-> validate([
-            'nomeAluno'         => 'required|unique:tblaluno,nomeAluno|min:3',
-            'emailAluno'        => 'required|unique:tblaluno,emailAluno|email',
-            'telefoneAluno'     => 'required|unique:tblaluno,telefoneAluno|min:10',
-            'dataCadAluno'      => 'required|date',
-            'nivelHabilidade'   => 'required|string|max:255',
-            'estadoAluno'       => 'required|string|max:255',
-            'nomeCurso'         => 'required|string|max:255',
-            'dataDeNascimento'  => 'required|date',
-            'objetivo'          => 'nullable|string',
-            'statusAluno'       => 'required|in:ativo,desativo',
-            'fotoAluno'         => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'idCurso'           => 'required|exists:tblcurso,idCurso',
-
-        ]);
-
-        $aluno = Aluno::findOrFail($idAluno);
-
-        $aluno->update($request->only([
-            'idAluno',
-            'nomeAluno',
-            'emailAluno',
-            'telefoneAluno',
-            'dataCadAluno',
-            'nivelHabilidade',
-            'estadoAluno',
-            'nomeCurso',
-            'idCurso',
-            'dataDeNascimento',
-            'objetivo',
-            'statusAluno',
-            'fotoAluno',
-        ]));
-
-    }
+     public function update(Request $request, $idAluno)
+     {
+         $request->validate([
+             'nomeAluno' => 'required|min:3|unique:tblaluno,nomeAluno,' . $idAluno . ',idAluno',
+             'emailAluno' => 'required|email|unique:tblaluno,emailAluno,' . $idAluno . ',idAluno',
+             'telefoneAluno' => 'required|min:10|unique:tblaluno,telefoneAluno,' . $idAluno . ',idAluno',
+             'dataCadAluno' => 'required|date',
+             'nivelHabilidade' => 'required|string|max:255',
+             'estadoAluno' => 'required|string|max:255',
+             'nomeCurso' => 'required|string|max:255',
+             'dataDeNascimento' => 'required|date',
+             'objetivo' => 'nullable|string',
+             'statusAluno' => 'required|in:ativo,desativo',
+             'fotoAluno' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+             'idCurso' => 'required|exists:tblcurso,idCurso',
+         ]);
+     
+         $aluno = Aluno::findOrFail($idAluno);
+     
+         if ($request->hasFile('fotoAluno')) {
+             $fotoPath = $request->file('fotoAluno')->store('img/aluno', 'public');
+             $fotoUrl = url('storage/' . $fotoPath);
+             $aluno->fotoAluno = $fotoUrl;
+         }
+     
+         $aluno->update($request->only([
+             'nomeAluno',
+             'emailAluno',
+             'telefoneAluno',
+             'dataCadAluno',
+             'nivelHabilidade',
+             'estadoAluno',
+             'nomeCurso',
+             'idCurso',
+             'dataDeNascimento',
+             'objetivo',
+             'statusAluno',
+         ]));
+     
+         if (isset($fotoUrl)) {
+             $aluno->fotoAluno = $fotoUrl;
+         }
+     
+         $aluno->save();
+     
+         return response()->json([
+             'message' => 'Aluno atualizado com sucesso',
+             'aluno' => $aluno,
+         ]);
+     }
+     
 
     /**
      * @param  Aluno

@@ -16,14 +16,15 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::middleware(['auth:sanctum', 'aluno'])->group(function () {
     // Página Home
     Route::get('/home/{idAluno}', [AlunoController::class, 'home']);
-    // Página Perfil
+    // ------------------------
+    // Alunos
     Route::get('/perfil/{idAluno}', [AlunoController::class, 'perfil']);
-    Route::get('/foto{idAluno}', [AlunoController::class, 'fotoAluno']);
-    Route::post('/perfil/edit/{idAluno}', [AlunoController::class, 'update']);
+    Route::post('/update/{idAluno}', [AlunoController::class, 'update']);
     
     // ------------------------
     // Cursos
     Route::get('/listarCursos', [CursosController::class, 'listarCursos']);
+    Route::get('/saibaMais/{idCurso}', [CursosController::class, 'saibaMais']);
 
 
 

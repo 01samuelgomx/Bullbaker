@@ -30,52 +30,41 @@ class CursosController extends Controller
          ]);
      }
 
-     
-    
+    //  'dadosCurso' => [
 
-    //  public function listarCursos($idCurso)
-    //  {
-    //      // Filtra somente os cursos ativos
-    //      $cursosAtivos = Cursos::where('statusCurso', 'ativo')->get();
-         
-    //      // Busca o curso específico pelo ID da rota
-    //      $curso = Cursos::find($idCurso);
-     
-    //      // Verifica se o curso foi encontrado
-    //      if (!$curso) {
-    //          return response()->json(['error' => 'Curso não encontrado'], 404);
-    //      }
-     
-    //      // Retorna o curso específico e a lista de cursos ativos em formato JSON
-    //      return response()->json([
-    //          'dadosCurso' => [
-    //              'nome'             => $curso->nomeCurso,
-    //              'descricao'        => $curso->descricaoCurso,
-    //              'preco'            => $curso->precoCurso,
-    //              'vagas'            => $curso->vagasDisponiveisCurso,
-    //              'aprendeDescriCursos' => $curso->aprendeDescriCursos,
-    //              'tituloUm'         => $curso->tituloUmCurso,
-    //              'descrium'         => $curso->descriumCurso,
-    //              'tituloDois'       => $curso->tituloDoisCurso,
-    //              'descriDois'       => $curso->descriDoisCurso,
-    //              'tituloTres'       => $curso->tituloTresCurso,
-    //              'descriTres'       => $curso->descriTresCurso,
-    //              'foto'             => $curso->fotoCurso,
-    //              'status'           => $curso->statusCurso,
-    //          ],
-    //          'cursosAtivos' => $cursosAtivos
-    //      ]);
-    //  }
-     
-     
-    
+    //     'nome'                => $curso->nomeCurso,
+    //     'descricao'           => $curso->descricaoCurso,
+    //     'preco'               => $curso->precoCurso,
+    //     'vagas'               => $curso->vagasDisponiveisCurso,
+    //     'aprendeDescriCursos' => $curso->aprendeDescriCursos,
+    //     'tituloUm'            => $curso->tituloUmCurso,
+    //     'descrium'            => $curso->descriumCurso,
+    //     'tituloDois'          => $curso->tituloDoisCurso,
+    //     'descriDois'          => $curso->descriDoisCurso,
+    //     'tituloTres'          => $curso->tituloTresCurso,
+    //     'descriTres'          => $curso->descriTresCurso,
+    //     'foto'                => $curso->fotoCurso,
+    //     'status'              => $curso->statusCurso,
 
+    // ],
+
+     public function saibaMais($idCurso)
+     {
+        $curso = Cursos::where('idCurso', $idCurso)->first();
+
+        if ($curso) {
+            $curso->fotoCurso = url('storage/img/cursos/' . $curso->fotoCurso);
+            return response()->json($curso);
+        } else {
+            return response()->json(['message' => 'Curso não encontrado'], 404);
+        }
+        
+     }
 
     /**
-     * Show the form for cursoseating a new resource.
-     *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         //

@@ -317,7 +317,7 @@
                                     <td>
                                         @if (Storage::exists('public/img/cursos/' . $curso->fotoCurso))
                                             <img src="{{ asset('storage/img/cursos/' . $curso->fotoCurso) }}"
-                                                alt="lll" style="width: 100px; height: 100px;border-radius: 50%">
+                                                alt="lll" style="width: 100px; height: 100px;border-radius: 15%">
                                         @else
                                             <span>Imagem não disponível</span>
                                         @endif

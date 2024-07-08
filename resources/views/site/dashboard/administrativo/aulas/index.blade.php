@@ -158,12 +158,12 @@
                         <i class="ion-arrow-graph-up-right"></i>
                         <div class="stat-box-innr">
                             <span>
-                                <i class="counter"> -> {{ $num_aulas_ativas }}</i>
+                                <i class="counter"> -> {{ $num_cursos_ativos }}</i>
                             </span>
-                            <h5>aulas Cadastrados !</h5>
+                            <h5>Cursos Cadastrados !</h5>
                         </div>
                         <span>
-                            <i class="ion-ios-stopwatch"></i>Crie novo aula através da tabela</span>
+                            <i class="ion-ios-stopwatch"></i>Crie um novo curso através da tabela</span>
                     </div>
                 </div>
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
@@ -305,7 +305,7 @@
                                             <td>
                                         @if (Storage::exists('public/img/aulas/' . $aula->fotoAula))
                                             <img src="{{ asset('storage/img/aulas/' . $aula->fotoAula) }}"
-                                                alt="lll" style="width: 100px; height: 100px;border-radius: 50%">
+                                                alt="lll" style="width: 100px; height: 100px;border-radius: 15%">
                                         @else
                                             <span>Imagem não disponível</span>
                                         @endif
