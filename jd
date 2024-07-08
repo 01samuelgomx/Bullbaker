@@ -1,0 +1,149 @@
+[33mcommit fb69fe38474a36e9302e99ca61b95ebd1fdd296c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Sat Jul 6 18:45:23 2024 -0300
+
+    :white_check_mark: :construction:Sucesso! Dashboard atualizado com novos dados e totalmente funcional, api externa para o aplicativo ainda em construcao, subindo novas atualizacoes para a listagem de cursos
+
+[33mcommit 0fecc1bcef816233aa380b06b7dfd94b3b35b688[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Thu Jul 4 15:38:39 2024 -0300
+
+    :white_check_mark: :construction: Api de login do aluno para o aplicativo funcional, alimentando ainda as api de aluno e cursos que ainda estão em desenvolvimento
+
+[33mcommit 1d7ddfcea6b082be316dbb5c47c4893d72e202e4[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Mon Jul 1 22:14:42 2024 -0300
+
+    :construction: Login em andamento
+
+[33mcommit 5cf60a0d617c4055f758d9a94d0cdcdc7a3e3b12[m
+Author: Samuel Oliveira Gomes <SamuelOliveirat20hl@gmail.com>
+Date:   Fri Jun 28 17:15:40 2024 -0300
+
+    :memo:Desenvolvendo a documentação de login
+
+[33mcommit c7c80854d7971a5ee886a70bc0c84446ac0aa37b[m
+Author: Samuel Oliveira Gomes <SamuelOliveirat20hl@gmail.com>
+Date:   Thu Jun 27 17:22:42 2024 -0300
+
+    :memo: Adicionando nova funcionalidade de login com o app mobile
+
+[33mcommit c1d075520b23d57f8faf72959f028e40678f334e[m
+Author: Samuel Oliveira Gomes <SamuelOliveirat20hl@gmail.com>
+Date:   Wed Jun 26 17:26:04 2024 -0300
+
+    :white_check_mark: Croud finalizadado, implementando funcionalidade de aceitar um novo cadastro vindo de iframe do youtube
+
+[33mcommit 27ef7abef341523dd4087e9d664b99162bf38eb2[m
+Author: Samuel Oliveira Gomes <SamuelOliveirat20hl@gmail.com>
+Date:   Tue Jun 25 17:18:53 2024 -0300
+
+    :construction: Tabela aulas em desenvolvimento,melhorando estrutura de codigo debugando para encontrar erros na estrutura de models para o update e create de um video no banco
+
+[33mcommit a002f395cc3feb8972910282298bab00f7a783fe[m
+Author: Samuel Oliveira Gomes <SamuelOliveirat20hl@gmail.com>
+Date:   Fri Jun 21 17:20:59 2024 -0300
+
+    :construction: Tabela aulas em desenvolvimento
+
+[33mcommit 8f570dba1ebe6efbab8931cd3f145daacd70c57a[m
+Author: Samuel Oliveira Gomes <SamuelOliveirat20hl@gmail.com>
+Date:   Fri Jun 21 15:42:19 2024 -0300
+
+    :white_check_mark: Croud de cursos finalizadado, processo de envio de foto entregue a estrutura e nova interação de envio de foto sendo construida para o aluno
+
+[33mcommit 3e0999657c9eef3336e6246e6c3aa72383ad59bc[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Fri Jun 21 02:24:45 2024 -0300
+
+    :white_check_mark: Cadastro de cursos bem sucedido, realizando melhores praticas de codigo e implementando novos estilos de botoes,processo de vizualização de imagem ainda em desenvolvimento
+
+[33mcommit c346c48972de694a47963820a643949da8654614[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Thu Jun 20 00:36:00 2024 -0300
+
+    :construction: Desenvolvendo croud com foto em tblCursos
+
+[33mcommit c9baabb9cc4f50438dace13e5a6426c8a296b45d[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Wed Jun 19 02:15:28 2024 -0300
+
+    :sparkles: Implementando novos recursos de save e update de imagem
+
+[33mcommit 0cb28751ea6a60bd0e34cd2d34880395721adb0f[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Tue Jun 18 17:06:52 2024 -0300
+
+    :zap: Subindo novas atualizaçcoes na tabela cursos
+
+[33mcommit 9cb1fdbf0505ab98df51ef406346f08c71b1edb2[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Sun Jun 16 02:19:40 2024 -0300
+
+    :white_check_mark: Implementando cruod da tabela cursos, listagem e edit funcionais, reescrevendo nomes de campos do formulario de criacaoç
+
+[33mcommit 9bcfc60d1b40073f058a68e0a4e873e6227e9afd[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Thu Jun 13 15:40:53 2024 -0300
+
+    :white_check_mark: Croud do aluno finalizado com sucesso!, partindp para integrar uma imaagem ao banco
+
+[33mcommit d7fd20fe532e5798c53faa687b83310ab00c9054[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Thu Jun 13 14:45:56 2024 -0300
+
+    :construction: Corrigindo nomeclatura de class e desenvolvendo o update dos dados dos alunos
+
+[33mcommit e00dbb701e459a1808f411b8a26264101af6cb28[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Thu Jun 13 01:19:35 2024 -0300
+
+    :pencil2: corrigindo erros de digitacao e method editar funcionando
+
+[33mcommit 2304e47f1178ecc87574716c55eee351a01ffab0[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Mon Jun 10 17:28:03 2024 -0300
+
+    :construction: Edit do aluno em construcao
+
+[33mcommit 696b2153082f49dd4d2ac9cd3c6145d8f473219d[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Mon Jun 10 14:46:26 2024 -0300
+
+    :white_check_mark: Login e Method listar do aluno funcionando, agora vamos implementar o restante do croud
+
+[33mcommit b14eec34fc5f87451cb166eb643c66e8f2eb3651[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Sun Jun 9 12:22:01 2024 -0300
+
+    :construction: Adicionando method de listagem na tabela alunos, ainda em desenvolvimento devido problemas na
+
+[33mcommit 2dad2d7fa0c0ec62ac53ca97c2fccea7b941b0b2[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Fri Jun 7 17:01:16 2024 -0300
+
+    :lock: Subindo nova funcionalidade, Login e AlunoController
+
+[33mcommit 5c16cdb4b89ff19c55dc557b8f79759344079077[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Fri Jun 7 14:27:56 2024 -0300
+
+    :bug: bla bla bla
+
+[33mcommit 69ca9dcc6cbfcef675357ea8f35268ec9d4992ab[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Fri Jun 7 02:15:25 2024 -0300
+
+    feat:subindo novos arquivos, implementando validacao de restricao de  acesso ao dashboard
+
+[33mcommit 36d00d69430c904a7cb3cba33062635c16418cfd[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Fri Jun 7 00:58:32 2024 -0300
+
+    feat: Implementando Funcao de Loginç
+
+[33mcommit 6962bcd5cd65577ba8e1921912d425794e9f05b4[m
+Author: 01samuelgomx <SamuelOliveirat20hl@gmail.com>
+Date:   Fri Jun 7 00:43:26 2024 -0300
+
+    Doc: Subindo arquivos do laravel
