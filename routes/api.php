@@ -25,6 +25,7 @@ Route::middleware(['auth:sanctum', 'aluno'])->group(function () {
     // Cursos
     Route::get('/listarCursos', [CursosController::class, 'listarCursos']);
     Route::get('/saibaMais/{idCurso}', [CursosController::class, 'saibaMais']);
+    Route::get('/aula/{idCurso}', [CursosController::class, 'aula']);
 
 
 

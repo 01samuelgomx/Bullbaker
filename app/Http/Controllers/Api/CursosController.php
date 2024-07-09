@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Cursos;
 use App\Http\Controllers\Controller;
+use App\Models\Aula;
 use Illuminate\Http\Request;
 
 class CursosController extends Controller
@@ -30,41 +31,55 @@ class CursosController extends Controller
          ]);
      }
 
-    //  'dadosCurso' => [
-
-    //     'nome'                => $curso->nomeCurso,
-    //     'descricao'           => $curso->descricaoCurso,
-    //     'preco'               => $curso->precoCurso,
-    //     'vagas'               => $curso->vagasDisponiveisCurso,
-    //     'aprendeDescriCursos' => $curso->aprendeDescriCursos,
-    //     'tituloUm'            => $curso->tituloUmCurso,
-    //     'descrium'            => $curso->descriumCurso,
-    //     'tituloDois'          => $curso->tituloDoisCurso,
-    //     'descriDois'          => $curso->descriDoisCurso,
-    //     'tituloTres'          => $curso->tituloTresCurso,
-    //     'descriTres'          => $curso->descriTresCurso,
-    //     'foto'                => $curso->fotoCurso,
-    //     'status'              => $curso->statusCurso,
-
-    // ],
-
+     
      public function saibaMais($idCurso)
      {
-        $curso = Cursos::where('idCurso', $idCurso)->first();
+         $curso = Cursos::where('idCurso', $idCurso)->first();
+         
+         if ($curso) {
+             $curso->fotoCurso = url('storage/img/cursos/' . $curso->fotoCurso);
+             return response()->json($curso);
+            } else {
+                return response()->json(['message' => 'Curso não encontrado'], 404);
+            }
+            
+        }
 
-        if ($curso) {
-            $curso->fotoCurso = url('storage/img/cursos/' . $curso->fotoCurso);
-            return response()->json($curso);
-        } else {
-            return response()->json(['message' => 'Curso não encontrado'], 404);
+
+        public function aula($idCurso)
+        {
+            $aulas = Aula::where('idCurso', $idCurso)->get();
+        
+            if ($aulas) {
+                foreach ($aulas as $aula) {
+                    $aula->fotoAula = url('storage/img/aulas/' . $aula->fotoAula);
+                }
+                return response()->json($aulas);
+            }
+        
+            return response()->json($aulas);
         }
         
-     }
+        
+        
+        //     'nome'                => $curso->nomeCurso,
+        //     'descricao'           => $curso->descricaoCurso,
+        //     'preco'               => $curso->precoCurso,
+        //     'vagas'               => $curso->vagasDisponiveisCurso,
+        //     'aprendeDescriCursos' => $curso->aprendeDescriCursos,
+        //     'tituloUm'            => $curso->tituloUmCurso,
+        //     'descrium'            => $curso->descriumCurso,
+        //     'tituloDois'          => $curso->tituloDoisCurso,
+        //     'descriDois'          => $curso->descriDoisCurso,
+        //     'tituloTres'          => $curso->tituloTresCurso,
+        //     'descriTres'          => $curso->descriTresCurso,
+        //     'foto'                => $curso->fotoCurso,
+        //     'status'              => $curso->statusCurso,
 
     /**
      * @return \Illuminate\Http\Response
      */
-
+    
     public function create()
     {
         //

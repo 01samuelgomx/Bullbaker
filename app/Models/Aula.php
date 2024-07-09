@@ -30,13 +30,18 @@ class Aula extends Model
             'idCurso'            => 'required|exists:tblcurso,idCurso',
             'descricaoAula'      => 'required|min:10',
             'duracaoAula'        => 'required|integer|min:1',
-           'video_aulaAula'      => ['nullable', 'string', 'regex:/<iframe.*src="https:\/\/www\.youtube\.com\/embed\/[a-zA-Z0-9_-]+".*<\/iframe>/'],
+            'video_aulaAula'     => ['nullable', 'string', 'regex:/<iframe.*src="https:\/\/www\.youtube\.com\/embed\/[a-zA-Z0-9_-]+".*<\/iframe>/'],
             'fotoAula'           => 'nullable|image|mimes:jpeg,png,PNG,jpeg,jpg,gif,svg|max:2048',
             'statusAula'         => 'required|in:ativo,desativo',
 
         ];
     } 
     
+    public function curso()
+    {
+        return $this->belongsTo(Cursos::class, 'idCurso', 'idCurso');
+    }
+
     public function Feedback(){
         return [
             'idCurso.required'       => 'O campo ID do curso é obrigatório.',
