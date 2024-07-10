@@ -7,6 +7,7 @@ use App\Http\Controllers\sobreController;
 use App\Http\Controllers\CursosController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ContatoController;
+use App\Http\Controllers\infoController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,11 @@ Route::get('/menu', [MenuController::class, 'menu'])->name('menu');
 //  Login
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'autenticar'])->name('login');
+
+//--------------------------------------------------------------------------
+//  Dashboard paginas
+Route::get('/dashboard/administrativo/info', [infoController::class, 'index'])->name('info'); 
+
 
 
 //--------------------------------------------------------------------------

@@ -253,7 +253,6 @@ class AlunoController extends Controller
         
     }
     
-    
 
     /**
      * @param  Integer

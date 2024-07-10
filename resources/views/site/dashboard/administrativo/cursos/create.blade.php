@@ -109,20 +109,31 @@
                 </li>
 
                 <li class="has-drp">
-                    <a href="{{ url('dashboard/administrativo/cursos/index') }}" title="acessar tabela cursos">
+                    <a href="{{ url('dashboard/administrativo/cursos/index') }}" title="Acessar tabela cursos">
                         <span>Cursos</span>
                         <i class="fa fa-university" aria-hidden="true"></i>
                     </a>
                 </li>
 
                 <li class="has-drp">
-                    <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="acessar tabela aulas">
+                    <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="Acessar tabela aulas">
                         <span>Aulas</span>
                         <i class="fa fa-play-circle" aria-hidden="true"></i>
                     </a>
                 </li>
 
             </ul>
+
+            <h4>Manual </h4>
+            <ul class="drp-sec">
+                <li class="has-drp">
+                    <a href="{{ url('dashboard/administrativo/info') }}" title="Acessar informações de suporte">
+                        <span>Ajuda?</span>
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+
         </nav>
     </header>
     <!-- Side Header -->

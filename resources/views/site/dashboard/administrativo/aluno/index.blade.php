@@ -79,29 +79,38 @@
                 </li>
 
                 <li class="has-drp">
-                    <a href="{{ url('dashboard/administrativo/cursos/index') }}" title="acessar tabela cursos">
+                    <a href="{{ url('dashboard/administrativo/cursos/index') }}" title="Acessar tabela cursos">
                         <span>Cursos</span>
                         <i class="fa fa-university" aria-hidden="true"></i>
                     </a>
                 </li>
 
                 <li class="has-drp">
-                    <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="acessar tabela aulas">
+                    <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="Acessar tabela aulas">
                         <span>Aulas</span>
                         <i class="fa fa-play-circle" aria-hidden="true"></i>
                     </a>
                 </li>
 
             </ul>
+
+            <h4>Manual </h4>
+            <ul class="drp-sec">
+                <li class="has-drp">
+                    <a href="{{ url('dashboard/administrativo/info') }}" title="Acessar informações de suporte">
+                        <span>Ajuda?</span>
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+
         </nav>
     </header>
 
     <!-- Side Header -->
 
     <div class="option-panel">
-        <span class="panel-btn">
-            <i class="fa ion-android-settings fa-spin"></i>
-        </span>
+
         <div class="color-panel">
             <h4>Text Color</h4>
             <span class="color1" onclick="setActiveStyleSheet('color1'); return false;">
@@ -377,7 +386,8 @@
                                     </td>
 
                                     <td>
-                                        <form action="{{ route('delete.aluno', $aluno->idAluno) }}" method="POST">
+                                        <form action="{{ route('delete.aluno', $aluno->idAluno) }}" method="POST" 
+                                        role="form text-left" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit"
