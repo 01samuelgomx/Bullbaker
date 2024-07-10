@@ -221,6 +221,10 @@
                             @enderror
                         </div>
 
+                    </div>
+
+                    <div class="row mrg20">
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <p>Email</p>
                             <input class="brd-rd5" type="email" placeholder="Email:" name="emailAluno"
@@ -231,33 +235,24 @@
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
-                            <p>Email</p>
-                            <input class="brd-rd5" type="number" placeholder="Senha:" name="senhaAluno"
-                                id="senhaAluno" value="{{ old('senhaAluno', $editAluno->senhaAluno) }}" required />
-                            @error('senhaAluno')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-6 col-sm-12 col-lg-6">
-                            <p>Objetivo do Aluno</p>
-                            <input class="brd-rd5" type="text" placeholder="Objetivo:" name="objetivo"
-                                id="objetivo" value="{{ old('objetivo', $editAluno->objetivo) }}" required />
-                            @error('objetivo')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-
-
-                    <div class="row mrg20">
-
-                        <div class="col-md-6 col-sm-12 col-lg-6">
                             <p>Telefone</p>
                             <input class="brd-rd5" type="tel" placeholder="Telefone:" name="telefoneAluno"
                                 value="{{ old('telefoneAluno', $editAluno->telefoneAluno) }}" id="telefoneAluno"
                                 required />
                             @error('telefoneAluno')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                    </div>
+
+                    <div class="row mrg20">
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Senha</p>
+                            <input class="brd-rd5" type="number" placeholder="Senha:" name="senhaAluno"
+                                id="senhaAluno" value="{{ old('senhaAluno', $editAluno->senhaAluno) }}" required />
+                            @error('senhaAluno')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -274,6 +269,22 @@
                         </div>
 
 
+
+                    </div>
+
+
+                    <div class="row mrg20">
+
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <p>Objetivo do Aluno</p>
+                            <input class="brd-rd5" type="text" placeholder="Objetivo:" name="objetivo"
+                                id="objetivo" value="{{ old('objetivo', $editAluno->objetivo) }}" required />
+                            @error('objetivo')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <p>Estado do Aluno</p>
                             <input class="brd-rd5" type="text" placeholder="Estado do Aluno:" name="estadoAluno"
@@ -284,6 +295,9 @@
                             @enderror
                         </div>
 
+                    </div>
+
+                    <div class="row mrg20">
 
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <p>Nome do Curso</p>
@@ -303,6 +317,11 @@
                             @enderror
                         </div>
 
+                    </div>
+
+                    <div class="row mrg20">
+
+
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <p>Status do Aluno</p>
                             <select class="brd-rd5" name="statusAluno" id="statusAluno" required>
@@ -318,7 +337,6 @@
                             @enderror
                         </div>
 
-                    </div>
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <p>Nivel De Habilidade</p>
                             <select class="brd-rd5" name="nivelHabilidade" id="nivelHabilidade" required>
@@ -336,9 +354,8 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-
-
                     </div>
+
                 </div>
 
 

@@ -48,7 +48,6 @@
 
         </div>
 
-
         <div class="topbar-bottom-colors">
             <i style="background-color: #361F08;"></i>
             <i style="background-color: #C1959D;"></i>
@@ -58,6 +57,7 @@
             <i style="background-color: #90A293;"></i>
             <i style="background-color: #361F08;"></i>
         </div>
+        
     </div>
     <!-- Topbar -->
     <header class="side-header expand-header">

@@ -187,7 +187,7 @@
                         name="fotoAula">
                     <label for="file-input" class="file-label">
                         <img id="icon"
-                            src="{{ isset($editAula->fotoAula) && $editAula->fotoAula ? asset('storage/img/aula/' . $editAula->fotoAula) : asset('public/img/camera.png') }}"
+                            src="{{ isset($editAula->fotoAula) && $editAula->fotoAula ? asset('storage/img/aulas/' . $editAula->fotoAula) : asset('public/img/camera.png') }}"
                             alt="Escolher Imagem" style="width: 100px; height: 100px; border-radius: 50%">
                     </label>
                     @error('fotoAula')

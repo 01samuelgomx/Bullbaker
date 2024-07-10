@@ -28,6 +28,4 @@ Route::middleware(['auth:sanctum', 'aluno'])->group(function () {
     Route::get('/aula/{idCurso}', [CursosController::class, 'aula']);
 
 
-
-
 });

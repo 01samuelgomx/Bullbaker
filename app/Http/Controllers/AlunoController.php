@@ -8,6 +8,7 @@ use App\Models\Usuario;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class AlunoController extends Controller
@@ -136,109 +137,130 @@ class AlunoController extends Controller
     // -------------------------------
     // Cadastro Aluno
 
-    public function cadAluno (Request $request)
+    public function cadAluno(Request $request)
     {
-        $request->merge(['create_at' => now()]);
+        $request->merge(['created_at' => now()]);
         $request->merge(['updated_at' => now()]);
-
+    
         $request->validate([
-            
             'nomeAluno'         => 'required|unique:tblaluno,nomeAluno|min:3',
             'emailAluno'        => 'required|unique:tblaluno,emailAluno|email',
             'senhaAluno'        => 'required|unique:tblaluno,senhaAluno|max:10',
             'telefoneAluno'     => 'required|unique:tblaluno,telefoneAluno|min:10',
-
+    
             'dataCadAluno'      => 'required|date',
             'nivelHabilidade'   => 'required|string|max:255',
             'estadoAluno'       => 'required|string|max:255',
-
+    
             'nomeCurso'         => 'required|string|max:255',
             'dataDeNascimento'  => 'required|date',
             'objetivo'          => 'nullable|string',
-
+    
             'statusAluno'       => 'required|in:ativo,desativo',
             'fotoAluno'         => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'idCurso'           => 'required|exists:tblcurso,idCurso',
-
-        ],[
+        ], [
             'nomeAluno.required'     => 'O campo nome é obrigatório.',
             'nomeAluno.unique'       => 'Este nome já está em uso.',
             'nomeAluno.min'          => 'O nome deve ter no mínimo 3 caracteres.',
-
+    
             'emailAluno.required'    => 'O campo e-mail é obrigatório.',
             'emailAluno.unique'      => 'Este e-mail já está em uso.',
             'emailAluno.email'       => 'O e-mail deve ser um endereço de e-mail válido.',
-
+    
             'senhaAluno.required'    => 'O campo senha é obrigatório.',
-            'senhaAluno.unique'      => 'Está não é segura  já está em uso.',
-            'senhaAluno.max'       => 'a senha deve ter ate 10 caracteres',
-
+            'senhaAluno.unique'      => 'Esta senha já está em uso.',
+            'senhaAluno.max'         => 'A senha deve ter até 10 caracteres.',
+    
             'telefoneAluno.required' => 'O campo telefone é obrigatório.',
             'telefoneAluno.unique'   => 'Este telefone já está em uso.',
             'telefoneAluno.min'      => 'O telefone deve ter no mínimo 11 caracteres.',
-
+    
             'dataCadAluno.required'  => 'O campo data de cadastro é obrigatório.',
             'dataCadAluno.date'      => 'A data de cadastro deve ser uma data válida.',
-
+    
             'nivelHabilidade.required' => 'O campo nível de habilidade é obrigatório.',
             'nivelHabilidade.string'   => 'O nível de habilidade deve ser um texto.',
             'nivelHabilidade.max'      => 'O nível de habilidade não deve exceder 255 caracteres.',
-
+    
             'estadoAluno.required'   => 'O campo estado é obrigatório.',
             'estadoAluno.string'     => 'O estado deve ser um texto.',
             'estadoAluno.max'        => 'O estado não deve exceder 255 caracteres.',
-
+    
             'nomeCurso.required'     => 'O campo nome do curso é obrigatório.',
             'nomeCurso.string'       => 'O nome do curso deve ser um texto.',
             'nomeCurso.max'          => 'O nome do curso não deve exceder 255 caracteres.',
-
+    
             'dataDeNascimento.required' => 'O campo data de nascimento é obrigatório.',
             'dataDeNascimento.date'     => 'A data de nascimento deve ser uma data válida.',
-
+    
             'objetivo.string'        => 'O objetivo deve ser um texto.',
-
+    
             'statusAluno.required'   => 'O campo status é obrigatório.',
             'statusAluno.in'         => 'O status deve ser "ativo" ou "desativado".',
-
+    
             'fotoAluno.image'        => 'A foto deve ser uma imagem.',
             'fotoAluno.mimes'        => 'A foto deve ser um arquivo do tipo: jpeg, png, jpg, gif, svg.',
             'fotoAluno.max'          => 'A foto não deve ter mais que 2048 KB.',
-
+    
             'idCurso.required'       => 'O campo curso é obrigatório.',
             'idCurso.exists'         => 'O curso selecionado é inválido.',
         ]);
-
-        $aluno = new Aluno();
-
-        $aluno->nomeAluno        = $request->input('nomeAluno');
-        $aluno->emailAluno       = $request->input('emailAluno');
-        $aluno->senhaAluno       = $request->input('senhaAluno');
-        $aluno->telefoneAluno    = $request->input('telefoneAluno');
-
-        $aluno->dataCadAluno     = $request->input('dataCadAluno');
-        $aluno->nivelHabilidade  = $request->input('nivelHabilidade');
-        $aluno->estadoAluno      = $request->input('estadoAluno');
-
-        $aluno->nomeCurso        = $request->input('nomeCurso');
-        $aluno->idCurso          = $request->input('idCurso');
-        $aluno->dataDeNascimento = $request->input('dataDeNascimento');
-
-                // Upload da imagem
-        if ($request->hasFile('fotoAluno') && $request->file('fotoAluno')->isValid()) {
-        $file = $request->file('fotoAluno');
-        $path = $file->store('public/img/alunos');
-        $aluno->fotoAluno = basename($path);
+    
+        DB::beginTransaction();
+    
+        try {
+            // Cadastrar o aluno
+            $aluno = new Aluno();
+    
+            $aluno->nomeAluno        = $request->input('nomeAluno');
+            $aluno->emailAluno       = $request->input('emailAluno');
+            $aluno->senhaAluno       = $request->input('senhaAluno');
+            $aluno->telefoneAluno    = $request->input('telefoneAluno');
+            $aluno->dataCadAluno     = $request->input('dataCadAluno');
+            $aluno->nivelHabilidade  = $request->input('nivelHabilidade');
+            $aluno->estadoAluno      = $request->input('estadoAluno');
+            $aluno->nomeCurso        = $request->input('nomeCurso');
+            $aluno->idCurso          = $request->input('idCurso');
+            $aluno->dataDeNascimento = $request->input('dataDeNascimento');
+            $aluno->objetivo         = $request->input('objetivo');
+            $aluno->statusAluno      = $request->input('statusAluno');
+            $aluno->created_at       = $request->input('created_at');
+            $aluno->updated_at       = $request->input('updated_at');
+    
+            // Upload da imagem
+            if ($request->hasFile('fotoAluno') && $request->file('fotoAluno')->isValid()) {
+                $file = $request->file('fotoAluno');
+                $path = $file->store('public/img/alunos');
+                $aluno->fotoAluno = basename($path);
+            }
+    
+            $aluno->save();
+    
+            // Cadastrar o usuário com tipo_usuario_id igual ao id do aluno
+            $usuario = new Usuario();
+    
+            $usuario->nome              = $request->input('nomeAluno');
+            $usuario->email             = $request->input('emailAluno');
+            $usuario->senha             = $request->input('senhaAluno');
+            $usuario->tipo_usuario_type = 'aluno';
+            $usuario->tipo_usuario_id   = $aluno->id; // Usar o ID do aluno recém-criado
+            $usuario->created_at        = $request->input('created_at');
+            $usuario->updated_at        = $request->input('updated_at');
+    
+            $usuario->save();
+    
+            DB::commit();
+    
+            return redirect()->route('index.aluno')->with('success', 'Aluno e usuário adicionados com sucesso!');
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Erro ao cadastrar aluno e usuário: ' . $e->getMessage());
+            return redirect()->route('index.aluno')->with('error', 'Ocorreu um erro ao adicionar o aluno e usuário.');
+        }
     }
-
-        $aluno->objetivo        = $request->input('objetivo');
-        $aluno->statusAluno     = $request->input('statusAluno');
-        $aluno->created_at      = $request->input('create_at');
-        $aluno->updated_at      = $request->input('updated_at');
-
-        $aluno->save();
-
-        return redirect()->route('index.aluno')->with('success', 'Aluno adicionado com sucesso!');
-    }
+    
+    
 
     /**
      * @param  Integer

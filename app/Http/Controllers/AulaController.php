@@ -144,7 +144,8 @@ class AulaController extends Controller
                 'nomeAula'               => 'required|unique:tblaulas,nomeAula|min:3',
                 'descricaoAula'          => 'required|min:10',
                 'duracaoAula'            => 'required|integer|min:1',
-                'video_aulaAula'         => ['nullable', 'string', 'regex:/<iframe.*src="https:\/\/www\.youtube\.com\/embed\/[a-zA-Z0-9_-]+".*<\/iframe>/'],
+                'video_aulaAula'         => ['nullable','string','regex:/<iframe.*?src="https:\/\/www\.youtube\.com\/embed\/[a-zA-Z0-9_-]+(\?.*)?".*?<\/iframe>/'],
+
                 'fotoAula'               => 'nullable|image|mimes:jpeg,png,PNG,jpeg,jpg,gif,svg|max:2048',
                 'statusAula'             => 'required|in:ativo,desativo',
                 ],[
@@ -222,7 +223,7 @@ class AulaController extends Controller
              'nomeAula'                => 'required|unique:tblaulas,nomeAula,'.$idAula.',idAula|min:3',
              'descricaoAula'           => 'required|min:10',
              'duracaoAula'             => 'required|integer|min:1',
-             'video_aulaAula'          => ['nullable', 'string', 'regex:/<iframe.*src="https:\/\/www\.youtube\.com\/embed\/[a-zA-Z0-9_-]+".*<\/iframe>/',],
+             'video_aulaAula'          => ['nullable','string','regex:/<iframe.*?src="https:\/\/www\.youtube\.com\/embed\/[a-zA-Z0-9_-]+(\?.*)?".*?<\/iframe>/'],
              'fotoAula'                => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
              'statusAula'              => 'required|in:ativo,desativo',
              [

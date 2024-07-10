@@ -58,9 +58,8 @@ class CursosController extends Controller
             }
         
             return response()->json($aulas);
-        }
-        
-        
+        }        
+ 
         
         //     'nome'                => $curso->nomeCurso,
         //     'descricao'           => $curso->descricaoCurso,
@@ -82,23 +81,17 @@ class CursosController extends Controller
     
     public function create()
     {
-        //
     }
 
     /**
-     * Store a newly cursoseated resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param  \App\Models\Cursos  $curso
      * @return \Illuminate\Http\Response
      */
