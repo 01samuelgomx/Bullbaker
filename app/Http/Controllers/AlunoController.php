@@ -207,9 +207,7 @@ class AlunoController extends Controller
             'idCurso.exists'         => 'O curso selecionado é inválido.',
         ]);
     
-        DB::beginTransaction();
-    
-        try {
+
             // Cadastrar o aluno
             $aluno = new Aluno();
     
@@ -240,24 +238,19 @@ class AlunoController extends Controller
             // Cadastrar o usuário com tipo_usuario_id igual ao id do aluno
             $usuario = new Usuario();
     
-            $usuario->nome              = $request->input('nomeAluno');
-            $usuario->email             = $request->input('emailAluno');
-            $usuario->senha             = $request->input('senhaAluno');
-            $usuario->tipo_usuario_type = 'aluno';
-            $usuario->tipo_usuario_id   = $aluno->id; // Usar o ID do aluno recém-criado
-            $usuario->created_at        = $request->input('created_at');
-            $usuario->updated_at        = $request->input('updated_at');
+            $usuario->nome                   = $request->input('nomeAluno');
+            $usuario->email                  = $request->input('emailAluno');
+            $usuario->senha                  = $request->input('senhaAluno');
+            $usuario-> email_verificado_em	 = $request->input('dataCadAluno');
+            $usuario->tipo_usuario_type      = 'aluno';
+            $usuario->tipo_usuario_id        = $aluno->idAluno; // Usar o ID do aluno recém-criado
+            $usuario->created_at             = $request->input('created_at');
+            $usuario->updated_at             = $request->input('updated_at');
     
             $usuario->save();
     
-            DB::commit();
-    
-            return redirect()->route('index.aluno')->with('success', 'Aluno e usuário adicionados com sucesso!');
-        } catch (\Exception $e) {
-            DB::rollback();
-            Log::error('Erro ao cadastrar aluno e usuário: ' . $e->getMessage());
-            return redirect()->route('index.aluno')->with('error', 'Ocorreu um erro ao adicionar o aluno e usuário.');
-        }
+            return redirect()->route('index.aluno')->with('sucess', 'Aluno foi cadastrado com sucesso');
+        
     }
     
     
