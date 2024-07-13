@@ -18,7 +18,13 @@ class Administrador extends Model
         'nomeAdmin',       
         'emailAdmin',      
         'telefoneAdmin',      
-        'dataCadAdmin',      
+        'dataCadAdmin',     
+        'descricaoAdmin', 
+        'enderecoAdmin', 
+        'dataNascimentoAdmin', 
+        'estadoCivilAdmin', 
+        'cidadeAdmin', 
+        'estadoAdmin', 
         'statusAdmin',
         'fotoAdmin',
         'tipoAdministrador',
@@ -26,9 +32,7 @@ class Administrador extends Model
         'updated_at',
     ];
 
-    public function usuario(){
-        return $this->morphOne(Usuario::class, 'tipo_usuario');
-    }
+
 
     public function Regras()
     {
@@ -37,6 +41,12 @@ class Administrador extends Model
             'emailAdmin' => 'required|unique:tbladministrador,emailAdmin,'.$this->id.'|email',
             'telefoneAdmin' => 'required|unique:tbladministrador,telefoneAdmin,'.$this->id.'|min:10',
             'dataCadAdmin' => 'required|date',
+            'descricaoAdmin' => 'nullable|string|max:255',
+            'enderecoAdmin' => 'nullable|string|max:255',
+            'dataNascimentoAdmin' => 'nullable|date',
+            'estadoCivilAdmin' => 'nullable|in:solteiro,casado,divorciado,viúvo',
+            'cidadeAdmin' => 'nullable|string|max:100',
+            'estadoAdmin' => 'nullable|string|max:50',
             'statusAdmin' => 'required|in:ativo,desativado',
             'fotoAdmin' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'tipoAdministrador' => 'required|in:super,regular',
@@ -57,6 +67,12 @@ class Administrador extends Model
             'telefoneAdmin.min' => 'O telefone deve ter no mínimo 10 caracteres.',
             'dataCadAdmin.required' => 'O campo data de cadastro é obrigatório.',
             'dataCadAdmin.date' => 'Insira uma data válida.',
+            'descricaoAdmin.max' => 'A descrição deve ter no máximo 255 caracteres.',
+            'enderecoAdmin.max' => 'O endereço deve ter no máximo 255 caracteres.',
+            'dataNascimentoAdmin.date' => 'Insira uma data de nascimento válida.',
+            'estadoCivilAdmin.in' => 'O estado civil deve ser solteiro, casado, divorciado ou viúvo.',
+            'cidadeAdmin.max' => 'A cidade deve ter no máximo 100 caracteres.',
+            'estadoAdmin.max' => 'O estado deve ter no máximo 50 caracteres.',
             'statusAdmin.required' => 'O campo status é obrigatório.',
             'statusAdmin.in' => 'O status deve ser ativo ou desativado.',
             'fotoAdmin.image' => 'O arquivo deve ser uma imagem.',
@@ -66,4 +82,9 @@ class Administrador extends Model
             'tipoAdministrador.in' => 'O tipo de administrador deve ser super ou regular.',
         ];
     }
+
+    public function usuario(){
+        return $this->morphOne(Usuario::class, 'tipo_usuario');
+    }
+
 }

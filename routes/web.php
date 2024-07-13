@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\AulaController;
 use App\Http\Controllers\homeController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\infoController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\perfilController;
 use Illuminate\Support\Facades\Route;
 
 //--------------------------------------------------------------------------
@@ -27,7 +29,11 @@ Route::post('/login', [LoginController::class, 'autenticar'])->name('login');
 
 //--------------------------------------------------------------------------
 //  Dashboard paginas
-Route::get('/dashboard/administrativo/info', [infoController::class, 'index'])->name('info'); 
+Route::get('/dashboard/administrativo/info', [AdministradorController::class, 'index'])->name('info'); 
+Route::middleware('autenticacao:Administrativo')->group(function () {
+    Route::get('/dashboard/administrativo/perfil/index', [PerfilController::class, 'index'])->name('index'); 
+
+});
 
 
 

@@ -48,6 +48,9 @@
 
         </div>
 
+
+
+
         <div class="topbar-bottom-colors">
             <i style="background-color: #361F08;"></i>
             <i style="background-color: #C1959D;"></i>
@@ -57,7 +60,7 @@
             <i style="background-color: #90A293;"></i>
             <i style="background-color: #361F08;"></i>
         </div>
-        
+
     </div>
     <!-- Topbar -->
     <header class="side-header expand-header">
@@ -111,24 +114,12 @@
 
     <div class="option-panel">
 
-        <div class="color-panel">
-            <h4>Text Color</h4>
-            <span class="color1" onclick="setActiveStyleSheet('color1'); return false;">
-                <i></i>
-            </span>
-            <span class="color2" onclick="setActiveStyleSheet('color2'); return false;">
-                <i></i>
-            </span>
-            <span class="color3" onclick="setActiveStyleSheet('color'); return false;">
-                <i></i>
-            </span>
-            <span class="color4" onclick="setActiveStyleSheet('color4'); return false;">
-                <i></i>
-            </span>
-            <span class="color5" onclick="setActiveStyleSheet('color5'); return false;">
-                <i></i>
-            </span>
-        </div>
+        <span class="panel-btn">
+            <a href="{{ url('dashboard/administrativo/perfil/index') }}" title=" Acesso a pagina de perfil">
+                <img src="{{ asset('assets/img/settings.png') }}" alt="icone de configuração" />
+            </a>
+        </span>
+
     </div>
     <!-- Options Panel -->
     <div class="pg-tp">
@@ -351,7 +342,7 @@
                                     <td>
                                         <span class="ph#">{{ $aluno->nivelHabilidade }}</span>
                                     </td>
-                                    
+
                                     <td>
                                         <span class="ph#">{{ $aluno->estadoAluno }}</span>
                                     </td>
@@ -386,8 +377,8 @@
                                     </td>
 
                                     <td>
-                                        <form action="{{ route('delete.aluno', $aluno->idAluno) }}" method="POST" 
-                                        role="form text-left" enctype="multipart/form-data">
+                                        <form action="{{ route('delete.aluno', $aluno->idAluno) }}" method="POST"
+                                            role="form text-left" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit"

@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Administrador;
-use App\Models\Aula;
-use App\Models\Cursos;
+use App\Models\Perfil;
+use Illuminate\Http\Request;
 
-use App\Http\Requests\StoreAdministradorRequest;
-use App\Http\Requests\UpdateAdministradorRequest;
-
-class AdministradorController extends Controller
+class PerfilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +16,6 @@ class AdministradorController extends Controller
      */
     public function index()
     {
-            // Busca o administrador com base no ID da sessão ou outro critério adequado
             $idAdministrador = session('id');
             // dd($idAdministrador);
             $administrador = Administrador::find($idAdministrador);
@@ -27,7 +24,7 @@ class AdministradorController extends Controller
                 abort(404, 'Administrador não encontrado');
             }
 
-            return view('site.dashboard.administrativo.info', compact('administrador'));
+            return view('site.dashboard.administrativo.perfil.index', compact('administrador'));
     }
 
     /**
@@ -43,10 +40,10 @@ class AdministradorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreAdministradorRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAdministradorRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -54,10 +51,10 @@ class AdministradorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Administrador  $administrador
+     * @param  \App\Models\Perfil  $perfil
      * @return \Illuminate\Http\Response
      */
-    public function show(Administrador $administrador)
+    public function show(Perfil $perfil)
     {
         //
     }
@@ -65,10 +62,10 @@ class AdministradorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Administrador  $administrador
+     * @param  \App\Models\Perfil  $perfil
      * @return \Illuminate\Http\Response
      */
-    public function edit(Administrador $administrador)
+    public function edit(Perfil $perfil)
     {
         //
     }
@@ -76,11 +73,11 @@ class AdministradorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateAdministradorRequest  $request
-     * @param  \App\Models\Administrador  $administrador
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Perfil  $perfil
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAdministradorRequest $request, Administrador $administrador)
+    public function update(Request $request, Perfil $perfil)
     {
         //
     }
@@ -88,10 +85,10 @@ class AdministradorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Administrador  $administrador
+     * @param  \App\Models\Perfil  $perfil
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Administrador $administrador)
+    public function destroy(Perfil $perfil)
     {
         //
     }

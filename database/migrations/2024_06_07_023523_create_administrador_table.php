@@ -16,22 +16,26 @@ return new class extends Migration
      public function up()
      {
          Schema::create('tblAdministrador', function (Blueprint $table) {
-             $table->id('idAdmin'); // ID auto-incrementável
+             $table->id('idAdmin'); 
              $table->string('nomeAdmin');
-             $table->string('emailAdmin')->unique(); // Email único
+             $table->string('emailAdmin')->unique(); 
              $table->string('telefoneAdmin');
-             $table->timestamp('dataCadAdmin')->useCurrent(); // Data de cadastro com valor padrão como timestamp atual
-             $table->text('descricaoAdmin')->nullable(); // Cria um campo TEXT para a descrição da aula, podendo ser nulo
+             $table->string('cidadeAdmin'); 
              $table->string('enderecoAdmin');
-             $table->boolean('statusAdmin')->default(true); // Status com valor padrão verdadeiro
-             $table->string('fotoAdmin')->nullable(); // Campo foto, pode ser nulo
-             $table->enum('tipoAdministrador', ['Administrativo']); // Campo tipo com valores específicos
-             // Novos campos
-             $table->date('dataNascimentoAdmin'); // Data de nascimento
-             $table->string('estadoCivilAdmin'); // Estado civil do administrador
-             $table->string('cidadeAdmin'); // Cidade de residência
-             $table->string('estadoAdmin'); // Estado de residência
-             $table->timestamps(); // Adiciona os campos created_at e updated_at
+             $table->string('estadoAdmin'); 
+             $table->text('descricaoAdmin')->nullable(); 
+             $table->timestamp('dataCadAdmin')->useCurrent(); 
+            //  -----------------------
+            //  Campos de notificacao
+            $table->string('tituloNotificacaoAdmin'); 
+            $table->string('mensagemNotificacaoAdmin'); 
+            //  -----------------------
+             $table->enum('tipoAdministrador', ['Administrativo']); 
+             $table->date('dataNascimentoAdmin'); 
+             $table->string('estadoCivilAdmin'); 
+             $table->string('fotoAdmin')->nullable(); 
+             $table->boolean('statusAdmin')->default(true);
+             $table->timestamps(); 
      
          });
      }

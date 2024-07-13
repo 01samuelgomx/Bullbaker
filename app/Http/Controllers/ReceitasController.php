@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\cr;
+use App\Models\Receitas;
 use App\Http\Controllers\Controller;
-use App\Models\Administrador;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreReceitasRequest;
+use App\Http\Requests\UpdateReceitasRequest;
 
-class infoController extends Controller
+class ReceitasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,16 +16,7 @@ class infoController extends Controller
      */
     public function index()
     {
-            // Busca o administrador com base no ID da sessão ou outro critério adequado
-            $idAdministrador = session('id');
-            // dd($idAdministrador);
-            $administrador = Administrador::find($idAdministrador);
-            // dd($administrador);
-            if (!$administrador) {
-                abort(404, 'Administrador não encontrado');
-            }
-
-            return view('site.dashboard.administrativo.info', compact('administrador'));
+        //
     }
 
     /**
@@ -41,10 +32,10 @@ class infoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreReceitasRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreReceitasRequest $request)
     {
         //
     }
@@ -52,10 +43,10 @@ class infoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\cr  $cr
+     * @param  \App\Models\Receitas  $receitas
      * @return \Illuminate\Http\Response
      */
-    public function show(cr $cr)
+    public function show(Receitas $receitas)
     {
         //
     }
@@ -63,10 +54,10 @@ class infoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\cr  $cr
+     * @param  \App\Models\Receitas  $receitas
      * @return \Illuminate\Http\Response
      */
-    public function edit(cr $cr)
+    public function edit(Receitas $receitas)
     {
         //
     }
@@ -74,11 +65,11 @@ class infoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\cr  $cr
+     * @param  \App\Http\Requests\UpdateReceitasRequest  $request
+     * @param  \App\Models\Receitas  $receitas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, cr $cr)
+    public function update(UpdateReceitasRequest $request, Receitas $receitas)
     {
         //
     }
@@ -86,10 +77,10 @@ class infoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\cr  $cr
+     * @param  \App\Models\Receitas  $receitas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(cr $cr)
+    public function destroy(Receitas $receitas)
     {
         //
     }

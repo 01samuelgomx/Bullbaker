@@ -107,29 +107,12 @@
     </header>
 
     <!-- Side Header -->
-
     <div class="option-panel">
         <span class="panel-btn">
-            <i class="fa ion-android-settings fa-spin"></i>
+            <a href="{{ url('dashboard/administrativo/perfil/index') }}" title=" Acesso a pagina de perfil">
+                <img src="{{ asset('assets/img/settings.png') }}" alt="icone de configuração" />
+            </a>
         </span>
-        <div class="color-panel">
-            <h4>Text Color</h4>
-            <span class="color1" onclick="setActiveStyleSheet('color1'); return false;">
-                <i></i>
-            </span>
-            <span class="color2" onclick="setActiveStyleSheet('color2'); return false;">
-                <i></i>
-            </span>
-            <span class="color3" onclick="setActiveStyleSheet('color'); return false;">
-                <i></i>
-            </span>
-            <span class="color4" onclick="setActiveStyleSheet('color4'); return false;">
-                <i></i>
-            </span>
-            <span class="color5" onclick="setActiveStyleSheet('color5'); return false;">
-                <i></i>
-            </span>
-        </div>
     </div>
     <!-- Options Panel -->
     <div class="pg-tp">
