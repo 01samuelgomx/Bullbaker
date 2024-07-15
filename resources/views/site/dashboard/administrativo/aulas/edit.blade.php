@@ -169,7 +169,7 @@
     <!-- Page Top -->
 
     <div class="panel-content">
-        <div class="widget pad50-65">
+        <div class="widget pad50-65 styleTableAula">
 
             <form action="{{ route('update.aula', $editAula->idAula) }}" method="POST" role="form text-left" 
             enctype="multipart/form-data" class="contact-form">

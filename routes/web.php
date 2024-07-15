@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Route;
 //  Croud Perfil
 
     Route::middleware('autenticacao:Administrativo')->group(function () {
-        Route::get('/dashboard/administrativo/info', [AdministradorController::class, 'index'])->name('info'); 
+        Route::get('/dashboard/administrativo/info', [infoController::class, 'index'])->name('index'); 
         
         Route::get('/dashboard/administrativo/perfil/index', [AdministradorController::class, 'index'])->name('index.perfil'); 
         Route::post('/dashboard/administrativo/perfil', [NotificacaoController::class, 'cadNotificacao'])->name('cad.notificacao'); 
@@ -44,7 +44,7 @@ use Illuminate\Support\Facades\Route;
 });
 
 //--------------------------------------------------------------------------
-//  Croud Perfil
+//  Croud Receitas
 
     Route::middleware('autenticacao:Administrativo')->group(function () {
         Route::get('/dashboard/administrativo/receitas/index', [ReceitasController::class, 'index'])->name('index.receita'); 

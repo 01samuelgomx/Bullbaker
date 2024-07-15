@@ -168,7 +168,7 @@
     </div>
     <!-- Page Top -->
     <div class="panel-content">
-        <div class="widget pad50-65">
+        <div class="widget pad50-65 styleTableAluno">
 
             <form action="{{ route('cad.aluno') }}" method="POST" role="form text-left" class="contact-form"
                 enctype="multipart/form-data">

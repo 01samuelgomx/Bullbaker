@@ -71,15 +71,23 @@ class ReceitasController extends Controller
            $num_aulas_ativas = 0;
        }
 
+       $result = DB::table('view_receitas_ativas')->first();
+       if ($result) {
+           $totalReceitasAtivas = $result->totalReceitasAtivas;
+       } else {
+           $totalReceitasAtivas = 0;
+       }
+
 
        // Retornar a view com os dados necessários
-       return view('site.dashboard.administrativo.receitas.index', compact( 'administrador', 'lista', 'num_alunos_ativos', 'num_cursos_ativos', 'num_aulas_ativas'));
+       return view('site.dashboard.administrativo.receitas.index', compact( 'administrador', 'lista', 'num_alunos_ativos', 'num_cursos_ativos', 'num_aulas_ativas','totalReceitasAtivas'));
    }
 
       /**
      * @param Receitas  $receita
      * @return Response
      */
+
     public function edit($id)
     {
         $idReceita = session('id');
@@ -95,71 +103,48 @@ class ReceitasController extends Controller
      * @return Response
      */
     
-    public function cadReceita(Request $request)
-    {
-        $request->merge(['created_at' => now()]);
-        $request->merge(['updated_at' => now()]);
-
-        $request->validate([
-
-            'idReceita'          => 'required|integer|unique:tblreceitas,idReceita',
-            'nomeReceita'        => 'required|string|max:35',
-            'ingredienteReceita' => 'required|string|max:550',
-            'modoPreparoReceita' => 'required|string|max:750',
-            'fotoReceita'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'statusReceita'      => 'required|in:ativo,inativo',
-            'created_at'         => 'required|date',
-            'updated_at'         => 'required|date',
-
-        ],[
-
-            'idReceita.required' => 'O campo ID da Receita é obrigatório.',
-            'idReceita.integer' => 'O campo ID da Receita deve ser um número inteiro.',
-            'idReceita.unique' => 'O campo ID da Receita deve ser único.',
-    
-            'nomeReceita.required' => 'O campo Nome da Receita é obrigatório.',
-            'nomeReceita.string' => 'O campo Nome da Receita deve ser um texto.',
-            'nomeReceita.max' => 'O campo Nome da Receita deve ter no máximo 35 caracteres.',
-    
-            'ingredienteReceita.required' => 'O campo Ingredientes da Receita é obrigatório.',
-            'ingredienteReceita.string' => 'O campo Ingredientes da Receita deve ser uma texto.',
-            'ingredienteReceita.max' => 'O campo Ingredientes da Receita deve ter no máximo 550 caracteres.',
-    
-            'modoPreparoReceita.required' => 'O campo modo de Preparo da Receita é obrigatório.',
-            'modoPreparoReceita.string' => 'O campo modo de Preparo da Receita deve ser um texto.',
-            'modoPreparoReceita.max' => 'O campo modo de Preparo da Receita  deve ter no máximo 750 caracteres.',
-    
-            'fotoReceita.image' => 'O campo Foto da Receita deve ser uma imagem.',
-            'fotoReceita.mimes' => 'A imagem da Receita deve estar em um dos seguintes formatos: jpeg, png, jpg, gif, svg.',
-            'fotoReceita.max' => 'A imagem da Receita deve ter no máximo 2MB.',
-    
-            'statusReceita.required' => 'O campo Status da Receita é obrigatório.',
-            'statusReceita.in' => 'O campo Status da Receita deve ser "ativo" ou "inativo".',
-    
-            'created_at.required' => 'O campo Data de Criação é obrigatório.',
-            'created_at.date' => 'O campo Data de Criação deve ser uma data válida.',
-    
-            'updated_at.required' => 'O campo Data de Atualização é obrigatório.',
-            'updated_at.date' => 'O campo Data de Atualização deve ser uma data válida.',
-
-        ]);
-
-        $receita = New Receitas();
-
-        $receita->nomeReceita          =$request->input('nomeReceita');
-        $receita->ingredienteReceita   =$request->input('ingredienteReceita');
-        $receita->modoPreparoReceita   =$request->input('modoPreparoReceita');
-        $receita->statusReceita        =$request->input('statusReceita');
-
-        if ($request->hasFile('fotoReceita') && $request->file('fotoReceita')->isValid()) {
-            $file = $request->file('fotoReceita');
-            $path = $file->store('public/img/receitas');
-            $receita->fotoReceita = basename($path);
-        }
-        $receita->save();
-
-        return redirect()->route('index.receita')->with('success','Receita cadastrada com sucesso');
-    }
+     public function cadReceita(Request $request)
+     {
+         $request->validate([
+             'nomeReceita'        => 'required|string|max:35',
+             'ingredienteReceita' => 'required|string|max:550',
+             'modoPreparoReceita' => 'required|string|max:750',
+             'fotoReceita'        => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+             'statusReceita'      => 'required|in:ativo,desativo',
+         ],[
+             'nomeReceita.required' => 'O campo Nome da Receita é obrigatório.',
+             'nomeReceita.string' => 'O campo Nome da Receita deve ser um texto.',
+             'nomeReceita.max' => 'O campo Nome da Receita deve ter no máximo 35 caracteres.',
+             'ingredienteReceita.required' => 'O campo Ingredientes da Receita é obrigatório.',
+             'ingredienteReceita.string' => 'O campo Ingredientes da Receita deve ser um texto.',
+             'ingredienteReceita.max' => 'O campo Ingredientes da Receita deve ter no máximo 550 caracteres.',
+             'modoPreparoReceita.required' => 'O campo Modo de Preparo da Receita é obrigatório.',
+             'modoPreparoReceita.string' => 'O campo Modo de Preparo da Receita deve ser um texto.',
+             'modoPreparoReceita.max' => 'O campo Modo de Preparo da Receita deve ter no máximo 750 caracteres.',
+             'fotoReceita.image' => 'O campo Foto da Receita deve ser uma imagem.',
+             'fotoReceita.mimes' => 'A imagem da Receita deve estar em um dos seguintes formatos: jpeg, png, jpg, gif, svg.',
+             'fotoReceita.max' => 'A imagem da Receita deve ter no máximo 2MB.',
+             'statusReceita.required' => 'O campo Status da Receita é obrigatório.',
+             'statusReceita.in' => 'O campo Status da Receita deve ser "ativo" ou "desativo".',
+         ]);
+ 
+         $receita = new Receitas();
+         $receita->nomeReceita = $request->input('nomeReceita');
+         $receita->ingredienteReceita = $request->input('ingredienteReceita');
+         $receita->modoPreparoReceita = $request->input('modoPreparoReceita');
+         $receita->statusReceita = $request->input('statusReceita');
+ 
+         if ($request->hasFile('fotoReceita') && $request->file('fotoReceita')->isValid()) {
+             $file = $request->file('fotoReceita');
+             $path = $file->store('public/img/receitas');
+             $receita->fotoReceita = basename($path);
+         }
+ 
+         $receita->save();
+ 
+         return redirect()->route('index.receita')->with('success', 'Receita cadastrada com sucesso');
+     }
+ 
 
     /**
      * @param Integer  $receita
@@ -178,74 +163,54 @@ class ReceitasController extends Controller
      * @param Receitas  $receita
      * @return Response
      */
-    public function update(Request $request, $idreceita)
+    public function update(Request $request, $idReceita)
     {
+        $receita = Receitas::findOrFail($idReceita);
+
         $request->validate([
-            'idReceita'          => 'required|integer|unique:tblreceitas,idReceita',
             'nomeReceita'        => 'required|string|max:35',
             'ingredienteReceita' => 'required|string|max:550',
             'modoPreparoReceita' => 'required|string|max:750',
             'fotoReceita'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'statusReceita'      => 'required|in:ativo,inativo',
-            'created_at'         => 'required|date',
-            'updated_at'         => 'required|date',
-    
+            'statusReceita'      => 'required|in:ativo,desativo',
         ],[
-           'idReceita.required' => 'O campo ID da Receita é obrigatório.',
-        'idReceita.integer' => 'O campo ID da Receita deve ser um número inteiro.',
-        'idReceita.unique' => 'O campo ID da Receita deve ser único.',
+            'nomeReceita.required' => 'O campo Nome da Receita é obrigatório.',
+            'nomeReceita.string' => 'O campo Nome da Receita deve ser um texto.',
+            'nomeReceita.max' => 'O campo Nome da Receita deve ter no máximo 35 caracteres.',
 
-        'nomeReceita.required' => 'O campo Nome da Receita é obrigatório.',
-        'nomeReceita.string' => 'O campo Nome da Receita deve ser um texto.',
-        'nomeReceita.max' => 'O campo Nome da Receita deve ter no máximo 35 caracteres.',
+            'ingredienteReceita.required' => 'O campo Ingredientes da Receita é obrigatório.',
+            'ingredienteReceita.string' => 'O campo Ingredientes da Receita deve ser um texto.',
+            'ingredienteReceita.max' => 'O campo Ingredientes da Receita deve ter no máximo 550 caracteres.',
 
-        'ingredienteReceita.required' => 'O campo Ingredientes da Receita é obrigatório.',
-        'ingredienteReceita.string' => 'O campo Ingredientes da Receita deve ser uma texto.',
-        'ingredienteReceita.max' => 'O campo Ingredientes da Receita deve ter no máximo 550 caracteres.',
+            'modoPreparoReceita.required' => 'O campo Modo de Preparo da Receita é obrigatório.',
+            'modoPreparoReceita.string' => 'O campo Modo de Preparo da Receita deve ser um texto.',
+            'modoPreparoReceita.max' => 'O campo Modo de Preparo da Receita deve ter no máximo 750 caracteres.',
 
-        'modoPreparoReceita.required' => 'O campo modo de Preparo da Receita é obrigatório.',
-        'modoPreparoReceita.string' => 'O campo modo de Preparo da Receita deve ser um texto.',
-        'modoPreparoReceita.max' => 'O campo modo de Preparo da Receita  deve ter no máximo 750 caracteres.',
+            'fotoReceita.image' => 'O campo Foto da Receita deve ser uma imagem.',
+            'fotoReceita.mimes' => 'A imagem da Receita deve estar em um dos seguintes formatos: jpeg, png, jpg, gif, svg.',
+            'fotoReceita.max' => 'A imagem da Receita deve ter no máximo 2MB.',
 
-        'fotoReceita.image' => 'O campo Foto da Receita deve ser uma imagem.',
-        'fotoReceita.mimes' => 'A imagem da Receita deve estar em um dos seguintes formatos: jpeg, png, jpg, gif, svg.',
-        'fotoReceita.max' => 'A imagem da Receita deve ter no máximo 2MB.',
-
-        'statusReceita.required' => 'O campo Status da Receita é obrigatório.',
-        'statusReceita.in' => 'O campo Status da Receita deve ser "ativo" ou "inativo".',
-
-        'created_at.required' => 'O campo Data de Criação é obrigatório.',
-        'created_at.date' => 'O campo Data de Criação deve ser uma data válida.',
-
-        'updated_at.required' => 'O campo Data de Atualização é obrigatório.',
-        'updated_at.date' => 'O campo Data de Atualização deve ser uma data válida.',
+            'statusReceita.required' => 'O campo Status da Receita é obrigatório.',
+            'statusReceita.in' => 'O campo Status da Receita deve ser "ativo" ou "desativo".',
         ]);
 
-        $receita = Receitas::findOrFail($idreceita);
+        $receita->nomeReceita = $request->input('nomeReceita');
+        $receita->ingredienteReceita = $request->input('ingredienteReceita');
+        $receita->modoPreparoReceita = $request->input('modoPreparoReceita');
+        $receita->statusReceita = $request->input('statusReceita');
 
-        $receita->update($request->only([
-            'idReceita', 
-            'nomeReceita', 
-            'ingredienteReceita',
-            'modoPreparoReceita',
-            'fotoReceita',
-            'statusReceita',
-        ]));
-
-          // Atualização da imagem do aluno, se uma nova imagem foi enviada
-          if ($request->hasFile('fotoReceita')) {
+        if ($request->hasFile('fotoReceita') && $request->file('fotoReceita')->isValid()) {
             // Apaga a imagem anterior, se existir
             if ($receita->fotoReceita) {
                 Storage::delete('public/img/receitas/' . $receita->fotoReceita);
             }
-    
+
             // Armazena a nova imagem
             $path = $request->file('fotoReceita')->store('public/img/receitas');
             $receita->fotoReceita = basename($path);
-    
-            // Salva a alteração da imagem no banco de dados
-            $receita->save();
         }
+
+        $receita->save();
 
         return redirect()->route('index.receita')->with('success', 'Receita atualizada com sucesso.');
     }

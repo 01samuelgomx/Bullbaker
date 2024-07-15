@@ -167,29 +167,25 @@
     </div>
     <!-- Page Top -->
     <div class="panel-content">
-        <div class="widget pad50-65">
+        <div class="widget pad50-65 styleTableReita">
 
-            <form action="{{ route('cad.receita') }}" method="POST" role="form text-left" class="contact-form"
+            <form action="{{ route('cad.receita') }}" method="POST" class="contact-form"
                 enctype="multipart/form-data">
                 @csrf
                 @method('POST')
 
-
                 <div class="d-flex justify-content-between">
-
                     <div class="widget-title2">
-
                         <div class="pr-tp-inr">
-                            <h4>Preencha com os dados da Receita </h4>
-                            <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
+                            <h4>Preencha com os dados da Receita</h4>
+                            <span>Por favor, certifique-se das informações antes de realizar o cadastro!</span>
                         </div>
-
                     </div>
 
                     {{-- ------FOTO------ --}}
                     <div class="file-input-container" style="margin-bottom:30px;">
                         <input type="file" id="file-input" accept="image/*" onchange="displayImage(event)"
-                            name="fotoReceita" value="{{ old('fotoReceita') }}">
+                            name="fotoReceita">
                         <label for="file-input" class="file-label">
                             <img id="icon" src="{{ asset('img/camera.png') }}" alt="Escolher Imagem">
                         </label>
@@ -198,12 +194,9 @@
                         @enderror
                     </div>
                     {{-- ---------------- --}}
-
                 </div>
 
-
                 <div class="column mrg20">
-
                     <div class="row mrg20">
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <p>Nome da Receita</p>
@@ -233,16 +226,14 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-
                     </div>
 
                     <div class="row mrg20">
-
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <p>Status da Receita</p>
                             <select class="brd-rd5" name="statusReceita" id="statusReceita" required>
-                                <option value="ativo" {{ old('statusReceita') == 'ativo' ? 'selected' : '' }}>
-                                    Ativo</option>
+                                <option value="ativo" {{ old('statusReceita') == 'ativo' ? 'selected' : '' }}>Ativo
+                                </option>
                                 <option value="desativo" {{ old('statusReceita') == 'desativo' ? 'selected' : '' }}>
                                     Desativo</option>
                             </select>
@@ -256,10 +247,9 @@
                 <div class="col-md-12 col-sm-12 col-lg-12">
                     <button class="green-bg brd-rd5" type="submit">Enviar</button>
                 </div>
+            </form>
 
         </div>
-        </form>
-    </div>
     </div>
 
 

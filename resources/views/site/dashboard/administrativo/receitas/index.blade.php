@@ -110,6 +110,8 @@
             <i style="background-color: #C1959D;"></i>
             <i style="background-color: #90A293;"></i>
             <i style="background-color: #361F08;"></i>
+            <i style="background-color: #4d636f;"></i>
+            <i style="background-color:#2c3e47;"></i>
         </div>
 
     </div>
@@ -193,6 +195,7 @@
     <!-- Page Top -->
 
     <div class="panel-content">
+
         <div class="filter-items">
             <div class="row grid-wrap mrg20">
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
@@ -201,19 +204,9 @@
                             <span class="wdgt-opt-btn">
                                 <i class="ion-android-more-vertical"></i>
                             </span>
-                            <div class="wdgt-opt-lst brd-rd5">
-                                <a class="delt-wdgt" href="#" title="">Delete</a>
-                                <a class="expnd-wdgt" href="#" title="">Expand</a>
-                                <a class="refrsh-wdgt" href="#" title="">Refresh</a>
-                            </div>
+
                         </div>
-                        <div class="wdgt-ldr">
-                            <div class="ball-scale-multiple">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
+
                         <i class="ion-arrow-graph-up-right"></i>
                         <div class="stat-box-innr">
                             <span>
@@ -231,19 +224,9 @@
                             <span class="wdgt-opt-btn">
                                 <i class="ion-android-more-vertical"></i>
                             </span>
-                            <div class="wdgt-opt-lst brd-rd5">
-                                <a class="delt-wdgt" href="#" title="">Delete</a>
-                                <a class="expnd-wdgt" href="#" title="">Expand</a>
-                                <a class="refrsh-wdgt" href="#" title="">Refresh</a>
-                            </div>
+
                         </div>
-                        <div class="wdgt-ldr">
-                            <div class="ball-scale-multiple">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
+
                         <i class="ion-android-desktop"></i>
                         <div class="stat-box-innr">
                             <span>
@@ -254,25 +237,16 @@
                             <i class="ion-ios-stopwatch"></i>Saiba mais e acesse a tabela aulas !</span>
                     </div>
                 </div>
+
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
                     <div class="stat-box widget bg-clr3">
                         <div class="wdgt-opt">
                             <span class="wdgt-opt-btn">
                                 <i class="ion-android-more-vertical"></i>
                             </span>
-                            <div class="wdgt-opt-lst brd-rd5">
-                                <a class="delt-wdgt" href="#" title="">Delete</a>
-                                <a class="expnd-wdgt" href="#" title="">Expand</a>
-                                <a class="refrsh-wdgt" href="#" title="">Refresh</a>
-                            </div>
+
                         </div>
-                        <div class="wdgt-ldr">
-                            <div class="ball-scale-multiple">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
+
 
                         <i class="ion-cube"></i>
                         <div class="stat-box-innr">
@@ -285,8 +259,28 @@
                             <i class="ion-ios-stopwatch"></i>Confira mais em sua tabela alunos !</span>
                     </div>
                 </div>
-                <div class="col-md-4 grid-item col-sm-6 col-lg-3">
 
+                <div class="col-md-4 grid-item col-sm-6 col-lg-3">
+                    <div class="stat-box widget bg-clr4" >
+                        <div class="wdgt-opt">
+                            <span class="wdgt-opt-btn">
+                                <i class="ion-android-more-vertical"></i>
+                            </span>
+
+                        </div>
+
+                        <i class="ion-android-desktop"></i>
+                        <div class="stat-box-innr " >
+                            <span>
+                                <i class="counter"> -> {{ $totalReceitasAtivas }}</i></span>
+                            <h5>Receitas Inseridas !</h5>
+                        </div>
+                        <span>
+                            <i class="ion-ios-stopwatch"></i>Cadastre novas Receita!</span>
+                    </div>
+                </div>
+
+                <div class="col-md-4 grid-item col-sm-6 col-lg-3">
                 </div>
                 <div class="wdgt-ldr">
                     <div class="ball-scale-multiple">
@@ -297,18 +291,18 @@
                 </div>
                 <i class="ion-android-upload"></i>
                 <div class="stat-box-innr">
-                    <span>$
-                        <i class="counter">2,206</i>
+                    <span>.
+                        <i class="counter">.</i>
                     </span>
-                    <h5>Today Income</h5>
+                    <h5>.</h5>
                 </div>
                 <span>
-                    <i class="ion-ios-stopwatch"></i> Updated: 05:14pm</span>
+                    <i class="ion-ios-stopwatch" style="color: #fff"></i>.</span>
             </div>
+
+
+
         </div>
-
-
-
 
         <div class="col-md-12 grid-item col-sm-12 col-lg-12">
             <div class="widget proj-order pad50-40">
@@ -336,7 +330,7 @@
                 <div class="table-wrap">
                     <table class="table table-bordered style2">
 
-                        <thead class="thead-inverse" style="background-color: #90a293; color: #fff">
+                        <thead class="thead-inverse" style="background-color:#4d636f; color: #fff">
                             <tr>
                                 <th>ID</th>
                                 <th>Foto</th>
@@ -355,7 +349,7 @@
                             @foreach ($lista as $receita)
                                 <tr>
                                     <td>
-                                        <span class="blue-bg indx" style="background-color:#445547;"
+                                        <span class="blue-bg indx" style="background-color:#2c3e47;"
                                             name="">{{ $receita->idReceita }}</span>
                                     </td>
 
@@ -383,7 +377,7 @@
                                     </td>
 
                                     <td>
-                                        <span class="ph#">{{ $receita->statusReceita}}</span>
+                                        <span class="ph#">{{ $receita->statusReceita }}</span>
                                     </td>
 
                                     <td>
@@ -394,8 +388,8 @@
                                     </td>
 
                                     <td>
-                                        <form action="{{ route('delete.receita', $receita->idReceita) }}" method="POST"
-                                            role="form text-left" enctype="multipart/form-data">
+                                        <form action="{{ route('delete.receita', $receita->idReceita) }}"
+                                            method="POST" role="form text-left" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit"

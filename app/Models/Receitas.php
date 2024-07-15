@@ -8,16 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Receitas extends Model
 {
     use HasFactory;
-    protected $table = 'tblreceitas';
     protected $primaryKey = 'idReceita';
+    protected $table = 'tblreceitas';
 
     protected $fillable = [
-        'idReceita', 
-        'nomeReceita', 
-        'ingredienteReceita',
-        'modoPreparoReceita',
-        'fotoReceita',
-        'statusReceita',
+        'nomeReceita',
+         'ingredienteReceita', 
+         'modoPreparoReceita', 
+         'fotoReceita', 
+         'statusReceita',
     ];
 
     public function regras(){
@@ -27,8 +26,8 @@ class Receitas extends Model
         'nomeReceita'        => 'required|string|max:35',
         'ingredienteReceita' => 'required|string|max:550',
         'modoPreparoReceita' => 'required|string|max:750',
-        'fotoReceita'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'statusReceita'      => 'required|in:ativo,inativo',
+        'fotoReceita'        => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'statusReceita'      => 'required|in:ativo,desativo',
         'created_at'         => 'required|date',
         'updated_at'         => 'required|date',
 
@@ -60,7 +59,7 @@ public function Feedback(){
         'fotoReceita.max' => 'A imagem da Receita deve ter no máximo 2MB.',
 
         'statusReceita.required' => 'O campo Status da Receita é obrigatório.',
-        'statusReceita.in' => 'O campo Status da Receita deve ser "ativo" ou "inativo".',
+        'statusReceita.in' => 'O campo Status da Receita deve ser "ativo" ou "desativo".',
 
         'created_at.required' => 'O campo Data de Criação é obrigatório.',
         'created_at.date' => 'O campo Data de Criação deve ser uma data válida.',

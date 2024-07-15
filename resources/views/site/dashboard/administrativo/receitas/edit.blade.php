@@ -170,23 +170,19 @@
     <!-- Page Top -->
 
     <div class="panel-content">
-        <div class="widget pad50-65">
+        <div class="widget pad50-65 styleTableReita">
 
             <form action="{{ route('update.receita', $editReceita->idReceita) }}" method="POST" role="form text-left"
                 class="contact-form" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
-
                 <div class="d-flex justify-content-between">
-
                     <div class="widget-title2">
-
                         <div class="pr-tp-inr">
-                            <h4>Preencha com os dados do Aluno </h4>
-                            <span>Por favor certifique-se das informções antes de realizar o cadastro!</span>
+                            <h4>Preencha com os dados da Receita</h4>
+                            <span>Por favor, certifique-se das informações antes de realizar a atualização!</span>
                         </div>
-
                     </div>
 
                     {{-- ------FOTO------ --}}
@@ -203,12 +199,9 @@
                         @enderror
                     </div>
                     {{-- ---------------- --}}
-
                 </div>
 
-
                 <div class="column mrg20">
-
                     <div class="row mrg20">
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <p>Nome da Receita</p>
@@ -239,11 +232,9 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-
                     </div>
 
                     <div class="row mrg20">
-
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <p>Status da Receita</p>
                             <select class="brd-rd5" name="statusReceita" id="statusReceita" required>
@@ -264,12 +255,11 @@
                 <div class="col-md-12 col-sm-12 col-lg-12">
                     <button class="green-bg brd-rd5" type="submit">Enviar</button>
                 </div>
+            </form>
 
-           </div>
-        </form>
 
+        </div>
     </div>
-</div>
 
 
     <!-- Panel Content -->

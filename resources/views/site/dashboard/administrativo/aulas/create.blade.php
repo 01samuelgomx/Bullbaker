@@ -167,7 +167,7 @@
     <!-- Page Top -->
 
     <div class="panel-content">
-        <div class="widget pad50-65">
+        <div class="widget pad50-65 styleTableAula">
 
             <form action="{{ route('cad.aula') }}" method="POST" role="form text-left" 
             class="contact-form" enctype="multipart/form-data">

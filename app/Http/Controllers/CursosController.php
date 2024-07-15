@@ -94,9 +94,17 @@ class CursosController extends Controller
                      $num_aulas_ativas = 0;
                  }
                  
+                 $result = DB::table('view_receitas_ativas')->first();
+                 if ($result) {
+                     $totalReceitasAtivas = $result->totalReceitasAtivas;
+                 } else {
+                     $totalReceitasAtivas = 0;
+                 }
+          
+                 
                  // -------------------------------
         // dd($lista);
-        return view('site.dashboard.administrativo.cursos.index', compact('administrador','curso','lista','num_alunos_ativos','num_cursos_ativos','num_aulas_ativas'));
+        return view('site.dashboard.administrativo.cursos.index', compact('administrador','curso','lista','num_alunos_ativos','num_cursos_ativos','num_aulas_ativas','totalReceitasAtivas'));
     }
 
 

@@ -201,19 +201,9 @@
                             <span class="wdgt-opt-btn">
                                 <i class="ion-android-more-vertical"></i>
                             </span>
-                            <div class="wdgt-opt-lst brd-rd5">
-                                <a class="delt-wdgt" href="#" title="">Delete</a>
-                                <a class="expnd-wdgt" href="#" title="">Expand</a>
-                                <a class="refrsh-wdgt" href="#" title="">Refresh</a>
-                            </div>
+
                         </div>
-                        <div class="wdgt-ldr">
-                            <div class="ball-scale-multiple">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
+
                         <i class="ion-arrow-graph-up-right"></i>
                         <div class="stat-box-innr">
                             <span>
@@ -222,7 +212,7 @@
                             <h5>Cursos Cadastrados !</h5>
                         </div>
                         <span>
-                            <i class="ion-ios-stopwatch"></i>Crie um novo curso através da tabela</span>
+                            <i class="ion-ios-stopwatch"></i>Crie novo curso através da tabela</span>
                     </div>
                 </div>
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
@@ -231,19 +221,9 @@
                             <span class="wdgt-opt-btn">
                                 <i class="ion-android-more-vertical"></i>
                             </span>
-                            <div class="wdgt-opt-lst brd-rd5">
-                                <a class="delt-wdgt" href="#" title="">Delete</a>
-                                <a class="expnd-wdgt" href="#" title="">Expand</a>
-                                <a class="refrsh-wdgt" href="#" title="">Refresh</a>
-                            </div>
+
                         </div>
-                        <div class="wdgt-ldr">
-                            <div class="ball-scale-multiple">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
+
                         <i class="ion-android-desktop"></i>
                         <div class="stat-box-innr">
                             <span>
@@ -254,38 +234,50 @@
                             <i class="ion-ios-stopwatch"></i>Saiba mais e acesse a tabela aulas !</span>
                     </div>
                 </div>
+
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
                     <div class="stat-box widget bg-clr3">
                         <div class="wdgt-opt">
                             <span class="wdgt-opt-btn">
                                 <i class="ion-android-more-vertical"></i>
                             </span>
-                            <div class="wdgt-opt-lst brd-rd5">
-                                <a class="delt-wdgt" href="#" title="">Delete</a>
-                                <a class="expnd-wdgt" href="#" title="">Expand</a>
-                                <a class="refrsh-wdgt" href="#" title="">Refresh</a>
-                            </div>
+
                         </div>
-                        <div class="wdgt-ldr">
-                            <div class="ball-scale-multiple">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
+
+
                         <i class="ion-cube"></i>
                         <div class="stat-box-innr">
                             <span>
                                 <i class="counter"> -> {{ $num_alunos_ativos }}</i>
                             </span>
-                            <h5>Total de Aluno</h5>
+                            <h5>Total de Alunos</h5>
                         </div>
                         <span>
-                            <i class="ion-ios-stopwatch"></i>Confira mais em sua tabela Alunos !</span>
+                            <i class="ion-ios-stopwatch"></i>Confira mais em sua tabela alunos !</span>
                     </div>
                 </div>
-                <div class="col-md-4 grid-item col-sm-6 col-lg-3">
 
+                <div class="col-md-4 grid-item col-sm-6 col-lg-3">
+                    <div class="stat-box widget bg-clr4" >
+                        <div class="wdgt-opt">
+                            <span class="wdgt-opt-btn">
+                                <i class="ion-android-more-vertical"></i>
+                            </span>
+
+                        </div>
+
+                        <i class="ion-android-desktop"></i>
+                        <div class="stat-box-innr " >
+                            <span>
+                                <i class="counter"> -> {{ $totalReceitasAtivas }}</i></span>
+                            <h5>Receitas Inseridas !</h5>
+                        </div>
+                        <span>
+                            <i class="ion-ios-stopwatch"></i>Cadastre novas Receita!</span>
+                    </div>
+                </div>
+
+                <div class="col-md-4 grid-item col-sm-6 col-lg-3">
                 </div>
                 <div class="wdgt-ldr">
                     <div class="ball-scale-multiple">
@@ -296,19 +288,18 @@
                 </div>
                 <i class="ion-android-upload"></i>
                 <div class="stat-box-innr">
-                    <span>$
-                        <i class="counter"></i>
+                    <span>.
+                        <i class="counter">.</i>
                     </span>
-
+                    <h5>.</h5>
                 </div>
                 <span>
-
-                </span>
+                    <i class="ion-ios-stopwatch" style="color: #fff"></i>.</span>
             </div>
+
+
+
         </div>
-
-
-
 
         <div class="col-md-12 grid-item col-sm-12 col-lg-12">
             <div class="widget proj-order pad50-40">

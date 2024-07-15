@@ -205,6 +205,29 @@ textarea {
     padding: 0;
     width: 1170px;
 }
+
+
+.styleTableAluno{
+    border-top: solid 10px #445547;
+    border-radius: 44px !important;;
+    border-bottom: solid 10px #445547;
+}
+.styleTableCurso{
+    border-top: solid 10px #785e63;
+    border-radius: 44px !important;;
+    border-bottom: solid 10px #785e63;
+}
+.styleTableAula{
+    border-top: solid 10px #361F08;
+    border-radius: 44px !important;
+    border-bottom: solid 10px #361F08;
+}
+.styleTableReita{
+    border-top: solid 10px #4d636f;
+    border-radius: 44px !important;;
+    border-bottom: solid 10px #4d636f;
+}
+
 .rmv-ext,
 .rmv-ext2,
 .rmv-ext3,
@@ -291,10 +314,10 @@ textarea {
     background-color: #90a293 !important;
 }
 .bg-clr4 {
-    background-color: #00b8e5 !important;
+    background-color:#4d636f!important;
 }
 .bg-clr5 {
-    background-color: #13aaf9 !important;
+    background-color: #2c3e47 !important;
 }
 .bg-clr6 {
     background-color: #ffb22b !important;
