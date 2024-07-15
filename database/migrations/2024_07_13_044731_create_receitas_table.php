@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tblreceitas', function (Blueprint $table) {
-            $table->id();
+            $table->id('idReceita');
             $table->string('nomeReceita', 255);
             $table->string('ingredienteReceita', 255);
+            $table->string('modoPreparoReceita', 255);
             $table->string('fotoReceita', 255);
             $table->string('statusReceita', 255);
             $table->timestamps();
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('receitas');
+        Schema::dropIfExists('tblreceitas');
     }
 };

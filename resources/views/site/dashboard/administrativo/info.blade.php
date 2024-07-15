@@ -92,9 +92,20 @@
                         <i class="fa fa-play-circle" aria-hidden="true"></i>
                     </a>
                 </li>
+
             </ul>
 
-            <h4>Manual</h4>
+            <h4>Itens </h4>
+            <ul class="drp-sec">
+                <li class="has-drp">
+                    <a href="{{ url('dashboard/administrativo/receitas/index') }}" title="Acessar tabela de receita">
+                        <span>Receitas</span>
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <h4>Manual </h4>
             <ul class="drp-sec">
                 <li class="has-drp">
                     <a href="{{ url('dashboard/administrativo/info') }}" title="Acessar informações de suporte">
@@ -103,6 +114,7 @@
                     </a>
                 </li>
             </ul>
+
         </nav>
     </header>
 

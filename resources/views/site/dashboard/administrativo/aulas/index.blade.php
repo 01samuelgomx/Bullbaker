@@ -118,7 +118,7 @@
     <header class="side-header expand-header">
         <div class="nav-head">Navegação Principal !
             <span class="menu-trigger">
-                <i class="fa fa-reorder" aria-hidden="true"></i>
+                <i class="ion-android-menu"></i>
             </span>
         </div>
         <nav class="custom-scrollbar">
@@ -134,19 +134,29 @@
                 </li>
 
                 <li class="has-drp">
-                    <a href="{{ url('dashboard/administrativo/cursos/index') }}" title="acessar tabela aulas">
+                    <a href="{{ url('dashboard/administrativo/cursos/index') }}" title="Acessar tabela cursos">
                         <span>Cursos</span>
                         <i class="fa fa-university" aria-hidden="true"></i>
                     </a>
                 </li>
 
                 <li class="has-drp">
-                    <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="acessar tabela aulas">
+                    <a href="{{ url('dashboard/administrativo/aulas/index') }}" title="Acessar tabela aulas">
                         <span>Aulas</span>
                         <i class="fa fa-play-circle" aria-hidden="true"></i>
                     </a>
                 </li>
 
+            </ul>
+
+            <h4>Itens </h4>
+            <ul class="drp-sec">
+                <li class="has-drp">
+                    <a href="{{ url('dashboard/administrativo/receitas/index') }}" title="Acessar tabela de receita">
+                        <span>Receitas</span>
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </a>
+                </li>
             </ul>
 
             <h4>Manual </h4>
@@ -161,7 +171,6 @@
 
         </nav>
     </header>
-
     <!-- Side Header -->
 
     <div class="option-panel">

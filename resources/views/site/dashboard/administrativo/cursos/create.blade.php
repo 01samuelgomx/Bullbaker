@@ -89,9 +89,8 @@
         </div>
     </div>
     <!-- Topbar -->
-
     <header class="side-header expand-header">
-        <div class="nav-head">Main Navigation
+        <div class="nav-head">Navegação Principal !
             <span class="menu-trigger">
                 <i class="ion-android-menu"></i>
             </span>
@@ -122,6 +121,16 @@
                     </a>
                 </li>
 
+            </ul>
+
+            <h4>Itens </h4>
+            <ul class="drp-sec">
+                <li class="has-drp">
+                    <a href="{{ url('dashboard/administrativo/receitas/index') }}" title="Acessar tabela de receita">
+                        <span>Receitas</span>
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </a>
+                </li>
             </ul>
 
             <h4>Manual </h4>

@@ -12,6 +12,7 @@ use App\Http\Controllers\infoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NotificacaoController;
 use App\Http\Controllers\perfilController;
+use App\Http\Controllers\ReceitasController;
 use Illuminate\Support\Facades\Route;
 
 //--------------------------------------------------------------------------
@@ -29,7 +30,8 @@ use Illuminate\Support\Facades\Route;
     Route::post('/login', [LoginController::class, 'autenticar'])->name('login');
 
 //--------------------------------------------------------------------------
-//  Dashboard paginas
+//  Croud Perfil
+
     Route::middleware('autenticacao:Administrativo')->group(function () {
         Route::get('/dashboard/administrativo/info', [AdministradorController::class, 'index'])->name('info'); 
         
@@ -41,7 +43,19 @@ use Illuminate\Support\Facades\Route;
 
 });
 
+//--------------------------------------------------------------------------
+//  Croud Perfil
 
+    Route::middleware('autenticacao:Administrativo')->group(function () {
+        Route::get('/dashboard/administrativo/receitas/index', [ReceitasController::class, 'index'])->name('index.receita'); 
+
+        Route::get('/dashboard/administrativo/receitas/create', [ReceitasController::class, 'create'])->name('create.receita'); 
+        Route::post('/dashboard/administrativo/receitas', [ReceitasController::class, 'cadReceita'])->name('cad.receita'); 
+        Route::get('/dashboard/administrativo/receitas/{id}/edit', [ReceitasController::class, 'edit'])->name('edit.receita');
+        Route::put('/dashboard/administrativo/receitas/{id}', [ReceitasController::class, 'update'])->name('update.receita'); 
+        Route::delete('/dashboard/administrativo/receitas/{id}', [ReceitasController::class, 'destroy'])->name('delete.receita'); 
+
+});
 
 //--------------------------------------------------------------------------
 // Crud Aluno

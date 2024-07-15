@@ -114,26 +114,6 @@ class AlunoController extends Controller
              return view('site.dashboard.administrativo.aluno.edit', compact('aluno', 'editAluno'));
          }
 
-
-    // -------------------------------
-    // Croud STORE
-    // ------------------------------
-
-    public function store(Request $request)
-    {
-        $request -> validate($this->aluno->Regras(), $this->aluno->Feedback());
-        $imagem = $request -> file('foto');
-        $imagem_url = $imagem -> store('imagem', 'public');
-
-        $alunos = $this->aluno->create([
-
-            'nome' => $request-> nome,
-            'foto' => $imagem_url,
-        ]);
-
-        return response()->json($alunos, 200);
-    }
-
     // -------------------------------
     // Cadastro Aluno
 
@@ -389,12 +369,5 @@ class AlunoController extends Controller
 
        return redirect()->route('index.aluno')->with('success', 'Aluno desativado com sucesso.');
     }
-
-     // -------------------------------
-     // LOGIN ALUNO APP
-
-
-
-
 
 }
