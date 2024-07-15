@@ -249,7 +249,7 @@ class AlunoController extends Controller
     
             $usuario->save();
     
-            return redirect()->route('index.aluno')->with('sucess', 'Aluno foi cadastrado com sucesso');
+            return redirect()->route('index.aluno')->with('success', 'Aluno foi cadastrado com sucesso');
         
     }
     

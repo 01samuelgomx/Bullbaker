@@ -67,6 +67,8 @@
     }
 </style>
 
+
+
 <body class="expand-data panel-data">
     <div class="topbar">
         <div class="logo">
@@ -139,7 +141,7 @@
     </header>
     <!-- Side Header -->
     <div class="option-panel">
-         <span class="panel-btn">
+        <span class="panel-btn">
             <a href="{{ url('dashboard/administrativo/perfil/index') }}" title=" Acesso a pagina de perfil">
                 <img src="{{ asset('assets/img/settings.png') }}" alt="icone de configuração" />
             </a>
@@ -343,9 +345,13 @@
 
         </div>
         </form>
+    </div>
+    </div>
 
-    </div>
-    </div>
+
+
+
+
     <!-- Panel Content -->
     <script>
         function displayImage(event) {

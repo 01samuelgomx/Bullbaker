@@ -27,8 +27,49 @@
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color5.css') }}" title="color5">
 </head>
 
+
+<style>
+    .file-input-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+    }
+
+    #file-input {
+        display: none;
+    }
+
+    .file-label {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: transparent;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        transition: background-color 0.3s ease;
+    }
+
+    .file-label img {
+        width: 100px;
+        height: 100px;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    .file-label img.selected {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+
 <body class="expand-data panel-data">
-       <div class="topbar">
+    <div class="topbar">
         <div class="logo">
             <h1>
                 <a href="#" title="">
@@ -99,48 +140,9 @@
     </header>
     <!-- Side Header -->
 
-    <style>
-        .file-input-container {
-            position: relative;
-            width: 150px;
-            height: 150px;
-        }
-
-        #file-input {
-            display: none;
-        }
-
-        .file-label {
-            display: block;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background-color: transparent;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-            transition: background-color 0.3s ease;
-        }
-
-        .file-label img {
-            width: 100px;
-            height: 100px;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
-
-        .file-label img.selected {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
 
     <div class="option-panel">
-         <span class="panel-btn">
+        <span class="panel-btn">
             <a href="{{ url('dashboard/administrativo/perfil/index') }}" title=" Acesso a pagina de perfil">
                 <img src="{{ asset('assets/img/settings.png') }}" alt="icone de configuração" />
             </a>
@@ -362,11 +364,10 @@
         </div>
         </form>
 
-
-
-
     </div>
     </div>
+
+
     <!-- Panel Content -->
     <script>
         function displayImage(event) {

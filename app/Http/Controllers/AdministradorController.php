@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Administrador;
 use App\Models\Aula;
 use App\Models\Cursos;
+use App\Models\Notificacao;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,10 @@ class AdministradorController extends Controller
             abort(404, 'Administrador não encontrado');
         }
 
-        return view('site.dashboard.administrativo.perfil.index', compact('administrador'));
+        $idnotificacao = session('id');
+        $lista = Notificacao::where('statusNotificacao', 'ativo')->get();
+
+        return view('site.dashboard.administrativo.perfil.index', compact('administrador','lista'));
     }
 
     /**

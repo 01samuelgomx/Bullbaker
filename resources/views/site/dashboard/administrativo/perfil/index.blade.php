@@ -106,7 +106,7 @@
     .align-close {
         display: flex;
         justify-content: flex-end;
-         width: 100%;
+        width: 100%;
     }
 
     .close {
@@ -293,10 +293,10 @@
                         </div>
                     </div>
                     <div class="col-md-8 col-sm-12 col-lg-8">
-                        <div class="usr-actvty-wrp widget pad50-40">
 
-                            <h4 class="widget-title">Notificações
-                            </h4>
+
+                        <div class="usr-actvty-wrp widget pad50-40" style="padding: 0px 40px">
+
 
 
                             <form action="{{ route('cad.notificacao') }}" method="POST" role="form text-left"
@@ -304,18 +304,39 @@
                                 @csrf
                                 @method('POST')
 
-                                <div class="file-input-container" style="margin-bottom:30px;">
-                                    <input type="file" id="file-input" accept="image/*"
-                                        onchange="displayImage(event)" name="fotoNotificacao"
-                                        value="{{ old('fotoNotificacao') }}">
-                                    <label for="file-input" class="file-label">
-                                        <img id="icon" src="{{ asset('img/camera.png') }}"
-                                            alt="Escolher Imagem">
-                                    </label>
-                                    @error('fotoNotificacao')
+                                <div class="perfilNotificacao">
+                                    <h4 class="widget-title">Notificações
+                                    </h4>
+
+                                    <div class="file-input-container" style="margin-bottom:30px;">
+                                        <input type="file" id="file-input" accept="image/*"
+                                            onchange="displayImage(event)" name="fotoNotificacao"
+                                            value="{{ old('fotoNotificacao') }}">
+                                        <label for="file-input" class="file-label">
+                                            <img id="icon" src="{{ asset('img/camera.png') }}"
+                                                alt="Escolher Imagem">
+                                        </label>
+                                        @error('fotoNotificacao')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-lg-6" style="margin-top: -45px; margin-bottom: 25px">
+                                    <p>Status da Notificação</p>
+                                    <select class="brd-rd5" name="statusNotificacao" id="statusNotificacao" required>
+                                        <option value="ativo"
+                                            {{ old('statusNotificacao') == 'ativo' ? 'selected' : '' }}>
+                                            Ativo</option>
+                                        <option value="desativo"
+                                            {{ old('statusNotificacao') == 'desativo' ? 'selected' : '' }}>
+                                            Desativo</option>
+                                    </select>
+                                    @error('statusNotificacao')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
 
                                 <div class="row mrg20">
                                     <div class="col-md-6 col-sm-6 col-lg-6">
@@ -363,6 +384,82 @@
                                 </div>
                             </div>
 
+                            <div class="table-wrap">
+                                <table class="table table-bordered style2" style="margin-top: 55px">
+
+                                    <thead class="thead-inverse" style="background-color: #90a293; color: #fff">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Foto</th>
+                                            <th>Titulo</th>
+                                            <th>Mensagem</th>
+                                            <th>Status</th>
+                                            <th>Edição</th>
+                                            <th>Deletar</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+
+                                        @foreach ($lista as $notificacao)
+                                            <tr>
+                                                <td>
+                                                    <span class="blue-bg indx" style="background-color:#445547;"
+                                                        name="">{{ $notificacao->idNotificacao }}</span>
+                                                </td>
+
+                                                {{-- ------FOTO------ --}}
+                                                <td>
+                                                    @if (Storage::exists('public/img/notificacao/' . $notificacao->fotoNotificacao))
+                                                        <img src="{{ asset('storage/img/notificacao/' . $notificacao->fotoNotificacao) }}"
+                                                            alt="lll"
+                                                            style="width: 100px; height: 100px;border-radius: 50%">
+                                                    @else
+                                                        <span>Imagem não disponível</span>
+                                                    @endif
+                                                </td>
+                                                {{-- ---------------- --}}
+
+                                                <td>
+                                                    <span class="date">{{ $notificacao->tituloNotificacao }}</span>
+                                                </td>
+
+                                                <td>
+                                                    <h4 class="name">{{ $notificacao->mensagemNotificacao }}</h4>
+                                                </td>
+
+                                                <td>
+                                                    <h4 class="name">{{ $notificacao->statusNotificacao }}</h4>
+                                                </td>
+                                                {{-- 
+                                                <td>
+                                                    <div>
+                                                        <a href="{{ route('edit.notificacao', $notificacao->idNotificacao) }}"
+                                                            title=""
+                                                            class="brd-rd30 btn btn-outline-success">Editar</a>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <form
+                                                        action="{{ route('delete.notificacao', $notificacao->idNotificacao) }}"
+                                                        method="POST" role="form text-left"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit"
+                                                            class="brd-rd30 btn btn-outline-danger">Delete</button>
+                                                    </form>
+                                                </td> --}}
+
+
+                                            </tr>
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
 
 
 
@@ -371,12 +468,6 @@
 
 
 
-
-
-
-
-
-                    
                         </div>
                     </div>
 
@@ -388,6 +479,7 @@
     {{-- ----------- --}}
     {{--    MODAL    --}}
     {{-- ----------- --}}
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             @if (session('success'))

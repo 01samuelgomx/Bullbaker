@@ -28,6 +28,61 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
+<style>
+    /* Estilos do Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .modal-content p {
+        font-size: 15px;
+        font-weight: 700;
+        padding: 15px;
+    }
+
+    .align-close {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
 
 <body class="expand-data panel-data">
     <div class="topbar">
@@ -47,9 +102,6 @@
             </div>
 
         </div>
-
-
-
 
         <div class="topbar-bottom-colors">
             <i style="background-color: #361F08;"></i>
@@ -392,6 +444,27 @@
 
                         </tbody>
                     </table>
+
+                    @if (session('success'))
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                showModal();
+                            });
+                        </script>
+                    @endif
+
+                    <!-- Modal de Sucesso -->
+                    <div id="successModal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            <div class="align-close">
+                                <span class="close" onclick="closeModal()">&times;</span>
+                            </div>
+                            <img src="{{ asset('assets/img/success.png') }}" style="width: 120px; height: 120px"
+                                alt="confere">
+                            <p>Operação realizada com sucesso!</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -402,12 +475,28 @@
     </div>
     </div>
     <!-- Panel Content -->
-    <footer>
-        <p>Copyright
-            <a href="#" title="">Example Company</a> &amp; 2017 - 2018
-        </p>
-        <span>10GB of 250GB Free.</span>
-    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                showModal();
+            @endif
+        });
+
+        function showModal() {
+            var modal = document.getElementById("successModal");
+            modal.style.display = "block";
+
+            setTimeout(function() {
+                modal.style.display = "none";
+            }, 3500);
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("successModal");
+            modal.style.display = "none";
+        }
+    </script>
 
     <!-- Vendor: Javascripts -->
     <script src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
