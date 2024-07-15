@@ -35,6 +35,9 @@ use Illuminate\Support\Facades\Route;
         
         Route::get('/dashboard/administrativo/perfil/index', [AdministradorController::class, 'index'])->name('index.perfil'); 
         Route::post('/dashboard/administrativo/perfil', [NotificacaoController::class, 'cadNotificacao'])->name('cad.notificacao'); 
+        Route::get('/dashboard/administrativo/perfil/{id}/edit', [NotificacaoController::class, 'edit'])->name('edit.notificacao');
+        Route::put('/dashboard/administrativo/perfil/{id}', [NotificacaoController::class, 'update'])->name('update.notificacao'); 
+        Route::delete('/dashboard/administrativo/perfil/{id}', [NotificacaoController::class, 'destroy'])->name('delete.notificacao'); // Deletar os dados
 
 });
 

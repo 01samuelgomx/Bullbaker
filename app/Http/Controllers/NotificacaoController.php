@@ -102,10 +102,11 @@ class NotificacaoController extends Controller
                 'tituloNotificacao'        => 'required|string|max:35',
                 'mensagemNotificacao'      => 'required|string|max:150',
                 'statusNotificacao'        => 'required|in:ativo,desativo',
-                'fotoNotificacao'          => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'fotoNotificacao'          => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],[
-                'tituloNotificacao.max'    => 'O titulo da notificação deve ter no máximo 35 caracteres.',
+                'tituloNotificacao.max'    => 'O título da notificação deve ter no máximo 35 caracteres.',
                 'mensagemNotificacao.max'  => 'A mensagem da notificação deve ter no máximo 150 caracteres.',
+                'statusNotificacao.in'     => 'O status da notificação deve ser "ativo" ou "desativo".',
                 'fotoNotificacao.image'    => 'O arquivo deve ser uma imagem.',
                 'fotoNotificacao.mimes'    => 'A imagem deve estar em um dos seguintes formatos: jpeg, png, jpg, gif, svg.',
                 'fotoNotificacao.max'      => 'A imagem deve ter no máximo 2MB.',
@@ -118,6 +119,7 @@ class NotificacaoController extends Controller
                 'idNotificacao',
                 'tituloNotificacao',
                 'mensagemNotificacao', 
+                'statusNotificacao',
             ]));
 
                     // Atualização da imagem do aluno, se uma nova imagem foi enviada
@@ -155,9 +157,18 @@ class NotificacaoController extends Controller
      * @param  \App\Models\Notificacao  $notificacao
      * @return \Illuminate\Http\Response
      */
-    public function edit(Notificacao $notificacao)
+    public function edit($id)
     {
-        //
+      $idnotificacao = session('id');
+             
+      if (!$idnotificacao) {
+          return redirect()->route('login')->withErrors(['msg' => 'Sessão expirada, faça login novamente.']);
+      }
+
+      $notificacao = Notificacao::find($idnotificacao);
+      $editNotificacao = Notificacao::findOrFail($id);
+  
+      return view('site.dashboard.administrativo.perfil.edit', compact('notificacao', 'editNotificacao'));
     }
 
     /**
@@ -179,8 +190,11 @@ class NotificacaoController extends Controller
      * @param  \App\Models\Notificacao  $notificacao
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Notificacao $notificacao)
+    public function destroy($id)
     {
-        //
+        $editNotificacao = Notificacao::findOrFail($id);
+        $editNotificacao ->update(['statusNotificacao' => 'desativo']);
+         
+        return redirect()->route('index.perfil')->with('success', 'Notificacao desativada com sucesso.');
     }
 }

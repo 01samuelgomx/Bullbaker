@@ -322,7 +322,9 @@
                                     </div>
 
                                 </div>
-                                <div class="col-md-6 col-sm-12 col-lg-6" style="margin-top: -45px; margin-bottom: 25px">
+
+                                <div class="col-md-6 col-sm-12 col-lg-6"
+                                    style="margin-top: -45px; margin-bottom: 25px">
                                     <p>Status da Notificação</p>
                                     <select class="brd-rd5" name="statusNotificacao" id="statusNotificacao" required>
                                         <option value="ativo"
@@ -380,14 +382,15 @@
                                     </div>
                                     <img src="{{ asset('assets/img/success.png') }}"
                                         style="width: 120px; height: 120px" alt="confere">
-                                    <p>Cadastro realizado com sucesso!</p>
+                                    <p>Operação realizado com sucesso!</p>
                                 </div>
                             </div>
 
                             <div class="table-wrap">
                                 <table class="table table-bordered style2" style="margin-top: 55px">
 
-                                    <thead class="thead-inverse" style="background-color: #90a293; color: #fff">
+                                    <thead class="thead-inverse"
+                                        style="background-color: #90a293; color: #fff">
                                         <tr>
                                             <th>ID</th>
                                             <th>Foto</th>
@@ -395,17 +398,15 @@
                                             <th>Mensagem</th>
                                             <th>Status</th>
                                             <th>Edição</th>
-                                            <th>Deletar</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
 
-
                                         @foreach ($lista as $notificacao)
                                             <tr>
                                                 <td>
-                                                    <span class="blue-bg indx" style="background-color:#445547;"
+                                                    <span class="blue-bg indx" style="background-color:#445547"
                                                         name="">{{ $notificacao->idNotificacao }}</span>
                                                 </td>
 
@@ -432,7 +433,7 @@
                                                 <td>
                                                     <h4 class="name">{{ $notificacao->statusNotificacao }}</h4>
                                                 </td>
-                                                {{-- 
+
                                                 <td>
                                                     <div>
                                                         <a href="{{ route('edit.notificacao', $notificacao->idNotificacao) }}"
@@ -441,36 +442,14 @@
                                                     </div>
                                                 </td>
 
-                                                <td>
-                                                    <form
-                                                        action="{{ route('delete.notificacao', $notificacao->idNotificacao) }}"
-                                                        method="POST" role="form text-left"
-                                                        enctype="multipart/form-data">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit"
-                                                            class="brd-rd30 btn btn-outline-danger">Delete</button>
-                                                    </form>
-                                                </td> --}}
-
-
                                             </tr>
                                         @endforeach
 
                                     </tbody>
                                 </table>
                             </div>
-
-
-
-
-
-
-
-
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -479,7 +458,7 @@
     {{-- ----------- --}}
     {{--    MODAL    --}}
     {{-- ----------- --}}
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             @if (session('success'))
