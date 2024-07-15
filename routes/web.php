@@ -10,28 +10,31 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\infoController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NotificacaoController;
 use App\Http\Controllers\perfilController;
 use Illuminate\Support\Facades\Route;
 
 //--------------------------------------------------------------------------
 //  Web Routes
 //--------------------------------------------------------------------------
-Route::get('/', [homeController::class, 'index'])->name('home');
-Route::get('/sobre',[sobreController::class, 'sobre'])->name('sobre');
-Route::get('/cursos', [ CursosController::class, 'cursos'])->name('cursos');
-Route::get('/contato', [ContatoController::class, 'contato'])->name('contato');
-Route::get('/menu', [MenuController::class, 'menu'])->name('menu');
+    Route::get('/', [homeController::class, 'index'])->name('home');
+    Route::get('/sobre',[sobreController::class, 'sobre'])->name('sobre');
+    Route::get('/cursos', [ CursosController::class, 'cursos'])->name('cursos');
+    Route::get('/contato', [ContatoController::class, 'contato'])->name('contato');
+    Route::get('/menu', [MenuController::class, 'menu'])->name('menu');
 
 //--------------------------------------------------------------------------
 //  Login
-Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::post('/login', [LoginController::class, 'autenticar'])->name('login');
+    Route::get('/login', [LoginController::class, 'login'])->name('login');
+    Route::post('/login', [LoginController::class, 'autenticar'])->name('login');
 
 //--------------------------------------------------------------------------
 //  Dashboard paginas
-Route::get('/dashboard/administrativo/info', [AdministradorController::class, 'index'])->name('info'); 
-Route::middleware('autenticacao:Administrativo')->group(function () {
-    Route::get('/dashboard/administrativo/perfil/index', [PerfilController::class, 'index'])->name('index'); 
+    Route::middleware('autenticacao:Administrativo')->group(function () {
+        Route::get('/dashboard/administrativo/info', [AdministradorController::class, 'index'])->name('info'); 
+        
+        Route::get('/dashboard/administrativo/perfil/index', [AdministradorController::class, 'index'])->name('index.perfil'); 
+        Route::post('/dashboard/administrativo/perfil', [NotificacaoController::class, 'cadNotificacao'])->name('cad.notificacao'); 
 
 });
 

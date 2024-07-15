@@ -16,15 +16,7 @@ class PerfilController extends Controller
      */
     public function index()
     {
-            $idAdministrador = session('id');
-            // dd($idAdministrador);
-            $administrador = Administrador::find($idAdministrador);
-            // dd($administrador);
-            if (!$administrador) {
-                abort(404, 'Administrador não encontrado');
-            }
 
-            return view('site.dashboard.administrativo.perfil.index', compact('administrador'));
     }
 
     /**

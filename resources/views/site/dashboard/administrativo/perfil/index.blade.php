@@ -28,6 +28,103 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
+<style>
+    .file-input-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+    }
+
+    #file-input {
+        display: none;
+    }
+
+    .file-label {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: transparent;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        transition: background-color 0.3s ease;
+    }
+
+    .file-label img {
+        width: 100px;
+        height: 100px;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    .file-label img.selected {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+
+<style>
+    /* Estilos do Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .modal-content p {
+        font-size: 15px;
+        font-weight: 700;
+        padding: 15px;
+    }
+
+    .align-close {
+        display: flex;
+        justify-content: flex-end;
+         width: 100%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
+
 <body class="expand-data panel-data">
     <div class="topbar">
         <div class="logo">
@@ -115,15 +212,6 @@
         </span>
     </div>
     <!-- Options Panel -->
-    {{-- <div class="pg-tp">
-        <i class="ion-cube"></i>
-        <div class="pr-tp-inr">
-            <h4>Bem - Vindo ao seu perfil
-            </h4>
-            <span>Nossa interface de atualizações, Realize seu cadastro em poucos passos!</span>
-        </div>
-    </div> --}}
-    <!-- Page Top -->
 
     <div class="panel-content">
         <div class="widget pad50-65">
@@ -202,105 +290,138 @@
                                     </li>
                                 </ul>
                             </div>
-                            {{-- <div class="usr-prf">
-                                <a class="brd-rd5 btn scl-btn2 facebook" href="#" title="">
-                                    <i class="fa fa-facebook" aria-hidden="true"></i>
-
-                                </a>
-                                <a class="brd-rd5 btn scl-btn2 twitter" href="#" title="">
-                                    <i class="fa fa-instagram" aria-hidden="true"></i>
-                                </a>
-                                <a class="brd-rd5 btn scl-btn2 google" href="#" title="">
-                                    <i class="fa fa-twitter" aria-hidden="true"></i>
-                                </a>
-                            </div> --}}
                         </div>
                     </div>
                     <div class="col-md-8 col-sm-12 col-lg-8">
                         <div class="usr-actvty-wrp widget pad50-40">
+
                             <h4 class="widget-title">Notificações
                             </h4>
 
 
+                            <form action="{{ route('cad.notificacao') }}" method="POST" role="form text-left"
+                                class="form-wrp" enctype="multipart/form-data">
+                                @csrf
+                                @method('POST')
 
-                            <form class="form-wrp">
-                                <div class="row mrg20">
-
-                                    <div class="col-md-6 col-sm-6 col-lg-6">
-                                        <input class="brd-rd30" type="text" placeholder="Titulo:" />
-                                    </div>
-
-                                    <div class="col-md-6 col-sm-6 col-lg-6">
-                                        <input class="brd-rd30" type="text" placeholder="Mensagem" />
-                                    </div>
-
+                                <div class="file-input-container" style="margin-bottom:30px;">
+                                    <input type="file" id="file-input" accept="image/*"
+                                        onchange="displayImage(event)" name="fotoNotificacao"
+                                        value="{{ old('fotoNotificacao') }}">
+                                    <label for="file-input" class="file-label">
+                                        <img id="icon" src="{{ asset('img/camera.png') }}"
+                                            alt="Escolher Imagem">
+                                    </label>
+                                    @error('fotoNotificacao')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                    <div class="col-md-12 col-sm-12 col-lg-12">
-                                        <button class="green-bg brd-rd5" type="submit">
-                                            <i class="fa fa-paper-plane"></i> Enviar</button>
+
+                                <div class="row mrg20">
+                                    <div class="col-md-6 col-sm-6 col-lg-6">
+                                        <input class="brd-rd30" type="text" placeholder="Titulo:"
+                                            name="tituloNotificacao" id="tituloNotificacao"
+                                            value="{{ old('tituloNotificacao') }}" required />
+                                        @error('tituloNotificacao')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
+
+                                    <div class="col-md-6 col-sm-6 col-lg-6">
+                                        <input class="brd-rd30" type="text" placeholder="Mensagem"
+                                            name="mensagemNotificacao" id="mensagemNotificacao"
+                                            value="{{ old('mensagemNotificacao') }}" required />
+                                        @error('mensagemNotificacao')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-lg-12">
+                                    <button class="green-bg brd-rd5" type="submit">
+                                        <i class="fa fa-paper-plane"></i> Enviar
+                                    </button>
+                                </div>
                             </form>
-                                    <!-- Accordions  -->
-            <div id="acordn2" class="acordn-styl2 mt80">
-                <div class="acordn-itm brd-rd5">
 
-                    <h4 style="background-color: #90A293; color: #fff ">
-                        <i style="color:#fff" class="fa fa-chevron-up blue"></i>Instruções Tabela de alunos
-                    </h4>
+                            @if (session('success'))
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        showModal();
+                                    });
+                                </script>
+                            @endif
 
-                    <div class="acrdn-cnt">
-                        <h3 style="font-weight: 600; font-size: 18px">Regras de Validação</h3>
-                        <p style="margin-bottom: 25px">Para garantir que os dados sejam inseridos corretamente na
-                            tabela de alunos, siga as instruções abaixo para cada campo. As regras de validação são
-                            obrigatórias e devem ser respeitadas para um cadastro bem-sucedido.</p>
-                    </div>
-
-                </div>
-                <div class="acordn-itm brd-rd5">
-                    <h4 style="background-color: #C1959D; color: #fff ">
-                        <i style="color:#fff" class="fa fa-chevron-up"></i> Instruções Tabela de Cursos
-                    </h4>
-
-                    <div class="acrdn-cnt">
-                        <h3 style="font-weight: 600; font-size: 18px">Regras de Validação</h3>
-                        <p style="margin-bottom: 25px">Para garantir que os dados sejam inseridos corretamente na
-                            tabela de cursos, siga as instruções abaixo para cada campo. As regras de validação são
-                            obrigatórias e devem ser respeitadas para um cadastro bem-sucedido.</p>
-                  
-                    </div>
-
-                </div>
+                            <!-- Modal de Sucesso -->
+                            <div id="successModal" class="modal" style="display: none;">
+                                <div class="modal-content">
+                                    <div class="align-close">
+                                        <span class="close" onclick="closeModal()">&times;</span>
+                                    </div>
+                                    <img src="{{ asset('assets/img/success.png') }}"
+                                        style="width: 120px; height: 120px" alt="confere">
+                                    <p>Cadastro realizado com sucesso!</p>
+                                </div>
+                            </div>
 
 
-                <div class="acordn-itm brd-rd5">
-                    <h4 style="background-color: #361F08; color: #fff ">
-                        <i style="color:#fff" class="fa fa-chevron-up"></i> Instruções Tabela de Aulas
-                    </h4>
-                    <div class="acrdn-cnt">
-                        <h3 style="font-weight: 600; font-size: 18px">Regras de Validação</h3>
-                        <p style="margin-bottom: 25px">Para garantir que os dados sejam inseridos corretamente na
-                            tabela de cursos, siga as instruções abaixo para cada campo. As regras de validação são
-                            obrigatórias e devem ser respeitadas para um cadastro bem-sucedido.</p>
-                 
-                    </div>
 
-                </div>
-            </div>
-            <!-- Accordions  -->
-                    </div>
-                        </div>
+
+
+
+
+
+
+
+
+
+
+
                     
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- ----------- --}}
+    {{--    MODAL    --}}
+    {{-- ----------- --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                showModal();
+            @endif
+        });
+
+        function showModal() {
+            var modal = document.getElementById("successModal");
+            modal.style.display = "block";
+
+            setTimeout(function() {
+                modal.style.display = "none";
+            }, 10000);
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("successModal");
+            modal.style.display = "none";
+        }
+    </script>
+
+
     <!-- Panel Content -->
-    <footer>
-        <p>Copyright
-            <a href="#" title="">Example Company</a> &amp; 2017 - 2018
-        </p>
-        <span>10GB of 250GB Free.</span>
-    </footer>
+    <script>
+        function displayImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('icon');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 
     <!-- Vendor: Javascripts -->
     <script src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
@@ -332,7 +453,7 @@
     <script src="{{ asset('assets/js/styleswitcher.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
 
-   <script>
+    <script>
         $(document).ready(function() {
             'use strict';
 

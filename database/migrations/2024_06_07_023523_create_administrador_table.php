@@ -25,11 +25,6 @@ return new class extends Migration
              $table->string('estadoAdmin'); 
              $table->text('descricaoAdmin')->nullable(); 
              $table->timestamp('dataCadAdmin')->useCurrent(); 
-            //  -----------------------
-            //  Campos de notificacao
-            $table->string('tituloNotificacaoAdmin'); 
-            $table->string('mensagemNotificacaoAdmin'); 
-            //  -----------------------
              $table->enum('tipoAdministrador', ['Administrativo']); 
              $table->date('dataNascimentoAdmin'); 
              $table->string('estadoCivilAdmin'); 
