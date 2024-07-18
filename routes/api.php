@@ -3,6 +3,8 @@
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\AlunoController;
 use App\Http\Controllers\Api\CursosController;
+use App\Http\Controllers\Api\NotificacaoController;
+use App\Http\Controllers\Api\ReceitaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,18 +16,30 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::middleware(['auth:sanctum', 'aluno'])->group(function () {
+
+    // ------------------------
     // Página Home
     Route::get('/home/{idAluno}', [AlunoController::class, 'home']);
+
     // ------------------------
     // Alunos
     Route::get('/perfil/{idAluno}', [AlunoController::class, 'perfil']);
-    Route::post('/update/{idAluno}', [AlunoController::class, 'update']);
+    Route::put('/update/{idAluno}', [AlunoController::class, 'update']);
+
     
     // ------------------------
     // Cursos
     Route::get('/listarCursos', [CursosController::class, 'listarCursos']);
     Route::get('/saibaMais/{idCurso}', [CursosController::class, 'saibaMais']);
     Route::get('/aula/{idCurso}', [CursosController::class, 'aula']);
+
+    // ------------------------
+    // Notificacao
+    Route::get('/listarNotificacao', [NotificacaoController::class, 'listarNotificacao']);
+    
+    // ------------------------
+    // Receitas
+    Route::get('/listarReceita', [ReceitaController::class, 'listarReceita']);
 
 
 });

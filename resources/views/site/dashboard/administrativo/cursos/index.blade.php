@@ -260,7 +260,7 @@
                 </div>
 
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
-                    <div class="stat-box widget bg-clr4" >
+                    <div class="stat-box widget bg-clr4">
                         <div class="wdgt-opt">
                             <span class="wdgt-opt-btn">
                                 <i class="ion-android-more-vertical"></i>
@@ -269,7 +269,7 @@
                         </div>
 
                         <i class="ion-android-desktop"></i>
-                        <div class="stat-box-innr " >
+                        <div class="stat-box-innr ">
                             <span>
                                 <i class="counter"> -> {{ $totalReceitasAtivas }}</i></span>
                             <h5>Receitas Inseridas !</h5>
@@ -305,23 +305,6 @@
 
         <div class="col-md-12 grid-item col-sm-12 col-lg-12">
             <div class="widget proj-order pad50-40">
-                <div class="wdgt-opt">
-                    <span class="wdgt-opt-btn">
-                        <i class="ion-android-more-vertical"></i>
-                    </span>
-                    <div class="wdgt-opt-lst brd-rd5">
-                        <a class="delt-wdgt" href="#" title="">Delete</a>
-                        <a class="expnd-wdgt" href="#" title="">Expand</a>
-                        <a class="refrsh-wdgt" href="#" title="">Refresh</a>
-                    </div>
-                </div>
-                <div class="wdgt-ldr">
-                    <div class="ball-scale-multiple">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
                 <h4 class="widget-title">Confira as informações dos cursos!</h4>
                 <a class="add-proj brd-rd5" href="{{ url('/dashboard/administrativo/cursos/create') }}"
                     data-toggle="tooltip" title="Adicionar novo curso">+</a>
@@ -359,8 +342,9 @@
                             @foreach ($lista as $curso)
                                 <tr>
                                     <td>
-                                        <span class="blue-bg indx" style="background-color:#785e63;"
-                                            name="">{{ $curso->idCurso }}</span>
+                                        <span class="blue-bg indx" style="background-color:#785e63;" name=""
+                                            title="Numero do Curso"> {{ $curso->idCurso }}</span>
+
                                     </td>
 
                                     {{-- ------FOTO------ --}}
@@ -480,6 +464,46 @@
                 </div>
             </div>
         </div>
+
+        @foreach ($lista as $curso)
+            <div class="product-detail-tabs brd-rd5">
+                <ul class="nav nav-tabs">
+                    @if (Storage::exists('public/img/cursos/' . $curso->fotoCurso))
+                        <img src="{{ asset('storage/img/cursos/' . $curso->fotoCurso) }}" alt="lll"
+                            style="width: 180px; height: 180px;border-radius: 15%">
+                    @else
+                        <span>Imagem não disponível</span>
+                    @endif
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="prd-desc">
+                        <h3>{{ $curso->nomeCurso }}</h3>
+                        <p>{{ $curso->descricaoCurso }}</p>
+                    </div>
+
+                    <div class="tab-pane active" id="prd-desc">
+                        <h3 style="font-size: 12px">{{ $curso->tituloUmCurso }}</h3>
+                        <p style="font-size: 12px">{{ $curso->descriumCurso }}</p>
+                    </div>
+                    <div class="tab-pane active" id="prd-desc">
+                        <h3 style="font-size: 12px">{{ $curso->tituloDoisCurso }}</h3>
+                        <p style="font-size: 12px">{{ $curso->descriDoisCurso }}</p>
+                    </div>
+                    <div class="tab-pane active" id="prd-desc">
+                        <h3 style="font-size: 12px">{{ $curso->tituloTresCurso }}</h3>
+                        <p style="font-size: 12px">{{ $curso->descriTresCurso }}</p>
+                    </div>
+
+                    <ul>
+                        <li> Duração do curso {{ $curso->duracaoCurso }} dias</li>
+                        <li> Data de inicio {{ $curso->data_inicio }}</li>
+                        <li> Data de Termino {{ $curso->data_inicio }}</li>
+                    </ul>
+                </div>
+            </div>
+        @endforeach
+
 
 
     </div>

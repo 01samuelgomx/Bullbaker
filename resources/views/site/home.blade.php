@@ -13,7 +13,7 @@
 
                         <p>  A verdadeira magia da confeitaria de bolos está além do sabor e da estética. É sobre criar
                             memórias duradouras, celebrar momentos especiais e compartilhar alegria com aqueles que amamos.</p>
-                        <a href="gallery.html" class="main_btn">explore gallery</a>
+                        <a href="{{ url('/sobre') }}" class="main_btn">Confira!</a>
                     </div>
                 </div>
                 <div class="swiper-slide"><img src="{{ asset('img/slider/slider-2.jpg') }}" alt="">
@@ -21,7 +21,7 @@
                         <h1>Bull Baker</h1>
                         <p>  A verdadeira magia da confeitaria de bolos está além do sabor e da estética. É sobre criar
                             memórias duradouras, celebrar momentos especiais e compartilhar alegria com aqueles que amamos.</p>
-                        <a href="gallery.html" class="main_btn">explore gallery</a>
+                        <a href="{{ url('/sobre') }}" class="main_btn">Confira!</a>
                     </div>
                 </div>
                 <div class="swiper-slide"><img src="{{ asset('img/slider/slider-3.jpg') }}" alt="">
@@ -29,7 +29,7 @@
                         <h1>Bull Baker</h1>
                         <p>  A verdadeira magia da confeitaria de bolos está além do sabor e da estética. É sobre criar
                             memórias duradouras, celebrar momentos especiais e compartilhar alegria com aqueles que amamos.</p>
-                        <a href="gallery.html" class="main_btn">explore gallery</a>
+                        <a href="{{ url('/sobre') }}" class="main_btn">Confira!</a>
                     </div>
                 </div>
             </div>

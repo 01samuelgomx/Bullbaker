@@ -24,8 +24,8 @@ class Receitas extends Model
 
         'idReceita'          => 'required|integer|unique:tblreceitas,idReceita',
         'nomeReceita'        => 'required|string|max:35',
-        'ingredienteReceita' => 'required|string|max:550',
-        'modoPreparoReceita' => 'required|string|max:750',
+        'ingredienteReceita' => 'required|string|max:750',
+        'modoPreparoReceita' => 'required|string|max:950',
         'fotoReceita'        => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'statusReceita'      => 'required|in:ativo,desativo',
         'created_at'         => 'required|date',
@@ -48,11 +48,11 @@ public function Feedback(){
 
         'ingredienteReceita.required' => 'O campo Ingredientes da Receita é obrigatório.',
         'ingredienteReceita.string' => 'O campo Ingredientes da Receita deve ser uma texto.',
-        'ingredienteReceita.max' => 'O campo Ingredientes da Receita deve ter no máximo 550 caracteres.',
+        'ingredienteReceita.max' => 'O campo Ingredientes da Receita deve ter no máximo 750 caracteres.',
 
         'modoPreparoReceita.required' => 'O campo modo de Preparo da Receita é obrigatório.',
         'modoPreparoReceita.string' => 'O campo modo de Preparo da Receita deve ser um texto.',
-        'modoPreparoReceita.max' => 'O campo modo de Preparo da Receita  deve ter no máximo 750 caracteres.',
+        'modoPreparoReceita.max' => 'O campo modo de Preparo da Receita  deve ter no máximo 950 caracteres.',
 
         'fotoReceita.image' => 'O campo Foto da Receita deve ser uma imagem.',
         'fotoReceita.mimes' => 'A imagem da Receita deve estar em um dos seguintes formatos: jpeg, png, jpg, gif, svg.',

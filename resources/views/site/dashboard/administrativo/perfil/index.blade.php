@@ -230,7 +230,8 @@
                         <div class="profile-info-wrp">
                             <div class="insta-wrp">
                                 <span>
-                                    <img class="brd-rd50" src="{{ asset('assets/img/menina.png') }}" alt="" />
+                                    <img class="brd-rd50" src="{{ asset('assets/img/menina.png') }}"
+                                        alt="" />
                                     <span class="sts online"></span>
                                 </span>
                                 <div class="insta-inf">
@@ -395,68 +396,59 @@
                                 </div>
                             </div>
 
-                            <div class="table-wrap">
-                                <table class="table table-bordered style2" style="margin-top: 55px">
+                            {{-- <div class="col-md-6 grid-item col-sm-12 col-lg-6"> --}}
+                            <div class="widget usr-msgs pad50-40">
+                                <div class="wdgt-opt">
+                                    <span class="wdgt-opt-btn">
+                                        <i class="ion-android-more-vertical"></i>
+                                    </span>
+                                    <div class="wdgt-opt-lst brd-rd5">
+                                        <a class="delt-wdgt" href="#" title="">Delete</a>
+                                        <a class="expnd-wdgt" href="#" title="">Expand</a>
+                                        <a class="refrsh-wdgt" href="#" title="">Refresh</a>
+                                    </div>
+                                </div>
+                                <div class="wdgt-ldr">
+                                    <div class="ball-scale-multiple">
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <h4 class="widget-title">Enviadas</h4>
+                                <div class="msgs-lst">
 
-                                    <thead class="thead-inverse"
-                                        style="background-color: #90a293; color: #fff">
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Foto</th>
-                                            <th>Titulo</th>
-                                            <th>Mensagem</th>
-                                            <th>Status</th>
-                                            <th>Edição</th>
-                                        </tr>
-                                    </thead>
+                                    @foreach ($lista as $notificacao)
+                                        <div class="msg-itm" style="display: flex">
+                                            <span class="brd-rd50"
+                                                style="width: 50px; height:50px; border-radius: 50%">
+                                                @if (Storage::exists('public/img/notificacao/' . $notificacao->fotoNotificacao))
+                                                    <img src="{{ asset('storage/img/notificacao/' . $notificacao->fotoNotificacao) }}"
+                                                        alt="lll"
+                                                        style="width: 50px; height:50px; border-radius: 50%">
+                                                @else
+                                                    <span>Imagem não disponível</span>
+                                                @endif
+                                            </span>
+                                            <div class="msg-inf">
+                                                <h5>{{ $notificacao->tituloNotificacao }}</h5>
+                                                <div class="msg">
+                                                <p>{{ $notificacao->mensagemNotificacao }}</p>
+                                                    <p class="pst-tm">{{ $notificacao->statusNotificacao }}</p>
+                                                </div>
+                                            </div>
 
-                                    <tbody>
-
-                                        @foreach ($lista as $notificacao)
-                                            <tr>
-                                                <td>
-                                                    <span class="blue-bg indx" style="background-color:#445547"
-                                                        name="">{{ $notificacao->idNotificacao }}</span>
-                                                </td>
-
-                                                {{-- ------FOTO------ --}}
-                                                <td>
-                                                    @if (Storage::exists('public/img/notificacao/' . $notificacao->fotoNotificacao))
-                                                        <img src="{{ asset('storage/img/notificacao/' . $notificacao->fotoNotificacao) }}"
-                                                            alt="lll"
-                                                            style="width: 100px; height: 100px;border-radius: 50%">
-                                                    @else
-                                                        <span>Imagem não disponível</span>
-                                                    @endif
-                                                </td>
-                                                {{-- ---------------- --}}
-
-                                                <td>
-                                                    <span class="date">{{ $notificacao->tituloNotificacao }}</span>
-                                                </td>
-
-                                                <td>
-                                                    <h4 class="name">{{ $notificacao->mensagemNotificacao }}</h4>
-                                                </td>
-
-                                                <td>
-                                                    <h4 class="name">{{ $notificacao->statusNotificacao }}</h4>
-                                                </td>
-
-                                                <td>
-                                                    <div>
-                                                        <a href="{{ route('edit.notificacao', $notificacao->idNotificacao) }}"
-                                                            title=""
-                                                            class="brd-rd30 btn btn-outline-success">Editar</a>
-                                                    </div>
-                                                </td>
-
-                                            </tr>
-                                        @endforeach
-
-                                    </tbody>
-                                </table>
+                                            <div>
+                                                <a href="{{ route('edit.notificacao', $notificacao->idNotificacao) }}"
+                                                    title="" class="brd-rd30 btn btn-outline-success"
+                                                    style="padding: 2px 7px !important;">Editar</a>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
+                            {{-- </div> --}}
+
                         </div>
                     </div>
                 </div>

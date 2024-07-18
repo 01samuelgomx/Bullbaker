@@ -107,8 +107,8 @@ class ReceitasController extends Controller
      {
          $request->validate([
              'nomeReceita'        => 'required|string|max:35',
-             'ingredienteReceita' => 'required|string|max:550',
-             'modoPreparoReceita' => 'required|string|max:750',
+             'ingredienteReceita' => 'required|string|max:750',
+             'modoPreparoReceita' => 'required|string|max:950',
              'fotoReceita'        => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
              'statusReceita'      => 'required|in:ativo,desativo',
          ],[
@@ -117,10 +117,10 @@ class ReceitasController extends Controller
              'nomeReceita.max' => 'O campo Nome da Receita deve ter no máximo 35 caracteres.',
              'ingredienteReceita.required' => 'O campo Ingredientes da Receita é obrigatório.',
              'ingredienteReceita.string' => 'O campo Ingredientes da Receita deve ser um texto.',
-             'ingredienteReceita.max' => 'O campo Ingredientes da Receita deve ter no máximo 550 caracteres.',
+             'ingredienteReceita.max' => 'O campo Ingredientes da Receita deve ter no máximo 750 caracteres.',
              'modoPreparoReceita.required' => 'O campo Modo de Preparo da Receita é obrigatório.',
              'modoPreparoReceita.string' => 'O campo Modo de Preparo da Receita deve ser um texto.',
-             'modoPreparoReceita.max' => 'O campo Modo de Preparo da Receita deve ter no máximo 750 caracteres.',
+             'modoPreparoReceita.max' => 'O campo Modo de Preparo da Receita deve ter no máximo 950 caracteres.',
              'fotoReceita.image' => 'O campo Foto da Receita deve ser uma imagem.',
              'fotoReceita.mimes' => 'A imagem da Receita deve estar em um dos seguintes formatos: jpeg, png, jpg, gif, svg.',
              'fotoReceita.max' => 'A imagem da Receita deve ter no máximo 2MB.',
@@ -169,8 +169,8 @@ class ReceitasController extends Controller
 
         $request->validate([
             'nomeReceita'        => 'required|string|max:35',
-            'ingredienteReceita' => 'required|string|max:550',
-            'modoPreparoReceita' => 'required|string|max:750',
+            'ingredienteReceita' => 'required|string|max:750',
+            'modoPreparoReceita' => 'required|string|max:950',
             'fotoReceita'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'statusReceita'      => 'required|in:ativo,desativo',
         ],[
@@ -180,11 +180,11 @@ class ReceitasController extends Controller
 
             'ingredienteReceita.required' => 'O campo Ingredientes da Receita é obrigatório.',
             'ingredienteReceita.string' => 'O campo Ingredientes da Receita deve ser um texto.',
-            'ingredienteReceita.max' => 'O campo Ingredientes da Receita deve ter no máximo 550 caracteres.',
+            'ingredienteReceita.max' => 'O campo Ingredientes da Receita deve ter no máximo 750 caracteres.',
 
             'modoPreparoReceita.required' => 'O campo Modo de Preparo da Receita é obrigatório.',
             'modoPreparoReceita.string' => 'O campo Modo de Preparo da Receita deve ser um texto.',
-            'modoPreparoReceita.max' => 'O campo Modo de Preparo da Receita deve ter no máximo 750 caracteres.',
+            'modoPreparoReceita.max' => 'O campo Modo de Preparo da Receita deve ter no máximo 950 caracteres.',
 
             'fotoReceita.image' => 'O campo Foto da Receita deve ser uma imagem.',
             'fotoReceita.mimes' => 'A imagem da Receita deve estar em um dos seguintes formatos: jpeg, png, jpg, gif, svg.',

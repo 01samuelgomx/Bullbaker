@@ -276,51 +276,7 @@ class AlunoController extends Controller
              'fotoAluno'         => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
              'idCurso'           => 'required|exists:tblcurso,idCurso',
          ], [
-            'nomeAluno.required'     => 'O campo nome é obrigatório.',
-            'nomeAluno.unique'       => 'Este nome já está em uso.',
-            'nomeAluno.min'          => 'O nome deve ter no mínimo 3 caracteres.',
-    
-            'emailAluno.required'    => 'O campo e-mail é obrigatório.',
-            'emailAluno.unique'      => 'Este e-mail já está em uso.',
-            'emailAluno.email'       => 'O e-mail deve ser um endereço de e-mail válido.',
-    
-            'senhaAluno.required'    => 'O campo senha é obrigatório.',
-            'senhaAluno.unique'      => 'Está não é segura  já está em uso.',
-            'senhaAluno.max'       => 'a senha deve ter ate 10 caracteres',
-    
-            'telefoneAluno.required' => 'O campo telefone é obrigatório.',
-            'telefoneAluno.unique'   => 'Este telefone já está em uso.',
-            'telefoneAluno.min'      => 'O telefone deve ter no mínimo 11 caracteres.',
-    
-            'dataCadAluno.required'  => 'O campo data de cadastro é obrigatório.',
-            'dataCadAluno.date'      => 'A data de cadastro deve ser uma data válida.',
-    
-            'nivelHabilidade.required' => 'O campo nível de habilidade é obrigatório.',
-            'nivelHabilidade.string'   => 'O nível de habilidade deve ser um texto.',
-            'nivelHabilidade.max'      => 'O nível de habilidade não deve exceder 255 caracteres.',
-    
-            'estadoAluno.required'   => 'O campo estado é obrigatório.',
-            'estadoAluno.string'     => 'O estado deve ser um texto.',
-            'estadoAluno.max'        => 'O estado não deve exceder 255 caracteres.',
-    
-            'nomeCurso.required'     => 'O campo nome do curso é obrigatório.',
-            'nomeCurso.string'       => 'O nome do curso deve ser um texto.',
-            'nomeCurso.max'          => 'O nome do curso não deve exceder 255 caracteres.',
-    
-            'dataDeNascimento.required' => 'O campo data de nascimento é obrigatório.',
-            'dataDeNascimento.date'     => 'A data de nascimento deve ser uma data válida.',
-    
-            'objetivo.string'        => 'O objetivo deve ser um texto.',
-    
-            'statusAluno.required'   => 'O campo status é obrigatório.',
-            'statusAluno.in'         => 'O status deve ser "ativo" ou "desativado".',
-    
-            'fotoAluno.image'        => 'A foto deve ser uma imagem.',
-            'fotoAluno.mimes'        => 'A foto deve ser um arquivo do tipo: jpeg, png, jpg, gif, svg.',
-            'fotoAluno.max'          => 'A foto não deve ter mais que 2048 KB.',
-    
-            'idCurso.required'       => 'O campo curso é obrigatório.',
-            'idCurso.exists'         => 'O curso selecionado é inválido.',
+             // Mensagens de erro personalizadas...
          ]);
      
          // Busca do aluno pelo ID
@@ -357,7 +313,18 @@ class AlunoController extends Controller
              $aluno->save();
          }
      
-         return redirect()->route('index.aluno')->with('success', 'Aluno atualizado com sucesso.');
+         // Atualiza o usuário associado ao aluno
+         $usuario = Usuario::where('tipo_usuario_id', $idAluno)->where('tipo_usuario_type', 'aluno')->firstOrFail();
+     
+         $usuario->nome = $request->input('nomeAluno');
+         $usuario->email = $request->input('emailAluno');
+         $usuario->senha = $request->input('senhaAluno');
+         $usuario->email_verificado_em = $request->input('dataCadAluno');
+         $usuario->updated_at = now();
+     
+         $usuario->save();
+     
+         return redirect()->route('index.aluno')->with('success', 'Aluno e usuário atualizados com sucesso.');
      }
      
 

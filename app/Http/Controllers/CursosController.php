@@ -22,6 +22,11 @@ class CursosController extends Controller
 
     // -------------------------------
     // Create curso
+    public function pagina()
+    {
+        return view('site.cursos', //compact('curso')
+    );
+   }
     public function create()
     {
         return view('site.dashboard.administrativo.cursos.create', //compact('curso')

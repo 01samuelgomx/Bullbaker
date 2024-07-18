@@ -4315,8 +4315,8 @@ span.product-sizes-list {
 }
 .product-detail-tabs > ul.nav-tabs {
     float: left;
-    width: 35%;
-    background-color: #ffffff;
+    width: 27%;
+    /* background-color: #ffffff; */
     border-bottom: 0;
     padding: 50px 30px 50px 40px;
     display: block;
@@ -4339,7 +4339,7 @@ span.product-sizes-list {
     padding: 0;
 }
 .product-detail-tabs .tab-content {
-    padding: 30px 0px 0 50px;
+    padding: 30px 0px 0px 0px;
     width: 65%;
     float: left;
 }
@@ -4356,7 +4356,7 @@ span.product-sizes-list {
     font-size: 14px;
     line-height: 24px;
     color: #555555;
-    margin: 25px 0 0;
+    /* margin: 25px 0 0; */
 }
 .product-detail-tabs .tab-pane > ul {
     float: left;

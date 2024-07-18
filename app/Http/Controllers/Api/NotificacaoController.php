@@ -8,14 +8,25 @@ use Illuminate\Http\Request;
 
 class NotificacaoController extends Controller
 {
+    public $notificacao;
+    public $idnotificacao;
+
+    public function __construct(Notificacao $notificacao) {
+        $this -> notificacao = $notificacao;
+    }
     /**
-     * Display a listing of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function listarNotificacao()
     {
-        //
+        $notificacoesAtivas = Notificacao::where('statusNotificacao', 'ativo')->get()->map(function($notificacao) {
+            $notificacao->fotoNotificacao = url('storage/img/notificacao/' . $notificacao->fotoNotificacao);
+            return $notificacao;
+        });
+    
+        return response()->json([
+            'NotificacoesAtivas' => $notificacoesAtivas
+        ]);
     }
 
     /**

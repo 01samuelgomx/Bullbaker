@@ -349,7 +349,7 @@
                                 <tr>
                                     <td>
                                         <span class="blue-bg indx" style="background-color:#271402;"
-                                            name="">{{ $aula->idAula }}</span>
+                                            name="" title="Numero da aula">{{ $aula->idAula }}</span>
                                     </td>
 
                                     <td>
@@ -379,7 +379,7 @@
 
                                     <td>
                                         <span class="blue-bg indx" style="background-color:#785e63;"
-                                            name="">{{ $aula->idCurso }}</span>
+                                            name="" title="Numero do curso relacionado">{{ $aula->idCurso }}</span>
                                     </td>
 
                                     <td>

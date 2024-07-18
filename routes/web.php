@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 //--------------------------------------------------------------------------
     Route::get('/', [homeController::class, 'index'])->name('home');
     Route::get('/sobre',[sobreController::class, 'sobre'])->name('sobre');
-    Route::get('/cursos', [ CursosController::class, 'cursos'])->name('cursos');
+    Route::get('/cursos', [ CursosController::class, 'pagina'])->name('cursos');
     Route::get('/contato', [ContatoController::class, 'contato'])->name('contato');
     Route::get('/menu', [MenuController::class, 'menu'])->name('menu');
 

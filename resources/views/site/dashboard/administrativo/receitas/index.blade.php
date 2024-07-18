@@ -350,7 +350,7 @@
                                 <tr>
                                     <td>
                                         <span class="blue-bg indx" style="background-color:#2c3e47;"
-                                            name="">{{ $receita->idReceita }}</span>
+                                            name="" title="Numero da Receita">{{ $receita->idReceita }}</span>
                                     </td>
 
                                     {{-- ------FOTO------ --}}

@@ -357,7 +357,7 @@
                                 <tr>
                                     <td>
                                         <span class="blue-bg indx" style="background-color:#445547;"
-                                            name="">{{ $aluno->idAluno }}</span>
+                                            name="" title="Numero do Aluno">{{ $aluno->idAluno }}</span>
                                     </td>
 
                                     {{-- ------FOTO------ --}}

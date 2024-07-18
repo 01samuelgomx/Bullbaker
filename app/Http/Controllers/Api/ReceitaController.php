@@ -13,9 +13,16 @@ class ReceitaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function listarReceita()
     {
-        //
+        $receitasAtivas = Receitas::where('statusReceita', 'ativo')->get()->map(function($receita) {
+            $receita->fotoReceita = url('storage/img/receitas/' . $receita->fotoReceita);
+            return $receita;
+        });
+    
+        return response()->json([
+            'ReceitasAtivas' => $receitasAtivas
+        ]);
     }
 
     /**
