@@ -205,8 +205,16 @@ textarea {
     padding: 0;
     width: 1170px;
 }
-
-
+/* Certifique-se de que o modal tenha um z-index alto */
+.modal {
+    z-index: 1050 !important;
+}
+.modal-backdrop {
+    z-index: 1040 !important;
+}
+/* .modal-content {
+    border: 2px solid red !important; 
+} */
 .styleTableAluno{
     border-top: solid 10px #445547;
     border-radius: 44px !important;;
@@ -227,6 +235,28 @@ textarea {
     border-radius: 44px !important;;
     border-bottom: solid 10px #4d636f;
 }
+
+
+.tittle-modalAluno{
+    background-color: #445547;
+    color: #fff ;
+    border-radius: 5px;
+  }
+.tittle-modalCurso{
+    background-color: #c1959d ;
+    color: #fff ;
+    border-radius: 5px;
+  }
+.tittle-modalAula{
+    background-color: #361F08;
+    color: #fff ;
+    border-radius: 5px;
+  }
+.tittle-modalReceita{
+    background-color: #4d636f ;
+    color: #fff ;
+    border-radius: 5px;
+  }
 
 .rmv-ext,
 .rmv-ext2,
@@ -643,6 +673,7 @@ button,
 
 /*===== Topbar =====*/
 .topbar {
+    display: flex;
     background-color: #ffffff;
     -webkit-box-shadow: 0 5px 18px rgba(0, 0, 0, 0.18);
     -ms-box-shadow: 0 5px 18px rgba(0, 0, 0, 0.18);
@@ -654,6 +685,7 @@ button,
     position: fixed;
     top: 0;
     width: 100%;
+    justify-content: space-between;
     z-index: 2;
     height: 96px;
 }
@@ -831,6 +863,11 @@ button,
 }
 .usr-act {
     cursor: pointer;
+    width: 43%;
+    align-items: center;
+    display: flex;
+    height: 95px;
+    flex-direction: row-reverse;
     float: right;
     padding: 25px 30px 25px 140px;
     position: relative;
@@ -991,8 +1028,16 @@ nav h4 {
 .side-header.expand-header > div > nav ul > li > a {
     display: flex;
     justify-content: space-between;
+    color: #8191a8 !important;
     padding: 15px 40px;
 }
+.limited-width {
+    max-width: 25%;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .side-header.expand-header > nav ul > li > a span,
 .side-header.expand-header > div > nav ul > li > a span,
 .side-header.expand-header nav h4 {

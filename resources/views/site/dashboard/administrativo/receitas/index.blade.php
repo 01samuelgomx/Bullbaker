@@ -26,6 +26,9 @@
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color4.css') }}" title="color4">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color5.css') }}" title="color5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 
 <style>
@@ -43,6 +46,18 @@
         background-color: rgba(0, 0, 0, 0.4);
     }
 
+    .modal-backdrop {
+        z-index: -1 !important;
+    }
+
+    {{-- .modal-body {
+        position: relative;
+        -ms-flex: 1 1 auto;
+        width: 190% !import;
+        flex: 1 1 auto;
+        padding: 1rem;
+    } --}}
+
     .modal-content {
         display: flex;
         flex-direction: column;
@@ -52,15 +67,15 @@
         margin: 15% auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 80%;
-        max-width: 400px;
+        width: 100%;
+        max-width: 120em !important;
         text-align: center;
     }
 
     .modal-content p {
         font-size: 15px;
         font-weight: 700;
-        padding: 15px;
+        padding: 5px;
     }
 
     .align-close {
@@ -98,7 +113,8 @@
 
         <div class="topbar-data">
             <div class="usr-act">
-                <span>Olá, seja bem vindo! {{ $administrador->nomeAdmin }}</span>
+                <img class="brd-rd50" style="width: 50px" src="{{ asset('assets/img/gabriela.png') }}">
+                <span>Olá, seja bem vindo! {{ $administrador->nomeAdmin }} </span>
             </div>
         </div>
 
@@ -261,7 +277,7 @@
                 </div>
 
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
-                    <div class="stat-box widget bg-clr4" >
+                    <div class="stat-box widget bg-clr4">
                         <div class="wdgt-opt">
                             <span class="wdgt-opt-btn">
                                 <i class="ion-android-more-vertical"></i>
@@ -270,7 +286,7 @@
                         </div>
 
                         <i class="ion-android-desktop"></i>
-                        <div class="stat-box-innr " >
+                        <div class="stat-box-innr ">
                             <span>
                                 <i class="counter"> -> {{ $totalReceitasAtivas }}</i></span>
                             <h5>Receitas Inseridas !</h5>
@@ -325,13 +341,14 @@
                 </div>
                 <h4 class="widget-title">Confira todas as receitas!</h4>
                 <a class="add-proj brd-rd5" href="{{ url('/dashboard/administrativo/receitas/create') }}"
-                    data-toggle="tooltip" title="Add Project">+</a>
+                    data-toggle="tooltip" title="Adicionar Nova Receita">+</a>
 
                 <div class="table-wrap">
                     <table class="table table-bordered style2">
 
                         <thead class="thead-inverse" style="background-color:#4d636f; color: #fff">
                             <tr>
+                                <th>Visualizar</th>
                                 <th>ID</th>
                                 <th>Foto</th>
                                 <th>Nome</th>
@@ -349,8 +366,16 @@
                             @foreach ($lista as $receita)
                                 <tr>
                                     <td>
-                                        <span class="blue-bg indx" style="background-color:#2c3e47;"
-                                            name="" title="Numero da Receita">{{ $receita->idReceita }}</span>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#myModal" style="background-color: #4d636f; border: none"
+                                            onclick="fetchReceitaData({{ $receita->idReceita }})">
+                                            Abrir
+                                        </button>
+                                    </td>
+
+                                    <td>
+                                        <span class="blue-bg indx" style="background-color:#2c3e47;" name=""
+                                            title="Numero da Receita">{{ $receita->idReceita }}</span>
                                     </td>
 
                                     {{-- ------FOTO------ --}}
@@ -369,11 +394,14 @@
                                     </td>
 
                                     <td>
-                                        <h4 class="name">{{ $receita->ingredienteReceita }}</h4>
+
+                                        <h4 class="name">{{ Str::limit($receita->ingredienteReceita, 50, '...') }}
+                                        </h4>
                                     </td>
 
                                     <td>
-                                        <h4 class="name">{{ $receita->modoPreparoReceita }}</h4>
+                                        <h4 class="name">{{ Str::limit($receita->modoPreparoReceita, 50, '...') }}
+                                        </h4>
                                     </td>
 
                                     <td>
@@ -412,6 +440,48 @@
                         </script>
                     @endif
 
+
+
+
+                    <div class="container mt-3">
+                        @foreach ($lista as $receita)
+                            <div class="modal fade" id="myModal">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <img id="modalImagem" src="" alt="Imagem da Receita"
+                                            style="width: 100px; height: 100px;border-radius: 50%; display: none;">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="modalTitle"></h4>
+                                            <button type="button" class="close"
+                                                data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Informação do conteúdo</p>
+                                            <div class="row mrg20">
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalReceita">Ingredientes!</p>
+                                                    <p id="modalIngredientes"></p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p  class="tittle-modalReceita">Modo de preparo</p>
+                                                    <p id="modalModoPreparo"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger"
+                                                data-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+
+
+
+
                     <!-- Modal de Sucesso -->
                     <div id="successModal" class="modal" style="display: none;">
                         <div class="modal-content">
@@ -427,35 +497,11 @@
                 </div>
             </div>
         </div>
-
-
     </div>
     <!-- Filter Items -->
     </div>
     </div>
     <!-- Panel Content -->
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            @if (session('success'))
-                showModal();
-            @endif
-        });
-
-        function showModal() {
-            var modal = document.getElementById("successModal");
-            modal.style.display = "block";
-
-            setTimeout(function() {
-                modal.style.display = "none";
-            }, 3500);
-        }
-
-        function closeModal() {
-            var modal = document.getElementById("successModal");
-            modal.style.display = "none";
-        }
-    </script>
 
     <!-- Vendor: Javascripts -->
     <script src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
@@ -486,6 +532,70 @@
     <script src="{{ asset('assets/js/jquery.poptrox.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/styleswitcher.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                showModal();
+            @endif
+        });
+
+        function showModal() {
+            var modal = document.getElementById("successModal");
+            modal.style.display = "block";
+
+            setTimeout(function() {
+                modal.style.display = "none";
+            }, 3500);
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("successModal");
+            modal.style.display = "none";
+        }
+    </script>
+
+
+    {{-- Requisição do modal de visualização das receitas --}}
+    <script>
+        function fetchReceitaData(id) {
+            fetch(`/dashboard/administrativo/receitas/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        document.getElementById('modalTitle').innerText = data.nomeReceita;
+                        document.getElementById('modalIngredientes').innerText = data.ingredienteReceita;
+                        document.getElementById('modalModoPreparo').innerText = data.modoPreparoReceita;
+
+                        if (data.fotoReceita) {
+                            document.getElementById('modalImagem').src = `/storage/img/receitas/${data.fotoReceita}`;
+                            document.getElementById('modalImagem').style.display = 'block';
+                        } else {
+                            document.getElementById('modalImagem').style.display = 'none';
+                        }
+
+                        $('#myModal').modal('show');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching receita data:', error);
+                    alert('Erro ao buscar dados da receita');
+                });
+        }
+
+        $(document).ready(function() {
+            $('#myModal').on('hidden.bs.modal', function() {
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+            });
+        });
+    </script>
+
 
 </body>
 

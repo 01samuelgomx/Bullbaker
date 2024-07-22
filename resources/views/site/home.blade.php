@@ -7,29 +7,29 @@
     <section class="home_slider">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="{{ asset('img/slider/slider-1.jpg') }}" alt="">
+                <div class="swiper-slide"><img src="{{ asset('img/slider/slider-1.png') }}" alt="">
                     <div class="slider_text">
                         <h1>Bull Baker</h1>
 
                         <p>  A verdadeira magia da confeitaria de bolos está além do sabor e da estética. É sobre criar
                             memórias duradouras, celebrar momentos especiais e compartilhar alegria com aqueles que amamos.</p>
-                        <a href="{{ url('/sobre') }}" class="main_btn">Confira!</a>
+                        <a href="gallery.html" class="main_btn">Explorar Curso</a>
                     </div>
                 </div>
-                <div class="swiper-slide"><img src="{{ asset('img/slider/slider-2.jpg') }}" alt="">
+                <div class="swiper-slide"><img src="{{ asset('img/slider/slider-2.jpg') }}">
                     <div class="slider_text">
                         <h1>Bull Baker</h1>
                         <p>  A verdadeira magia da confeitaria de bolos está além do sabor e da estética. É sobre criar
                             memórias duradouras, celebrar momentos especiais e compartilhar alegria com aqueles que amamos.</p>
-                        <a href="{{ url('/sobre') }}" class="main_btn">Confira!</a>
+                        <a href="gallery.html" class="main_btn">Explorar Curso</a>
                     </div>
                 </div>
-                <div class="swiper-slide"><img src="{{ asset('img/slider/slider-3.jpg') }}" alt="">
+                <div class="swiper-slide"><img src="{{ asset('img/slider/slider-3.png') }}">
                     <div class="slider_text">
                         <h1>Bull Baker</h1>
                         <p>  A verdadeira magia da confeitaria de bolos está além do sabor e da estética. É sobre criar
                             memórias duradouras, celebrar momentos especiais e compartilhar alegria com aqueles que amamos.</p>
-                        <a href="{{ url('/sobre') }}" class="main_btn">Confira!</a>
+                        <a href="gallery.html" class="main_btn">Explorar Curso</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
     <!--================ End Top Dish Area =================-->
 
     <!--================ Menu Area =================-->
-    <section class="menu_area">
+    {{-- <section class="menu_area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -109,35 +109,35 @@
                             <li>
                                 <h4>
                                     Bolo de Chocolate
-                                    <span>$5.00</span>
+                                    <span>R$50</span>
                                 </h4>
                                 <p>Bolo de chocolate com cobertura</p>
                             </li>
                             <li>
                                 <h4>
                                     Bolo de Morango
-                                    <span>$5.00</span>
+                                    <span>R$50</span>
                                 </h4>
                                 <p>Bolo de morango com chantilly</p>
                             </li>
                             <li>
                                 <h4>
                                     Bolo de Limão
-                                    <span>$5.00</span>
+                                    <span>R$50</span>
                                 </h4>
                                 <p>Bolo de limão com glacê</p>
                             </li>
                             <li>
                                 <h4>
                                     Bolo Red Velvet
-                                    <span>$5.00</span>
+                                    <span>R$50</span>
                                 </h4>
                                 <p>Bolo red velvet com cream cheese frosting</p>
                             </li>
                             <li>
                                 <h4>
                                     Bolo de Cenoura
-                                    <span>$5.00</span>
+                                    <span>R$50</span>
                                 </h4>
                                 <p>Bolo de cenoura com cobertura de chocolate</p>
                             </li>
@@ -150,35 +150,35 @@
                             <li>
                                 <h4>
                                     Bolo de Chocolate
-                                    <span>$5.00</span>
+                                    <span>R$50</span>
                                 </h4>
                                 <p>Bolo de chocolate com cobertura</p>
                             </li>
                             <li>
                                 <h4>
                                     Bolo de Morango
-                                    <span>$5.00</span>
+                                    <span>R$50</span>
                                 </h4>
                                 <p>Bolo de morango com chantilly</p>
                             </li>
                             <li>
                                 <h4>
                                     Bolo de Limão
-                                    <span>$5.00</span>
+                                    <span>R$50</span>
                                 </h4>
                                 <p>Bolo de limão com glacê</p>
                             </li>
                             <li>
                                 <h4>
                                     Bolo Red Velvet
-                                    <span>$5.00</span>
+                                    <span>R$50</span>
                                 </h4>
                                 <p>Bolo red velvet com cream cheese frosting</p>
                             </li>
                             <li>
                                 <h4>
                                     Bolo de Cenoura
-                                    <span>$5.00</span>
+                                    <span>R$50</span>
                                 </h4>
                                 <p>Bolo de cenoura com cobertura de chocolate</p>
                             </li>
@@ -187,8 +187,7 @@
                 </div>
             </div>
         </div>
-    </section>
-
+    </section> --}}
     <!--================End Menu Area =================-->
 
     <!--================ Gallery Area =================-->
@@ -308,6 +307,30 @@
         </div>
     </section>
     <!--================ End Gallery Area =================-->
+
+	<!--================Story Area =================-->
+	<section class="about_story_area section_gap">
+		<div class="container">
+			<div class="row story_inner">
+				<div class="col-lg-6">
+					<div class="story_text">
+						<h2>Conheça nosso app!</h2>
+						<hr>
+						<p>A Bullbaker oferece uma interface completa para os seus cursos. No nosso app, você terá a melhor experiência! Foi desenvolvido para atender às necessidades dos alunos, com conteúdos completos em um design simples e intuitivo, proporcionando uma experiência ainda melhor.</p>
+						<p>Adquira o acesso ao app exclusivo entrando em contato por whatsapp!</p>
+						<a class="main_btn" href="https://wa.me/5511986033373?text=Ol%C3%A1%21+%F0%9F%91%8B++Meu+nome+%C3%A9+%5BSeu+Nome%5D%2Ce+estou+Interessado+em+adotar+um+pet+que+vi+em+seu+Site%F0%9F%90%BE">Confira!</a>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="story_img">
+						<img class="img-fluid" src="img/story/phone.png" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Story Area =================-->
+
       <!--================ Start banner section =================-->
     <section class="home_banner relative">
         <div class="container-fluid pl-0 ">

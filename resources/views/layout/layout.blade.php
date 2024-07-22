@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="icon" href="{{ asset('img/favicon.png') }}" type="image/png" />
+    <link rel="icon" href="{{ asset('img/logo.jpg') }}" type="image/png" />
+
     <title> @yield('title') - Confeitaria</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/css/lightgallery.min.css" />
@@ -124,7 +125,7 @@
         @yield('conteudo')
     </main>
     <!--================Contact Area =================-->
-    <section class="contact_area p_120">
+    {{-- <section class="contact_area p_120">
 
         <div class="container">
             <div class="row">
@@ -177,7 +178,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--================Contact Area =================-->
 
     <!--================ Inicio Footer =================-->

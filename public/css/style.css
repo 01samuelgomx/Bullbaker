@@ -87,7 +87,6 @@ Table of Content:
   margin-left: -15px;
 }
 
-
 /*-----------------------------*/
 /*---------WHATS MODAL---------*/
 /*-----------------------------*/
@@ -277,6 +276,22 @@ button:focus {
   @media (max-width: 992px) {
     .section_gap {
       padding: 50px 0; } }
+
+      @media (max-width: 700px) {
+        .banner_area .banner_inner {
+            position: relative;
+            overflow: hidden;
+            top: 60px !important;
+            width: 100%;
+            min-height: 400px;
+            background: #f9f9ff;
+            z-index: 1;
+        }
+    }
+    .single-defination h4 {
+      color: #222222;
+      margin-top: 30px !important;
+  }
 
 .pad_btm {
   padding-bottom: 120px; }

@@ -82,6 +82,18 @@ class ReceitasController extends Controller
        // Retornar a view com os dados necessários
        return view('site.dashboard.administrativo.receitas.index', compact( 'administrador', 'lista', 'num_alunos_ativos', 'num_cursos_ativos', 'num_aulas_ativas','totalReceitasAtivas'));
    }
+    
+    public function show($id)
+    {
+        $receita = Receitas::find($id);
+    
+        if (!$receita) {
+            return response()->json(['error' => 'Receita não encontrada'], 404);
+        }
+    
+        return response()->json($receita);
+    }
+    
 
       /**
      * @param Receitas  $receita
@@ -145,16 +157,6 @@ class ReceitasController extends Controller
          return redirect()->route('index.receita')->with('success', 'Receita cadastrada com sucesso');
      }
  
-
-    /**
-     * @param Integer  $receita
-     * @return Response
-     */
-    
-    public function show(Receitas $receita)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

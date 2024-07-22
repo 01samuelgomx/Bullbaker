@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
             // MIDDLEWARE EDITADO
-           \App\Http\Middleware\LogAcessoBullbaker::class,
+        //    \App\Http\Middleware\LogAcessoBullbaker::class,
         ],
 
         'api' => [

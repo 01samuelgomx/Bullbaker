@@ -17,7 +17,7 @@ class Cursos extends Model
         'precoCurso',
         'vagasDisponiveisCurso',
         'data_inicio',
-        'data_inicio',
+        'data_fim',
         'aprendeDescriCursos',
         'tituloUmCurso',
         'descriumCurso',
