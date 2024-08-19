@@ -8,8 +8,6 @@ use App\Models\Aula;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-
-
 class AulaController extends Controller
 {
     public $aula;
@@ -28,8 +26,7 @@ class AulaController extends Controller
     
     public function create()
     {
-        return view('site.dashboard.administrativo.aulas.create', //compact('aula')
-    );
+        return view('site.dashboard.administrativo.aulas.create');
     }
 
 
@@ -112,6 +109,17 @@ class AulaController extends Controller
         return view('site.dashboard.administrativo.aulas.index', compact('administrador','aula','lista','num_alunos_ativos','num_cursos_ativos','num_aulas_ativas','totalReceitasAtivas'));
     }
 
+
+    public function show($id)
+    {
+        $aula = Aula::find($id);
+    
+        if (!$aula) {
+            return response()->json(['error' => 'aula não encontrado'], 404);
+        }
+    
+        return response()->json($aula);
+    }
 
         // -------------------------------
         // Edit Aula

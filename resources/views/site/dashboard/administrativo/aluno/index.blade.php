@@ -26,6 +26,9 @@
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color4.css') }}" title="color4">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color5.css') }}" title="color5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 
 <style>
@@ -43,6 +46,10 @@
         background-color: rgba(0, 0, 0, 0.4);
     }
 
+    .modal-backdrop {
+        z-index: -1 !important;
+    }
+
     .modal-content {
         display: flex;
         flex-direction: column;
@@ -52,15 +59,15 @@
         margin: 15% auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 80%;
-        max-width: 400px;
+        width: 100%;
+        max-width: 400px !important;
         text-align: center;
     }
 
     .modal-content p {
         font-size: 15px;
         font-weight: 700;
-        padding: 15px;
+        padding: 5px;
     }
 
     .align-close {
@@ -98,7 +105,8 @@
         <div class="topbar-data">
 
             <div class="usr-act">
-                <span>Olá, seja bem vindo! {{ $administrador->nomeAdmin }}</span>
+                <img class="brd-rd50" style="width: 50px" src="{{ asset('assets/img/gabriela.png') }}">
+                <span>Olá, seja bem vindo! {{ $administrador->nomeAdmin }} </span>
             </div>
 
         </div>
@@ -154,7 +162,7 @@
                 <li class="has-drp">
                     <a href="{{ url('dashboard/administrativo/receitas/index') }}" title="Acessar tabela de receita">
                         <span>Receitas</span>
-                        <i class="fa fa-info" aria-hidden="true"></i>
+                        <i class="fa fa-book" aria-hidden="true"></i>
                     </a>
                 </li>
             </ul>
@@ -260,7 +268,7 @@
                 </div>
 
                 <div class="col-md-4 grid-item col-sm-6 col-lg-3">
-                    <div class="stat-box widget bg-clr4" >
+                    <div class="stat-box widget bg-clr4">
                         <div class="wdgt-opt">
                             <span class="wdgt-opt-btn">
                                 <i class="ion-android-more-vertical"></i>
@@ -269,7 +277,7 @@
                         </div>
 
                         <i class="ion-android-desktop"></i>
-                        <div class="stat-box-innr " >
+                        <div class="stat-box-innr ">
                             <span>
                                 <i class="counter"> -> {{ $totalReceitasAtivas }}</i></span>
                             <h5>Receitas Inseridas !</h5>
@@ -331,6 +339,7 @@
 
                         <thead class="thead-inverse" style="background-color: #90a293; color: #fff">
                             <tr>
+                                <th>Visualizar</th>
                                 <th>ID</th>
                                 <th>Foto</th>
                                 <th>Nome</th>
@@ -355,9 +364,18 @@
 
                             @foreach ($lista as $aluno)
                                 <tr>
+
                                     <td>
-                                        <span class="blue-bg indx" style="background-color:#445547;"
-                                            name="" title="Numero do Aluno">{{ $aluno->idAluno }}</span>
+                                        <button type="button" class="btn btn-primary"
+                                            style="background-color:#445547; border: none"
+                                            onclick="fetchAlunoData({{ $aluno->idAluno }})">
+                                            Abrir
+                                        </button>
+                                    </td>
+
+                                    <td>
+                                        <span class="blue-bg indx" style="background-color:#90A293;" name=""
+                                            title="Numero do Aluno">{{ $aluno->idAluno }}</span>
                                     </td>
 
                                     {{-- ------FOTO------ --}}
@@ -453,6 +471,91 @@
                         </script>
                     @endif
 
+
+                    <!-- Listagem dos cursos -->
+                    <div class="container mt-3">
+                        @foreach ($lista as $aluno)
+                            <div class="modal fade" id="myModal">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <img id="fotoAluno" src="" alt="foto do aluno"
+                                            style="width: 100px; height: 100px; border-radius: 50%; display: none;">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="nomeAluno"></h4>
+                                            <button type="button" class="close"
+                                                data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Informação do conteúdo</p>
+                                            <div class="row mrg20">
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalAluno">Email!</p>
+                                                    <p id="emailAluno"></p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalAluno">Senha</p>
+                                                    <p id="senhaAluno"></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mrg20">
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalAluno">Telefone</p>
+                                                    <p id="telefoneAluno"></p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalAluno">Estado do aluno</p>
+                                                    <p id="estadoAluno"></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mrg20">
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalAluno">Data de cadastro</p>
+                                                    <p id="dataCadAluno"></p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalAluno">Data de Nascimento</p>
+                                                    <p id="dataDeNascimento"></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mrg20">
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalAluno">Curso cadastrado</p>
+                                                    <p id="nomeCurso"></p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalAluno">Nivel habilidade</p>
+                                                    <p id="nivelHabilidade"></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mrg20">
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalAluno">Objetivo Aluno</p>
+                                                    <p id="objetivo"></p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalAluno">Status</p>
+                                                    <p id="statusAluno"></p>
+                                                </div>
+                                            </div>
+                                  
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger"
+                                                data-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+
+
+
                     <!-- Modal de Sucesso -->
                     <div id="successModal" class="modal" style="display: none;">
                         <div class="modal-content">
@@ -475,29 +578,6 @@
     </div>
     </div>
     <!-- Panel Content -->
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            @if (session('success'))
-                showModal();
-            @endif
-        });
-
-        function showModal() {
-            var modal = document.getElementById("successModal");
-            modal.style.display = "block";
-
-            setTimeout(function() {
-                modal.style.display = "none";
-            }, 3500);
-        }
-
-        function closeModal() {
-            var modal = document.getElementById("successModal");
-            modal.style.display = "none";
-        }
-    </script>
-
     <!-- Vendor: Javascripts -->
     <script src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
     <!-- Vendor: Followed by our custom Javascripts -->
@@ -527,7 +607,77 @@
     <script src="{{ asset('assets/js/jquery.poptrox.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/styleswitcher.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                showModal();
+            @endif
+        });
+
+        function showModal() {
+            var modal = document.getElementById("successModal");
+            modal.style.display = "block";
+
+            setTimeout(function() {
+                modal.style.display = "none";
+            }, 3500);
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("successModal");
+            modal.style.display = "none";
+        }
+    </script>
+
+    {{-- Requisição do modal de visualização dos cursos --}}
+    <script>
+        function fetchAlunoData(id) {
+            fetch(`/dashboard/administrativo/aluno/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error('Error fetching aluno data:', data.error);
+                        alert(data.error);
+                    } else {
+                        document.getElementById('nomeAluno').innerText = data.nomeAluno;
+                        document.getElementById('emailAluno').innerText = data.emailAluno;
+                        document.getElementById('senhaAluno').innerText = data.senhaAluno;
+                        document.getElementById('telefoneAluno').innerText = data.telefoneAluno;
+                        document.getElementById('dataCadAluno').innerText = data.dataCadAluno;
+                        document.getElementById('nivelHabilidade').innerText = data.nivelHabilidade;
+                        document.getElementById('estadoAluno').innerText = data.estadoAluno;
+                        document.getElementById('nomeCurso').innerText = data.nomeCurso;
+                        document.getElementById('dataDeNascimento').innerText = data.dataDeNascimento;
+                        document.getElementById('objetivo').innerText = data.objetivo;
+                        document.getElementById('statusAluno').innerText = data.statusAluno;
+
+                        if (data.fotoAluno) {
+                            document.getElementById('fotoAluno').src = `/storage/img/alunos/${data.fotoAluno}`;
+                            document.getElementById('fotoAluno').style.display = 'block';
+                        } else {
+                            document.getElementById('fotoAluno').style.display = 'none';
+                        }
+
+                        $('#myModal').modal('show');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching aluno data:', error);
+                    alert('Erro ao buscar dados do aluno');
+                });
+        }
+
+        $(document).ready(function() {
+            $('#myModal').on('hidden.bs.modal', function() {
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+            });
+        });
+    </script>
 </body>
 
 </html>

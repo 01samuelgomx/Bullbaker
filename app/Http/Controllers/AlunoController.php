@@ -8,7 +8,6 @@ use App\Models\Usuario;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class AlunoController extends Controller
@@ -29,8 +28,7 @@ class AlunoController extends Controller
 
     public function create()
     {
-        return view('site.dashboard.administrativo.aluno.create', //compact('aluno')
-        );
+        return view('site.dashboard.administrativo.aluno.create');
     }
 
     // -------------------------------
@@ -38,8 +36,6 @@ class AlunoController extends Controller
 
     public function index()
     {
-
-        // Busca o administrador com base no ID da sessão ou outro critério adequado
         $idAdministrador = session('id');
         // dd($idAdministrador);
         $administrador = Administrador::find($idAdministrador);
@@ -47,7 +43,6 @@ class AlunoController extends Controller
         if (!$administrador) {
             abort(404, 'Administrador não encontrado');
         }
-
 
         $lista = Aluno::where('statusAluno', 'ativo')->get();
 
@@ -91,6 +86,18 @@ class AlunoController extends Controller
 
         // Retornar a view com os dados necessários
         return view('site.dashboard.administrativo.aluno.index', compact( 'usuario', 'administrador', 'lista', 'num_alunos_ativos', 'num_cursos_ativos', 'num_aulas_ativas','totalReceitasAtivas'));
+    }
+
+
+    public function show($id)
+    {
+        $aluno = Aluno::find($id);
+     
+        if (!$aluno) {
+            return response()->json(['error' => 'aluno não encontrado'], 404);
+        }
+    
+        return response()->json($aluno);
     }
 
         /**
@@ -240,15 +247,6 @@ class AlunoController extends Controller
         
     }
     
-
-    /**
-     * @param  Integer
-     * @return Response
-     */
-
-            public function show($id){
-            }
-
     /**
      * @param  Request
      * @param  Aluno

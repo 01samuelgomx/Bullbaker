@@ -20,117 +20,89 @@ class CursosController extends Controller
      * @return Response
      */
 
-    // -------------------------------
-    // Create curso
     public function pagina()
     {
-        return view('site.cursos', //compact('curso')
-    );
-   }
+        return view('site.cursos');
+        
+    }
+    
+    // -------------------------------
+    // Create curso
     public function create()
     {
-        return view('site.dashboard.administrativo.cursos.create', //compact('curso')
-    );
-   }
+        return view('site.dashboard.administrativo.cursos.create');
+    }
 
     /**
      * @return Response
      */
-
+    
     // -------------------------------
-    // Listar curso
+    // Index curso
+     public function index()
+     {
+         $idCurso = session('id');
+         $curso = Cursos::find($idCurso);
+         
+         $lista = Cursos::where('statusCurso', 'ativo')->get();
+         
+         if (!$curso) {
+             abort(404, 'Curso não encontrado');
+         }
+     
+         $idAdministrador = session('id');
+         $administrador = Administrador::find($idAdministrador);
+         if (!$administrador) {
+             abort(404, 'Administrador não encontrado');
+         }
+         
+         // Contar Alunos Ativos
+         $result = DB::table('vw_alunos_ativos')->first();
+         $num_alunos_ativos = $result ? $result->num_alunos_ativos : 0;
+     
+         // Contar Cursos Ativos
+         $result = DB::table('vw_cursos_ativos')->first();
+         $num_cursos_ativos = $result ? $result->num_cursos_ativos : 0;
+     
+         // Contar Aulas Ativas
+         $result = DB::table('vw_aulas_ativas')->first();
+         $num_aulas_ativas = $result ? $result->num_aulas_ativas : 0;
+     
+         // Contar Receitas Ativas
+         $result = DB::table('view_receitas_ativas')->first();
+         $totalReceitasAtivas = $result ? $result->totalReceitasAtivas : 0;
+         
+         return view('site.dashboard.administrativo.cursos.index', compact(
+             'administrador', 'curso', 'lista', 'num_alunos_ativos', 'num_cursos_ativos', 'num_aulas_ativas', 'totalReceitasAtivas'
+         ));
+     }
+     
+
+     public function show($id)
+     {
+         $curso = Cursos::find($id);
+     
+         if (!$curso) {
+             return response()->json(['error' => 'Curso não encontrado'], 404);
+         }
+     
+         return response()->json($curso);
+     }
+     
     
-    public function index()
-    {
-        $idCurso = session('id');
-        // dd($idCurso);
-        $curso = Cursos::find($idCurso);
-        
-        // Filtra somente os cursos ativos
-        $lista = Cursos::where('statusCurso', 'ativo')->get();
-        
-        // dd($curso->fotoCurso); 
-        
-        if (!$curso) {
-            abort(404, 'curso não encontrado');
-        }
-
-
-        // Busca o administrador com base no ID da sessão ou outro critério adequado
-        $idAdministrador = session('id');
-        // dd($idAdministrador);
-        $administrador = Administrador::find($idAdministrador);
-        // dd($administrador);
-        if (!$administrador) {
-            abort(404, 'Administrador não encontrado');
-        }
-    
-
-        // -------------------------------
-        // Listar Views
-        
-               // Contar ALunos
-               $result = DB::table('vw_alunos_ativos')->first();
-            
-               // // Verifica se a consulta retornou um resultado
-               if ($result) {
-               $num_alunos_ativos = $result->num_alunos_ativos;
-              } else {
-               $num_alunos_ativos = 0;
-              }
- 
-                // Contar Cursos
-                 $result = DB::table('vw_cursos_ativos')->first();
-                 
-                 // // Verifica se a consulta retornou um resultado
-                 if ($result) {
-                     $num_cursos_ativos = $result->num_cursos_ativos;
-                 } else {
-                     $num_cursos_ativos = 0;
-                 }
- 
-                // Contar Aulas
-                 $result = DB::table('vw_aulas_ativas')->first();
-                 
-                 // // Verifica se a consulta retornou um resultado
-                 if ($result) {
-                     $num_aulas_ativas = $result->num_aulas_ativas;
-                 } else {
-                     $num_aulas_ativas = 0;
-                 }
-                 
-                 $result = DB::table('view_receitas_ativas')->first();
-                 if ($result) {
-                     $totalReceitasAtivas = $result->totalReceitasAtivas;
-                 } else {
-                     $totalReceitasAtivas = 0;
-                 }
-          
-                 
-                 // -------------------------------
-        // dd($lista);
-        return view('site.dashboard.administrativo.cursos.index', compact('administrador','curso','lista','num_alunos_ativos','num_cursos_ativos','num_aulas_ativas','totalReceitasAtivas'));
-    }
-
 
          public function edit($id)
          {
-             // Pega o ID do curso da sessão
              $idCurso = session('id');
-             
-             // Se o ID do curso da sessão não estiver definido, redireciona para outra página ou retorna um erro
              
              if (!$idCurso) {
                  return redirect()->route('login')->withErrors(['msg' => 'Sessão expirada, faça login novamente.']);
              }
 
-             // Encontra o curso logado
              $curso = Cursos::find($idCurso);
          
-             // Encontra o curso que será editado
              $editCurso = Cursos::findOrFail($id);
          
-             // Retorna a view com as variáveis necessárias
              return view('site.dashboard.administrativo.cursos.edit', compact('curso', 'editCurso'));
          }
          

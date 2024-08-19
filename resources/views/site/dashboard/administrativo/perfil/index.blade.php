@@ -139,7 +139,9 @@
         <div class="topbar-data">
 
             <div class="usr-act">
-                <span>Olá, seja bem vindo! {{ $administrador->nomeAdmin }}</span>
+                <img class="brd-rd50" style="width: 50px" src="{{ asset('assets/img/gabriela.png') }}">
+                <span>Olá, seja bem vindo! {{ $administrador->nomeAdmin }} </span>
+
             </div>
 
         </div>
@@ -230,7 +232,7 @@
                         <div class="profile-info-wrp">
                             <div class="insta-wrp">
                                 <span>
-                                    <img class="brd-rd50" src="{{ asset('assets/img/menina.png') }}"
+                                    <img class="brd-rd50" src="{{ asset('assets/img/gabriela.png') }}"
                                         alt="" />
                                     <span class="sts online"></span>
                                 </span>
@@ -430,18 +432,22 @@
                                                     <span>Imagem não disponível</span>
                                                 @endif
                                             </span>
-                                            <div class="msg-inf">
-                                                <h5>{{ $notificacao->tituloNotificacao }}</h5>
-                                                <div class="msg">
-                                                <p>{{ $notificacao->mensagemNotificacao }}</p>
-                                                    <p class="pst-tm">{{ $notificacao->statusNotificacao }}</p>
-                                                </div>
-                                            </div>
 
-                                            <div>
-                                                <a href="{{ route('edit.notificacao', $notificacao->idNotificacao) }}"
-                                                    title="" class="brd-rd30 btn btn-outline-success"
-                                                    style="padding: 2px 7px !important;">Editar</a>
+                                            <div style="display:flex; width: 100%; justify-content: space-between">
+
+                                                <div class="msg-inf">
+                                                    <h5>{{ $notificacao->tituloNotificacao }}</h5>
+                                                    <div class="msg">
+                                                        <p>{{ $notificacao->mensagemNotificacao }}</p>
+                                                        <p class="pst-tm">{{ $notificacao->statusNotificacao }}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <a href="{{ route('edit.notificacao', $notificacao->idNotificacao) }}"
+                                                        title="" class="brd-rd30 btn btn-outline-success"
+                                                        style="padding: 2px 7px !important;">Editar</a>
+                                                </div>
                                             </div>
                                         </div>
                                     @endforeach

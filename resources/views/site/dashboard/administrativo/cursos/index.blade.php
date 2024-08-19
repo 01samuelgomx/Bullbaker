@@ -26,6 +26,9 @@
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color4.css') }}" title="color4">
     <link rel="alternate stylesheet" href="{{ asset('assets/css/color-schemes/color5.css') }}" title="color5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 
 <style>
@@ -43,6 +46,10 @@
         background-color: rgba(0, 0, 0, 0.4);
     }
 
+    .modal-backdrop {
+        z-index: -1 !important;
+    }
+
     .modal-content {
         display: flex;
         flex-direction: column;
@@ -52,15 +59,15 @@
         margin: 15% auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 80%;
-        max-width: 400px;
+        width: 100%;
+        max-width: 400px !important;
         text-align: center;
     }
 
     .modal-content p {
         font-size: 15px;
         font-weight: 700;
-        padding: 15px;
+        padding: 5px;
     }
 
     .align-close {
@@ -98,7 +105,8 @@
         <div class="topbar-data">
 
             <div class="usr-act">
-                <span>Olá, seja bem vindo! {{ $administrador->nomeAdmin }}</span>
+                <img class="brd-rd50" style="width: 50px" src="{{ asset('assets/img/gabriela.png') }}">
+                <span>Olá, seja bem vindo! {{ $administrador->nomeAdmin }} </span>
             </div>
 
 
@@ -155,7 +163,7 @@
                 <li class="has-drp">
                     <a href="{{ url('dashboard/administrativo/receitas/index') }}" title="Acessar tabela de receita">
                         <span>Receitas</span>
-                        <i class="fa fa-info" aria-hidden="true"></i>
+                        <i class="fa fa-book" aria-hidden="true"></i>
                     </a>
                 </li>
             </ul>
@@ -309,11 +317,13 @@
                 <a class="add-proj brd-rd5" href="{{ url('/dashboard/administrativo/cursos/create') }}"
                     data-toggle="tooltip" title="Adicionar novo curso">+</a>
 
+
                 <div class="table-wrap">
                     <table class="table table-bordered style2">
 
                         <thead class="thead-inverse" style="background-color: #c1959d; color: #fff">
                             <tr>
+                                <th>Visualizar</th>
                                 <th>ID</th>
                                 <th>Foto</th>
                                 <th>Nome</th>
@@ -331,20 +341,26 @@
                                 <th>Data de inicio</th>
                                 <th>Data final</th>
                                 <th>Status do Curso</th>
-                                <th style="backgroud-color:#4c7f4c">Edição</th>
-                                <th style="backgroud-color:##b2354c">Deletar</th>
+                                <th>Edição</th>
+                                <th>Deletar</th>
                             </tr>
                         </thead>
 
                         <tbody>
-
-
                             @foreach ($lista as $curso)
                                 <tr>
-                                    <td>
-                                        <span class="blue-bg indx" style="background-color:#785e63;" name=""
-                                            title="Numero do Curso"> {{ $curso->idCurso }}</span>
 
+                                    <td>
+                                        <button type="button" class="btn btn-primary"
+                                            style="background-color:#AD868D; border: none"
+                                            onclick="fetchCursoData({{ $curso->idCurso }})">
+                                            Abrir
+                                        </button>
+                                    </td>
+
+                                    <td>
+                                        <span class="blue-bg indx" style="background-color:#C1959D;" name=""
+                                            title="Numero do Curso"> {{ $curso->idCurso }}</span>
                                     </td>
 
                                     {{-- ------FOTO------ --}}
@@ -368,41 +384,49 @@
                                     </td>
 
                                     <td>
-                                        <span class="ph#">{{ $curso->duracaoCurso }} Dias</span>
+                                        <span class="ph#">{{ $curso->duracaoCurso }}
+                                            Dias</span>
                                     </td>
 
                                     <td>
-                                        <span class="ph#">R$ {{ $curso->precoCurso }}</span>
+                                        <span class="ph#">R$
+                                            {{ $curso->precoCurso }}</span>
                                     </td>
 
                                     <td>
-                                        <span class="ph#">{{ $curso->vagasDisponiveisCurso }} vagas!</span>
+                                        <span class="ph#">{{ $curso->vagasDisponiveisCurso }}
+                                            vagas!</span>
                                     </td>
 
                                     <td>
-                                        <span class="ph#">{{ $curso->aprendeDescriCursos }}</span>
+                                        <span
+                                            class="ph#">{{ Str::limit($curso->aprendeDescriCursos, 25, '...') }}</span>
                                     </td>
 
                                     <td>
-                                        <span class="ph#">{{ $curso->tituloUmCurso }}</span>
+                                        <span class="ph#">{{ Str::limit($curso->tituloUmCurso, 25, '...') }}</span>
                                     </td>
 
                                     <td>
-                                        <span class="ph#">{{ $curso->descriumCurso }}</span>
+                                        <span class="ph#">{{ Str::limit($curso->descriumCurso, 25, '...') }}</span>
                                     </td>
                                     <td>
-                                        <span class="ph#">{{ $curso->tituloDoisCurso }}</span>
-                                    </td>
-
-                                    <td>
-                                        <span class="ph#">{{ $curso->descriDoisCurso }}</span>
-                                    </td>
-                                    <td>
-                                        <span class="ph#">{{ $curso->tituloTresCurso }}</span>
+                                        <span
+                                            class="ph#">{{ Str::limit($curso->tituloDoisCurso, 25, '...') }}</span>
                                     </td>
 
                                     <td>
-                                        <span class="ph#">{{ $curso->descriTresCurso }}</span>
+                                        <span
+                                            class="ph#">{{ Str::limit($curso->descriDoisCurso, 25, '...') }}</span>
+                                    </td>
+                                    <td>
+                                        <span
+                                            class="ph#">{{ Str::limit($curso->tituloTresCurso, 25, '...') }}</span>
+                                    </td>
+
+                                    <td>
+                                        <span
+                                            class="ph#">{{ Str::limit($curso->descriTresCurso, 25, '...') }}</span>
                                     </td>
 
 
@@ -437,8 +461,8 @@
 
                                 </tr>
                             @endforeach
-
                         </tbody>
+
                     </table>
 
                     @if (session('success'))
@@ -448,6 +472,92 @@
                             });
                         </script>
                     @endif
+
+                    <!-- Listagem dos cursos -->
+                    <div class="container mt-3">
+                        @foreach ($lista as $curso)
+                            <div class="modal fade" id="myModal">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <img id="fotoCurso" src="" alt="Imagem do curso"
+                                            style="width: 100px; height: 100px; border-radius: 50%; display: none;">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="nomeCurso"></h4>
+                                            <button type="button" class="close"
+                                                data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Informação do conteúdo</p>
+                                            <div class="row mrg20">
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalCurso">Descrição!</p>
+                                                    <p id="descricaoCurso"></p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalCurso">O que se aprende?</p>
+                                                    <p id="aprendeDescriCursos"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row mrg20">
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalCurso">Primeiro Título</p>
+                                                    <p id="tituloUmCurso"></p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalCurso">Primeira descrição</p>
+                                                    <p id="descriumCurso"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row mrg20">
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalCurso">Segundo Título</p>
+                                                    <p id="tituloDoisCurso"></p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalCurso">Segunda descrição</p>
+                                                    <p id="descriDoisCurso"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row mrg20">
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalCurso">Terceiro Título</p>
+                                                    <p id="tituloTresCurso"></p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalCurso">Terceira descrição</p>
+                                                    <p id="descriTresCurso"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row mrg20">
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalCurso">Duração</p>
+                                                    <p id="duracaoCurso"> dias</p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalCurso">Preço</p>
+                                                    <p id="precoCurso"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row mrg20">
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalCurso">Data de início</p>
+                                                    <p id="data_inicio"></p>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 limited-width">
+                                                    <p class="tittle-modalCurso">Data de Término</p>
+                                                    <p id="data_fim"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger"
+                                                data-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
 
                     <!-- Modal de Sucesso -->
                     <div id="successModal" class="modal" style="display: none;">
@@ -461,54 +571,38 @@
                         </div>
                     </div>
 
-                </div>
-            </div>
-        </div>
+                    <!-- Vendor: Javascripts -->
+                    <script src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
+                    <!-- Vendor: Followed by our custom Javascripts -->
+                    <script src="{{ asset('assets/js/bootstrap.min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/select2.min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/slick.min.js') }}" type="text/javascript"></script>
 
-        @foreach ($lista as $curso)
-            <div class="product-detail-tabs brd-rd5">
-                <ul class="nav nav-tabs">
-                    @if (Storage::exists('public/img/cursos/' . $curso->fotoCurso))
-                        <img src="{{ asset('storage/img/cursos/' . $curso->fotoCurso) }}" alt="lll"
-                            style="width: 180px; height: 180px;border-radius: 15%">
-                    @else
-                        <span>Imagem não disponível</span>
-                    @endif
-                </ul>
-
-                <div class="tab-content">
-                    <div class="tab-pane active" id="prd-desc">
-                        <h3>{{ $curso->nomeCurso }}</h3>
-                        <p>{{ $curso->descricaoCurso }}</p>
-                    </div>
-
-                    <div class="tab-pane active" id="prd-desc">
-                        <h3 style="font-size: 12px">{{ $curso->tituloUmCurso }}</h3>
-                        <p style="font-size: 12px">{{ $curso->descriumCurso }}</p>
-                    </div>
-                    <div class="tab-pane active" id="prd-desc">
-                        <h3 style="font-size: 12px">{{ $curso->tituloDoisCurso }}</h3>
-                        <p style="font-size: 12px">{{ $curso->descriDoisCurso }}</p>
-                    </div>
-                    <div class="tab-pane active" id="prd-desc">
-                        <h3 style="font-size: 12px">{{ $curso->tituloTresCurso }}</h3>
-                        <p style="font-size: 12px">{{ $curso->descriTresCurso }}</p>
-                    </div>
-
-                    <ul>
-                        <li> Duração do curso {{ $curso->duracaoCurso }} dias</li>
-                        <li> Data de inicio {{ $curso->data_inicio }}</li>
-                        <li> Data de Termino {{ $curso->data_inicio }}</li>
-                    </ul>
-                </div>
-            </div>
-        @endforeach
-
-
-
-    </div>
-    </div>
-    </div>
+                    <!-- Our Web Javascripts -->
+                    <script src="{{ asset('assets/js/isotope.min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/isotope-int.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/jquery.counterup.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/waypoints.min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/highcharts.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/exporting.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/highcharts-more.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/moment.min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/jquery.circliful.min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/fullcalendar.min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/jquery.downCount.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/jquery.bootstrap-touchspin.min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/jquery.formtowizard.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/form-validator.min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/form-validator-lang-en.min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/cropbox-min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/ion.rangeSlider.min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/jquery.poptrox.min.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/styleswitcher.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -531,35 +625,55 @@
             modal.style.display = "none";
         }
     </script>
-    <!-- Vendor: Javascripts -->
-    <script src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
-    <!-- Vendor: Followed by our custom Javascripts -->
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/select2.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/slick.min.js') }}" type="text/javascript"></script>
 
-    <!-- Our Web Javascripts -->
-    <script src="{{ asset('assets/js/isotope.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/isotope-int.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/jquery.counterup.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/waypoints.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/highcharts.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/exporting.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/highcharts-more.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/moment.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/jquery.circliful.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/fullcalendar.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/jquery.downCount.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/jquery.bootstrap-touchspin.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/jquery.formtowizard.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/form-validator.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/form-validator-lang-en.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/cropbox-min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/ion.rangeSlider.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/jquery.poptrox.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/styleswitcher.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
+
+                    {{-- Requisição do modal de visualização dos cursos --}}
+                    <script>
+                        function fetchCursoData(id) {
+                            fetch(`/dashboard/administrativo/cursos/${id}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.error) {
+                                        console.error('Error fetching curso data:', data.error);
+                                        alert(data.error);
+                                    } else {
+                                        document.getElementById('nomeCurso').innerText = data.nomeCurso;
+                                        document.getElementById('descricaoCurso').innerText = data.descricaoCurso;
+                                        document.getElementById('duracaoCurso').innerText = data.duracaoCurso;
+                                        document.getElementById('precoCurso').innerText = data.precoCurso;
+                                        document.getElementById('data_inicio').innerText = data.data_inicio;
+                                        document.getElementById('data_fim').innerText = data.data_fim;
+                                        document.getElementById('aprendeDescriCursos').innerText = data.aprendeDescriCursos;
+                                        document.getElementById('tituloUmCurso').innerText = data.tituloUmCurso;
+                                        document.getElementById('descriumCurso').innerText = data.descriumCurso;
+                                        document.getElementById('tituloDoisCurso').innerText = data.tituloDoisCurso;
+                                        document.getElementById('descriDoisCurso').innerText = data.descriDoisCurso;
+                                        document.getElementById('tituloTresCurso').innerText = data.tituloTresCurso;
+                                        document.getElementById('descriTresCurso').innerText = data.descriTresCurso;
+
+                                        if (data.fotoCurso) {
+                                            document.getElementById('fotoCurso').src = `/storage/img/cursos/${data.fotoCurso}`;
+                                            document.getElementById('fotoCurso').style.display = 'block';
+                                        } else {
+                                            document.getElementById('fotoCurso').style.display = 'none';
+                                        }
+
+                                        $('#myModal').modal('show');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching curso data:', error);
+                                    alert('Erro ao buscar dados do curso');
+                                });
+                        }
+
+                        $(document).ready(function() {
+                            $('#myModal').on('hidden.bs.modal', function() {
+                                $('body').removeClass('modal-open');
+                                $('.modal-backdrop').remove();
+                            });
+                        });
+                    </script>
 
 </body>
 
