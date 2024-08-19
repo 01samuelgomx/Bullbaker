@@ -12,11 +12,13 @@ class Receitas extends Model
     protected $table = 'tblreceitas';
 
     protected $fillable = [
+
         'nomeReceita',
          'ingredienteReceita', 
          'modoPreparoReceita', 
          'fotoReceita', 
          'statusReceita',
+         
     ];
 
     public function regras(){
